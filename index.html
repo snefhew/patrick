@@ -496,6 +496,66 @@ button{cursor:pointer;border:none;background:none;}
 /* ── Rev divider: softer ── */
 #p1 .rev-div{opacity:.12;}
 
+/* ═══════════════════════════════════════
+   PAGE 2 PARITY — 11 improvements
+═══════════════════════════════════════ */
+
+/* 2. Info bar — centered layout */
+#p2 .c-c{padding:16px 28px;justify-content:center;gap:48px;flex-wrap:wrap;}
+#p2 .info-item{flex-direction:column;align-items:center;gap:3px;}
+#p2 .info-item .info-inner{padding:0;}
+#p2 .info-val{text-align:center;}
+
+/* 3. Chatbot cell — center card */
+#p2 .c-d{display:flex;align-items:center;justify-content:center;position:relative;}
+
+/* 4. Treatment list heading */
+#p2 .e2-lbl{font-family:var(--fm);font-size:9px;letter-spacing:0.3em;
+  text-transform:uppercase;color:var(--ash);margin-bottom:20px;
+  display:flex;align-items:center;gap:10px;width:100%;}
+#p2 .e2-lbl::after{content:'';flex:1;height:1px;background:var(--carbon);}
+
+/* 5. Treatment category titles — amber with ruled line */
+#p2 .tg-title{font-family:var(--fm);font-size:9px;letter-spacing:0.35em;
+  text-transform:uppercase;color:var(--amber);
+  padding:8px 0 10px;margin-bottom:12px;
+  border-bottom:1px solid var(--amber);opacity:1;
+  display:flex;align-items:center;gap:8px;}
+#p2 .tg-title::after{content:'';flex:1;height:1px;background:var(--amber);opacity:.25;}
+
+/* 6. Treatment row prices — euro sign */
+#p2 .tr-p::before{content:'€ ';font-size:10px;color:var(--ash);}
+#p2 .tr-p.va::before{content:'v.a. € ';font-size:10px;color:var(--ash);}
+
+/* 7. FAQ heading — ruled line */
+#p2 .faq-lbl{font-family:var(--fm);font-size:9px;letter-spacing:0.3em;
+  text-transform:uppercase;color:var(--ash);margin-bottom:14px;
+  display:flex;align-items:center;gap:10px;width:100%;}
+#p2 .faq-lbl::after{content:'';flex:1;height:1px;background:var(--carbon);}
+
+/* 8. Footer — heavier top border */
+#p2 .c-footer{border-top:2px solid var(--carbon);}
+
+/* 9. Page 2 heading — tighter */
+#p2 .p2-h1{font-size:clamp(2rem,2.8vw,3.2rem);font-weight:700;line-height:0.92;
+  letter-spacing:-0.025em;color:var(--polar);margin-bottom:12px;}
+#p2 .p2-h1 em{font-style:normal;color:var(--ash);}
+
+/* 10. Vbar — dot overlay */
+#p2 .c-vbar{position:relative;}
+#p2 .c-vbar::before{content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);
+  background-size:8px 8px;pointer-events:none;}
+
+/* 11. Book button — more impactful */
+#p2 .e2-book{display:block;margin-top:16px;padding:16px;width:100%;
+  background:var(--polar);color:var(--midnight);
+  font-family:var(--fm);font-size:11px;letter-spacing:0.22em;
+  text-transform:uppercase;text-align:center;
+  border:none;
+  transition:background .2s,letter-spacing .2s;}
+#p2 .e2-book:hover{background:var(--white);letter-spacing:0.28em;}
+
 @media(max-width:900px){
   #app{scroll-snap-type:none;}
   .page{scroll-snap-align:none;height:auto;min-height:100vh;
@@ -569,8 +629,7 @@ button{cursor:pointer;border:none;background:none;}
     <div class="hero-meta">
       <p class="hero-desc">Gediplomeerde barbier en kapper in het hart van Amsterdam. Geen haastwerk, aandacht en kwaliteit voor elk detail.</p>
       <div class="scroll-hint" onclick="document.getElementById('p2').scrollIntoView({behavior:'smooth'})">
-        <span>Behandelingen &amp; prijzen</span>
-        <span class="scroll-arrow">↓</span>
+        <span>↓ Bekijk alle behandelingen</span>
       </div>
     </div>
   </div>

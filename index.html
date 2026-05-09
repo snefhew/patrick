@@ -8,6 +8,7 @@
 <meta property="og:title" content="Patrick Anches — Barbier &amp; Kapper Amsterdam">
 <meta property="og:description" content="Gediplomeerde barbier en kapper in Amsterdam-West. Knippen, baard, extensions en Black hair. Boek direct via Treatwell.">
 <meta property="og:url" content="https://snefhew.github.io/patrick/">
+<meta property="og:image" content="https://snefhew.github.io/patrick/hero.jpg">
 <meta property="og:locale" content="nl_NL">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Patrick Anches — Barbier &amp; Kapper Amsterdam">
@@ -16,6 +17,7 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'><rect x='.4' y='.4' width='17.2' height='17.2' stroke='%23292929' stroke-width='.8' fill='none'/><circle cx='9' cy='9' r='2.8' stroke='%23292929' stroke-width='.6' fill='none'/></svg>">
 <title>Patrick Anches — Barbier &amp; Kapper Amsterdam</title>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="hero.jpg">
 <style>
 /* ═══════════════════════════════════════
    BASE
@@ -71,6 +73,7 @@ button{cursor:pointer;border:none;background:none;}
 }
 #p1 .cell{border:var(--b);background:var(--bg);color:var(--ink);border-radius:0;}
 #p1 *{border-radius:0!important;}
+#p1 .sdot, #p1 .ch-dot, #p1 .typing span { border-radius: 50% !important; }
 
 /* A: logo + status */
 #p1 .c-a{grid-column:1;grid-row:1;padding:16px 24px;
@@ -293,7 +296,8 @@ button{cursor:pointer;border:none;background:none;}
 #p2 .faq-item{border-top:var(--b);}
 #p2 .faq-q{font-size:13px;font-weight:600;color:var(--polar);cursor:pointer;
   display:flex;justify-content:space-between;align-items:flex-start;
-  gap:8px;padding:12px 0;transition:color .15s;}
+  gap:8px;padding:12px 0;transition:color .15s;
+  appearance:none;background:none;border:none;width:100%;text-align:left;font:inherit;}
 #p2 .faq-q:hover{color:var(--white);}
 #p2 .faq-icon{font-size:18px;flex-shrink:0;color:var(--ash);
   transition:transform .2s,color .2s;line-height:1;}
@@ -420,7 +424,11 @@ button{cursor:pointer;border:none;background:none;}
 }
 #p1 .vbar-text {
   text-shadow: 0 0 8px rgba(220,130,50,0.70), 0 0 22px rgba(220,130,50,0.30), 0 0 40px rgba(200,110,30,0.12);
-  animation: vbarGlow 3.5s ease-in-out infinite;
+}
+@media(prefers-reduced-motion:no-preference){
+  #p1 .vbar-text {
+    animation: vbarGlow 3.5s ease-in-out infinite;
+  }
 }
 #p2 .vbar-text {
   text-shadow: none;
@@ -516,7 +524,7 @@ body { font-size: 16px; }
 #p2 { --ash: #b0b0b0; }
 
 #p1 .vbar-num, #p2 .vbar-num { color: rgba(255,255,255,0.65); font-size: 10px; }
-#p2 .tr:hover { background: rgba(255,255,255,0.08); padding-left: 10px; }
+#p2 .tr:hover { background: rgba(255,255,255,0.08); transform: translateX(8px); }
 #p2 .p2-h1 em { color: var(--amber); font-style: normal; }
 @keyframes scrollBounce{
   0%,100%{transform:translateY(0);opacity:.55;}
@@ -598,11 +606,6 @@ body { font-size: 16px; }
   from{opacity:0;transform:translateX(12px);}
   to{opacity:1;transform:translateX(0);}
 }
-@keyframes pageWipeIn{
-  from{clip-path:inset(0 0 100% 0);opacity:0;}
-  to{clip-path:inset(0 0 0% 0);opacity:1;}
-}
-
 /* ── Cell entrance state (applied before animation fires) ── */
 @media(prefers-reduced-motion:no-preference){
   .cell[data-anim]{
@@ -704,19 +707,19 @@ body { font-size: 16px; }
 
   /* Treatment rows — slide-right reveal */
   #p2 .tr{
-    transition:background .12s, transform .2s cubic-bezier(0.22,1,0.36,1), padding-left .2s cubic-bezier(0.22,1,0.36,1);
+    transition:background .12s, transform .2s cubic-bezier(0.22,1,0.36,1);
   }
   #p2 .tr:hover{
     background:rgba(255,255,255,.06);
-    padding-left:8px;
+    transform:translateX(8px);
   }
 
-  /* Book button — scale pop */
+  /* Book button — subtle lift */
   #p2 .e2-book{
-    transition:background .2s, letter-spacing .2s, transform .2s cubic-bezier(0.22,1,0.36,1);
+    transition:background .2s, color .2s, transform .2s cubic-bezier(0.22,1,0.36,1);
   }
   #p2 .e2-book:hover{
-    transform:scale(1.01);
+    transform:translateY(-2px);
   }
 
   /* Chips — satisfying press */
@@ -781,8 +784,12 @@ body { font-size: 16px; }
 #p1 .scroll-hint:hover{color:var(--ink);}
 .scroll-arrow{
   display:inline-block;
-  animation:scrollBounce 2s ease-in-out infinite;
   font-size:13px;line-height:1;}
+@media(prefers-reduced-motion:no-preference){
+  .scroll-arrow{
+    animation:scrollBounce 2s ease-in-out infinite;
+  }
+}
 
 /* ── Info bar: centered layout matching p2 ── */
 #p1 .c-c {
@@ -824,12 +831,9 @@ body { font-size: 16px; }
 #p2 .c-footer>.footer-item{display:none;}
 
 /* ── Hover states: stats, treatment rows, tw-card ── */
-#p1 .stat-item{transition:opacity .2s;}
-#p1 .stat-item:hover{opacity:.65;}
 #p1 .tw-card{transition:box-shadow .2s;}
 #p1 .tw-card:hover{box-shadow:4px 4px 0 var(--ink);}
-#p2 .tr{transition:background .12s;}
-#p2 .tr:hover{background:rgba(255,255,255,.04);}
+#p2 .tr{transition:background .12s, transform .2s cubic-bezier(0.22,1,0.36,1);}
 
 /* ── Chatbot input focus ── */
 #p1 .ch-in{transition:background .15s;}
@@ -856,8 +860,8 @@ body { font-size: 16px; }
 #p2 .e2-book{
   margin-top:16px;padding:15px;
   border:1px solid var(--polar);
-  transition:background .18s,color .18s;}
-#p2 .e2-book:hover{background:transparent;color:var(--polar);}
+  transition:background .18s,color .18s,transform .2s cubic-bezier(0.22,1,0.36,1);}
+#p2 .e2-book:hover{background:transparent;color:var(--polar);transform:translateY(-2px);}
 
 /* ── Rev header: ruled flanking lines ── */
 #p1 .rev-header{
@@ -926,8 +930,8 @@ body { font-size: 16px; }
   font-family:var(--fm);font-size:11px;letter-spacing:0.22em;
   text-transform:uppercase;text-align:center;
   border:none;
-  transition:background .2s,letter-spacing .2s;}
-#p2 .e2-book:hover{background:var(--white);letter-spacing:0.28em;}
+  transition:background .2s,color .2s,transform .2s cubic-bezier(0.22,1,0.36,1);}
+#p2 .e2-book:hover{background:var(--white);transform:translateY(-2px);}
 
 /* ═══════════════════════════════════════
    VISUAL UPGRADE — p1 vbar dots, stat accents,
@@ -1063,12 +1067,6 @@ body { font-size: 16px; }
 
 /* ── Scroll hint: warm amber arrow ── */
 #p1 .scroll-arrow{color:#C8A97A;}
-
-/* ── Stats: suffix styling for 67+ sign ── */
-#p1 .stat-suffix{
-  font-size:1.8rem;font-weight:700;line-height:1;
-  opacity:0.55;vertical-align:baseline;margin-left:1px;
-}
 
 /* ── Rev author: spaced caps ── */
 #p1 .rev-author{letter-spacing:0.18em;}
@@ -1414,7 +1412,7 @@ body { font-size: 16px; }
         <div class="ch-dot"></div>
         <span class="ch-name">Assistent Patrick</span>
       </div>
-      <div class="ch-msgs" id="msgs1"></div>
+      <div class="ch-msgs" id="msgs1" role="log" aria-live="polite" aria-label="Chatgesprek"></div>
       <div class="ch-chips" id="chips1">
         <button class="chip" onclick="qs('Wat kost knippen?')">Prijzen</button>
         <button class="chip" onclick="qs('Afspraak maken')">Afspraak</button>
@@ -1531,35 +1529,35 @@ body { font-size: 16px; }
     <span class="faq-lbl">Veelgestelde vragen</span>
     <div class="faq-wrap">
       <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">Hoe maak ik een afspraak?<span class="faq-icon">+</span></div>
+        <button class="faq-q" onclick="toggleFaq(this)">Hoe maak ik een afspraak?<span class="faq-icon">+</span></button>
         <div class="faq-a">Boek via Treatwell. Je kiest behandeling, datum en tijd, bevestiging volgt direct. Of WhatsApp: 06 52874750.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">Kan ik binnenlopen zonder afspraak?<span class="faq-icon">+</span></div>
+        <button class="faq-q" onclick="toggleFaq(this)">Kan ik binnenlopen zonder afspraak?<span class="faq-icon">+</span></button>
         <div class="faq-a">Patrick werkt op afspraak. WhatsApp vooraf om te checken of er plek is.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">Wat zijn de openingstijden?<span class="faq-icon">+</span></div>
+        <button class="faq-q" onclick="toggleFaq(this)">Wat zijn de openingstijden?<span class="faq-icon">+</span></button>
         <div class="faq-a">Woensdag t/m zaterdag, 10:00 tot 19:00. Maandag, dinsdag en zondag gesloten.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">Wat betekenen de "v.a." prijzen?<span class="faq-icon">+</span></div>
+        <button class="faq-q" onclick="toggleFaq(this)">Wat betekenen de "v.a." prijzen?<span class="faq-icon">+</span></button>
         <div class="faq-a">Prijs kan oplopen afhankelijk van haarlengte of dikte. Patrick bepaalt dit op locatie.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">Doet Patrick ook damesbehandelingen?<span class="faq-icon">+</span></div>
+        <button class="faq-q" onclick="toggleFaq(this)">Doet Patrick ook damesbehandelingen?<span class="faq-icon">+</span></button>
         <div class="faq-a">Ja. Europees haar én Black hair. Knippen, föhnen, steilen, permanenten, relaxen en extensions.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">Waar kan ik parkeren?<span class="faq-icon">+</span></div>
+        <button class="faq-q" onclick="toggleFaq(this)">Waar kan ik parkeren?<span class="faq-icon">+</span></button>
         <div class="faq-a">P-garage De Hallen, Bellamyplein 41 op loopafstand. Of betaald straatparkeren.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">Welke producten gebruikt Patrick?<span class="faq-icon">+</span></div>
+        <button class="faq-q" onclick="toggleFaq(this)">Welke producten gebruikt Patrick?<span class="faq-icon">+</span></button>
         <div class="faq-a">L'Oreal, Redken, Keune en KeraCare. Uitsluitend professionele merken.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">Spreekt Patrick ook Engels?<span class="faq-icon">+</span></div>
+        <button class="faq-q" onclick="toggleFaq(this)">Spreekt Patrick ook Engels?<span class="faq-icon">+</span></button>
         <div class="faq-a">Ja, Patrick spreekt vloeiend Nederlands en Engels.</div>
       </div>
     </div>
@@ -1610,7 +1608,7 @@ body { font-size: 16px; }
         <div class="ch-dot"></div>
         <span class="ch-name">Assistent Patrick</span>
       </div>
-      <div class="ch-msgs" id="msgs2"></div>
+      <div class="ch-msgs" id="msgs2" role="log" aria-live="polite" aria-label="Chatgesprek"></div>
       <div class="ch-chips" id="chips2">
         <button class="chip" onclick="qs2('Wat kost knippen?')">Prijzen</button>
         <button class="chip" onclick="qs2('Afspraak maken')">Afspraak</button>
@@ -1885,7 +1883,7 @@ function setStatus(dotId,textId){
   const parts=new Intl.DateTimeFormat('nl-NL',{
     timeZone:'Europe/Amsterdam',weekday:'short',hour:'numeric',hour12:false
   }).formatToParts(now);
-  const dayStr=parts.find(p=>p.type==='weekday').value.toLowerCase();
+  const dayStr=parts.find(p=>p.type==='weekday').value.toLowerCase().replace('.','');
   const h=parseInt(parts.find(p=>p.type==='hour').value,10);
   const dy=['zo','ma','di','wo','do','vr','za'].indexOf(dayStr);
   const open=[3,4,5,6].includes(dy)&&h>=10&&h<19;
@@ -2033,7 +2031,7 @@ async function sendMsg(txt){
 function sd(){const v=document.getElementById('in1').value.trim();document.getElementById('in1').value='';if(v)sendMsg(v);}
 function sd2(){const v=document.getElementById('in2').value.trim();document.getElementById('in2').value='';if(v)sendMsg(v);}
 function qs(t){sendMsg(t);}
-function qs2(t){sendMsg(t);}
+function qs2(t){qs(t);}
 document.getElementById('in1').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sd();}});
 document.getElementById('in2').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sd2();}});
 const welcome='Hoi! Ik ben de assistent van Patrick. Vraag me over behandelingen, prijzen of hoe je een afspraak maakt.';

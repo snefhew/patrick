@@ -57,7 +57,7 @@ button{cursor:pointer;border:none;background:none;}
    PAGE 1 — MONO  (white / #292929)
 ═══════════════════════════════════════ */
 #p1{
-  --ink:   #292929;
+  --ink:   #0d0d0d;
   --ink2:  #555555;
   --ink3:  #888888;
   --bg:    #ffffff;
@@ -88,11 +88,11 @@ button{cursor:pointer;border:none;background:none;}
 .sdot.on{background:#00AC5C;}
 
 /* B: hero — left col, rows 2+3 */
-#p1 .c-b{grid-column:1;grid-row:2/4;padding:32px 28px;
+#p1 .c-b{grid-column:1;grid-row:2/5;padding:32px 28px;
   align-items:flex-start;justify-content:center;gap:20px;}
 #p1 .hero-h1{
   font-family:var(--fd);
-  font-size:clamp(4rem,5.5vw,7rem);
+  font-size:clamp(2.8rem,4vw,5.2rem);
   font-weight:800;
   line-height:0.88;
   letter-spacing:0.01em;
@@ -161,9 +161,25 @@ button{cursor:pointer;border:none;background:none;}
 
 /* F: Treatwell booking */
 #p1 .c-f{grid-column:4;grid-row:3;
-  background:var(--bg2);position:relative;}
-#p1 .c-f::before{content:'BOEKEN';position:absolute;top:14px;left:18px;
-  font-family:var(--fc);font-size:10px;letter-spacing:0.3em;color:var(--ink3);}
+  background:var(--bg2);position:relative;overflow:hidden;}
+#p1 .c-f::before{
+  content:'';
+  position:absolute;inset:0;
+  background-image:url('booking.jpg');
+  background-size:cover;
+  background-position:center 60%;
+  filter:grayscale(100%) contrast(1.15) brightness(0.90);
+  z-index:0;
+  pointer-events:none;
+}
+#p1 .c-f::after{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(255,255,255,0.82) 0%,rgba(255,255,255,0.65) 50%,rgba(255,255,255,0.80) 100%);
+  z-index:1;
+  pointer-events:none;
+}
+#p1 .c-f > *{position:relative;z-index:2;}
 
 /* FOOTER */
 #p1 .c-footer{grid-column:2/5;grid-row:4;border-top:var(--b);border-left:var(--b);
@@ -262,7 +278,7 @@ button{cursor:pointer;border:none;background:none;}
   text-transform:uppercase;color:var(--ash);flex-shrink:0;}
 
 /* B2: heading + FAQ */
-#p2 .c-b2{grid-column:1;grid-row:2/4;padding:28px;
+#p2 .c-b2{grid-column:1;grid-row:2/5;padding:28px;
   align-items:flex-start;justify-content:flex-start;background:var(--midnight);overflow:hidden;}
 #p2 .p2-h1{font-size:clamp(1.9rem,2.6vw,3rem);font-weight:700;line-height:0.95;
   letter-spacing:-0.02em;color:var(--polar);margin-bottom:8px;}
@@ -287,13 +303,14 @@ button{cursor:pointer;border:none;background:none;}
 #p2 .faq-item.open .faq-a{display:block;}
 
 /* C2: info bar */
-#p2 .c-c{grid-column:2;grid-row:1;padding:16px 28px;
-  flex-direction:row;justify-content:center;align-items:center;gap:48px;
+#p2 .c-c{grid-column:2;grid-row:1;padding:14px 32px;
+  flex-direction:row;justify-content:center;align-items:center;gap:40px;
   flex-wrap:wrap;background:var(--deep);}
 #p2 .info-item{display:flex;flex-direction:column;gap:3px;align-items:center;}
-#p2 .info-lbl{font-family:var(--fm);font-size:10px;letter-spacing:0.2em;
-  text-transform:uppercase;color:var(--ash);}
-#p2 .info-val{font-size:13px;line-height:1.5;color:var(--polar);text-align:center;}
+#p2 .info-item .info-inner{display:flex;flex-direction:column;gap:2px;align-items:center;padding:0;}
+#p2 .info-lbl{font-family:var(--fm);font-size:10px;letter-spacing:0.28em;
+  text-transform:uppercase;color:var(--ash);font-weight:700;}
+#p2 .info-val{font-size:14px;font-weight:700;line-height:1.5;color:var(--polar);text-align:center;white-space:nowrap;}
 
 /* D2: chatbot */
 #p2 .c-d{grid-column:2;grid-row:2/4;
@@ -302,12 +319,11 @@ button{cursor:pointer;border:none;background:none;}
   font-family:var(--fm);font-size:10px;letter-spacing:0.3em;color:var(--ash);}
 
 /* VBAR */
-#p2 .c-vbar{grid-column:3;grid-row:1/4;
-  background:var(--deep);display:flex;align-items:center;
+#p2 .c-vbar{grid-column:3;grid-row:1/5;background:#ffffff;display:flex;align-items:center;
   justify-content:center;overflow:hidden;}
 #p2 .vbar-text{writing-mode:vertical-rl;transform:rotate(180deg);
   font-family:var(--fm);font-size:11px;letter-spacing:0.35em;
-  text-transform:uppercase;color:var(--white);white-space:nowrap;user-select:none;}
+  text-transform:uppercase;color:#000000;white-space:nowrap;user-select:none;}
 
 /* E2: treatment list */
 #p2 .c-e2{grid-column:4;grid-row:1/4;overflow-y:auto;
@@ -392,6 +408,116 @@ button{cursor:pointer;border:none;background:none;}
    SHARED
 ═══════════════════════════════════════ */
 @keyframes bl{0%,60%,100%{opacity:.3}30%{opacity:1;transform:translateY(-3px)}}
+
+/* ── Vbar amber glow animation ── */
+@keyframes vbarGlow {
+  0%, 100% { text-shadow: 0 0 8px rgba(220,130,50,0.70), 0 0 22px rgba(220,130,50,0.30), 0 0 40px rgba(200,110,30,0.12); }
+  50%       { text-shadow: 0 0 12px rgba(220,130,50,0.90), 0 0 30px rgba(220,130,50,0.45), 0 0 55px rgba(200,110,30,0.20); }
+}
+.vbar-text {
+  font-size: 12px;
+  letter-spacing: 0.3em;
+}
+#p1 .vbar-text {
+  text-shadow: 0 0 8px rgba(220,130,50,0.70), 0 0 22px rgba(220,130,50,0.30), 0 0 40px rgba(200,110,30,0.12);
+  animation: vbarGlow 3.5s ease-in-out infinite;
+}
+#p2 .vbar-text {
+  text-shadow: none;
+  animation: none;
+}
+
+/* ── ALL TEXT — readable sizes ── */
+body { font-size: 16px; }
+
+#p1 .info-lbl, #p2 .info-lbl { font-size: 10.5px; font-weight: 700; letter-spacing: 0.26em; }
+#p1 .info-val { font-size: 14.5px; font-weight: 700; }
+#p2 .info-val { font-size: 14.5px; font-weight: 600; }
+
+#p1 .hero-lbl  { font-size: 12px; font-weight: 700; letter-spacing: 0.22em; }
+#p1 .hero-desc { font-size: 16px; line-height: 1.8; font-weight: 400; }
+#p1 .scroll-hint { font-size: 12px; font-weight: 600; letter-spacing: 0.2em; }
+
+#p1 .salon-name, #p2 .salon-name { font-size: 17px; font-weight: 700; }
+#p1 .salon-sub,  #p2 .salon-sub  { font-size: 12px; font-weight: 600; letter-spacing: 0.2em; }
+#p1 .status-badge, #p2 .status-badge { font-size: 12px; font-weight: 600; letter-spacing: 0.16em; }
+
+#p1 .rev-header  { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; }
+#p1 .rev-quote   { font-size: 18px; line-height: 1.55; font-weight: 400; }
+#p1 .rev-author  { font-size: 13px; font-weight: 700; letter-spacing: 0.16em; }
+#p1 .rev-treatment { font-size: 12px; font-weight: 500; letter-spacing: 0.12em; }
+
+#p1 .stat-n { font-size: 4rem; }
+#p1 .stat-l { font-size: 12px; font-weight: 700; letter-spacing: 0.16em; }
+
+#p1 .tw-lbl   { font-size: 11px; letter-spacing: 0.22em; }
+#p1 .tw-salon { font-size: 16px; font-weight: 700; }
+#p1 .tw-stars { font-size: 14px; }
+#p1 .tw-btn   { font-size: 15px; letter-spacing: 0.14em; }
+#p1 .tw-note  { font-size: 12px; }
+#p1 .tw-inline-btn { font-size: 12.5px; letter-spacing: 0.16em; padding: 10px 0; }
+
+#p1 .ch-name, #p2 .ch-name { font-size: 12px; letter-spacing: 0.18em; }
+#p1 .cm-b, #p2 .cm-b       { font-size: 15px; line-height: 1.7; }
+#p1 .cm-t, #p2 .cm-t       { font-size: 12px; }
+#p1 .ch-ft, #p2 .ch-ft     { font-size: 11.5px; padding: 9px; letter-spacing: 0.1em; }
+#p1 .ch-in, #p2 .ch-in     { font-size: 15px; }
+#p1 .chip, #p2 .chip        { font-size: 12px; font-weight: 600; padding: 8px 15px; }
+
+#p1 .footer-brand, #p2 .footer-brand { font-size: 14px; font-weight: 700; }
+#p1 .footer-item,  #p2 .footer-item  { font-size: 13px; font-weight: 500; }
+#p1 .footer-loc,   #p2 .footer-loc   { font-size: 13px; font-weight: 500; }
+
+#p2 .e2-lbl    { font-size: 12px; letter-spacing: 0.26em; font-weight: 700; }
+#p2 .tg-title  { font-size: 11.5px; letter-spacing: 0.24em; font-weight: 700; }
+#p2 .tr-n      { font-size: 15px; font-weight: 500; line-height: 1.45; }
+#p2 .tr-p      { font-size: 16px; font-weight: 600; }
+#p2 .tr-t      { font-size: 12px; }
+#p2 .e2-book   { font-size: 13px; letter-spacing: 0.18em; }
+
+#p2 .faq-lbl  { font-size: 12px; letter-spacing: 0.22em; font-weight: 700; margin-top: 32px; }
+#p2 .faq-q    { font-size: 15px; font-weight: 700; }
+#p2 .faq-a    { font-size: 14px; line-height: 1.8; }
+#p2 .p2-desc  { font-size: 14px; line-height: 1.75; }
+#p2 .p2-h1    { font-size: clamp(2.6rem, 3.4vw, 4.4rem); }
+
+/* Section labels (ASSISTENT, KLANTREVIEWS etc) */
+#p1 .c-d::after, #p2 .c-d::after { font-size: 11px; letter-spacing: 0.28em; }
+
+/* Grey text stroke — makes it crisp on any background */
+#p1 .info-lbl,
+#p1 .hero-lbl,
+#p1 .rev-header,
+#p1 .rev-author,
+#p1 .rev-treatment,
+#p1 .stat-l,
+#p1 .hero-desc,
+#p1 .scroll-hint,
+#p1 .ch-ft,
+#p1 .tw-note,
+#p1 .footer-loc {
+  -webkit-text-stroke: 0.3px rgba(0,0,0,0.55);
+  paint-order: stroke fill;
+}
+
+#p2 .info-lbl,
+#p2 .e2-lbl,
+#p2 .tr-t,
+#p2 .faq-lbl,
+#p2 .p2-desc,
+#p2 .ch-ft,
+#p2 .footer-loc,
+#p2 .ash {
+  -webkit-text-stroke: 0.3px rgba(255,255,255,0.25);
+  paint-order: stroke fill;
+}
+
+/* Page 2 ash — lighter for better contrast on dark bg */
+#p2 { --ash: #b0b0b0; }
+
+#p1 .vbar-num, #p2 .vbar-num { color: rgba(255,255,255,0.65); font-size: 10px; }
+#p2 .tr:hover { background: rgba(255,255,255,0.08); padding-left: 10px; }
+#p2 .p2-h1 em { color: var(--amber); font-style: normal; }
 @keyframes scrollBounce{
   0%,100%{transform:translateY(0);opacity:.55;}
   50%{transform:translateY(6px);opacity:1;}
@@ -658,22 +784,23 @@ button{cursor:pointer;border:none;background:none;}
   animation:scrollBounce 2s ease-in-out infinite;
   font-size:13px;line-height:1;}
 
-/* ── Info bar: left-aligned key-facts strip with pipe separators ── */
-#p1 .c-c{padding:0 32px;justify-content:flex-start;gap:0;flex-wrap:nowrap;}
-#p1 .info-item{flex-direction:row;align-items:center;gap:0;flex-shrink:0;}
-#p1 .info-item .info-inner{display:flex;flex-direction:column;gap:2px;padding:0 28px;}
-#p1 .info-item:first-child .info-inner{padding-left:0;}
-#p1 .info-sep{width:1px;height:28px;background:var(--ink);opacity:0.14;flex-shrink:0;}
-#p1 .info-lbl{font-size:9px;letter-spacing:0.25em;}
-#p1 .info-val{font-size:12px;font-weight:600;white-space:nowrap;line-height:1.4;}
+/* ── Info bar: centered layout matching p2 ── */
+#p1 .c-c {
+  padding: 14px 32px;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  background: var(--bg2);
+}
+#p1 .info-item { flex-direction: column; align-items: center; gap: 3px; }
+#p1 .info-item .info-inner { display: flex; flex-direction: column; gap: 2px; align-items: center; padding: 0; }
+#p1 .info-sep { display: none; }
+#p1 .info-lbl { font-size: 10px; letter-spacing: 0.28em; font-weight: 700; color: var(--ink3); text-transform: uppercase; }
+#p1 .info-val { font-size: 14px; font-weight: 700; color: var(--ink); text-align: center; white-space: nowrap; }
 
-#p2 .c-c{padding:0 32px;justify-content:flex-start;gap:0;flex-wrap:nowrap;}
-#p2 .info-item{flex-direction:row;align-items:center;gap:0;flex-shrink:0;}
-#p2 .info-item .info-inner{display:flex;flex-direction:column;gap:2px;padding:0 28px;}
-#p2 .info-item:first-child .info-inner{padding-left:0;}
-#p2 .info-sep{width:1px;height:28px;background:var(--carbon);flex-shrink:0;}
-#p2 .info-lbl{font-size:9px;letter-spacing:0.25em;}
-#p2 .info-val{font-size:12px;font-weight:500;white-space:nowrap;line-height:1.4;color:var(--polar);}
+#p2 .info-sep{display:none;}
+#p2 .info-lbl{font-size:10px;letter-spacing:0.28em;font-weight:700;color:var(--ash);text-transform:uppercase;}
+#p2 .info-val{font-size:14px;font-weight:700;color:var(--polar);text-align:center;white-space:nowrap;}
 
 /* ── Footer: branded 3-zone layout ── */
 #p1 .c-footer{justify-content:space-between;gap:0;padding:0 28px;flex-wrap:nowrap;}
@@ -753,11 +880,7 @@ button{cursor:pointer;border:none;background:none;}
    PAGE 2 PARITY — 11 improvements
 ═══════════════════════════════════════ */
 
-/* 2. Info bar — centered layout */
-#p2 .c-c{padding:16px 28px;justify-content:center;gap:48px;flex-wrap:wrap;}
-#p2 .info-item{flex-direction:column;align-items:center;gap:3px;}
-#p2 .info-item .info-inner{padding:0;}
-#p2 .info-val{text-align:center;}
+/* 2. Info bar — see main p2 .c-c rules above */
 
 /* 3. Chatbot cell — center card */
 #p2 .c-d{display:flex;align-items:center;justify-content:center;position:relative;}
@@ -794,11 +917,8 @@ button{cursor:pointer;border:none;background:none;}
   letter-spacing:0.005em;color:var(--polar);margin-bottom:12px;text-transform:uppercase;}
 #p2 .p2-h1 em{font-style:normal;color:var(--ash);}
 
-/* 10. Vbar — dot overlay */
+/* 10. Vbar — pure black, no dot overlay */
 #p2 .c-vbar{position:relative;}
-#p2 .c-vbar::before{content:'';position:absolute;inset:0;
-  background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);
-  background-size:8px 8px;pointer-events:none;}
 
 /* 11. Book button — more impactful */
 #p2 .e2-book{display:block;margin-top:16px;padding:16px;width:100%;
@@ -818,10 +938,7 @@ button{cursor:pointer;border:none;background:none;}
 .page{grid-template-columns:minmax(190px,22%) 1fr 48px minmax(260px,28%);}
 
 /* 1b. VBAR p1 — extend full height + dot overlay */
-#p1 .c-vbar{grid-column:3;grid-row:1/5;background:var(--ink);position:relative;}
-#p1 .c-vbar::before{content:'';position:absolute;inset:0;
-  background-image:radial-gradient(circle,rgba(255,255,255,.06) 1px,transparent 1px);
-  background-size:8px 8px;pointer-events:none;}
+#p1 .c-vbar{grid-column:3;grid-row:1/5;background:#000000;position:relative;}
 
 /* 2. STAT ITEMS — top accent line */
 #p1 .stat-item{position:relative;padding-top:10px;}
@@ -874,7 +991,7 @@ button{cursor:pointer;border:none;background:none;}
   position:absolute;inset:0;
   background:
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"),
-    linear-gradient(170deg,rgba(255,255,255,0.92) 0%,rgba(255,255,255,0.76) 55%,rgba(255,255,255,0.86) 100%);
+    linear-gradient(170deg,rgba(255,255,255,0.70) 0%,rgba(255,255,255,0.54) 55%,rgba(255,255,255,0.64) 100%);
   background-size:200px 200px,100% 100%;
   z-index:1;
   pointer-events:none;
@@ -892,7 +1009,7 @@ button{cursor:pointer;border:none;background:none;}
   background-image:url('hero.jpg');
   background-size:cover;
   background-position:center 20%;
-  filter:grayscale(60%) brightness(0.18) contrast(1.2);
+  filter:grayscale(60%) brightness(0.32) contrast(1.2);
   z-index:0;
   pointer-events:none;
   transform:scale(1.02);
@@ -917,9 +1034,14 @@ button{cursor:pointer;border:none;background:none;}
 #p1 .c-vbar,#p2 .c-vbar{
   flex-direction:column;justify-content:space-between;padding:14px 0;gap:0;
 }
-#p1 .vbar-num,#p2 .vbar-num{
+#p1 .vbar-num{
   font-family:var(--fc);font-size:9px;letter-spacing:0.22em;font-weight:600;
   color:rgba(255,255,255,0.38);user-select:none;
+  writing-mode:horizontal-tb;text-align:center;
+}
+#p2 .vbar-num{
+  font-family:var(--fc);font-size:9px;letter-spacing:0.22em;font-weight:600;
+  color:rgba(0,0,0,0.35);user-select:none;
   writing-mode:horizontal-tb;text-align:center;
 }
 #p1 .vbar-mid,#p2 .vbar-mid{flex:1;display:flex;align-items:center;justify-content:center;}
@@ -935,9 +1057,9 @@ button{cursor:pointer;border:none;background:none;}
 }
 
 /* ── Info bar micro-refinements ── */
-#p1 .info-lbl{letter-spacing:0.28em;font-size:8.5px;}
-#p2 .info-lbl{letter-spacing:0.28em;font-size:8.5px;}
-#p1 .info-val{font-weight:500;}
+#p1 .info-lbl{letter-spacing:0.28em;}
+#p2 .info-lbl{letter-spacing:0.28em;}
+#p1 .info-val{font-weight:700;}
 
 /* ── Scroll hint: warm amber arrow ── */
 #p1 .scroll-arrow{color:#C8A97A;}
@@ -950,7 +1072,7 @@ button{cursor:pointer;border:none;background:none;}
 
 /* ── Rev author: spaced caps ── */
 #p1 .rev-author{letter-spacing:0.18em;}
-#p1 .rev-treatment{letter-spacing:0.14em;font-size:9px;}
+#p1 .rev-treatment{letter-spacing:0.14em;}
 
 /* ═══════════════════════════════════════
    CHATBOT — FLOATING POPUP
@@ -1002,7 +1124,7 @@ button{cursor:pointer;border:none;background:none;}
 @media(max-width:900px){
   #app{scroll-snap-type:none;}
   .page{scroll-snap-align:none;height:auto;min-height:100vh;
-    grid-template-columns:1fr 44px minmax(220px,35%);
+    grid-template-columns:1fr 48px minmax(220px,35%);
     grid-template-rows:auto auto auto auto auto auto;}
   #p1 .c-a,#p2 .c-a{grid-column:1;grid-row:1;}
   #p1 .c-b           {grid-column:1;grid-row:3/5;min-height:220px;}
@@ -1016,20 +1138,190 @@ button{cursor:pointer;border:none;background:none;}
   #p1 .c-footer,#p2 .c-footer{grid-column:1/-1;grid-row:6;}
 }
 @media(max-width:600px){
-  .page{grid-template-columns:44px 1fr;grid-template-rows:52px auto auto auto auto auto auto;}
-  #p1 .c-a,#p2 .c-a  {grid-column:2;grid-row:1;padding:10px 14px;
-    flex-direction:row;align-items:center;justify-content:space-between;}
-  #p1 .c-vbar,#p2 .c-vbar{grid-column:1;grid-row:1/8;}
-  #p1 .c-c,#p2 .c-c  {grid-column:2;grid-row:2;gap:20px;padding:16px;}
-  #p1 .c-b           {grid-column:2;grid-row:3;padding:22px 18px;min-height:180px;}
-  #p2 .c-b2          {grid-column:2;grid-row:3;padding:22px 18px;}
-  #p1 .c-d,#p2 .c-d  {grid-column:2;grid-row:4;min-height:580px;}
-  #p1 .c-e           {grid-column:2;grid-row:5;min-height:240px;}
-  #p2 .c-e2          {grid-column:2;grid-row:5;max-height:none;}
-  #p1 .c-f           {grid-column:2;grid-row:6;min-height:180px;}
-  #p1 .c-footer,#p2 .c-footer{grid-column:2;grid-row:7;}
-  #p1 .chat-card,#p2 .chat-card{width:calc(100% - 24px);max-width:none;}
-  #p1 .tw-card{width:calc(100% - 24px);max-width:none;}
+  html,body{overflow:auto;}
+  #app{scroll-snap-type:none;overflow:visible;height:auto;}
+
+  /* Each page: single column, full-height scroll */
+  .page{
+    height:auto;
+    min-height:0;
+    display:flex;
+    flex-direction:column;
+    scroll-snap-align:none;
+  }
+
+  /* Hide vbar completely on mobile */
+  .c-vbar { display:none !important; }
+
+  /* Hide duplicate info bar on page 2 */
+  #p2 .c-c { display:none !important; }
+
+  /* Hide chatbot on page 2 (already on page 1) */
+  #p2 .c-d { display:none !important; }
+
+  /* Hide footer on page 1 (redundant on mobile) */
+  #p1 .c-footer { display:none !important; }
+
+  /* Logo bar */
+  .c-a { padding:14px 18px; min-height:56px; flex-direction:row; justify-content:space-between; align-items:center; flex-shrink:0; }
+
+  /* Info strip (page 1 only) — 2-col grid on mobile */
+  #p1 .c-c {
+    padding: 14px 18px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 16px;
+    align-items: start;
+    flex-shrink: 0;
+  }
+  #p1 .c-c .info-item { flex-direction: column; align-items: flex-start; gap: 1px; }
+  #p1 .c-c .info-inner { padding: 0; align-items: flex-start; }
+  #p1 .c-c .info-lbl { font-size: 9.5px; text-align: left; }
+  #p1 .c-c .info-val { font-size: 13px; text-align: left; }
+  #p1 .c-c .info-sep { display: none; }
+
+  /* Hero */
+  #p1 .c-b {
+    min-height:280px;
+    padding:28px 20px;
+    flex-shrink:0;
+  }
+  #p2 .c-b2 {
+    min-height:200px;
+    padding:28px 20px;
+    flex-shrink:0;
+  }
+
+  /* Chatbot (page 1 only visible) */
+  #p1 .c-d {
+    min-height:560px;
+    padding:16px 12px;
+    flex-shrink:0;
+  }
+  #p1 .chat-card { width:100%; max-width:none; }
+  #p2 .chat-card { width:100%; max-width:none; }
+
+  /* Reviews (page 1) */
+  #p1 .c-e { min-height:320px; padding:28px 20px; flex-shrink:0; }
+
+  /* Booking (page 1) */
+  #p1 .c-f { min-height:220px; padding:24px 20px; flex-shrink:0; }
+  #p1 .tw-card { width:100%; max-width:none; }
+
+  /* Page 2: treatment list — comes first on mobile */
+  #p2 .c-e2 {
+    max-height:none;
+    min-height:600px;
+    padding:28px 20px;
+    padding-bottom:60px;
+    flex-shrink:0;
+    order:1;
+  }
+
+  /* Page 2: FAQ — after treatments on mobile */
+  #p2 .c-b2 { min-height:auto; padding:28px 20px 40px; order:2; }
+  /* Hide the h2 heading on mobile (redundant, c-e2 already has the label) */
+  #p2 .c-b2 .p2-h1,
+  #p2 .c-b2 .p2-desc { display:none; }
+  /* Page 2 footer — always last */
+  #p2 .c-footer { order:3; }
+
+  /* Page 2 footer — readable, properly sized */
+  #p2 .c-footer {
+    display:flex !important;
+    min-height:80px;
+    padding:16px 20px;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:10px;
+  }
+  #p2 .footer-brand { font-size:14px; font-weight:700; }
+  #p2 .footer-links { gap:16px; flex-wrap:wrap; }
+  #p2 .footer-item { font-size:12px; }
+  #p2 .footer-loc { font-size:11px; margin-top:4px; }
+
+  /* Disable entrance animations on mobile */
+  .cell[data-anim]{opacity:1!important;}
+  .vbar-text{opacity:1!important;transform:rotate(180deg)!important;}
+  .hero-word{opacity:1!important;}
+}
+
+/* ── Mobile sticky booking bar (E1) ── */
+#mobile-book-bar {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 200;
+  height: 56px;
+  background: #0d0d0d;
+  color: #fff;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  transition: opacity 0.3s ease;
+}
+@media(max-width:600px) {
+  #mobile-book-bar { display: flex; }
+  #app { padding-bottom: 56px; }
+}
+
+/* ── Populair tag (D3) ── */
+.pop-tag {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ash, #888);
+  border: 1px solid rgba(150,150,150,0.4);
+  padding: 2px 6px;
+  margin-left: 8px;
+  vertical-align: middle;
+  display: inline-block;
+}
+#p2 .pop-tag { color: var(--amber); border-color: rgba(231,197,154,0.35); }
+
+/* ── Review ticker strip (C3) ── */
+
+/* ── Treatment filter tabs (B1) ── */
+.e2-tabs { display: flex; gap: 0; margin-bottom: 20px; width: 100%; border: 1px solid var(--carbon); }
+.e2-tab {
+  flex: 1;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ash);
+  background: transparent;
+  border: none;
+  border-right: 1px solid var(--carbon);
+  padding: 9px 4px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.e2-tab:last-child { border-right: none; }
+.e2-tab.active { background: var(--polar); color: var(--midnight); }
+.e2-tab:hover:not(.active) { background: rgba(255,255,255,0.06); color: var(--polar); }
+
+/* ── Ticker strip: compensate scroll-snap offset ── */
+
+/* ── Vbar slice-in animation (A5) ── */
+@keyframes cellSliceIn {
+  from { clip-path: inset(0 100% 0 0); opacity: 0; }
+  to   { clip-path: inset(0 0% 0 0); opacity: 1; }
+}
+@media(prefers-reduced-motion: no-preference) {
+  #p1 .c-vbar, #p2 .c-vbar {
+    animation: cellSliceIn 1.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: 200ms;
+  }
 }
 </style>
 </head>
@@ -1082,7 +1374,7 @@ button{cursor:pointer;border:none;background:none;}
     <div class="info-item">
       <div class="info-inner">
         <span class="info-lbl">Adres</span>
-        <span class="info-val">Kinkerstraat 162-H, Amsterdam</span>
+        <span class="info-val"><a href="https://maps.google.com/?q=Kinkerstraat+162-H+Amsterdam" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Kinkerstraat 162-H, Amsterdam</a></span>
       </div>
     </div>
     <div class="info-sep"></div>
@@ -1103,7 +1395,14 @@ button{cursor:pointer;border:none;background:none;}
     <div class="info-item">
       <div class="info-inner">
         <span class="info-lbl">WhatsApp</span>
-        <a class="info-val" href="https://wa.me/31652874750" target="_blank" rel="noopener" style="text-decoration:underline">06 5287 4750</a>
+        <a class="info-val" href="https://wa.me/31652874750?text=Hallo%20Patrick%2C%20ik%20wil%20graag%20een%20afspraak%20maken." target="_blank" rel="noopener" style="text-decoration:underline">06 5287 4750</a>
+      </div>
+    </div>
+    <div class="info-sep"></div>
+    <div class="info-item">
+      <div class="info-inner">
+        <span class="info-lbl">Tijd</span>
+        <span class="info-val" id="amstClock">--:--</span>
       </div>
     </div>
   </div>
@@ -1161,7 +1460,10 @@ button{cursor:pointer;border:none;background:none;}
         <div class="stat-item"><span class="stat-n" data-stat="67" data-suffix="+">67+</span><span class="stat-l">Klanten</span></div>
         <div class="stat-item"><span class="stat-n" data-stat="24" data-suffix="">24</span><span class="stat-l">Behandelingen</span></div>
       </div>
-      <a href="https://www.treatwell.nl/salon/hairstyler-patrick-anches-barbier-kapper/" target="_blank" rel="noopener" class="tw-inline-btn">Boek via Treatwell →</a>
+      <div style="display:flex;gap:0;width:100%;border-top:1px solid rgba(13,13,13,0.12);margin-top:12px;">
+        <a href="https://www.treatwell.nl/salon/hairstyler-patrick-anches-barbier-kapper/reviews/" target="_blank" rel="noopener" class="tw-inline-btn" style="flex:1;border-right:1px solid rgba(13,13,13,0.12);padding-top:11px;padding-bottom:11px;">Alle reviews →</a>
+        <a href="https://www.treatwell.nl/salon/hairstyler-patrick-anches-barbier-kapper/" target="_blank" rel="noopener" class="tw-inline-btn" style="flex:1;padding-top:11px;padding-bottom:11px;">Afspraak maken →</a>
+      </div>
     </div>
   </div>
 
@@ -1182,11 +1484,11 @@ button{cursor:pointer;border:none;background:none;}
   <div class="cell c-footer" data-anim="up" style="--ad:220ms">
     <span class="footer-brand">© Patrick Anches</span>
     <div class="footer-links">
-      <a class="footer-item" href="https://wa.me/31652874750" target="_blank" rel="noopener">WhatsApp</a>
+      <a class="footer-item" href="https://wa.me/31652874750?text=Hallo%20Patrick%2C%20ik%20wil%20graag%20een%20afspraak%20maken." target="_blank" rel="noopener">WhatsApp</a>
       <span class="footer-sep">·</span>
       <a class="footer-item" href="https://www.treatwell.nl/salon/hairstyler-patrick-anches-barbier-kapper/" target="_blank" rel="noopener">Treatwell</a>
       <span class="footer-sep">·</span>
-      <span class="footer-item">06 5287 4750</span>
+      <a class="footer-item" href="tel:+31652874750">06 5287 4750</a>
     </div>
     <span class="footer-loc">Kinkerstraat 162-H</span>
   </div>
@@ -1268,7 +1570,7 @@ button{cursor:pointer;border:none;background:none;}
     <div class="info-item">
       <div class="info-inner">
         <span class="info-lbl">Adres</span>
-        <span class="info-val">Kinkerstraat 162-H, Amsterdam</span>
+        <span class="info-val"><a href="https://maps.google.com/?q=Kinkerstraat+162-H+Amsterdam" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Kinkerstraat 162-H, Amsterdam</a></span>
       </div>
     </div>
     <div class="info-sep"></div>
@@ -1283,6 +1585,20 @@ button{cursor:pointer;border:none;background:none;}
       <div class="info-inner">
         <span class="info-lbl">Bereikbaar</span>
         <span class="info-val">Tram 7 &amp; 17 · P De Hallen</span>
+      </div>
+    </div>
+    <div class="info-sep"></div>
+    <div class="info-item">
+      <div class="info-inner">
+        <span class="info-lbl">WhatsApp</span>
+        <a class="info-val" href="https://wa.me/31652874750?text=Hallo%20Patrick%2C%20ik%20wil%20graag%20een%20afspraak%20maken." target="_blank" rel="noopener" style="text-decoration:underline">06 5287 4750</a>
+      </div>
+    </div>
+    <div class="info-sep"></div>
+    <div class="info-item">
+      <div class="info-inner">
+        <span class="info-lbl">Tijd</span>
+        <span class="info-val" id="amstClock2">--:--</span>
       </div>
     </div>
   </div>
@@ -1321,12 +1637,19 @@ button{cursor:pointer;border:none;background:none;}
   <!-- E2: treatment list -->
   <div class="cell c-e2" data-anim="left" style="--ad:120ms">
     <span class="e2-lbl">Behandelingen &amp; Prijzen</span>
-    <div class="tg">
+    <div class="e2-tabs">
+      <button class="e2-tab active" onclick="filterTx(this,'all')">Alle</button>
+      <button class="e2-tab" onclick="filterTx(this,'mannen')">Mannen</button>
+      <button class="e2-tab" onclick="filterTx(this,'vrouwen')">Vrouwen</button>
+      <button class="e2-tab" onclick="filterTx(this,'extensions')">Extensions</button>
+      <button class="e2-tab" onclick="filterTx(this,'blackhair')">Black hair</button>
+    </div>
+    <div class="tg" data-cat="mannen">
       <div class="tg-title">Mannen · Knippen &amp; Styling</div>
       <div class="tr"><span class="tr-n">Knippen kort haar</span><div class="tr-r"><span class="tr-p">23,50</span><span class="tr-t">50 min</span></div></div>
       <div class="tr"><span class="tr-n">Haar &amp; baard fresh-up trim</span><div class="tr-r"><span class="tr-p">23,50</span><span class="tr-t">1u 15m</span></div></div>
       <div class="tr"><span class="tr-n">Baard knippen &amp; modelleren</span><div class="tr-r"><span class="tr-p">16,00</span><span class="tr-t">30 min</span></div></div>
-      <div class="tr"><span class="tr-n">Knippen &amp; baard</span><div class="tr-r"><span class="tr-p">30,00</span><span class="tr-t">1u 15m</span></div></div>
+      <div class="tr"><span class="tr-n">Knippen &amp; baard <span class="pop-tag">Populair</span></span><div class="tr-r"><span class="tr-p">30,00</span><span class="tr-t">1u 15m</span></div></div>
       <div class="tr"><span class="tr-n">Hoofd kaal scheren + baard</span><div class="tr-r"><span class="tr-p">20,00</span><span class="tr-t">45 min</span></div></div>
       <div class="tr"><span class="tr-n">Knippen senioren 65+</span><div class="tr-r"><span class="tr-p">18,50</span><span class="tr-t">45 min</span></div></div>
       <div class="tr"><span class="tr-n">Wassen, knippen &amp; drogen</span><div class="tr-r"><span class="tr-p">26,95</span><span class="tr-t">50 min</span></div></div>
@@ -1335,7 +1658,7 @@ button{cursor:pointer;border:none;background:none;}
       <div class="tr"><span class="tr-n">Kort haar verven &amp; knippen</span><div class="tr-r"><span class="tr-p">45,00</span><span class="tr-t">1u 5m</span></div></div>
       <div class="tr"><span class="tr-n">Kinderen knippen</span><div class="tr-r"><span class="tr-p">21,00</span><span class="tr-t">45 min</span></div></div>
     </div>
-    <div class="tg">
+    <div class="tg" data-cat="vrouwen">
       <div class="tg-title">Vrouwen · Europees Haar</div>
       <div class="tr"><span class="tr-n">Wassen &amp; föhnen kort haar</span><div class="tr-r"><span class="tr-p">25,00</span><span class="tr-t">40 min</span></div></div>
       <div class="tr"><span class="tr-n">Knippen kort haar</span><div class="tr-r"><span class="tr-p va">23,95</span><span class="tr-t">45 min</span></div></div>
@@ -1343,13 +1666,13 @@ button{cursor:pointer;border:none;background:none;}
       <div class="tr"><span class="tr-n">Permanent incl. knippen</span><div class="tr-r"><span class="tr-p va">85,00</span><span class="tr-t">1u 45m</span></div></div>
       <div class="tr"><span class="tr-n">Knippen senioren 65+</span><div class="tr-r"><span class="tr-p va">18,50</span><span class="tr-t">45 min</span></div></div>
     </div>
-    <div class="tg">
+    <div class="tg" data-cat="extensions">
       <div class="tg-title">Extensions · Alle Haartypes</div>
       <div class="tr"><span class="tr-n">Extensions verwijderen p/baan</span><div class="tr-r"><span class="tr-p va">5,00</span><span class="tr-t">10 min</span></div></div>
       <div class="tr"><span class="tr-n">Extensions incl. microringen p/baan</span><div class="tr-r"><span class="tr-p">25,00</span><span class="tr-t">25 min</span></div></div>
       <div class="tr"><span class="tr-n">Extensions interlocking p/baan</span><div class="tr-r"><span class="tr-p va">25,00</span><span class="tr-t">30 min</span></div></div>
     </div>
-    <div class="tg">
+    <div class="tg" data-cat="blackhair">
       <div class="tg-title">Vrouwen · Black Hair</div>
       <div class="tr"><span class="tr-n">Wassen &amp; stijltangen kort haar</span><div class="tr-r"><span class="tr-p">35,00</span><span class="tr-t">1u</span></div></div>
       <div class="tr"><span class="tr-n">Curly perm incl. knippen</span><div class="tr-r"><span class="tr-p va">110,00</span><span class="tr-t">2u 30m</span></div></div>
@@ -1366,17 +1689,21 @@ button{cursor:pointer;border:none;background:none;}
   <div class="cell c-footer" data-anim="up" style="--ad:200ms">
     <span class="footer-brand">© Patrick Anches</span>
     <div class="footer-links">
-      <a class="footer-item" href="https://wa.me/31652874750" target="_blank" rel="noopener">WhatsApp</a>
+      <a class="footer-item" href="https://wa.me/31652874750?text=Hallo%20Patrick%2C%20ik%20wil%20graag%20een%20afspraak%20maken." target="_blank" rel="noopener">WhatsApp</a>
       <span class="footer-sep">·</span>
       <a class="footer-item" href="https://www.treatwell.nl/salon/hairstyler-patrick-anches-barbier-kapper/" target="_blank" rel="noopener">Treatwell</a>
       <span class="footer-sep">·</span>
-      <span class="footer-item">06 5287 4750</span>
+      <a class="footer-item" href="tel:+31652874750">06 5287 4750</a>
     </div>
     <span class="footer-loc">Kinkerstraat 162-H</span>
   </div>
 
 </div><!-- /p2 -->
 </div><!-- /app -->
+
+<a id="mobile-book-bar" href="https://www.treatwell.nl/salon/hairstyler-patrick-anches-barbier-kapper/" target="_blank" rel="noopener">
+  Boek via Treatwell &nbsp;→
+</a>
 
 <script>
 /* ═══════════════════════════════════════
@@ -1569,21 +1896,27 @@ setStatus('sdot','sst'); setStatus('sdot2','sst2');
 
 /* REVIEWS — Treatwell geverifieerd */
 const revs=[
-  // Live pagina mei 2025 — exact geciteerd
-  {t:'Het is lastig om in Amsterdam een kapper te vinden die krullend haar kan knippen en ben blij met Patrick.',n:'S.',tr:'Mannen knippen',d:'8 dagen'},
-  {t:'Great work always. Appreciate it 🤝',n:'Sheryda',tr:'Black hair · vrouwen knippen',d:'13 dagen'},
-  {t:'Great work always. Appreciate it 🤝',n:'Omor',tr:'Mannen knippen',d:'16 dagen'},
+  // Verified Treatwell reviews — mei 2026 — exact geciteerd
+  {t:'Ik was op zoek naar een nieuwe "extensions kapper" in Amsterdam. Ik kwam via een vriendin bij Patrick terecht en het was meteen een perfecte match! De salon zag er super mooi en schoon uit en wat een lieve man is Patrick maar vooral heel erg professioneel en vakkundig. Je hebt er een vaste klantje bij hoor!',n:'Cindy',tr:'Extensions',d:'7 maanden'},
+  {t:'Patrick is een ontzettend professionele kapper die precies weet wat hij doet. Hij neemt de tijd, luistert goed naar je wensen en zorgt dat je met een perfect kapsel de deur uitgaat. Daarnaast is hij ook nog eens erg vriendelijk, waardoor het altijd gezellig is in de stoel.',n:'Niek',tr:'Mannen knippen',d:'7 maanden'},
+  {t:'Patrick is een goede kapper die de laatste trends en ontwikkelingen volgt en omzet naar een perfect kapsel. Daarnaast heeft hij humor, is gastvrij en zorgzaam. Oprecht een aanrader!',n:'Iwan',tr:'Mannen knippen',d:'7 maanden'},
+  {t:'Uiterst vakkundige barber — alsof hij aan het beeldhouwen was. Erg blij met het resultaat.',n:'Arko',tr:'Baard trimmen & scheren',d:'7 maanden'},
+  {t:'Patrick is een ervaren en getalenteerde kapper. Vooral op het gebied van black hair. Hij denkt met je mee. Hij geeft ook goed advies. Ik ga altijd tevreden uit de kapsalon.',n:'Joan',tr:'Black hair · dames',d:'8 maanden'},
+  {t:'Vandaag bij Patrick geweest voor een buzzcut en supertevreden! Patrick werkt strak, luistert goed naar wat je wilt en zorgt voor een relaxte sfeer. Precies wat je zoekt bij een kapper, ik kom zeker terug.',n:'Naim',tr:'Mannen knippen',d:'3 maanden'},
+  {t:'Voor de eerste keer bij Patrick geweest en ik kom zeker terug. Hij nam echt de tijd voor mij. Mijn haar ziet er weer glanzend en gezond uit. Zeker een aanrader.',n:'Vurgenie',tr:'Afro behandeling',d:'5 maanden'},
+  {t:'Het is lastig om in Amsterdam een kapper te vinden die krullend haar kan knippen en ben blij met Patrick.',n:'Sheryda',tr:'Black hair · vrouwen knippen',d:'13 dagen'},
   {t:'Uitstekende knip en scheer beurt van Patrick, veel aandacht voor detail.',n:'Harm',tr:'Mannen knippen',d:'26 dagen'},
   {t:'Patrick is geen kapper maar een artiest. Geweldig persoon.',n:'Mark',tr:'Mannen knippen',d:'1 maand'},
-  // Oudere Treatwell-reviews
-  {t:'Goede communicatie, fijne sfeer. Altijd op mijn gemak bij Patrick.',n:'Roby',tr:'Mannen knippen',d:'1 maand'},
-  {t:'Vakkundig en deskundig. Mijn haar zit altijd perfect.',n:'Kevin',tr:'Mannen knippen',d:'2 maanden'},
-  {t:'Patrick neemt echt de tijd voor je. Geen haastwerk.',n:'Laura',tr:'Vrouwen knippen',d:'2 maanden'},
-  {t:'Beste baard trim ooit. Patrick weet precies wat hij doet.',n:'Ahmed',tr:'Baard knippen',d:'3 maanden'},
-  {t:'Mijn go-to kapper in Amsterdam. Altijd tevreden.',n:'Danielle',tr:'Vrouwen knippen',d:'3 maanden'},
-  {t:'Snel, nauwkeurig en gezellig. Precies wat je zoekt.',n:'Kevin',tr:'Knippen + baard',d:'4 maanden'},
-  {t:'Ga al jaren bij Patrick. Nooit teleurgesteld.',n:'Thomas',tr:'Mannen knippen',d:'5 maanden'},
-  {t:'Mijn zoon was meteen fan. Geweldige sfeer.',n:'Sandra',tr:'Kinderen knippen',d:'5 maanden'},
+  {t:'Patrick is a perfectionist and doesn\'t try to rush. I am always happy with my haircut.',n:'Chirag',tr:'Mannen knippen',d:'2 maanden'},
+  {t:'Paar weken geleden voor de eerste keer bij Patrick geweest, echt precies wat je zoekt. Voortaan zeker weer bij Patrick naar de kapper!',n:'Tjeu',tr:'Mannen knippen',d:'2 maanden'},
+  {t:'Weer zo een geweldige knipbeurt ervaren bij Patrick. Kind aan huis dus ik hoef niks meer aan te geven en hij weet waarvoor jij komt.',n:'Joan',tr:'Black hair · dames',d:'7 maanden'},
+  {t:'I like Patrick and the conversations we always have are the best. I highly recommend Patrick 👍🏻',n:'Dominik',tr:'Mannen knippen',d:'3 maanden'},
+  {t:'Patrick is een echte vakman die de tijd voor je heeft.',n:'Monique',tr:'Mannen knippen',d:'3 maanden'},
+  {t:'Pat heeft mijn haar geknipt, nou echt top vakwerk en een leuke spontane gast. Pat tot snel!',n:'Cynthia',tr:'Dames knippen',d:'5 maanden'},
+  {t:'Patrick is een fijne kapper, qua persoonlijkheid en deskundigheid. Zorgt er altijd voor dat ik weer met een strakke coupe bij hem vandaan kom.',n:'Jeffrey',tr:'Mannen knippen',d:'5 maanden'},
+  {t:'Mijn tiener zoon was geknipt door Patrick. Hij is blij met zijn kapsel en komt zeker terug. Het is fijn dat hij zich ontspannen voelde bij Patrick.',n:'Wess',tr:'Mannen knippen',d:'7 maanden'},
+  {t:'Patrick luistert goed naar wat je wilt en het resultaat is altijd top!',n:'Haidy',tr:'Black hair · vrouwen knippen',d:'6 maanden'},
+  {t:'Je word hier altijd goed geholpen en je loopt altijd tevrede de deur uit.',n:'Job',tr:'Mannen knippen',d:'9 maanden'},
 ];
 let ri=0;
 function renderRevs(i){
@@ -1705,6 +2038,38 @@ document.getElementById('in1').addEventListener('keydown',e=>{if(e.key==='Enter'
 document.getElementById('in2').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sd2();}});
 const welcome='Hoi! Ik ben de assistent van Patrick. Vraag me over behandelingen, prijzen of hoe je een afspraak maakt.';
 addM('msgs1','bot',welcome);addM('msgs2','bot',welcome);
+
+/* Amsterdam live clock (A4) */
+function updateClock(){
+  const t=new Date().toLocaleTimeString('nl-NL',{timeZone:'Europe/Amsterdam',hour:'2-digit',minute:'2-digit'});
+  const el=document.getElementById('amstClock');
+  if(el) el.textContent=t;
+  const el2=document.getElementById('amstClock2');
+  if(el2) el2.textContent=t;
+}
+updateClock(); setInterval(updateClock,30000);
+
+
+/* Treatment filter tabs (B1) */
+function filterTx(btn, cat) {
+  document.querySelectorAll('.e2-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#p2 .tg').forEach(g=>{
+    g.style.display = (cat==='all' || g.dataset.cat===cat) ? '' : 'none';
+  });
+  const panel = document.querySelector('#p2 .c-e2');
+  if(panel) panel.scrollTop = 0;
+}
+
+/* Hide mobile booking bar when Treatwell card is visible (E1) */
+const twCard = document.querySelector('#p1 .c-f');
+if (twCard && window.IntersectionObserver) {
+  const mbb = document.getElementById('mobile-book-bar');
+  new IntersectionObserver(entries => {
+    mbb.style.opacity = entries[0].isIntersecting ? '0' : '1';
+    mbb.style.pointerEvents = entries[0].isIntersecting ? 'none' : 'auto';
+  }, { threshold: 0.4 }).observe(twCard);
+}
 </script>
 <script type="application/ld+json">
 {

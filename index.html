@@ -394,6 +394,248 @@ button{cursor:pointer;border:none;background:none;}
 }
 
 /* ═══════════════════════════════════════
+   ANIMATION SYSTEM
+═══════════════════════════════════════ */
+
+/* ── Keyframes ── */
+@keyframes cellFadeUp{
+  from{opacity:0;transform:translateY(28px);}
+  to{opacity:1;transform:translateY(0);}
+}
+@keyframes cellFadeDown{
+  from{opacity:0;transform:translateY(-28px);}
+  to{opacity:1;transform:translateY(0);}
+}
+@keyframes cellFadeLeft{
+  from{opacity:0;transform:translateX(32px);}
+  to{opacity:1;transform:translateX(0);}
+}
+@keyframes cellFadeRight{
+  from{opacity:0;transform:translateX(-32px);}
+  to{opacity:1;transform:translateX(0);}
+}
+@keyframes cellFadeScale{
+  from{opacity:0;transform:scale(0.94);}
+  to{opacity:1;transform:scale(1);}
+}
+@keyframes vbarSlide{
+  from{opacity:0;transform:rotate(180deg) translateY(40px);}
+  to{opacity:1;transform:rotate(180deg) translateY(0);}
+}
+@keyframes heroWordIn{
+  from{opacity:0;transform:translateY(0.4em) skewX(-3deg);}
+  to{opacity:1;transform:translateY(0) skewX(0deg);}
+}
+@keyframes statCountPop{
+  0%{transform:scale(1);}
+  40%{transform:scale(1.18);}
+  70%{transform:scale(0.96);}
+  100%{transform:scale(1);}
+}
+@keyframes chatPulse{
+  0%,100%{
+    box-shadow:
+      0 1px 3px rgba(0,0,0,0.05),
+      0 6px 20px rgba(0,0,0,0.09),
+      0 20px 48px rgba(0,0,0,0.13),
+      0 40px 72px rgba(0,0,0,0.06);
+  }
+  50%{
+    box-shadow:
+      0 2px 6px rgba(0,0,0,0.08),
+      0 10px 30px rgba(0,0,0,0.14),
+      0 28px 60px rgba(0,0,0,0.18),
+      0 50px 84px rgba(0,0,0,0.09);
+  }
+}
+@keyframes chatPulseDark{
+  0%,100%{
+    box-shadow:
+      0 2px 8px rgba(0,0,0,0.45),
+      0 10px 28px rgba(0,0,0,0.55),
+      0 28px 64px rgba(0,0,0,0.65),
+      0 0 0 1px rgba(255,255,255,0.06);
+  }
+  50%{
+    box-shadow:
+      0 4px 14px rgba(0,0,0,0.6),
+      0 16px 40px rgba(0,0,0,0.7),
+      0 40px 80px rgba(0,0,0,0.8),
+      0 0 0 1px rgba(255,255,255,0.1);
+  }
+}
+@keyframes revSlideIn{
+  from{opacity:0;transform:translateX(12px);}
+  to{opacity:1;transform:translateX(0);}
+}
+@keyframes pageWipeIn{
+  from{clip-path:inset(0 0 100% 0);opacity:0;}
+  to{clip-path:inset(0 0 0% 0);opacity:1;}
+}
+
+/* ── Cell entrance state (applied before animation fires) ── */
+@media(prefers-reduced-motion:no-preference){
+  .cell[data-anim]{
+    opacity:0;
+    will-change:transform,opacity;
+  }
+  .cell[data-anim].anim-done{
+    opacity:1;
+    will-change:auto;
+  }
+
+  /* Entrance animations — direction driven by data-anim attribute */
+  .cell[data-anim="up"].anim-active{
+    animation:cellFadeUp 0.65s cubic-bezier(0.22,1,0.36,1) both;
+    animation-delay:var(--ad,0ms);
+  }
+  .cell[data-anim="down"].anim-active{
+    animation:cellFadeDown 0.65s cubic-bezier(0.22,1,0.36,1) both;
+    animation-delay:var(--ad,0ms);
+  }
+  .cell[data-anim="left"].anim-active{
+    animation:cellFadeLeft 0.65s cubic-bezier(0.22,1,0.36,1) both;
+    animation-delay:var(--ad,0ms);
+  }
+  .cell[data-anim="right"].anim-active{
+    animation:cellFadeRight 0.65s cubic-bezier(0.22,1,0.36,1) both;
+    animation-delay:var(--ad,0ms);
+  }
+  .cell[data-anim="scale"].anim-active{
+    animation:cellFadeScale 0.7s cubic-bezier(0.22,1,0.36,1) both;
+    animation-delay:var(--ad,0ms);
+  }
+
+  /* Vbar text entrance */
+  .vbar-text{
+    opacity:0;
+    transform:rotate(180deg) translateY(40px);
+  }
+  .vbar-text.vbar-in{
+    animation:vbarSlide 0.9s cubic-bezier(0.22,1,0.36,1) forwards;
+    animation-delay:var(--vd,300ms);
+  }
+
+  /* Hero h1 word spans */
+  .hero-word{
+    display:inline-block;
+    opacity:0;
+    will-change:transform,opacity;
+  }
+  .hero-word.word-in{
+    animation:heroWordIn 0.55s cubic-bezier(0.22,1,0.36,1) forwards;
+    animation-delay:var(--wd,0ms);
+  }
+
+  /* Chatbot ambient pulse */
+  #p1 .chat-card{
+    animation:chatPulse 5s ease-in-out infinite;
+  }
+  #p1 .chat-card:hover{
+    animation:none;
+  }
+  #p2 .chat-card{
+    animation:chatPulseDark 5s ease-in-out infinite;
+  }
+  #p2 .chat-card:hover{
+    animation:none;
+  }
+
+  /* Stat pop when counting up */
+  .stat-n.popping{
+    animation:statCountPop 0.4s cubic-bezier(0.22,1,0.36,1);
+  }
+
+  /* Review slide-in (enhanced) */
+  .rev-in{
+    animation:revSlideIn 0.5s cubic-bezier(0.22,1,0.36,1) both;
+  }
+}
+
+/* ── Hover micro-interactions ── */
+@media(prefers-reduced-motion:no-preference){
+  /* Stat items — lift on hover */
+  #p1 .stat-item{
+    transition:opacity .2s, transform .25s cubic-bezier(0.22,1,0.36,1);
+  }
+  #p1 .stat-item:hover{
+    opacity:1;
+    transform:translateY(-4px);
+  }
+
+  /* Treatwell card — satisfying lift */
+  #p1 .tw-card{
+    transition:box-shadow .25s ease, transform .25s cubic-bezier(0.22,1,0.36,1);
+  }
+  #p1 .tw-card:hover{
+    box-shadow:6px 6px 0 var(--ink);
+    transform:translate(-2px,-2px);
+  }
+
+  /* Treatment rows — slide-right reveal */
+  #p2 .tr{
+    transition:background .12s, transform .2s cubic-bezier(0.22,1,0.36,1), padding-left .2s cubic-bezier(0.22,1,0.36,1);
+  }
+  #p2 .tr:hover{
+    background:rgba(255,255,255,.06);
+    padding-left:8px;
+  }
+
+  /* Book button — scale pop */
+  #p2 .e2-book{
+    transition:background .2s, letter-spacing .2s, transform .2s cubic-bezier(0.22,1,0.36,1);
+  }
+  #p2 .e2-book:hover{
+    transform:scale(1.01);
+  }
+
+  /* Chips — satisfying press */
+  #p1 .chip, #p2 .chip{
+    transition:background .12s, color .12s, transform .15s cubic-bezier(0.22,1,0.36,1);
+  }
+  #p1 .chip:active, #p2 .chip:active{
+    transform:scale(0.95);
+  }
+
+  /* Scroll hint — pulse */
+  #p1 .scroll-hint .scroll-arrow{
+    animation:scrollBounce 1.8s ease-in-out infinite;
+  }
+
+  /* Footer links */
+  #p1 .footer-item, #p2 .footer-item{
+    transition:color .2s, transform .2s cubic-bezier(0.22,1,0.36,1);
+    display:inline-block;
+  }
+  #p1 .footer-item:hover, #p2 .footer-item:hover{
+    transform:translateY(-1px);
+  }
+
+  /* Info items — subtle scale on hover */
+  #p1 .info-item .info-inner, #p2 .info-item .info-inner{
+    transition:transform .2s cubic-bezier(0.22,1,0.36,1);
+  }
+  #p1 .info-item:hover .info-inner, #p2 .info-item:hover .info-inner{
+    transform:scale(1.04);
+  }
+
+  /* FAQ question hover */
+  #p2 .faq-q{
+    transition:color .15s, padding-left .2s cubic-bezier(0.22,1,0.36,1);
+  }
+  #p2 .faq-q:hover{
+    padding-left:6px;
+  }
+}
+
+/* ── Disable animations on mobile ── */
+@media(max-width:600px){
+  .cell[data-anim]{opacity:1!important;}
+  .vbar-text{opacity:1!important;transform:rotate(180deg)!important;}
+  .hero-word{opacity:1!important;}
+}
+
+/* ═══════════════════════════════════════
    RESPONSIVE
 ═══════════════════════════════════════ */
 /* ═══════════════════════════════════════
@@ -740,7 +982,7 @@ button{cursor:pointer;border:none;background:none;}
 <div class="page" id="p1">
 
   <!-- A: logo + status -->
-  <div class="cell c-a">
+  <div class="cell c-a" data-anim="down" style="--ad:0ms">
     <div style="display:flex;align-items:center;gap:12px">
       <svg class="logo-svg-mono" width="22" height="22" viewBox="0 0 18 18" fill="none">
         <rect x=".4" y=".4" width="17.2" height="17.2" stroke="#292929" stroke-width=".8"/>
@@ -762,10 +1004,10 @@ button{cursor:pointer;border:none;background:none;}
   </div>
 
   <!-- B: hero -->
-  <div class="cell c-b">
+  <div class="cell c-b" data-anim="right" style="--ad:80ms">
     <div style="width:100%">
       <div class="hero-lbl">Amsterdam-West · Kinkerstraat</div>
-      <h1 class="hero-h1">Vakmanschap<br>voor elk<br>haartype.</h1>
+      <h1 class="hero-h1" id="heroH1">Vakmanschap<br>voor elk<br>haartype.</h1>
     </div>
     <div class="hero-meta">
       <p class="hero-desc">Gediplomeerde barbier en kapper in het hart van Amsterdam. Geen haastwerk, aandacht en kwaliteit voor elk detail.</p>
@@ -776,7 +1018,7 @@ button{cursor:pointer;border:none;background:none;}
   </div>
 
   <!-- C: info bar -->
-  <div class="cell c-c">
+  <div class="cell c-c" data-anim="down" style="--ad:60ms">
     <div class="info-item">
       <div class="info-inner">
         <span class="info-lbl">Adres</span>
@@ -807,7 +1049,7 @@ button{cursor:pointer;border:none;background:none;}
   </div>
 
   <!-- D: chatbot -->
-  <div class="cell c-d">
+  <div class="cell c-d" data-anim="scale" style="--ad:140ms">
     <div class="chat-card">
       <div class="ch-header">
         <div class="ch-dot"></div>
@@ -831,12 +1073,12 @@ button{cursor:pointer;border:none;background:none;}
   </div>
 
   <!-- VBAR -->
-  <div class="cell c-vbar">
-    <span class="vbar-text">Patrick Anches · Amsterdam · Kinkerstraat</span>
+  <div class="cell c-vbar" data-anim="scale" style="--ad:100ms">
+    <span class="vbar-text" style="--vd:400ms">Patrick Anches · Amsterdam · Kinkerstraat</span>
   </div>
 
   <!-- E: reviews -->
-  <div class="cell c-e">
+  <div class="cell c-e" data-anim="left" style="--ad:120ms">
     <div class="c-e-inner">
       <div class="rev-header">Klantreviews · Treatwell geverifieerd</div>
       <div style="width:100%;text-align:center">
@@ -853,16 +1095,16 @@ button{cursor:pointer;border:none;background:none;}
     </div>
     <div style="width:100%">
       <div class="stats-row">
-        <div class="stat-item"><span class="stat-n">4,8</span><span class="stat-l">Beoordeling</span></div>
-        <div class="stat-item"><span class="stat-n">67+</span><span class="stat-l">Klanten</span></div>
-        <div class="stat-item"><span class="stat-n">24</span><span class="stat-l">Behandelingen</span></div>
+        <div class="stat-item"><span class="stat-n" data-stat="4.8" data-suffix="" data-decimal="1">4,8</span><span class="stat-l">Beoordeling</span></div>
+        <div class="stat-item"><span class="stat-n" data-stat="67" data-suffix="+">67+</span><span class="stat-l">Klanten</span></div>
+        <div class="stat-item"><span class="stat-n" data-stat="24" data-suffix="">24</span><span class="stat-l">Behandelingen</span></div>
       </div>
       <a href="https://www.treatwell.nl/salon/hairstyler-patrick-anches-barbier-kapper/" target="_blank" rel="noopener" class="tw-inline-btn">Boek via Treatwell →</a>
     </div>
   </div>
 
   <!-- F: Treatwell -->
-  <div class="cell c-f">
+  <div class="cell c-f" data-anim="left" style="--ad:180ms">
     <div class="tw-card">
       <div class="tw-lbl">Direct boeken</div>
       <div class="tw-salon">Hairstyler Patrick Anches</div>
@@ -875,7 +1117,7 @@ button{cursor:pointer;border:none;background:none;}
   </div>
 
   <!-- Footer -->
-  <div class="cell c-footer">
+  <div class="cell c-footer" data-anim="up" style="--ad:220ms">
     <span class="footer-brand">© Patrick Anches</span>
     <div class="footer-links">
       <a class="footer-item" href="https://wa.me/31652874750" target="_blank" rel="noopener">WhatsApp</a>
@@ -895,7 +1137,7 @@ button{cursor:pointer;border:none;background:none;}
 <div class="page" id="p2">
 
   <!-- A2 -->
-  <div class="cell c-a">
+  <div class="cell c-a" data-anim="down" style="--ad:0ms">
     <div style="display:flex;align-items:center;gap:12px">
       <svg width="22" height="22" viewBox="0 0 18 18" fill="none">
         <rect x=".4" y=".4" width="17.2" height="17.2" stroke="#F3F3F3" stroke-width=".8"/>
@@ -917,7 +1159,7 @@ button{cursor:pointer;border:none;background:none;}
   </div>
 
   <!-- B2: heading + FAQ -->
-  <div class="cell c-b2">
+  <div class="cell c-b2" data-anim="right" style="--ad:80ms">
     <div style="width:100%">
       <h2 class="p2-h1">Behandelingen<br>&amp; <em>prijzen</em></h2>
       <p class="p2-desc">Boek direct via Treatwell. Bevestiging meteen in je inbox.</p>
@@ -960,7 +1202,7 @@ button{cursor:pointer;border:none;background:none;}
   </div>
 
   <!-- C2: info bar -->
-  <div class="cell c-c">
+  <div class="cell c-c" data-anim="down" style="--ad:60ms">
     <div class="info-item">
       <div class="info-inner">
         <span class="info-lbl">Adres</span>
@@ -984,7 +1226,7 @@ button{cursor:pointer;border:none;background:none;}
   </div>
 
   <!-- D2: chatbot -->
-  <div class="cell c-d">
+  <div class="cell c-d" data-anim="scale" style="--ad:140ms">
     <div class="chat-card">
       <div class="ch-header">
         <div class="ch-dot"></div>
@@ -1008,12 +1250,12 @@ button{cursor:pointer;border:none;background:none;}
   </div>
 
   <!-- VBAR -->
-  <div class="cell c-vbar">
-    <span class="vbar-text">Patrick Anches · Amsterdam · Kinkerstraat</span>
+  <div class="cell c-vbar" data-anim="scale" style="--ad:100ms">
+    <span class="vbar-text" style="--vd:400ms">Patrick Anches · Amsterdam · Kinkerstraat</span>
   </div>
 
   <!-- E2: treatment list -->
-  <div class="cell c-e2">
+  <div class="cell c-e2" data-anim="left" style="--ad:120ms">
     <span class="e2-lbl">Behandelingen &amp; Prijzen</span>
     <div class="tg">
       <div class="tg-title">Mannen · Knippen &amp; Styling</div>
@@ -1057,7 +1299,7 @@ button{cursor:pointer;border:none;background:none;}
   </div>
 
   <!-- Footer -->
-  <div class="cell c-footer">
+  <div class="cell c-footer" data-anim="up" style="--ad:200ms">
     <span class="footer-brand">© Patrick Anches</span>
     <div class="footer-links">
       <a class="footer-item" href="https://wa.me/31652874750" target="_blank" rel="noopener">WhatsApp</a>
@@ -1073,6 +1315,182 @@ button{cursor:pointer;border:none;background:none;}
 </div><!-- /app -->
 
 <script>
+/* ═══════════════════════════════════════
+   ANIMATION ENGINE
+═══════════════════════════════════════ */
+
+const prefersMotion = window.matchMedia('(prefers-reduced-motion:no-preference)').matches;
+const isMobile = () => window.innerWidth <= 600;
+
+/* ── Page / Cell entrance via IntersectionObserver ── */
+function initCellAnimations() {
+  if (!prefersMotion) return;
+
+  const cells = document.querySelectorAll('.cell[data-anim]');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        if (el.classList.contains('anim-done')) return;
+        el.classList.add('anim-active');
+
+        // Trigger vbar text inside this cell
+        const vt = el.querySelector('.vbar-text');
+        if (vt) {
+          setTimeout(() => vt.classList.add('vbar-in'), 80);
+        }
+
+        el.addEventListener('animationend', () => {
+          el.classList.add('anim-done');
+          el.classList.remove('anim-active');
+        }, { once: true });
+      }
+    });
+  }, {
+    // Fire when 30% of cell is visible
+    threshold: 0.3,
+    root: document.getElementById('app')
+  });
+
+  cells.forEach(c => observer.observe(c));
+}
+
+/* ── Hero H1 word-by-word entrance ── */
+function initHeroWords() {
+  if (!prefersMotion || isMobile()) return;
+
+  const h1 = document.getElementById('heroH1');
+  if (!h1) return;
+
+  // Parse inner HTML, wrapping text words but preserving <br> and <em>
+  const raw = h1.innerHTML;
+  // Split by <br>, process each line
+  const lines = raw.split('<br>');
+  let wordIdx = 0;
+  const processed = lines.map(line => {
+    // Wrap individual words
+    return line.replace(/(\S+)/g, (word) => {
+      const delay = 120 + wordIdx * 90;
+      wordIdx++;
+      return `<span class="hero-word" style="--wd:${delay}ms">${word}</span>`;
+    });
+  }).join('<br>');
+  h1.innerHTML = processed;
+
+  // Trigger after a short delay (cell entrance fires first)
+  setTimeout(() => {
+    h1.querySelectorAll('.hero-word').forEach(w => w.classList.add('word-in'));
+  }, 200);
+}
+
+/* ── Stat count-up animation ── */
+function initStatCounters() {
+  if (!prefersMotion) return;
+
+  const stats = document.querySelectorAll('.stat-n[data-stat]');
+  let triggered = false;
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !triggered) {
+        triggered = true;
+        stats.forEach(el => countUpStat(el));
+        observer.disconnect();
+      }
+    });
+  }, { threshold: 0.5, root: document.getElementById('app') });
+
+  stats.forEach(el => observer.observe(el));
+}
+
+function countUpStat(el) {
+  const target = parseFloat(el.dataset.stat);
+  const suffix = el.dataset.suffix || '';
+  const decimal = parseInt(el.dataset.decimal || '0', 10);
+  const duration = 900;
+  const startTime = performance.now();
+  const startVal = 0;
+
+  function tick(now) {
+    const elapsed = now - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    // Ease out cubic
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = startVal + (target - startVal) * eased;
+    const display = decimal > 0
+      ? current.toFixed(decimal).replace('.', ',')
+      : Math.round(current).toString();
+    el.textContent = display + suffix;
+
+    if (progress < 1) {
+      requestAnimationFrame(tick);
+    } else {
+      // Pop effect at end
+      el.classList.add('popping');
+      el.addEventListener('animationend', () => el.classList.remove('popping'), { once: true });
+    }
+  }
+  requestAnimationFrame(tick);
+}
+
+/* ── Page transition: detect snap and re-trigger cell anims on p2 ── */
+function initPageTransition() {
+  if (!prefersMotion) return;
+  const app = document.getElementById('app');
+  const p2 = document.getElementById('p2');
+  let p2Animated = false;
+  let p1Animated = false;
+
+  let ticking = false;
+  app.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const scrollY = app.scrollTop;
+      const vh = app.clientHeight;
+
+      // p2 threshold: scrolled more than 60% of first page
+      if (!p2Animated && scrollY > vh * 0.6) {
+        p2Animated = true;
+        triggerPageIn(p2);
+      }
+      // p1 re-animate on scroll back? (not needed, already done on load)
+      ticking = false;
+    });
+  });
+}
+
+function triggerPageIn(page) {
+  const cells = page.querySelectorAll('.cell[data-anim]');
+  cells.forEach(el => {
+    // Reset so animation fires again
+    el.classList.remove('anim-done', 'anim-active');
+    // Force reflow
+    void el.offsetHeight;
+    el.classList.add('anim-active');
+
+    // Vbar text
+    const vt = el.querySelector('.vbar-text');
+    if (vt) {
+      vt.classList.remove('vbar-in');
+      void vt.offsetHeight;
+      setTimeout(() => vt.classList.add('vbar-in'), 100);
+    }
+
+    el.addEventListener('animationend', () => {
+      el.classList.add('anim-done');
+      el.classList.remove('anim-active');
+    }, { once: true });
+  });
+}
+
+/* ── Init all (script is at bottom of body, DOM is ready) ── */
+initCellAnimations();
+initHeroWords();
+initStatCounters();
+initPageTransition();
+
 /* STATUS — uses Amsterdam timezone */
 function setStatus(dotId,textId){
   const now=new Date();
@@ -1088,12 +1506,15 @@ function setStatus(dotId,textId){
 }
 setStatus('sdot','sst'); setStatus('sdot2','sst2');
 
-/* REVIEWS */
+/* REVIEWS — Treatwell geverifieerd */
 const revs=[
-  {t:'Eindelijk een kapper die krullend haar echt begrijpt.',n:'Sheryda',tr:'Black hair · vrouwen knippen',d:'4 dagen'},
-  {t:'Great work always. Patrick knows exactly what he\'s doing.',n:'Omor',tr:'Mannen knippen',d:'1 week'},
-  {t:'Uitstekende knip en scheerbeurt. Veel aandacht voor detail.',n:'Harm',tr:'Mannen knippen',d:'17 dagen'},
+  // Live pagina mei 2025 — exact geciteerd
+  {t:'Het is lastig om in Amsterdam een kapper te vinden die krullend haar kan knippen en ben blij met Patrick.',n:'S.',tr:'Mannen knippen',d:'8 dagen'},
+  {t:'Great work always. Appreciate it 🤝',n:'Sheryda',tr:'Black hair · vrouwen knippen',d:'13 dagen'},
+  {t:'Great work always. Appreciate it 🤝',n:'Omor',tr:'Mannen knippen',d:'16 dagen'},
+  {t:'Uitstekende knip en scheer beurt van Patrick, veel aandacht voor detail.',n:'Harm',tr:'Mannen knippen',d:'26 dagen'},
   {t:'Patrick is geen kapper maar een artiest. Geweldig persoon.',n:'Mark',tr:'Mannen knippen',d:'1 maand'},
+  // Oudere Treatwell-reviews
   {t:'Goede communicatie, fijne sfeer. Altijd op mijn gemak bij Patrick.',n:'Roby',tr:'Mannen knippen',d:'1 maand'},
   {t:'Vakkundig en deskundig. Mijn haar zit altijd perfect.',n:'Kevin',tr:'Mannen knippen',d:'2 maanden'},
   {t:'Patrick neemt echt de tijd voor je. Geen haastwerk.',n:'Laura',tr:'Vrouwen knippen',d:'2 maanden'},
@@ -1106,9 +1527,14 @@ const revs=[
 let ri=0;
 function renderRevs(i){
   const r1=revs[i%revs.length],r2=revs[(i+1)%revs.length];
-  const fade=el=>{el.style.opacity='0'};
-  const show=el=>{el.style.transition='opacity .4s';el.style.opacity='1'};
-  ['rq1','ra1','rt1','rq2','ra2','rt2'].forEach(id=>fade(document.getElementById(id)));
+  const ids=['rq1','ra1','rt1','rq2','ra2','rt2'];
+  // Fade + slide out
+  ids.forEach(id=>{
+    const el=document.getElementById(id);
+    el.style.transition='opacity .25s ease, transform .25s ease';
+    el.style.opacity='0';
+    el.style.transform='translateX(-10px)';
+  });
   setTimeout(()=>{
     document.getElementById('rq1').innerHTML=`"${r1.t}"`;
     document.getElementById('ra1').textContent=`${r1.n} · ${r1.d} geleden`;
@@ -1116,8 +1542,20 @@ function renderRevs(i){
     document.getElementById('rq2').innerHTML=`"${r2.t}"`;
     document.getElementById('ra2').textContent=`${r2.n} · ${r2.d} geleden`;
     document.getElementById('rt2').textContent=r2.tr;
-    ['rq1','ra1','rt1','rq2','ra2','rt2'].forEach(id=>show(document.getElementById(id)));
-  },220);
+    // Slide in from right
+    ids.forEach((id,idx)=>{
+      const el=document.getElementById(id);
+      el.style.transform='translateX(14px)';
+      el.style.opacity='0';
+      el.style.transition='none';
+      // Staggered entrance
+      setTimeout(()=>{
+        el.style.transition=`opacity .45s ease ${idx*35}ms, transform .45s cubic-bezier(0.22,1,0.36,1) ${idx*35}ms`;
+        el.style.opacity='1';
+        el.style.transform='translateX(0)';
+      }, 20);
+    });
+  },260);
 }
 renderRevs(0);
 setInterval(()=>{ri=(ri+2)%revs.length;renderRevs(ri);},6000);

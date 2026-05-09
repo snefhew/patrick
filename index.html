@@ -48,7 +48,7 @@ button{cursor:pointer;border:none;background:none;}
   scroll-snap-align:start;
   display:grid;
   position:relative;
-  grid-template-columns:minmax(130px,12%) 1fr 34px 2fr;
+  grid-template-columns:minmax(110px,10%) minmax(180px,17%) 24px 1fr;
   grid-template-rows:minmax(72px,12vh) 1fr minmax(150px,22vh) minmax(48px,6vh);
 }
 .cell{position:relative;overflow:hidden;
@@ -1266,26 +1266,27 @@ body { font-size: 16px; }
 @media(max-width:900px){
   #app{scroll-snap-type:none;}
   .page{scroll-snap-align:none;height:auto;min-height:100vh;
-    grid-template-columns:1fr 48px minmax(220px,35%);
+    grid-template-columns:minmax(100px,13%) minmax(160px,1fr) 22px minmax(200px,45%);
     grid-template-rows:auto auto auto auto auto auto;}
   /* P1 tablet */
   #p1 .c-a           {grid-column:1;grid-row:1;}
-  #p1 .c-b           {grid-column:1;grid-row:3/5;min-height:220px;}
-  #p1 .c-c           {grid-column:1/3;grid-row:2;}
-  #p1 .c-e           {grid-column:1/3;grid-row:5;min-height:280px;}
-  #p1 .c-f           {grid-column:1/3;grid-row:6;min-height:160px;}
-  #p1 .c-tx          {grid-column:3;grid-row:1/6;max-height:80vh;overflow-y:auto;}
-  #p1 .c-vbar        {grid-column:2;grid-row:1/5;}
+  #p1 .c-b           {grid-column:1/3;grid-row:3;min-height:220px;}
+  #p1 .c-c           {grid-column:1/4;grid-row:2;}
+  #p1 .c-e           {grid-column:1/3;grid-row:4;min-height:280px;}
+  #p1 .c-f           {grid-column:1/3;grid-row:5;min-height:160px;}
+  #p1 .c-tx          {grid-column:4;grid-row:1/6;max-height:80vh;overflow-y:auto;}
+  #p1 .c-vbar        {grid-column:3;grid-row:1/5;}
   #p1 .c-footer      {grid-column:1/-1;grid-row:7;}
   /* P2 tablet */
-  #p2 .c-a           {grid-column:1;grid-row:1;}
-  #p2 .c-photo       {grid-column:1;grid-row:3/5;min-height:220px;}
-  #p2 .c-c           {grid-column:1/3;grid-row:2;}
-  #p2 .c-faq         {grid-column:1/3;grid-row:5;min-height:420px;}
-  #p2 .c-vbar        {grid-column:2;grid-row:1/5;}
-  #p2 .c-album       {grid-column:3;grid-row:1/4;max-height:60vh;}
-  #p2 .c-tw-p2       {grid-column:3;grid-row:4/6;min-height:180px;}
+  #p2 .c-a           {grid-column:1/3;grid-row:1;}
+  #p2 .c-photo       {grid-column:1;grid-row:2/5;min-height:200px;}
+  #p2 .c-c           {grid-column:2;grid-row:1;}
+  #p2 .c-e           {grid-column:2;grid-row:2/4;min-height:260px;}
+  #p2 .c-vbar        {grid-column:3;grid-row:1/5;}
+  #p2 .c-album       {grid-column:4;grid-row:1/4;}
+  #p2 .c-tw-p2       {grid-column:4;grid-row:4;min-height:160px;}
   #p2 .c-footer      {grid-column:1/-1;grid-row:6;}
+}
 }
 @media(max-width:600px){
   html,body{overflow:auto;}
@@ -1344,7 +1345,7 @@ body { font-size: 16px; }
   /* P2 mobile order */
   #p2 .c-photo { min-height:240px; flex-shrink:0; order:1; }
   #p2 .c-faq   { min-height:auto; padding:0; flex-shrink:0; order:2; }
-  #p2 .c-album { min-height:220px; flex-shrink:0; order:3; }
+  #p2 .c-album { width:100%; aspect-ratio:16/9; min-height:unset; flex-shrink:0; order:3; padding:0; }
   #p2 .c-tw-p2 { min-height:200px; padding:24px 20px; flex-shrink:0; order:4; }
   /* Page 2 footer — always last */
   #p2 .c-footer { order:5; }
@@ -1598,6 +1599,10 @@ body { font-size: 16px; }
 .pv-thumb-img:hover{opacity:0.88;transform:scale(1.04);}
 .pv-thumb-img.active{opacity:1;border-color:rgba(255,255,255,0.70);filter:none;}
 @media(max-width:600px){
+  /* Album cell: full width 16:9 */
+  #p2 .c-album{padding:0!important;background:#111!important;}
+  .macos-win{border-radius:0;width:100%!important;max-height:100%!important;}
+  .macos-toolbar{bottom:10px;}
   .pv-window{border-radius:0;width:100vw;height:100vh;}
   .pv-filmstrip{height:72px;}
   .pv-thumb-img{width:54px;height:54px;}
@@ -2132,20 +2137,19 @@ body { font-size: 16px; }
         </div>
         <span class="macos-win-title" id="album-win-title">Portfolio &mdash; 1 / 7</span>
       </div>
-      <!-- photo-wrap: contains photo (click=viewer) AND toolbar (click=nav, sibling not child) -->
       <div class="macos-photo-wrap">
-        <div class="macos-photo" onclick="openPhotoViewer(albumIdx)">
-          <img class="macos-photo-img" id="album-img" src="p1.jpg" alt="Portfolio foto">
-        </div>
-        <!-- Toolbar is a SIBLING of .macos-photo — no stopPropagation needed -->
-        <div class="macos-toolbar">
-          <button class="macos-tb-btn" title="Vorige" onclick="albumNav(-1)">
+        <!-- img is direct click target for viewer — no wrapper div with onclick -->
+        <img class="macos-photo-img" id="album-img" src="p1.jpg" alt="Portfolio foto"
+             onclick="openPhotoViewer(albumIdx)" style="cursor:pointer;">
+        <!-- toolbar is a sibling; stopPropagation on the div prevents any bubbling -->
+        <div class="macos-toolbar" id="album-toolbar" onclick="event.stopPropagation()">
+          <button class="macos-tb-btn" id="album-prev" title="Vorige">
             <svg viewBox="0 0 12 12"><polyline points="8,1 3,6 8,11"/></svg>
           </button>
           <div class="macos-tb-sep"></div>
           <span class="macos-tb-counter" id="album-counter">1 / 7</span>
           <div class="macos-tb-sep"></div>
-          <button class="macos-tb-btn" title="Volgende" onclick="albumNav(1)">
+          <button class="macos-tb-btn" id="album-next" title="Volgende">
             <svg viewBox="0 0 12 12"><polyline points="4,1 9,6 4,11"/></svg>
           </button>
         </div>
@@ -2654,25 +2658,24 @@ const pvPhotos=['p1.jpg','p2.jpg','p3.jpg','p4.jpg','p5.jpg','p6.jpg','p7.jpg'];
 const pvNames=['Knippen & Styling','Haar Detail','Fade & Baard','Black Hair','Extensions','Kleur & Vorm','Finishing'];
 var albumIdx=0;
 var albumImgs=['p1.jpg','p2.jpg','p3.jpg','p4.jpg','p5.jpg','p6.jpg','p7.jpg'];
-/* preload all album images so swaps are instant */
-(function(){albumImgs.forEach(function(s){var i=new Image();i.src=s;});})();
+/* preload all images */
+(function(){albumImgs.forEach(function(s){var x=new Image();x.src=s;});})();
 function albumNav(dir){
   albumIdx=(albumIdx+dir+albumImgs.length)%albumImgs.length;
   var img=document.getElementById('album-img');
-  if(img){
-    img.style.transition='none';
-    img.style.opacity='0';
-    setTimeout(function(){
-      img.src=albumImgs[albumIdx];
-      img.style.transition='opacity .18s ease';
-      img.style.opacity='1';
-    },80);
-  }
+  if(img){ img.src=albumImgs[albumIdx]; }
   var ctr=document.getElementById('album-counter');
-  if(ctr)ctr.textContent=(albumIdx+1)+' / '+albumImgs.length;
+  if(ctr) ctr.textContent=(albumIdx+1)+' / '+albumImgs.length;
   var ttl=document.getElementById('album-win-title');
-  if(ttl)ttl.textContent='Portfolio — '+(albumIdx+1)+' / '+albumImgs.length;
+  if(ttl) ttl.textContent='Portfolio — '+(albumIdx+1)+' / '+albumImgs.length;
 }
+/* Wire up toolbar buttons via addEventListener — bulletproof, no inline onclick */
+document.addEventListener('DOMContentLoaded',function(){
+  var prev=document.getElementById('album-prev');
+  var next=document.getElementById('album-next');
+  if(prev) prev.addEventListener('click',function(e){e.stopPropagation();albumNav(-1);});
+  if(next) next.addEventListener('click',function(e){e.stopPropagation();albumNav(1);});
+});
 let pvIdx=0,pvStripBuilt=false;
 function openPhotoViewer(i){
   pvIdx=i;

@@ -408,6 +408,92 @@ button{cursor:pointer;border:none;background:none;}
   text-transform:uppercase;color:var(--ash);text-align:center;padding:7px;
   border-top:var(--b);flex-shrink:0;background:var(--deep);}
 
+/* ── c-photo (col1/row2) ── */
+#p2 .c-photo{grid-column:1;grid-row:2;position:relative;overflow:hidden;}
+#p2 .c-photo::before{
+  content:'';position:absolute;inset:0;
+  background-image:url('hero.jpg');
+  background-size:cover;background-position:center 20%;
+  filter:grayscale(60%) brightness(0.32) contrast(1.2);
+  z-index:0;pointer-events:none;transform:scale(1.02);
+}
+#p2 .c-photo::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(16,16,16,0.55) 0%,rgba(16,16,16,0.05) 45%,rgba(16,16,16,0.7) 100%);
+  z-index:1;pointer-events:none;
+}
+#p2 .c-photo>*{position:relative;z-index:2;}
+.c-photo-lbl{
+  position:absolute;bottom:16px;left:18px;
+  font-family:'Barlow Condensed',sans-serif;font-size:10px;
+  letter-spacing:0.3em;text-transform:uppercase;
+  color:rgba(243,243,243,0.45);
+}
+
+/* ── c-tw-p2 (col1/rows3-5) ── */
+#p2 .c-tw-p2{
+  grid-column:1;grid-row:3/5;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--deep);flex-direction:column;padding:28px;
+}
+.tw-p2-inner{width:100%;}
+#p2 .tw-p2-lbl{font-family:'Barlow Condensed',sans-serif;font-size:10px;
+  letter-spacing:0.22em;text-transform:uppercase;color:var(--ash);margin-bottom:8px;display:block;}
+#p2 .tw-p2-name{font-size:16px;font-weight:700;color:var(--polar);margin-bottom:4px;}
+#p2 .tw-p2-stars{font-size:13px;color:var(--amber);margin-bottom:20px;display:block;}
+#p2 .tw-p2-btn{display:block;width:100%;background:var(--polar);color:var(--midnight);
+  font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;
+  letter-spacing:0.18em;text-transform:uppercase;padding:15px;text-align:center;
+  border:none;transition:background .2s,transform .2s cubic-bezier(0.22,1,0.36,1);}
+#p2 .tw-p2-btn:hover{background:#fff;transform:translateY(-2px);}
+#p2 .tw-p2-note{font-family:'Barlow Condensed',sans-serif;font-size:10px;
+  color:var(--ash);text-align:center;margin-top:8px;display:block;}
+
+/* ── c-faq (col2/rows2-4) ── */
+#p2 .c-faq{
+  grid-column:2;grid-row:2/4;
+  background:var(--midnight);
+  align-items:flex-start;justify-content:flex-start;
+  overflow:hidden;padding:0;
+}
+#p2 .c-faq .faq-lbl{margin-top:0;margin-bottom:18px;}
+
+/* ── Floating chat button ── */
+#chat-fab{
+  position:fixed;bottom:28px;right:28px;z-index:300;
+  width:52px;height:52px;
+  background:#0d0d0d;color:#fff;
+  border:none;cursor:pointer;
+  border-radius:0;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 20px rgba(0,0,0,0.35);
+  transition:transform .2s cubic-bezier(0.22,1,0.36,1),box-shadow .2s;
+}
+#chat-fab:hover{transform:scale(1.08);box-shadow:0 8px 32px rgba(0,0,0,0.45);}
+#chat-fab svg{width:22px;height:22px;fill:#fff;}
+@media(max-width:600px){#chat-fab{bottom:72px;right:16px;width:46px;height:46px;}}
+
+/* ── Chat modal ── */
+#chat-modal{
+  display:none;position:fixed;inset:0;z-index:400;
+  background:rgba(0,0,0,0.55);
+  align-items:flex-end;justify-content:flex-end;
+  padding:0 28px 96px 0;
+}
+#chat-modal.open{display:flex;}
+#chat-modal-inner{
+  width:min(460px,calc(100vw - 40px));
+  max-height:min(600px,calc(100vh - 120px));
+  background:#0d0d0d;border:1px solid #292929;
+  display:flex;flex-direction:column;
+  box-shadow:0 8px 48px rgba(0,0,0,0.8),0 0 0 1px rgba(255,255,255,0.04);
+  border-radius:0;
+}
+@media(max-width:600px){
+  #chat-modal{padding:0;align-items:flex-end;justify-content:flex-end;}
+  #chat-modal-inner{width:100%;max-height:80vh;border-left:none;border-right:none;border-bottom:none;}
+}
+
 /* ═══════════════════════════════════════
    SHARED
 ═══════════════════════════════════════ */
@@ -490,7 +576,7 @@ body { font-size: 16px; }
 #p2 .p2-h1    { font-size: clamp(2.6rem, 3.4vw, 4.4rem); }
 
 /* Section labels (ASSISTENT, KLANTREVIEWS etc) */
-#p1 .c-d::after, #p2 .c-d::after { font-size: 11px; letter-spacing: 0.28em; }
+#p1 .c-d::after { font-size: 11px; letter-spacing: 0.28em; }
 
 /* Grey text stroke — makes it crisp on any background */
 #p1 .info-lbl,
@@ -1126,9 +1212,11 @@ body { font-size: 16px; }
     grid-template-rows:auto auto auto auto auto auto;}
   #p1 .c-a,#p2 .c-a{grid-column:1;grid-row:1;}
   #p1 .c-b           {grid-column:1;grid-row:3/5;min-height:220px;}
-  #p2 .c-b2          {grid-column:1;grid-row:3/5;min-height:220px;}
+  #p2 .c-photo       {grid-column:1;grid-row:3;min-height:200px;}
+  #p2 .c-tw-p2       {grid-column:1;grid-row:4/6;min-height:180px;}
   #p1 .c-c,#p2 .c-c  {grid-column:1/3;grid-row:2;}
-  #p1 .c-d,#p2 .c-d  {grid-column:1/3;grid-row:5;min-height:580px;}
+  #p1 .c-d           {grid-column:1/3;grid-row:5;min-height:580px;}
+  #p2 .c-faq         {grid-column:1/3;grid-row:5;min-height:420px;}
   #p1 .c-vbar,#p2 .c-vbar{grid-column:2;grid-row:1/5;}
   #p1 .c-e           {grid-column:3;grid-row:1/4;}
   #p1 .c-f           {grid-column:3;grid-row:4/6;min-height:160px;}
@@ -1154,8 +1242,7 @@ body { font-size: 16px; }
   /* Hide duplicate info bar on page 2 */
   #p2 .c-c { display:none !important; }
 
-  /* Hide chatbot on page 2 (already on page 1) */
-  #p2 .c-d { display:none !important; }
+  /* c-d removed from p2 — chatbot now in floating modal */
 
   /* Hide footer on page 1 (redundant on mobile) */
   #p1 .c-footer { display:none !important; }
@@ -1216,13 +1303,12 @@ body { font-size: 16px; }
     order:1;
   }
 
-  /* Page 2: FAQ — after treatments on mobile */
-  #p2 .c-b2 { min-height:auto; padding:28px 20px 40px; order:2; }
-  /* Hide the h2 heading on mobile (redundant, c-e2 already has the label) */
-  #p2 .c-b2 .p2-h1,
-  #p2 .c-b2 .p2-desc { display:none; }
+  /* Page 2 mobile: new cells */
+  #p2 .c-photo { min-height:240px; flex-shrink:0; order:2; }
+  #p2 .c-tw-p2 { min-height:180px; padding:24px 20px; flex-shrink:0; order:3; }
+  #p2 .c-faq { min-height:auto; padding:0; flex-shrink:0; order:4; }
   /* Page 2 footer — always last */
-  #p2 .c-footer { order:3; }
+  #p2 .c-footer { order:5; }
 
   /* Page 2 footer — readable, properly sized */
   #p2 .c-footer {
@@ -1520,46 +1606,19 @@ body { font-size: 16px; }
     </div>
   </div>
 
-  <!-- B2: heading + FAQ -->
-  <div class="cell c-b2" data-anim="right" style="--ad:80ms">
-    <div style="width:100%">
-      <h2 class="p2-h1">Behandelingen<br>&amp; <em>prijzen</em></h2>
-      <p class="p2-desc">Boek direct via Treatwell. Bevestiging meteen in je inbox.</p>
-    </div>
-    <span class="faq-lbl">Veelgestelde vragen</span>
-    <div class="faq-wrap">
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">Hoe maak ik een afspraak?<span class="faq-icon">+</span></button>
-        <div class="faq-a">Boek via Treatwell. Je kiest behandeling, datum en tijd, bevestiging volgt direct. Of WhatsApp: 06 52874750.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">Kan ik binnenlopen zonder afspraak?<span class="faq-icon">+</span></button>
-        <div class="faq-a">Patrick werkt op afspraak. WhatsApp vooraf om te checken of er plek is.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">Wat zijn de openingstijden?<span class="faq-icon">+</span></button>
-        <div class="faq-a">Woensdag t/m zaterdag, 10:00 tot 19:00. Maandag, dinsdag en zondag gesloten.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">Wat betekenen de "v.a." prijzen?<span class="faq-icon">+</span></button>
-        <div class="faq-a">Prijs kan oplopen afhankelijk van haarlengte of dikte. Patrick bepaalt dit op locatie.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">Doet Patrick ook damesbehandelingen?<span class="faq-icon">+</span></button>
-        <div class="faq-a">Ja. Europees haar én Black hair. Knippen, föhnen, steilen, permanenten, relaxen en extensions.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">Waar kan ik parkeren?<span class="faq-icon">+</span></button>
-        <div class="faq-a">P-garage De Hallen, Bellamyplein 41 op loopafstand. Of betaald straatparkeren.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">Welke producten gebruikt Patrick?<span class="faq-icon">+</span></button>
-        <div class="faq-a">L'Oreal, Redken, Keune en KeraCare. Uitsluitend professionele merken.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">Spreekt Patrick ook Engels?<span class="faq-icon">+</span></button>
-        <div class="faq-a">Ja, Patrick spreekt vloeiend Nederlands en Engels.</div>
-      </div>
+  <!-- Photo placeholder (col1/row2) -->
+  <div class="cell c-photo" data-anim="right" style="--ad:80ms">
+    <span class="c-photo-lbl">Foto Album · Binnenkort</span>
+  </div>
+
+  <!-- Treatwell dark booking card (col1/rows3-5) -->
+  <div class="cell c-tw-p2" data-anim="up" style="--ad:160ms">
+    <div class="tw-p2-inner">
+      <div class="tw-p2-lbl">Direct Boeken</div>
+      <div class="tw-p2-name">Hairstyler Patrick Anches</div>
+      <div class="tw-p2-stars">★★★★★ &nbsp;4,8 · 67 reviews</div>
+      <a class="tw-p2-btn" href="https://www.treatwell.nl/salon/hairstyler-patrick-anches-barbier-kapper/" target="_blank" rel="noopener">Boek via Treatwell</a>
+      <div class="tw-p2-note">Bevestiging direct · gratis</div>
     </div>
   </div>
 
@@ -1601,27 +1660,44 @@ body { font-size: 16px; }
     </div>
   </div>
 
-  <!-- D2: chatbot -->
-  <div class="cell c-d" data-anim="scale" style="--ad:140ms">
-    <div class="chat-card">
-      <div class="ch-header">
-        <div class="ch-dot"></div>
-        <span class="ch-name">Assistent Patrick</span>
+  <!-- FAQ (col2/rows2-4) -->
+  <div class="cell c-faq" data-anim="scale" style="--ad:140ms">
+    <div style="width:100%;height:100%;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--carbon) transparent;padding:28px;">
+      <span class="faq-lbl">Veelgestelde vragen</span>
+      <div class="faq-wrap" style="flex:1;overflow:visible;">
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Hoe maak ik een afspraak?<span class="faq-icon">+</span></button>
+          <div class="faq-a">Boek via Treatwell. Je kiest behandeling, datum en tijd, bevestiging volgt direct. Of WhatsApp: 06 52874750.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Kan ik binnenlopen zonder afspraak?<span class="faq-icon">+</span></button>
+          <div class="faq-a">Patrick werkt op afspraak. WhatsApp vooraf om te checken of er plek is.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Wat zijn de openingstijden?<span class="faq-icon">+</span></button>
+          <div class="faq-a">Woensdag t/m zaterdag, 10:00 tot 19:00. Maandag, dinsdag en zondag gesloten.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Wat betekenen de "v.a." prijzen?<span class="faq-icon">+</span></button>
+          <div class="faq-a">Prijs kan oplopen afhankelijk van haarlengte of dikte. Patrick bepaalt dit op locatie.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Doet Patrick ook damesbehandelingen?<span class="faq-icon">+</span></button>
+          <div class="faq-a">Ja. Europees haar én Black hair. Knippen, föhnen, steilen, permanenten, relaxen en extensions.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Waar kan ik parkeren?<span class="faq-icon">+</span></button>
+          <div class="faq-a">P-garage De Hallen, Bellamyplein 41 op loopafstand. Of betaald straatparkeren.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Welke producten gebruikt Patrick?<span class="faq-icon">+</span></button>
+          <div class="faq-a">L'Oreal, Redken, Keune en KeraCare. Uitsluitend professionele merken.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Spreekt Patrick ook Engels?<span class="faq-icon">+</span></button>
+          <div class="faq-a">Ja, Patrick spreekt vloeiend Nederlands en Engels.</div>
+        </div>
       </div>
-      <div class="ch-msgs" id="msgs2" role="log" aria-live="polite" aria-label="Chatgesprek"></div>
-      <div class="ch-chips" id="chips2">
-        <button class="chip" onclick="qs2('Wat kost knippen?')">Prijzen</button>
-        <button class="chip" onclick="qs2('Afspraak maken')">Afspraak</button>
-        <button class="chip" onclick="qs2('Openingstijden')">Tijden</button>
-        <button class="chip" onclick="qs2('Hoe kom ik er?')">Route</button>
-      </div>
-      <div class="ch-ir">
-        <input class="ch-in" id="in2" type="text" aria-label="Stel een vraag aan de assistent" placeholder="Stel een vraag..." autocomplete="off">
-        <button class="ch-snd" onclick="sd2()" aria-label="Verstuur bericht">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
-        </button>
-      </div>
-      <div class="ch-ft">Powered by Axon · AI-assistent</div>
     </div>
   </div>
 
@@ -1702,6 +1778,38 @@ body { font-size: 16px; }
 <a id="mobile-book-bar" href="https://www.treatwell.nl/salon/hairstyler-patrick-anches-barbier-kapper/" target="_blank" rel="noopener">
   Boek via Treatwell &nbsp;→
 </a>
+
+<!-- ── Floating chat button ── -->
+<button id="chat-fab" onclick="toggleChatModal()" aria-label="Open chat assistent">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 2H4a2 2 0 00-2 2v18l4-4h14a2 2 0 002-2V4a2 2 0 00-2-2z"/></svg>
+</button>
+
+<!-- ── Chat modal ── -->
+<div id="chat-modal" role="dialog" aria-modal="true" aria-label="Chat assistent" onclick="closeChatIfBg(event)">
+  <div id="chat-modal-inner">
+    <div class="ch-header" style="background:#0d0d0d;color:#fff;padding:14px 18px;display:flex;align-items:center;gap:10px;flex-shrink:0;border-bottom:1px solid #292929;">
+      <div style="width:7px;height:7px;border-radius:50%;background:#00AC5C;flex-shrink:0;"></div>
+      <span style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;flex:1;color:#fff;">Assistent Patrick</span>
+      <button onclick="toggleChatModal()" style="background:none;border:none;color:#fff;font-size:20px;cursor:pointer;line-height:1;padding:0 4px;" aria-label="Sluit chat">×</button>
+    </div>
+    <div id="msgsM" role="log" aria-live="polite" style="flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;min-height:280px;max-height:360px;background:#0d0d0d;scrollbar-width:thin;"></div>
+    <div id="chipsM" style="padding:10px 14px;display:flex;gap:6px;flex-wrap:wrap;border-top:1px solid #292929;flex-shrink:0;background:#0d0d0d;">
+      <button style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;padding:6px 12px;border:1px solid #292929;background:transparent;color:#888;cursor:pointer;" onclick="qsM('Wat kost knippen?')">Prijzen</button>
+      <button style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;padding:6px 12px;border:1px solid #292929;background:transparent;color:#888;cursor:pointer;" onclick="qsM('Afspraak maken')">Afspraak</button>
+      <button style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;padding:6px 12px;border:1px solid #292929;background:transparent;color:#888;cursor:pointer;" onclick="qsM('Openingstijden')">Tijden</button>
+      <button style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;padding:6px 12px;border:1px solid #292929;background:transparent;color:#888;cursor:pointer;" onclick="qsM('Hoe kom ik er?')">Route</button>
+    </div>
+    <div style="display:flex;border-top:1px solid #292929;flex-shrink:0;">
+      <input id="inM" type="text" placeholder="Stel een vraag..." autocomplete="off"
+        style="flex:1;border:none;border-right:1px solid #292929;padding:13px 16px;font-family:'Inter',sans-serif;font-size:14px;background:#0d0d0d;color:#f3f3f3;outline:none;"
+        onkeydown="if(event.key==='Enter')sdM()">
+      <button onclick="sdM()" style="width:50px;height:50px;background:#0d0d0d;border:none;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;border-left:1px solid #292929;">
+        <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:#fff;"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
+      </button>
+    </div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:#555;text-align:center;padding:9px;border-top:1px solid #1a1a1a;background:#080808;flex-shrink:0;">Powered by Axon · AI-assistent</div>
+  </div>
+</div>
 
 <script>
 /* ═══════════════════════════════════════
@@ -1980,6 +2088,7 @@ GRENZEN: Nooit beschikbaarheid beloven. Nooit vragen om persoonsgegevens. Als ge
 
 const hist=[];let busy=false;
 const CHAT_URL='https://chat.cratedrop.app/chat';
+const CHAT_PROXY=CHAT_URL;
 
 function ts(){return new Date().toLocaleTimeString('nl-NL',{hour:'2-digit',minute:'2-digit'});}
 function addM(cid,role,text){
@@ -1999,10 +2108,9 @@ async function sendMsg(txt){
   if(busy||!txt.trim())return;
   busy=true;
   document.getElementById('chips1').style.display='none';
-  document.getElementById('chips2').style.display='none';
-  addM('msgs1','user',txt);addM('msgs2','user',txt);
+  addM('msgs1','user',txt);
   hist.push({role:'user',content:txt});
-  showTyp('msgs1');showTyp('msgs2');
+  showTyp('msgs1');
   try{
     const r=await fetch(CHAT_URL,{
       method:'POST',
@@ -2010,32 +2118,26 @@ async function sendMsg(txt){
       body:JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:600,system:SYS,messages:hist.slice(-12)})
     });
     document.getElementById('typmsgs1')?.remove();
-    document.getElementById('typmsgs2')?.remove();
     if(!r.ok) throw new Error(`HTTP ${r.status}`);
     const data=await r.json();
     const rep=data.content?.[0]?.text||'Even geen antwoord. Probeer opnieuw.';
     hist.push({role:'assistant',content:rep});
-    addM('msgs1','bot',rep);addM('msgs2','bot',rep);
+    addM('msgs1','bot',rep);
     document.getElementById('chips1').style.display='flex';
-    document.getElementById('chips2').style.display='flex';
   }catch{
     document.getElementById('typmsgs1')?.remove();
-    document.getElementById('typmsgs2')?.remove();
     addM('msgs1','bot','Verbindingsfout. WhatsApp: 06 52874750.');
-    addM('msgs2','bot','Verbindingsfout. WhatsApp: 06 52874750.');
     document.getElementById('chips1').style.display='flex';
-    document.getElementById('chips2').style.display='flex';
   }
   busy=false;
 }
 function sd(){const v=document.getElementById('in1').value.trim();document.getElementById('in1').value='';if(v)sendMsg(v);}
-function sd2(){const v=document.getElementById('in2').value.trim();document.getElementById('in2').value='';if(v)sendMsg(v);}
+function sd2(){} // c-d removed — chatbot now in modal
 function qs(t){sendMsg(t);}
 function qs2(t){qs(t);}
 document.getElementById('in1').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sd();}});
-document.getElementById('in2').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sd2();}});
 const welcome='Hoi! Ik ben de assistent van Patrick. Vraag me over behandelingen, prijzen of hoe je een afspraak maakt.';
-addM('msgs1','bot',welcome);addM('msgs2','bot',welcome);
+addM('msgs1','bot',welcome);
 
 /* Amsterdam live clock (A4) */
 function updateClock(){
@@ -2057,6 +2159,50 @@ function filterTx(btn, cat) {
   });
   const panel = document.querySelector('#p2 .c-e2');
   if(panel) panel.scrollTop = 0;
+}
+
+/* ── Modal chat ── */
+let chatModalOpen = false;
+let modalInitDone = false;
+function toggleChatModal(){
+  chatModalOpen = !chatModalOpen;
+  document.getElementById('chat-modal').classList.toggle('open', chatModalOpen);
+  if(chatModalOpen && !modalInitDone){
+    modalInitDone = true;
+    addModalMsg('bot','Hallo! Ik ben de assistent van Patrick Anches. Hoe kan ik je helpen?');
+  }
+  if(chatModalOpen) setTimeout(()=>document.getElementById('inM').focus(),100);
+}
+function closeChatIfBg(e){if(e.target.id==='chat-modal') toggleChatModal();}
+function addModalMsg(role, text){
+  const box=document.getElementById('msgsM');
+  const d=document.createElement('div');
+  d.style.cssText='max-width:88%;'+(role==='bot'?'align-self:flex-start;':'align-self:flex-end;');
+  const b=document.createElement('div');
+  b.style.cssText='padding:11px 14px;font-family:Inter,sans-serif;font-size:14px;line-height:1.65;'+(role==='bot'?'background:#1a1a1a;border:1px solid #292929;color:#f3f3f3;':'background:#f3f3f3;color:#0d0d0d;');
+  b.textContent=text;
+  d.appendChild(b);
+  box.appendChild(d);
+  box.scrollTop=box.scrollHeight;
+}
+function qsM(q){document.getElementById('inM').value=q;sdM();}
+async function sdM(){
+  const inp=document.getElementById('inM');
+  const q=inp.value.trim();
+  if(!q) return;
+  inp.value='';
+  addModalMsg('user',q);
+  const box=document.getElementById('msgsM');
+  const typ=document.createElement('div');
+  typ.style.cssText='align-self:flex-start;background:#1a1a1a;border:1px solid #292929;padding:11px 14px;display:flex;gap:4px;';
+  ['','',''].forEach((_,i)=>{const s=document.createElement('span');s.style.cssText='width:5px;height:5px;border-radius:50%;background:#666;animation:bl 1.2s infinite;animation-delay:'+(i*0.2)+'s;display:inline-block;';typ.appendChild(s);});
+  box.appendChild(typ);box.scrollTop=box.scrollHeight;
+  try{
+    const res=await fetch(CHAT_PROXY,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:600,system:SYS,messages:[{role:'user',content:q}]})});
+    const data=await res.json();
+    typ.remove();
+    addModalMsg('bot',data.content?.[0]?.text||data.content||data.text||data.response||'Sorry, probeer opnieuw.');
+  }catch(e){typ.remove();addModalMsg('bot','Verbindingsfout. Probeer later opnieuw.');}
 }
 
 /* Hide mobile booking bar when Treatwell card is visible (E1) */

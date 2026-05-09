@@ -1607,27 +1607,38 @@ body { font-size: 16px; }
 #p2 .c-album::before{content:none !important;}
 #p2 .c-album::after{content:none !important;}
 #p2 .c-album{
-  flex-direction:column;align-items:stretch;justify-content:stretch;
-  padding:0;background:#1a1a1a;overflow:hidden;
+  grid-column:4;grid-row:1/3;
+  flex-direction:column;align-items:center;justify-content:center;
+  padding:10px;background:#0e0e0e;overflow:hidden;
 }
+/* 16:9 window, centered in cell */
 .macos-win{
+  aspect-ratio:16/9;
+  width:100%;max-height:100%;
   display:flex;flex-direction:column;
-  width:100%;height:100%;
   background:#1a1a1a;overflow:hidden;
+  border-radius:10px;
+  box-shadow:0 0 0 1px rgba(255,255,255,0.09),0 20px 60px rgba(0,0,0,0.9);
+  /* make it respect both width and height constraints */
+  height:auto;
+}
+/* If cell is wider than 16:9 allows at full height — constrain by height */
+@supports (aspect-ratio:16/9){
+  .macos-win{
+    max-width:min(100%, calc(100% * 16/9 * var(--cell-h, 1)));
+  }
 }
 
-/* ── Slim titlebar — 24px, just enough for the dots ── */
+/* ── Slim titlebar ── */
 .macos-titlebar{
-  height:24px;flex-shrink:0;
+  height:28px;flex-shrink:0;
   background:linear-gradient(180deg,#3a3a3a 0%,#2d2d2d 100%);
   border-bottom:1px solid rgba(0,0,0,0.70);
   display:flex;align-items:center;padding:0 10px;
   position:relative;user-select:none;
 }
 .macos-dots{display:flex;gap:6px;align-items:center;flex-shrink:0;}
-.macos-dot{
-  width:11px;height:11px;border-radius:50%;flex-shrink:0;
-}
+.macos-dot{width:11px;height:11px;border-radius:50%;flex-shrink:0;}
 .macos-dot.d-red{
   background:radial-gradient(circle at 38% 36%,#f87171,#ed6a5f 55%,#b94040 100%);
   box-shadow:inset 0 -1px 1px rgba(0,0,0,0.28),0 0 0 0.5px rgba(0,0,0,0.22);
@@ -1642,87 +1653,62 @@ body { font-size: 16px; }
 }
 .macos-win-title{
   position:absolute;left:50%;transform:translateX(-50%);
-  font-size:10px;font-weight:500;color:rgba(255,255,255,0.50);
+  font-size:10px;font-weight:500;color:rgba(255,255,255,0.48);
   letter-spacing:0.03em;white-space:nowrap;pointer-events:none;
 }
 
-/* ── Photo area — fills everything, no separate toolbar row ── */
+/* ── Photo area — click opens viewer ── */
+.macos-photo-wrap{
+  flex:1;min-height:0;position:relative;overflow:hidden;
+}
 .macos-photo{
-  flex:1;min-height:0;position:relative;overflow:hidden;cursor:pointer;
+  width:100%;height:100%;cursor:pointer;display:block;
 }
 .macos-photo-img{
   width:100%;height:100%;object-fit:cover;display:block;
-  filter:grayscale(10%) brightness(0.90);
-  transition:opacity .18s ease,filter .28s ease;
+  filter:grayscale(8%) brightness(0.92);
+  transition:opacity .20s ease,filter .28s ease;
 }
 .macos-photo:hover .macos-photo-img{filter:grayscale(0%) brightness(1.0);}
 
-/* ── Side arrows — always slightly visible ── */
-.macos-photo-arrow{
-  position:absolute;top:50%;transform:translateY(-50%);
-  width:30px;height:46px;border-radius:7px;z-index:4;
-  background:rgba(0,0,0,0.32);
-  border:1px solid rgba(255,255,255,0.10);
-  color:rgba(255,255,255,0.55);
-  display:flex;align-items:center;justify-content:center;
-  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-  transition:background .18s,color .18s,opacity .18s;
-  opacity:0.50;
-}
-.macos-photo:hover .macos-photo-arrow{opacity:1;}
-.macos-photo-arrow:hover{background:rgba(0,0,0,0.65);color:#fff;}
-.macos-photo-arrow svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
-.macos-arrow-l{left:8px;}
-.macos-arrow-r{right:8px;}
-
-/* ── Liquid Glass floating toolbar — overlaid on the photo ── */
+/* ── Liquid Glass toolbar — SIBLING of .macos-photo, absolute in .macos-photo-wrap ── */
 .macos-toolbar{
-  position:absolute;bottom:14px;left:50%;transform:translateX(-50%);
-  z-index:6;
+  position:absolute;bottom:13px;left:50%;transform:translateX(-50%);
+  z-index:10;
   display:flex;align-items:center;gap:0;
-  padding:0 6px;
-  height:36px;
-  border-radius:12px;
-  /* Liquid Glass: blur + saturate + translucent */
-  background:rgba(255,255,255,0.14);
-  backdrop-filter:blur(20px) saturate(180%);
-  -webkit-backdrop-filter:blur(20px) saturate(180%);
-  /* Outer border + inner specular highlight */
-  border:1px solid rgba(255,255,255,0.22);
+  padding:0 5px;height:34px;border-radius:11px;
+  /* Liquid Glass */
+  background:rgba(255,255,255,0.12);
+  backdrop-filter:blur(22px) saturate(200%);
+  -webkit-backdrop-filter:blur(22px) saturate(200%);
+  border:1px solid rgba(255,255,255,0.20);
   box-shadow:
-    0 8px 32px rgba(0,0,0,0.45),
-    0 2px 8px rgba(0,0,0,0.30),
-    inset 0 1px 0 rgba(255,255,255,0.28),
-    inset 0 -1px 0 rgba(0,0,0,0.10);
-  /* Always a bit visible, full on hover */
-  opacity:0.72;
-  transition:opacity .22s;
+    0 6px 24px rgba(0,0,0,0.50),
+    0 1px 4px rgba(0,0,0,0.30),
+    inset 0 1px 0 rgba(255,255,255,0.26),
+    inset 0 -1px 0 rgba(0,0,0,0.12);
+  opacity:0.78;
+  transition:opacity .20s;
   white-space:nowrap;
+  /* clicks pass through to nothing — toolbar is its own hit target */
+  pointer-events:all;
 }
-.macos-photo:hover .macos-toolbar{opacity:1;}
+.macos-photo-wrap:hover .macos-toolbar{opacity:1;}
 .macos-tb-btn{
-  width:32px;height:28px;border-radius:8px;
+  width:30px;height:26px;border-radius:7px;
   background:transparent;
-  color:rgba(255,255,255,0.82);
+  color:rgba(255,255,255,0.85);
   display:flex;align-items:center;justify-content:center;
-  transition:background .15s,color .15s;flex-shrink:0;
+  transition:background .14s,color .14s;flex-shrink:0;
 }
-.macos-tb-btn:hover{background:rgba(255,255,255,0.18);color:#fff;}
-.macos-tb-btn svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;}
-.macos-tb-sep{width:1px;height:16px;background:rgba(255,255,255,0.18);margin:0 3px;flex-shrink:0;}
+.macos-tb-btn:hover{background:rgba(255,255,255,0.16);color:#fff;}
+.macos-tb-btn svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;}
+.macos-tb-sep{width:1px;height:15px;background:rgba(255,255,255,0.16);margin:0 3px;flex-shrink:0;}
 .macos-tb-counter{
   font-family:'Barlow Condensed',sans-serif;font-size:11px;
-  letter-spacing:0.16em;color:rgba(255,255,255,0.65);
-  padding:0 6px;flex-shrink:0;
+  letter-spacing:0.14em;color:rgba(255,255,255,0.65);
+  padding:0 5px;flex-shrink:0;min-width:34px;text-align:center;
 }
-.macos-tb-open{
-  font-family:'Barlow Condensed',sans-serif;font-size:10px;
-  letter-spacing:0.20em;text-transform:uppercase;
-  color:rgba(255,255,255,0.65);cursor:pointer;
-  padding:0 6px 0 4px;border-radius:6px;
-  transition:color .15s,background .15s;flex-shrink:0;
-}
-.macos-tb-open:hover{color:#fff;background:rgba(255,255,255,0.12);}
 
 /* ═══════════════════════════════════════
    EDITORIAL REVIEW CARDS — pull-quote
@@ -2146,27 +2132,22 @@ body { font-size: 16px; }
         </div>
         <span class="macos-win-title" id="album-win-title">Portfolio &mdash; 1 / 7</span>
       </div>
-      <div class="macos-photo" onclick="openPhotoViewer(window.albumIdx||0)">
-        <img class="macos-photo-img" id="album-img" src="p1.jpg" alt="Portfolio">
-        <button class="macos-photo-arrow macos-arrow-l" onclick="albumNav(-1,event)" aria-label="Vorige">
-          <svg viewBox="0 0 14 14"><polyline points="9,2 4,7 9,12"/></svg>
-        </button>
-        <button class="macos-photo-arrow macos-arrow-r" onclick="albumNav(1,event)" aria-label="Volgende">
-          <svg viewBox="0 0 14 14"><polyline points="5,2 10,7 5,12"/></svg>
-        </button>
-        <!-- Liquid Glass toolbar floats over the photo -->
+      <!-- photo-wrap: contains photo (click=viewer) AND toolbar (click=nav, sibling not child) -->
+      <div class="macos-photo-wrap">
+        <div class="macos-photo" onclick="openPhotoViewer(albumIdx)">
+          <img class="macos-photo-img" id="album-img" src="p1.jpg" alt="Portfolio foto">
+        </div>
+        <!-- Toolbar is a SIBLING of .macos-photo — no stopPropagation needed -->
         <div class="macos-toolbar">
-          <button class="macos-tb-btn" title="Vorige" onclick="albumNav(-1,event)">
-            <svg viewBox="0 0 14 14"><polyline points="9,2 4,7 9,12"/></svg>
+          <button class="macos-tb-btn" title="Vorige" onclick="albumNav(-1)">
+            <svg viewBox="0 0 12 12"><polyline points="8,1 3,6 8,11"/></svg>
           </button>
           <div class="macos-tb-sep"></div>
           <span class="macos-tb-counter" id="album-counter">1 / 7</span>
           <div class="macos-tb-sep"></div>
-          <button class="macos-tb-btn" title="Volgende" onclick="albumNav(1,event)">
-            <svg viewBox="0 0 14 14"><polyline points="5,2 10,7 5,12"/></svg>
+          <button class="macos-tb-btn" title="Volgende" onclick="albumNav(1)">
+            <svg viewBox="0 0 12 12"><polyline points="4,1 9,6 4,11"/></svg>
           </button>
-          <div class="macos-tb-sep"></div>
-          <span class="macos-tb-open" onclick="openPhotoViewer(window.albumIdx||0)">Bekijk alle &#8594;</span>
         </div>
       </div>
     </div>
@@ -2673,11 +2654,20 @@ const pvPhotos=['p1.jpg','p2.jpg','p3.jpg','p4.jpg','p5.jpg','p6.jpg','p7.jpg'];
 const pvNames=['Knippen & Styling','Haar Detail','Fade & Baard','Black Hair','Extensions','Kleur & Vorm','Finishing'];
 var albumIdx=0;
 var albumImgs=['p1.jpg','p2.jpg','p3.jpg','p4.jpg','p5.jpg','p6.jpg','p7.jpg'];
-function albumNav(dir,e){
-  if(e){e.stopPropagation();e.preventDefault();}
+/* preload all album images so swaps are instant */
+(function(){albumImgs.forEach(function(s){var i=new Image();i.src=s;});})();
+function albumNav(dir){
   albumIdx=(albumIdx+dir+albumImgs.length)%albumImgs.length;
   var img=document.getElementById('album-img');
-  if(img){img.style.opacity='0';setTimeout(function(){img.src=albumImgs[albumIdx];img.style.opacity='1';},160);}
+  if(img){
+    img.style.transition='none';
+    img.style.opacity='0';
+    setTimeout(function(){
+      img.src=albumImgs[albumIdx];
+      img.style.transition='opacity .18s ease';
+      img.style.opacity='1';
+    },80);
+  }
   var ctr=document.getElementById('album-counter');
   if(ctr)ctr.textContent=(albumIdx+1)+' / '+albumImgs.length;
   var ttl=document.getElementById('album-win-title');

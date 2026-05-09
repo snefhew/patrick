@@ -387,10 +387,114 @@ button{cursor:pointer;border:none;background:none;}
    SHARED
 ═══════════════════════════════════════ */
 @keyframes bl{0%,60%,100%{opacity:.3}30%{opacity:1;transform:translateY(-3px)}}
+@keyframes scrollBounce{
+  0%,100%{transform:translateY(0);opacity:.55;}
+  50%{transform:translateY(6px);opacity:1;}
+}
 
 /* ═══════════════════════════════════════
    RESPONSIVE
 ═══════════════════════════════════════ */
+/* ═══════════════════════════════════════
+   UI/UX POLISH — info bar, footer, hover, scroll hint
+═══════════════════════════════════════ */
+
+/* ── Scroll hint: animated arrow ── */
+#p1 .scroll-hint{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--fc);font-size:10px;letter-spacing:0.22em;
+  text-transform:uppercase;color:var(--ink3);cursor:pointer;
+  transition:color .2s;margin-top:8px;width:fit-content;user-select:none;}
+#p1 .scroll-hint:hover{color:var(--ink);}
+.scroll-arrow{
+  display:inline-block;
+  animation:scrollBounce 2s ease-in-out infinite;
+  font-size:13px;line-height:1;}
+
+/* ── Info bar: left-aligned key-facts strip with pipe separators ── */
+#p1 .c-c{padding:0 32px;justify-content:flex-start;gap:0;flex-wrap:nowrap;}
+#p1 .info-item{flex-direction:row;align-items:center;gap:0;flex-shrink:0;}
+#p1 .info-item .info-inner{display:flex;flex-direction:column;gap:2px;padding:0 28px;}
+#p1 .info-item:first-child .info-inner{padding-left:0;}
+#p1 .info-sep{width:1px;height:28px;background:var(--ink);opacity:0.14;flex-shrink:0;}
+#p1 .info-lbl{font-size:9px;letter-spacing:0.25em;}
+#p1 .info-val{font-size:12px;font-weight:600;white-space:nowrap;line-height:1.4;}
+
+#p2 .c-c{padding:0 32px;justify-content:flex-start;gap:0;flex-wrap:nowrap;}
+#p2 .info-item{flex-direction:row;align-items:center;gap:0;flex-shrink:0;}
+#p2 .info-item .info-inner{display:flex;flex-direction:column;gap:2px;padding:0 28px;}
+#p2 .info-item:first-child .info-inner{padding-left:0;}
+#p2 .info-sep{width:1px;height:28px;background:var(--carbon);flex-shrink:0;}
+#p2 .info-lbl{font-size:9px;letter-spacing:0.25em;}
+#p2 .info-val{font-size:12px;font-weight:500;white-space:nowrap;line-height:1.4;color:var(--polar);}
+
+/* ── Footer: branded 3-zone layout ── */
+#p1 .c-footer{justify-content:space-between;gap:0;padding:0 28px;flex-wrap:nowrap;}
+#p1 .footer-brand{font-family:var(--ff);font-size:12px;font-weight:700;
+  color:var(--ink2);letter-spacing:-0.01em;white-space:nowrap;}
+#p1 .footer-links{display:flex;align-items:center;gap:20px;}
+#p1 .footer-sep{color:var(--ink3);opacity:.3;font-size:11px;}
+#p1 .footer-loc{font-family:var(--fm);font-size:10px;color:var(--ink3);
+  white-space:nowrap;text-align:right;}
+/* Override old centered footer-item layout for p1 */
+#p1 .c-footer>.footer-item{display:none;}
+
+#p2 .c-footer{justify-content:space-between;gap:0;padding:0 28px;flex-wrap:nowrap;}
+#p2 .footer-brand{font-family:var(--ff);font-size:12px;font-weight:700;
+  color:var(--polar);letter-spacing:-0.01em;white-space:nowrap;}
+#p2 .footer-links{display:flex;align-items:center;gap:20px;}
+#p2 .footer-sep{color:var(--carbon);font-size:11px;}
+#p2 .footer-loc{font-family:var(--fm);font-size:10px;color:var(--ash);
+  white-space:nowrap;text-align:right;}
+/* Override old centered footer-item layout for p2 */
+#p2 .c-footer>.footer-item{display:none;}
+
+/* ── Hover states: stats, treatment rows, tw-card ── */
+#p1 .stat-item{transition:opacity .2s;}
+#p1 .stat-item:hover{opacity:.65;}
+#p1 .tw-card{transition:box-shadow .2s;}
+#p1 .tw-card:hover{box-shadow:4px 4px 0 var(--ink);}
+#p2 .tr{transition:background .12s;}
+#p2 .tr:hover{background:rgba(255,255,255,.04);}
+
+/* ── Chatbot input focus ── */
+#p1 .ch-in{transition:background .15s;}
+#p1 .ch-in:focus{background:var(--bg2);}
+#p2 .ch-in{transition:background .15s;}
+#p2 .ch-in:focus{background:var(--deep);}
+
+/* ── Chatbot footer: slightly more breathing room ── */
+#p1 .ch-ft{padding:9px;font-size:9px;letter-spacing:0.12em;}
+#p2 .ch-ft{padding:9px;font-size:9px;letter-spacing:0.12em;}
+
+/* ── Chip padding bump ── */
+#p1 .chip{padding:7px 13px;}
+#p2 .chip{padding:7px 13px;}
+
+/* ── Treatment category headers: amber on p2 for visual distinction ── */
+#p2 .tg-title{color:var(--amber);}
+
+/* ── FAQ open state: amber icon accent ── */
+#p2 .faq-item.open .faq-icon{transform:rotate(45deg);color:var(--amber);}
+#p2 .faq-item.open .faq-q{color:var(--white);}
+
+/* ── e2-book CTA: more top margin + border-only hover ── */
+#p2 .e2-book{
+  margin-top:16px;padding:15px;
+  border:1px solid var(--polar);
+  transition:background .18s,color .18s;}
+#p2 .e2-book:hover{background:transparent;color:var(--polar);}
+
+/* ── Rev header: ruled flanking lines ── */
+#p1 .rev-header{
+  display:flex;align-items:center;gap:10px;
+  font-size:10px;letter-spacing:0.22em;}
+#p1 .rev-header::before,#p1 .rev-header::after{
+  content:'';flex:1;height:1px;background:var(--ink);opacity:.12;}
+
+/* ── Rev divider: softer ── */
+#p1 .rev-div{opacity:.12;}
+
 @media(max-width:900px){
   #app{scroll-snap-type:none;}
   .page{scroll-snap-align:none;height:auto;min-height:100vh;
@@ -464,7 +568,8 @@ button{cursor:pointer;border:none;background:none;}
     <div class="hero-meta">
       <p class="hero-desc">Gediplomeerde barbier en kapper in het hart van Amsterdam. Geen haastwerk, aandacht en kwaliteit voor elk detail.</p>
       <div class="scroll-hint" onclick="document.getElementById('p2').scrollIntoView({behavior:'smooth'})">
-        Behandelingen &amp; prijzen
+        <span>Behandelingen &amp; prijzen</span>
+        <span class="scroll-arrow">↓</span>
       </div>
     </div>
   </div>
@@ -472,16 +577,24 @@ button{cursor:pointer;border:none;background:none;}
   <!-- C: info bar -->
   <div class="cell c-c">
     <div class="info-item">
-      <span class="info-lbl">Adres</span>
-      <span class="info-val">Kinkerstraat 162-H<br>1053EH Amsterdam</span>
+      <div class="info-inner">
+        <span class="info-lbl">Adres</span>
+        <span class="info-val">Kinkerstraat 162-H, Amsterdam</span>
+      </div>
     </div>
+    <div class="info-sep"></div>
     <div class="info-item">
-      <span class="info-lbl">Open</span>
-      <span class="info-val">Wo t/m Za · 10:00 tot 19:00</span>
+      <div class="info-inner">
+        <span class="info-lbl">Open</span>
+        <span class="info-val">Wo t/m Za &nbsp;10:00 – 19:00</span>
+      </div>
     </div>
+    <div class="info-sep"></div>
     <div class="info-item">
-      <span class="info-lbl">Bereikbaar</span>
-      <span class="info-val">Tram 7 &amp; 17 · P De Hallen</span>
+      <div class="info-inner">
+        <span class="info-lbl">Bereikbaar</span>
+        <span class="info-val">Tram 7 &amp; 17 · P De Hallen</span>
+      </div>
     </div>
   </div>
 
@@ -554,13 +667,15 @@ button{cursor:pointer;border:none;background:none;}
 
   <!-- Footer -->
   <div class="cell c-footer">
-    <span class="footer-item">© Patrick Anches</span>
-    <span class="footer-item" style="opacity:.2">·</span>
-    <a class="footer-item" href="https://wa.me/31652874750" target="_blank">WhatsApp · 06 5287 4750</a>
-    <span class="footer-item" style="opacity:.2">·</span>
-    <a class="footer-item" href="https://www.treatwell.nl/salon/hairstyler-patrick-anches-barbier-kapper/" target="_blank">Treatwell</a>
-    <span class="footer-item" style="opacity:.2">·</span>
-    <span class="footer-item">Kinkerstraat 162-H · Amsterdam</span>
+    <span class="footer-brand">© Patrick Anches</span>
+    <div class="footer-links">
+      <a class="footer-item" href="https://wa.me/31652874750" target="_blank">WhatsApp</a>
+      <span class="footer-sep">·</span>
+      <a class="footer-item" href="https://www.treatwell.nl/salon/hairstyler-patrick-anches-barbier-kapper/" target="_blank">Treatwell</a>
+      <span class="footer-sep">·</span>
+      <span class="footer-item">06 5287 4750</span>
+    </div>
+    <span class="footer-loc">Kinkerstraat 162-H</span>
   </div>
 
 </div><!-- /p1 -->
@@ -638,16 +753,24 @@ button{cursor:pointer;border:none;background:none;}
   <!-- C2: info bar -->
   <div class="cell c-c">
     <div class="info-item">
-      <span class="info-lbl">Adres</span>
-      <span class="info-val">Kinkerstraat 162-H<br>1053EH Amsterdam</span>
+      <div class="info-inner">
+        <span class="info-lbl">Adres</span>
+        <span class="info-val">Kinkerstraat 162-H, Amsterdam</span>
+      </div>
     </div>
+    <div class="info-sep"></div>
     <div class="info-item">
-      <span class="info-lbl">Open</span>
-      <span class="info-val">Wo t/m Za · 10:00 tot 19:00</span>
+      <div class="info-inner">
+        <span class="info-lbl">Open</span>
+        <span class="info-val">Wo t/m Za &nbsp;10:00 – 19:00</span>
+      </div>
     </div>
+    <div class="info-sep"></div>
     <div class="info-item">
-      <span class="info-lbl">Bereikbaar</span>
-      <span class="info-val">Tram 7 &amp; 17 · P De Hallen</span>
+      <div class="info-inner">
+        <span class="info-lbl">Bereikbaar</span>
+        <span class="info-val">Tram 7 &amp; 17 · P De Hallen</span>
+      </div>
     </div>
   </div>
 
@@ -726,13 +849,15 @@ button{cursor:pointer;border:none;background:none;}
 
   <!-- Footer -->
   <div class="cell c-footer">
-    <span class="footer-item">© Patrick Anches</span>
-    <span class="footer-item" style="opacity:.2">·</span>
-    <a class="footer-item" href="https://wa.me/31652874750" target="_blank">WhatsApp · 06 5287 4750</a>
-    <span class="footer-item" style="opacity:.2">·</span>
-    <a class="footer-item" href="https://www.treatwell.nl/salon/hairstyler-patrick-anches-barbier-kapper/" target="_blank">Treatwell</a>
-    <span class="footer-item" style="opacity:.2">·</span>
-    <span class="footer-item">Kinkerstraat 162-H · Amsterdam</span>
+    <span class="footer-brand">© Patrick Anches</span>
+    <div class="footer-links">
+      <a class="footer-item" href="https://wa.me/31652874750" target="_blank">WhatsApp</a>
+      <span class="footer-sep">·</span>
+      <a class="footer-item" href="https://www.treatwell.nl/salon/hairstyler-patrick-anches-barbier-kapper/" target="_blank">Treatwell</a>
+      <span class="footer-sep">·</span>
+      <span class="footer-item">06 5287 4750</span>
+    </div>
+    <span class="footer-loc">Kinkerstraat 162-H</span>
   </div>
 
 </div><!-- /p2 -->

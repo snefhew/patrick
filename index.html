@@ -1434,48 +1434,45 @@ function countUpStat(el) {
   requestAnimationFrame(tick);
 }
 
-/* ── Page transition: detect snap and re-trigger cell anims on p2 ── */
+/* ── Page transition: batch-reveal p2 cells on snap-end for coordinated wow effect ── */
 function initPageTransition() {
   if (!prefersMotion) return;
   const app = document.getElementById('app');
   const p2 = document.getElementById('p2');
-  let p2Animated = false;
-  let p1Animated = false;
+  let p2Fired = false;
 
-  let ticking = false;
-  app.addEventListener('scroll', () => {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(() => {
-      const scrollY = app.scrollTop;
-      const vh = app.clientHeight;
+  const onScrollSettled = () => {
+    const scrollY = app.scrollTop;
+    const vh = app.clientHeight;
+    if (!p2Fired && scrollY >= vh * 0.9) {
+      p2Fired = true;
+      batchRevealPage(p2);
+    }
+  };
 
-      // p2 threshold: scrolled more than 60% of first page
-      if (!p2Animated && scrollY > vh * 0.6) {
-        p2Animated = true;
-        triggerPageIn(p2);
-      }
-      // p1 re-animate on scroll back? (not needed, already done on load)
-      ticking = false;
+  // scrollend = fires after snap settles (supported Chrome 114+, Firefox 109+)
+  if ('onscrollend' in app) {
+    app.addEventListener('scrollend', onScrollSettled);
+  } else {
+    let timer;
+    app.addEventListener('scroll', () => {
+      clearTimeout(timer);
+      timer = setTimeout(onScrollSettled, 80);
     });
-  });
+  }
 }
 
-function triggerPageIn(page) {
+function batchRevealPage(page) {
   const cells = page.querySelectorAll('.cell[data-anim]');
   cells.forEach(el => {
-    // Reset so animation fires again
-    el.classList.remove('anim-done', 'anim-active');
-    // Force reflow
+    if (el.classList.contains('anim-done')) return;
+    el.classList.remove('anim-active');
     void el.offsetHeight;
     el.classList.add('anim-active');
 
-    // Vbar text
     const vt = el.querySelector('.vbar-text');
-    if (vt) {
-      vt.classList.remove('vbar-in');
-      void vt.offsetHeight;
-      setTimeout(() => vt.classList.add('vbar-in'), 100);
+    if (vt && !vt.classList.contains('vbar-in')) {
+      setTimeout(() => vt.classList.add('vbar-in'), 120);
     }
 
     el.addEventListener('animationend', () => {

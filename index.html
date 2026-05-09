@@ -496,6 +496,13 @@ button{cursor:pointer;border:none;background:none;}
 /* ── Rev divider: softer ── */
 #p1 .rev-div{opacity:.12;}
 
+/* ── Treatwell inline button (reviews cell) ── */
+#p1 .tw-inline-btn{display:block;margin-top:12px;text-align:center;
+  font-family:var(--fc);font-size:10px;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--ink);
+  border-top:1px solid rgba(41,41,41,.12);padding-top:12px;width:100%;}
+#p1 .tw-inline-btn:hover{text-decoration:underline;}
+
 /* ═══════════════════════════════════════
    PAGE 2 PARITY — 11 improvements
 ═══════════════════════════════════════ */
@@ -656,6 +663,13 @@ button{cursor:pointer;border:none;background:none;}
         <span class="info-val">Tram 7 &amp; 17 · P De Hallen</span>
       </div>
     </div>
+    <div class="info-sep"></div>
+    <div class="info-item">
+      <div class="info-inner">
+        <span class="info-lbl">WhatsApp</span>
+        <a class="info-val" href="https://wa.me/31652874750" target="_blank" rel="noopener" style="text-decoration:underline">06 5287 4750</a>
+      </div>
+    </div>
   </div>
 
   <!-- D: chatbot -->
@@ -709,6 +723,7 @@ button{cursor:pointer;border:none;background:none;}
         <div class="stat-item"><span class="stat-n">67+</span><span class="stat-l">Klanten</span></div>
         <div class="stat-item"><span class="stat-n">24</span><span class="stat-l">Behandelingen</span></div>
       </div>
+      <a href="https://www.treatwell.nl/salon/hairstyler-patrick-anches-barbier-kapper/" target="_blank" rel="noopener" class="tw-inline-btn">Boek via Treatwell →</a>
     </div>
   </div>
 
@@ -729,9 +744,9 @@ button{cursor:pointer;border:none;background:none;}
   <div class="cell c-footer">
     <span class="footer-brand">© Patrick Anches</span>
     <div class="footer-links">
-      <a class="footer-item" href="https://wa.me/31652874750" target="_blank">WhatsApp</a>
+      <a class="footer-item" href="https://wa.me/31652874750" target="_blank" rel="noopener">WhatsApp</a>
       <span class="footer-sep">·</span>
-      <a class="footer-item" href="https://www.treatwell.nl/salon/hairstyler-patrick-anches-barbier-kapper/" target="_blank">Treatwell</a>
+      <a class="footer-item" href="https://www.treatwell.nl/salon/hairstyler-patrick-anches-barbier-kapper/" target="_blank" rel="noopener">Treatwell</a>
       <span class="footer-sep">·</span>
       <span class="footer-item">06 5287 4750</span>
     </div>
@@ -911,9 +926,9 @@ button{cursor:pointer;border:none;background:none;}
   <div class="cell c-footer">
     <span class="footer-brand">© Patrick Anches</span>
     <div class="footer-links">
-      <a class="footer-item" href="https://wa.me/31652874750" target="_blank">WhatsApp</a>
+      <a class="footer-item" href="https://wa.me/31652874750" target="_blank" rel="noopener">WhatsApp</a>
       <span class="footer-sep">·</span>
-      <a class="footer-item" href="https://www.treatwell.nl/salon/hairstyler-patrick-anches-barbier-kapper/" target="_blank">Treatwell</a>
+      <a class="footer-item" href="https://www.treatwell.nl/salon/hairstyler-patrick-anches-barbier-kapper/" target="_blank" rel="noopener">Treatwell</a>
       <span class="footer-sep">·</span>
       <span class="footer-item">06 5287 4750</span>
     </div>
@@ -1037,11 +1052,15 @@ async function sendMsg(txt){
     const rep=data.content?.[0]?.text||'Even geen antwoord. Probeer opnieuw.';
     hist.push({role:'assistant',content:rep});
     addM('msgs1','bot',rep);addM('msgs2','bot',rep);
+    document.getElementById('chips1').style.display='flex';
+    document.getElementById('chips2').style.display='flex';
   }catch{
     document.getElementById('typmsgs1')?.remove();
     document.getElementById('typmsgs2')?.remove();
     addM('msgs1','bot','Verbindingsfout. WhatsApp: 06 52874750.');
     addM('msgs2','bot','Verbindingsfout. WhatsApp: 06 52874750.');
+    document.getElementById('chips1').style.display='flex';
+    document.getElementById('chips2').style.display='flex';
   }
   busy=false;
 }

@@ -563,6 +563,45 @@ button{cursor:pointer;border:none;background:none;}
   transition:background .2s,letter-spacing .2s;}
 #p2 .e2-book:hover{background:var(--white);letter-spacing:0.28em;}
 
+/* ═══════════════════════════════════════
+   VISUAL UPGRADE — p1 vbar dots, stat accents,
+   Bebas Neue btn, hero texture, footer accent
+═══════════════════════════════════════ */
+
+/* 1a. Grid — widen vbar column to 48px */
+.page{grid-template-columns:minmax(190px,22%) 1fr 48px minmax(260px,28%);}
+
+/* 1b. VBAR p1 — extend full height + dot overlay */
+#p1 .c-vbar{grid-column:3;grid-row:1/5;background:var(--ink);position:relative;}
+#p1 .c-vbar::before{content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle,rgba(255,255,255,.06) 1px,transparent 1px);
+  background-size:8px 8px;pointer-events:none;}
+
+/* 2. STAT ITEMS — top accent line */
+#p1 .stat-item{position:relative;padding-top:10px;}
+#p1 .stat-item::before{content:'';position:absolute;top:0;left:50%;
+  transform:translateX(-50%);width:20px;height:2px;background:var(--ink);}
+
+/* 3. TREATWELL BUTTON — Bebas Neue full-bleed */
+#p1 .tw-btn{background:var(--ink);color:#fff;
+  font-family:var(--fd);
+  font-size:16px;letter-spacing:0.1em;
+  padding:16px;border:none;}
+#p1 .tw-btn:hover{background:#000;letter-spacing:0.15em;transition:all .2s;}
+
+/* 4. REVIEW HEADER — ensure full-width ruled flanking */
+#p1 .rev-header{display:flex;align-items:center;gap:10px;width:100%;}
+
+/* 5. HERO CELL — subtle ruled-paper texture */
+#p1 .c-b{
+  background-image:repeating-linear-gradient(
+    0deg,transparent,transparent 23px,rgba(41,41,41,.03) 23px,rgba(41,41,41,.03) 24px
+  );
+}
+
+/* 7. FOOTER p1 — 2px top accent line */
+#p1 .c-footer{border-top:2px solid var(--ink);}
+
 @media(max-width:900px){
   #app{scroll-snap-type:none;}
   .page{scroll-snap-align:none;height:auto;min-height:100vh;

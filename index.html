@@ -1452,147 +1452,206 @@ body { font-size: 16px; }
 ═══════════════════════════════════════ */
 #photo-viewer{
   display:none;position:fixed;inset:0;z-index:500;
-  background:rgba(0,0,0,0.80);
+  background:rgba(0,0,0,0.85);
   align-items:center;justify-content:center;
-  backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
+  backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);
 }
 #photo-viewer.open{display:flex;}
 .pv-window{
-  width:min(920px,calc(100vw - 40px));
-  height:min(680px,calc(100vh - 60px));
-  background:#0d0d0d;border-radius:12px;overflow:hidden;
-  display:flex;flex-direction:column;
-  box-shadow:0 0 0 1px rgba(255,255,255,0.07),0 2px 6px rgba(0,0,0,0.5),0 20px 60px rgba(0,0,0,0.9),0 48px 100px rgba(0,0,0,0.6);
+  width:min(940px,calc(100vw - 32px));
+  height:min(700px,calc(100vh - 48px));
+  background:#1c1c1c;
+  border-radius:12px;
+  box-shadow:0 0 0 1px rgba(255,255,255,0.10),
+             0 2px 0 rgba(255,255,255,0.06) inset,
+             0 28px 80px rgba(0,0,0,0.96);
+  display:flex;flex-direction:column;overflow:hidden;
+  animation:pvWindowIn .22s cubic-bezier(0.22,1,0.36,1);
 }
-/* Titlebar — 40px macOS chrome */
-.pv-titlebar{
-  height:40px;flex-shrink:0;
-  background:linear-gradient(180deg,#2e2e2e 0%,#262626 100%);
-  border-bottom:1px solid rgba(0,0,0,0.6);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,0.08);
-  display:flex;align-items:center;padding:0 14px;
-  user-select:none;position:relative;
-}
-/* Traffic lights — 13px with radial 3-D sheen */
-.pv-lights{display:flex;gap:8px;align-items:center;}
-.pv-light{
-  width:13px;height:13px;border-radius:50%;cursor:pointer;
-  transition:filter .12s,transform .1s;
-  box-shadow:0 1px 2px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.22);
-}
-.pv-light:hover{filter:brightness(1.14);}
-.pv-light:active{transform:scale(0.87);}
-.pv-light.pv-red{background:radial-gradient(circle at 38% 36%,#f87171,#ed6a5f 55%,#b94040 100%);}
-.pv-light.pv-yellow{background:radial-gradient(circle at 38% 36%,#fcd34d,#f6be50 55%,#c08a1e 100%);}
-.pv-light.pv-green{background:radial-gradient(circle at 38% 36%,#86efac,#61c555 55%,#2e8c2e 100%);}
-/* Toolbar icons right side */
-.pv-toolbar{position:absolute;right:14px;top:50%;transform:translateY(-50%);display:flex;gap:4px;}
-.pv-tb-btn{width:28px;height:28px;border-radius:6px;background:transparent;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s;}
-.pv-tb-btn:hover{background:rgba(255,255,255,0.1);}
-.pv-tb-btn svg{width:15px;height:15px;fill:none;stroke:rgba(255,255,255,0.52);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
-/* Title centred */
-.pv-title-text{
-  flex:1;text-align:center;
-  font-family:system-ui,'Barlow Condensed',sans-serif;font-size:13px;font-weight:500;
-  color:rgba(255,255,255,0.5);letter-spacing:0.02em;
-}
-/* Main photo canvas — pure black */
-.pv-main{
-  flex:1;position:relative;overflow:hidden;background:#000000;
-  display:flex;align-items:center;justify-content:center;min-height:0;
-}
-#pv-img{
-  max-width:calc(100% - 40px);max-height:calc(100% - 24px);
-  object-fit:contain;display:block;
-  filter:drop-shadow(0 6px 28px rgba(0,0,0,0.7));
-  transition:opacity .24s ease;
-}
-/* Nav arrows — frosted glass, appear on hover */
-.pv-nav{
-  position:absolute;top:50%;transform:translateY(-50%);
-  width:44px;height:44px;border-radius:50%;
-  background:rgba(255,255,255,0.13);border:1px solid rgba(255,255,255,0.18);
-  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  cursor:pointer;z-index:10;padding:0;
-  display:flex;align-items:center;justify-content:center;
-  opacity:0;transition:opacity .2s ease,background .15s ease;
-}
-.pv-nav:hover{background:rgba(255,255,255,0.25);}
-.pv-nav:active{background:rgba(255,255,255,0.32);}
-.pv-prev{left:20px;}
-.pv-next{right:20px;}
-.pv-main:hover .pv-nav{opacity:1;}
-/* CSS chevrons */
-.pv-chevron{display:block;width:10px;height:10px;border:2px solid rgba(255,255,255,0.88);border-width:2px 2px 0 0;}
-.pv-chevron-left{transform:rotate(-135deg);margin-left:3px;}
-.pv-chevron-right{transform:rotate(45deg);margin-right:3px;}
-/* Counter overlay */
-.pv-counter-ov{
-  position:absolute;bottom:14px;right:18px;
-  font-family:'Barlow Condensed',sans-serif;font-size:11px;
-  color:rgba(255,255,255,0.32);letter-spacing:0.14em;text-transform:uppercase;pointer-events:none;
-}
-/* Filmstrip */
-.pv-filmstrip{
-  height:96px;flex-shrink:0;background:#0a0a0a;
-  border-top:1px solid rgba(255,255,255,0.04);
-  overflow-x:auto;overflow-y:hidden;padding:13px 16px;
-  scrollbar-width:thin;scrollbar-color:rgba(255,255,255,0.1) transparent;
-}
-.pv-filmstrip::-webkit-scrollbar{height:3px;}
-.pv-filmstrip::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.1);border-radius:2px;}
-.pv-strip{display:flex;gap:8px;height:100%;align-items:center;}
-.pv-thumb-img{
-  width:68px;height:68px;flex-shrink:0;object-fit:cover;cursor:pointer;
-  border-radius:4px;border:2px solid transparent;opacity:0.48;
-  transition:opacity .18s,border-color .18s,transform .2s cubic-bezier(0.22,1,0.36,1);
-}
-.pv-thumb-img:hover{opacity:0.78;border-color:rgba(255,255,255,0.2);}
-.pv-thumb-img.pv-active{border-color:#ffffff;opacity:1;transform:scale(1.06);}
-@media(max-width:600px){
-  .pv-window{width:100%;height:96vh;border-radius:0;}
-  .pv-titlebar{height:44px;}
-  .pv-nav{opacity:1;}
-  .pv-filmstrip{height:80px;padding:10px 12px;}
-  .pv-thumb-img{width:58px;height:58px;}
+@keyframes pvWindowIn{
+  from{opacity:0;transform:scale(0.94);}
+  to{opacity:1;transform:scale(1);}
 }
 
-/* ── Album thumbnail grid ── */
+/* ── Titlebar ── */
+.pv-titlebar{
+  height:36px;flex-shrink:0;
+  background:linear-gradient(180deg,#3e3e3e 0%,#333 100%);
+  border-bottom:1px solid rgba(0,0,0,0.60);
+  display:flex;align-items:center;padding:0 12px;
+  position:relative;user-select:none;
+}
+.pv-lights{display:flex;gap:8px;align-items:center;flex-shrink:0;}
+.pv-light{
+  width:13px;height:13px;border-radius:50%;cursor:pointer;
+  transition:filter .15s;
+}
+.pv-light:hover{filter:brightness(1.15);}
+.pv-light.pv-red{
+  background:radial-gradient(circle at 38% 36%,#f87171,#ed6a5f 55%,#b94040 100%);
+  box-shadow:inset 0 -1px 1px rgba(0,0,0,0.30),0 0 0 0.5px rgba(0,0,0,0.25);
+}
+.pv-light.pv-yellow{
+  background:radial-gradient(circle at 38% 36%,#fcd34d,#f6be50 55%,#c08a1e 100%);
+  box-shadow:inset 0 -1px 1px rgba(0,0,0,0.30),0 0 0 0.5px rgba(0,0,0,0.25);
+}
+.pv-light.pv-green{
+  background:radial-gradient(circle at 38% 36%,#86efac,#61c555 55%,#2e8c2e 100%);
+  box-shadow:inset 0 -1px 1px rgba(0,0,0,0.30),0 0 0 0.5px rgba(0,0,0,0.25);
+}
+.pv-title-text{
+  position:absolute;left:50%;transform:translateX(-50%);
+  font-size:12px;font-weight:500;color:rgba(255,255,255,0.75);
+  letter-spacing:0.01em;pointer-events:none;white-space:nowrap;
+}
+.pv-title-dims{
+  position:absolute;right:12px;
+  font-size:10px;color:rgba(255,255,255,0.32);
+  letter-spacing:0.04em;pointer-events:none;
+}
+
+/* ── Main photo area ── */
+.pv-main{
+  flex:1;min-height:0;position:relative;
+  background:linear-gradient(180deg,#1c1c1c 0%,#161616 100%);
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+#pv-img{
+  max-width:100%;max-height:100%;
+  object-fit:contain;display:block;
+  transition:opacity .18s ease;
+  border-radius:2px;
+}
+
+/* ── Side nav arrows ── */
+.pv-nav{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:40px;height:64px;border-radius:8px;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.10);
+  backdrop-filter:blur(12px);
+  display:flex;align-items:center;justify-content:center;
+  color:rgba(255,255,255,0.80);font-size:22px;
+  transition:background .18s,opacity .18s;opacity:0;z-index:4;
+}
+.pv-main:hover .pv-nav{opacity:1;}
+.pv-nav:hover{background:rgba(255,255,255,0.14);}
+.pv-prev{left:14px;}
+.pv-next{right:14px;}
+.pv-chevron{
+  display:inline-block;width:10px;height:10px;
+  border-right:2px solid currentColor;border-bottom:2px solid currentColor;
+}
+.pv-chevron-left{transform:rotate(135deg);margin-left:3px;}
+.pv-chevron-right{transform:rotate(-45deg);margin-right:3px;}
+
+/* ── Floating pill toolbar (macOS Preview style) ── */
+.pv-pill{
+  position:absolute;bottom:18px;left:50%;transform:translateX(-50%);
+  display:flex;align-items:center;gap:0;
+  background:rgba(26,26,26,0.88);
+  border:1px solid rgba(255,255,255,0.14);
+  border-radius:12px;
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  box-shadow:0 4px 24px rgba(0,0,0,0.60),0 0 0 0.5px rgba(0,0,0,0.5);
+  opacity:0;transition:opacity .22s;z-index:5;
+  padding:3px;
+}
+.pv-main:hover .pv-pill{opacity:1;}
+.pv-pill-btn{
+  width:36px;height:30px;
+  border-radius:8px;
+  background:transparent;
+  color:rgba(255,255,255,0.78);
+  display:flex;align-items:center;justify-content:center;
+  transition:background .15s,color .15s;flex-shrink:0;
+}
+.pv-pill-btn:hover{background:rgba(255,255,255,0.14);color:#fff;}
+.pv-pill-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.pv-pill-sep{width:1px;height:18px;background:rgba(255,255,255,0.12);margin:0 2px;flex-shrink:0;}
+.pv-counter-pill{
+  font-size:11px;color:rgba(255,255,255,0.50);
+  padding:0 10px;letter-spacing:0.04em;white-space:nowrap;
+  height:30px;display:flex;align-items:center;
+}
+
+/* ── Filmstrip ── */
+.pv-filmstrip{
+  height:88px;flex-shrink:0;
+  background:#111;
+  border-top:1px solid rgba(255,255,255,0.07);
+  overflow-x:auto;overflow-y:hidden;
+  display:flex;align-items:center;
+  padding:0 10px;gap:5px;
+  scrollbar-width:none;
+}
+.pv-filmstrip::-webkit-scrollbar{display:none;}
+.pv-strip{display:flex;align-items:center;gap:5px;}
+.pv-thumb-img{
+  width:64px;height:64px;object-fit:cover;
+  border-radius:4px;cursor:pointer;flex-shrink:0;
+  opacity:0.55;border:2px solid transparent;
+  transition:opacity .2s,border-color .2s,transform .2s;
+  filter:grayscale(15%);
+}
+.pv-thumb-img:hover{opacity:0.88;transform:scale(1.04);}
+.pv-thumb-img.active{opacity:1;border-color:rgba(255,255,255,0.70);filter:none;}
+@media(max-width:600px){
+  .pv-window{border-radius:0;width:100vw;height:100vh;}
+  .pv-filmstrip{height:72px;}
+  .pv-thumb-img{width:54px;height:54px;}
+}
+
+/* ── Album single-photo slider ── */
 #p2 .c-album::before{content:none !important;}
 #p2 .c-album::after{content:none !important;}
 #p2 .c-album{
   flex-direction:column;align-items:stretch;justify-content:flex-start;
   padding:0;background:var(--midnight);
 }
-.album-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  grid-template-rows:repeat(2,1fr);
-  gap:2px;flex:1;width:100%;min-height:0;overflow:hidden;
+.album-single{
+  flex:1;min-height:0;position:relative;overflow:hidden;cursor:pointer;
 }
-.album-cell{position:relative;overflow:hidden;cursor:pointer;min-height:0;}
-.album-cell img{
+.album-single-img{
   width:100%;height:100%;object-fit:cover;display:block;
-  filter:grayscale(20%) brightness(0.78);
-  transition:filter .3s ease,transform .4s cubic-bezier(0.22,1,0.36,1);
+  filter:grayscale(18%) brightness(0.82);
+  transition:opacity .18s ease,filter .3s ease;
 }
-.album-cell:hover img{filter:grayscale(0%) brightness(1.05);transform:scale(1.08);}
-.album-cell-ov{
-  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  background:rgba(0,0,0,0);transition:background .25s ease;
-  color:#fff;font-size:20px;opacity:0;
+.album-single:hover .album-single-img{filter:grayscale(0%) brightness(1.0);}
+.album-arrow{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:34px;height:34px;border-radius:50%;
+  background:rgba(0,0,0,0.50);
+  border:1px solid rgba(255,255,255,0.18);
+  color:#fff;font-size:20px;line-height:1;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity .2s,background .2s;z-index:4;
+  backdrop-filter:blur(8px);
 }
-.album-cell:hover .album-cell-ov{background:rgba(0,0,0,0.32);opacity:1;}
-.c-album-lbl{
-  position:static !important;flex-shrink:0;
-  padding:9px 14px;cursor:pointer;text-align:center;
+.album-single:hover .album-arrow{opacity:1;}
+.album-arrow:hover{background:rgba(0,0,0,0.75);}
+.album-arrow-l{left:10px;}
+.album-arrow-r{right:10px;}
+.album-footer{
+  flex-shrink:0;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:7px 14px;
+  background:var(--midnight);
+  border-top:1px solid rgba(51,51,51,0.55);
+}
+.album-counter{
   font-family:'Barlow Condensed',sans-serif;font-size:10px;
-  letter-spacing:0.3em;text-transform:uppercase;
-  color:rgba(243,243,243,0.4);
-  background:var(--midnight);border-top:1px solid rgba(51,51,51,0.6);
+  letter-spacing:0.25em;text-transform:uppercase;
+  color:rgba(243,243,243,0.35);
+}
+.album-open-btn{
+  font-family:'Barlow Condensed',sans-serif;font-size:10px;
+  letter-spacing:0.25em;text-transform:uppercase;
+  color:rgba(243,243,243,0.45);cursor:pointer;
   transition:color .2s;
 }
-.c-album-lbl:hover{color:rgba(243,243,243,0.75);}
+.album-open-btn:hover{color:rgba(243,243,243,0.80);}
 
 /* ═══════════════════════════════════════
    EDITORIAL REVIEW CARDS — pull-quote
@@ -1604,7 +1663,7 @@ body { font-size: 16px; }
   display:flex;align-items:center;gap:10px;width:100%;flex-shrink:0;margin-bottom:10px;
 }
 #p1 .rev-header::before,#p1 .rev-header::after{content:'';flex:1;height:1px;background:var(--ink);opacity:.12;}
-.rev-card{flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:14px 16px;position:relative;min-height:0;overflow:hidden;}
+.rev-card{flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:14px 16px;position:relative;min-height:0;overflow:hidden;background:#f7f7f7;border:1px solid rgba(13,13,13,0.08);border-radius:6px;box-shadow:0 1px 3px rgba(13,13,13,0.06),0 4px 14px rgba(13,13,13,0.04);}
 .rev-qmark{
   position:absolute;top:-4px;left:10px;
   font-family:Georgia,'Times New Roman',serif;font-size:80px;line-height:1;
@@ -2007,18 +2066,18 @@ body { font-size: 16px; }
 
   <!-- Album — foto album (right col, rows 1-2) -->
   <div class="cell c-album" data-anim="left" style="--ad:80ms">
-    <div class="album-grid">
-      <div class="album-cell" onclick="openPhotoViewer(0)"><img src="p1.jpg" alt="Portfolio 1" loading="lazy"><div class="album-cell-ov">↗</div></div>
-      <div class="album-cell" onclick="openPhotoViewer(1)"><img src="p2.jpg" alt="Portfolio 2" loading="lazy"><div class="album-cell-ov">↗</div></div>
-      <div class="album-cell" onclick="openPhotoViewer(2)"><img src="p3.jpg" alt="Portfolio 3" loading="lazy"><div class="album-cell-ov">↗</div></div>
-      <div class="album-cell" onclick="openPhotoViewer(3)"><img src="p4.jpg" alt="Portfolio 4" loading="lazy"><div class="album-cell-ov">↗</div></div>
-      <div class="album-cell" onclick="openPhotoViewer(4)"><img src="p5.jpg" alt="Portfolio 5" loading="lazy"><div class="album-cell-ov">↗</div></div>
-      <div class="album-cell" onclick="openPhotoViewer(5)"><img src="p6.jpg" alt="Portfolio 6" loading="lazy"><div class="album-cell-ov">↗</div></div>
+    <div class="album-single" onclick="openPhotoViewer(albumIdx)">
+      <img class="album-single-img" id="album-img" src="p1.jpg" alt="Portfolio">
+      <button class="album-arrow album-arrow-l" onclick="albumNav(-1,event)">&#8249;</button>
+      <button class="album-arrow album-arrow-r" onclick="albumNav(1,event)">&#8250;</button>
     </div>
-    <span class="c-album-lbl" onclick="openPhotoViewer(0)">Foto Album · 7 foto's — Klik om te bekijken →</span>
+    <div class="album-footer">
+      <span class="album-counter" id="album-counter">1 / 7</span>
+      <span class="album-open-btn" onclick="openPhotoViewer(albumIdx)">Bekijk alle foto&#x2019;s &#8594;</span>
+    </div>
   </div>
 
-  <!-- E2: behandelingen verwijderd van p2 (staat nu op p1 rechts) -->
+  <!--- E2: behandelingen verwijderd van p2 (staat nu op p1 rechts) -->
 
   <!-- Footer -->
   <div class="cell c-footer" data-anim="up" style="--ad:200ms">
@@ -2044,19 +2103,12 @@ body { font-size: 16px; }
   <div class="pv-window">
     <div class="pv-titlebar">
       <div class="pv-lights">
-        <div class="pv-light pv-red" onclick="closePhotoViewer()"></div>
-        <div class="pv-light pv-yellow"></div>
-        <div class="pv-light pv-green"></div>
+        <div class="pv-light pv-red" onclick="closePhotoViewer()" title="Sluiten"></div>
+        <div class="pv-light pv-yellow" title="Minimaliseren"></div>
+        <div class="pv-light pv-green" title="Volledig scherm"></div>
       </div>
       <span class="pv-title-text" id="pv-title">Patrick Anches &mdash; Portfolio</span>
-      <div class="pv-toolbar">
-        <button class="pv-tb-btn" title="Vorige" onclick="pvNav(-1)">
-          <svg viewBox="0 0 16 16"><polyline points="10,3 5,8 10,13"/></svg>
-        </button>
-        <button class="pv-tb-btn" title="Volgende" onclick="pvNav(1)">
-          <svg viewBox="0 0 16 16"><polyline points="6,3 11,8 6,13"/></svg>
-        </button>
-      </div>
+      <span class="pv-title-dims" id="pv-dims"></span>
     </div>
     <div class="pv-main" id="pv-main">
       <button class="pv-nav pv-prev" onclick="pvNav(-1)" aria-label="Vorige foto">
@@ -2066,7 +2118,21 @@ body { font-size: 16px; }
       <button class="pv-nav pv-next" onclick="pvNav(1)" aria-label="Volgende foto">
         <span class="pv-chevron pv-chevron-right"></span>
       </button>
-      <span class="pv-counter-ov" id="pv-counter">1 / 7</span>
+      <div class="pv-pill">
+        <button class="pv-pill-btn" title="Vorige" onclick="pvNav(-1)">
+          <svg viewBox="0 0 16 16"><polyline points="10,3 5,8 10,13" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="pv-pill-sep"></div>
+        <span class="pv-counter-pill" id="pv-counter">1 / 7</span>
+        <div class="pv-pill-sep"></div>
+        <button class="pv-pill-btn" title="Volgende" onclick="pvNav(1)">
+          <svg viewBox="0 0 16 16"><polyline points="6,3 11,8 6,13" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="pv-pill-sep"></div>
+        <button class="pv-pill-btn" title="Sluiten" onclick="closePhotoViewer()">
+          <svg viewBox="0 0 16 16"><line x1="4" y1="4" x2="12" y2="12"/><line x1="12" y1="4" x2="4" y2="12"/></svg>
+        </button>
+      </div>
     </div>
     <div class="pv-filmstrip"><div class="pv-strip" id="pv-strip"></div></div>
   </div>
@@ -2510,6 +2576,16 @@ if (twCard && window.IntersectionObserver) {
 /* ── macOS Photo Viewer ── */
 const pvPhotos=['p1.jpg','p2.jpg','p3.jpg','p4.jpg','p5.jpg','p6.jpg','p7.jpg'];
 const pvNames=['Knippen & Styling','Haar Detail','Fade & Baard','Black Hair','Extensions','Kleur & Vorm','Finishing'];
+let albumIdx=0;
+const albumImgs=['p1.jpg','p2.jpg','p3.jpg','p4.jpg','p5.jpg','p6.jpg','p7.jpg'];
+function albumNav(dir,e){
+  if(e)e.stopPropagation();
+  albumIdx=(albumIdx+dir+albumImgs.length)%albumImgs.length;
+  const img=document.getElementById('album-img');
+  if(img){img.style.opacity='0';setTimeout(()=>{img.src=albumImgs[albumIdx];img.style.opacity='1';},160);}
+  const ctr=document.getElementById('album-counter');
+  if(ctr)ctr.textContent=(albumIdx+1)+' / '+albumImgs.length;
+}
 let pvIdx=0,pvStripBuilt=false;
 function openPhotoViewer(i){
   pvIdx=i;

@@ -48,7 +48,7 @@ button{cursor:pointer;border:none;background:none;}
   scroll-snap-align:start;
   display:grid;
   position:relative;
-  grid-template-columns:minmax(190px,22%) 1fr 44px minmax(260px,28%);
+  grid-template-columns:minmax(190px,20%) 1fr 44px minmax(300px,32%);
   grid-template-rows:minmax(72px,12vh) 1fr minmax(150px,22vh) minmax(48px,6vh);
 }
 .cell{position:relative;overflow:hidden;
@@ -138,7 +138,7 @@ button{cursor:pointer;border:none;background:none;}
 /* E: reviews — center col, row 2 */
 #p1 .c-e{grid-column:2;grid-row:2;padding:24px 26px;
   flex-direction:column;align-items:center;justify-content:space-between;}
-#p1 .c-e-inner{width:100%;flex:1;display:flex;flex-direction:column;gap:0;align-items:center;justify-content:space-evenly;}
+#p1 .c-e-inner{width:100%;flex:1;display:flex;flex-direction:column;gap:10px;align-items:stretch;justify-content:stretch;}
 #p1 .rev-header{font-family:var(--fc);font-size:11px;letter-spacing:0.2em;
   text-transform:uppercase;color:var(--ink3);margin-bottom:16px;text-align:center;}
 #p1 .rev-quote{
@@ -1603,55 +1603,108 @@ body { font-size: 16px; }
   .pv-thumb-img{width:54px;height:54px;}
 }
 
-/* ── Album single-photo slider ── */
+/* ── macOS Preview mini-window in album cell ── */
 #p2 .c-album::before{content:none !important;}
 #p2 .c-album::after{content:none !important;}
 #p2 .c-album{
-  flex-direction:column;align-items:stretch;justify-content:flex-start;
-  padding:0;background:var(--midnight);
+  flex-direction:column;align-items:stretch;justify-content:stretch;
+  padding:0;background:#1a1a1a;
+  overflow:hidden;
 }
-.album-single{
+/* The inner macOS window wrapper */
+.macos-win{
+  display:flex;flex-direction:column;
+  width:100%;height:100%;
+  background:#1a1a1a;
+  overflow:hidden;
+}
+/* Titlebar */
+.macos-titlebar{
+  height:30px;flex-shrink:0;
+  background:linear-gradient(180deg,#3c3c3c 0%,#303030 100%);
+  border-bottom:1px solid rgba(0,0,0,0.65);
+  display:flex;align-items:center;padding:0 10px;
+  position:relative;user-select:none;gap:7px;
+}
+.macos-dots{display:flex;gap:6px;align-items:center;flex-shrink:0;}
+.macos-dot{
+  width:11px;height:11px;border-radius:50%;flex-shrink:0;
+}
+.macos-dot.d-red{
+  background:radial-gradient(circle at 38% 36%,#f87171,#ed6a5f 55%,#b94040 100%);
+  box-shadow:inset 0 -1px 1px rgba(0,0,0,0.28),0 0 0 0.5px rgba(0,0,0,0.22);
+}
+.macos-dot.d-yellow{
+  background:radial-gradient(circle at 38% 36%,#fcd34d,#f6be50 55%,#c08a1e 100%);
+  box-shadow:inset 0 -1px 1px rgba(0,0,0,0.28),0 0 0 0.5px rgba(0,0,0,0.22);
+}
+.macos-dot.d-green{
+  background:radial-gradient(circle at 38% 36%,#86efac,#61c555 55%,#2e8c2e 100%);
+  box-shadow:inset 0 -1px 1px rgba(0,0,0,0.28),0 0 0 0.5px rgba(0,0,0,0.22);
+}
+.macos-win-title{
+  position:absolute;left:50%;transform:translateX(-50%);
+  font-size:11px;font-weight:500;color:rgba(255,255,255,0.62);
+  letter-spacing:0.02em;white-space:nowrap;pointer-events:none;
+}
+/* Photo area */
+.macos-photo{
   flex:1;min-height:0;position:relative;overflow:hidden;cursor:pointer;
 }
-.album-single-img{
+.macos-photo-img{
   width:100%;height:100%;object-fit:cover;display:block;
-  filter:grayscale(18%) brightness(0.82);
-  transition:opacity .18s ease,filter .3s ease;
+  filter:grayscale(12%) brightness(0.88);
+  transition:opacity .18s ease,filter .28s ease;
 }
-.album-single:hover .album-single-img{filter:grayscale(0%) brightness(1.0);}
-.album-arrow{
+.macos-photo:hover .macos-photo-img{filter:grayscale(0%) brightness(1.0);}
+/* Photo arrows — always visible, subtle */
+.macos-photo-arrow{
   position:absolute;top:50%;transform:translateY(-50%);
-  width:34px;height:34px;border-radius:50%;
-  background:rgba(0,0,0,0.50);
-  border:1px solid rgba(255,255,255,0.18);
-  color:#fff;font-size:20px;line-height:1;
+  width:32px;height:48px;border-radius:7px;z-index:4;
+  background:rgba(0,0,0,0.38);
+  border:1px solid rgba(255,255,255,0.12);
+  color:rgba(255,255,255,0.65);
   display:flex;align-items:center;justify-content:center;
-  opacity:0;transition:opacity .2s,background .2s;z-index:4;
   backdrop-filter:blur(8px);
+  transition:background .18s,color .18s,opacity .18s;
+  opacity:0.55;
 }
-.album-single:hover .album-arrow{opacity:1;}
-.album-arrow:hover{background:rgba(0,0,0,0.75);}
-.album-arrow-l{left:10px;}
-.album-arrow-r{right:10px;}
-.album-footer{
-  flex-shrink:0;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:7px 14px;
-  background:var(--midnight);
-  border-top:1px solid rgba(51,51,51,0.55);
+.macos-photo:hover .macos-photo-arrow{opacity:1;}
+.macos-photo-arrow:hover{background:rgba(0,0,0,0.70);color:#fff;}
+.macos-photo-arrow svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
+.macos-arrow-l{left:8px;}
+.macos-arrow-r{right:8px;}
+/* Toolbar */
+.macos-toolbar{
+  height:36px;flex-shrink:0;
+  background:linear-gradient(180deg,#282828 0%,#202020 100%);
+  border-top:1px solid rgba(0,0,0,0.55);
+  display:flex;align-items:center;padding:0 8px;gap:2px;
 }
-.album-counter{
+.macos-tb-btn{
+  width:30px;height:26px;border-radius:6px;
+  background:transparent;
+  color:rgba(255,255,255,0.58);
+  display:flex;align-items:center;justify-content:center;
+  transition:background .15s,color .15s;flex-shrink:0;
+}
+.macos-tb-btn:hover{background:rgba(255,255,255,0.12);color:#fff;}
+.macos-tb-btn svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;}
+.macos-tb-sep{width:1px;height:16px;background:rgba(255,255,255,0.10);margin:0 4px;flex-shrink:0;}
+.macos-tb-counter{
+  font-family:'Barlow Condensed',sans-serif;font-size:11px;
+  letter-spacing:0.18em;color:rgba(255,255,255,0.38);
+  padding:0 4px;flex-shrink:0;
+}
+.macos-tb-open{
+  margin-left:auto;
   font-family:'Barlow Condensed',sans-serif;font-size:10px;
-  letter-spacing:0.25em;text-transform:uppercase;
-  color:rgba(243,243,243,0.35);
+  letter-spacing:0.22em;text-transform:uppercase;
+  color:rgba(255,255,255,0.40);cursor:pointer;
+  padding:4px 8px;border-radius:5px;
+  transition:color .15s,background .15s;flex-shrink:0;
 }
-.album-open-btn{
-  font-family:'Barlow Condensed',sans-serif;font-size:10px;
-  letter-spacing:0.25em;text-transform:uppercase;
-  color:rgba(243,243,243,0.45);cursor:pointer;
-  transition:color .2s;
-}
-.album-open-btn:hover{color:rgba(243,243,243,0.80);}
+.macos-tb-open:hover{color:rgba(255,255,255,0.80);background:rgba(255,255,255,0.08);}
 
 /* ═══════════════════════════════════════
    EDITORIAL REVIEW CARDS — pull-quote
@@ -1663,7 +1716,7 @@ body { font-size: 16px; }
   display:flex;align-items:center;gap:10px;width:100%;flex-shrink:0;margin-bottom:10px;
 }
 #p1 .rev-header::before,#p1 .rev-header::after{content:'';flex:1;height:1px;background:var(--ink);opacity:.12;}
-.rev-card{flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:14px 16px;position:relative;min-height:0;overflow:hidden;background:#f7f7f7;border:1px solid rgba(13,13,13,0.08);border-radius:6px;box-shadow:0 1px 3px rgba(13,13,13,0.06),0 4px 14px rgba(13,13,13,0.04);}
+.rev-card{flex:1 1 0;min-height:0;display:flex;flex-direction:column;justify-content:space-between;padding:14px 16px;position:relative;overflow:hidden;background:#f7f7f7;border:1px solid rgba(13,13,13,0.08);border-radius:6px;box-shadow:0 1px 3px rgba(13,13,13,0.06),0 4px 14px rgba(13,13,13,0.04);}
 .rev-qmark{
   position:absolute;top:-4px;left:10px;
   font-family:Georgia,'Times New Roman',serif;font-size:80px;line-height:1;
@@ -2066,14 +2119,35 @@ body { font-size: 16px; }
 
   <!-- Album — foto album (right col, rows 1-2) -->
   <div class="cell c-album" data-anim="left" style="--ad:80ms">
-    <div class="album-single" onclick="openPhotoViewer(albumIdx)">
-      <img class="album-single-img" id="album-img" src="p1.jpg" alt="Portfolio">
-      <button class="album-arrow album-arrow-l" onclick="albumNav(-1,event)">&#8249;</button>
-      <button class="album-arrow album-arrow-r" onclick="albumNav(1,event)">&#8250;</button>
-    </div>
-    <div class="album-footer">
-      <span class="album-counter" id="album-counter">1 / 7</span>
-      <span class="album-open-btn" onclick="openPhotoViewer(albumIdx)">Bekijk alle foto&#x2019;s &#8594;</span>
+    <div class="macos-win">
+      <div class="macos-titlebar">
+        <div class="macos-dots">
+          <span class="macos-dot d-red"></span>
+          <span class="macos-dot d-yellow"></span>
+          <span class="macos-dot d-green"></span>
+        </div>
+        <span class="macos-win-title" id="album-win-title">Portfolio &mdash; 1 / 7</span>
+      </div>
+      <div class="macos-photo" onclick="openPhotoViewer(window.albumIdx||0)">
+        <img class="macos-photo-img" id="album-img" src="p1.jpg" alt="Portfolio">
+        <button class="macos-photo-arrow macos-arrow-l" onclick="albumNav(-1,event)" aria-label="Vorige">
+          <svg viewBox="0 0 14 14"><polyline points="9,2 4,7 9,12"/></svg>
+        </button>
+        <button class="macos-photo-arrow macos-arrow-r" onclick="albumNav(1,event)" aria-label="Volgende">
+          <svg viewBox="0 0 14 14"><polyline points="5,2 10,7 5,12"/></svg>
+        </button>
+      </div>
+      <div class="macos-toolbar">
+        <button class="macos-tb-btn" title="Vorige" onclick="albumNav(-1,event)">
+          <svg viewBox="0 0 14 14"><polyline points="9,2 4,7 9,12"/></svg>
+        </button>
+        <button class="macos-tb-btn" title="Volgende" onclick="albumNav(1,event)">
+          <svg viewBox="0 0 14 14"><polyline points="5,2 10,7 5,12"/></svg>
+        </button>
+        <div class="macos-tb-sep"></div>
+        <span class="macos-tb-counter" id="album-counter">1 / 7</span>
+        <span class="macos-tb-open" onclick="openPhotoViewer(window.albumIdx||0)">Bekijk alle &#8594;</span>
+      </div>
     </div>
   </div>
 
@@ -2576,15 +2650,17 @@ if (twCard && window.IntersectionObserver) {
 /* ── macOS Photo Viewer ── */
 const pvPhotos=['p1.jpg','p2.jpg','p3.jpg','p4.jpg','p5.jpg','p6.jpg','p7.jpg'];
 const pvNames=['Knippen & Styling','Haar Detail','Fade & Baard','Black Hair','Extensions','Kleur & Vorm','Finishing'];
-let albumIdx=0;
-const albumImgs=['p1.jpg','p2.jpg','p3.jpg','p4.jpg','p5.jpg','p6.jpg','p7.jpg'];
+var albumIdx=0;
+var albumImgs=['p1.jpg','p2.jpg','p3.jpg','p4.jpg','p5.jpg','p6.jpg','p7.jpg'];
 function albumNav(dir,e){
-  if(e)e.stopPropagation();
+  if(e){e.stopPropagation();e.preventDefault();}
   albumIdx=(albumIdx+dir+albumImgs.length)%albumImgs.length;
-  const img=document.getElementById('album-img');
-  if(img){img.style.opacity='0';setTimeout(()=>{img.src=albumImgs[albumIdx];img.style.opacity='1';},160);}
-  const ctr=document.getElementById('album-counter');
+  var img=document.getElementById('album-img');
+  if(img){img.style.opacity='0';setTimeout(function(){img.src=albumImgs[albumIdx];img.style.opacity='1';},160);}
+  var ctr=document.getElementById('album-counter');
   if(ctr)ctr.textContent=(albumIdx+1)+' / '+albumImgs.length;
+  var ttl=document.getElementById('album-win-title');
+  if(ttl)ttl.textContent='Portfolio — '+(albumIdx+1)+' / '+albumImgs.length;
 }
 let pvIdx=0,pvStripBuilt=false;
 function openPhotoViewer(i){

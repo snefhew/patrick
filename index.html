@@ -106,7 +106,7 @@ button{cursor:pointer;border:none;background:none;}
   text-transform:uppercase;color:var(--ink3);}
 #p1 .hero-desc{font-family:var(--ff);font-size:14px;line-height:1.75;
   color:var(--ink2);max-width:240px;font-weight:300;}
-#p1 .scroll-hint{font-family:var(--fc);font-size:10px;letter-spacing:0.2em;
+#p1 .scroll-hint{font-family:var(--fc);font-size:11px;letter-spacing:0.2em;
   text-transform:uppercase;color:var(--ink3);cursor:pointer;
   transition:color .2s;margin-top:8px;}
 #p1 .scroll-hint:hover{color:var(--ink);}
@@ -123,7 +123,8 @@ button{cursor:pointer;border:none;background:none;}
 
 /* D: chatbot */
 #p1 .c-d{grid-column:2;grid-row:2/4;
-  background:var(--bg2);position:relative;}
+  background:var(--bg2);position:relative;
+  display:flex;align-items:center;justify-content:center;}
 #p1 .c-d::after{content:'ASSISTENT';position:absolute;top:16px;left:20px;
   font-family:var(--fc);font-size:10px;letter-spacing:0.3em;color:var(--ink3);}
 
@@ -138,10 +139,10 @@ button{cursor:pointer;border:none;background:none;}
 /* E: reviews */
 #p1 .c-e{grid-column:4;grid-row:1/3;padding:28px 26px;
   flex-direction:column;align-items:center;justify-content:space-between;}
-#p1 .c-e-inner{width:100%;flex:1;display:flex;flex-direction:column;gap:0;align-items:center;justify-content:center;}
+#p1 .c-e-inner{width:100%;flex:1;display:flex;flex-direction:column;gap:0;align-items:center;justify-content:space-evenly;}
 #p1 .rev-header{font-family:var(--fc);font-size:11px;letter-spacing:0.2em;
   text-transform:uppercase;color:var(--ink3);margin-bottom:16px;text-align:center;}
-#p1 .rev-quote{font-family:var(--ff);font-style:italic;font-size:16px;
+#p1 .rev-quote{font-family:var(--ff);font-style:italic;font-size:17px;
   line-height:1.6;color:var(--ink);margin-bottom:8px;font-weight:300;text-align:center;}
 #p1 .rev-author{font-family:var(--fc);font-size:11px;letter-spacing:0.12em;
   text-transform:uppercase;color:var(--ink3);text-align:center;}
@@ -402,7 +403,7 @@ button{cursor:pointer;border:none;background:none;}
 /* ── Scroll hint: animated arrow ── */
 #p1 .scroll-hint{
   display:inline-flex;align-items:center;gap:8px;
-  font-family:var(--fc);font-size:10px;letter-spacing:0.22em;
+  font-family:var(--fc);font-size:11px;letter-spacing:0.22em;
   text-transform:uppercase;color:var(--ink3);cursor:pointer;
   transition:color .2s;margin-top:8px;width:fit-content;user-select:none;}
 #p1 .scroll-hint:hover{color:var(--ink);}
@@ -490,7 +491,7 @@ button{cursor:pointer;border:none;background:none;}
   display:flex;align-items:center;gap:10px;
   font-size:10px;letter-spacing:0.22em;}
 #p1 .rev-header::before,#p1 .rev-header::after{
-  content:'';flex:1;height:1px;background:var(--ink);opacity:.12;}
+  content:'';flex:1;height:1px;background:var(--ink);opacity:.15;}
 
 /* ── Rev divider: softer ── */
 #p1 .rev-div{opacity:.12;}
@@ -563,7 +564,7 @@ button{cursor:pointer;border:none;background:none;}
   <div class="cell c-b">
     <div style="width:100%">
       <div class="hero-lbl">Amsterdam-West · Kinkerstraat</div>
-      <h1 class="hero-h1">Vakman<br>schap<br>voor elk<br>haartype.</h1>
+      <h1 class="hero-h1">Vakmanschap<br>voor elk<br>haartype.</h1>
     </div>
     <div class="hero-meta">
       <p class="hero-desc">Gediplomeerde barbier en kapper in het hart van Amsterdam. Geen haastwerk, aandacht en kwaliteit voor elk detail.</p>

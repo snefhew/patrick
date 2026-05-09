@@ -3,413 +3,412 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Patrick Anches — Barbier & Kapper Amsterdam</title>
+<title>Patrick Anches — Barbier &amp; Kapper Amsterdam</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════
-   BASE RESET
+   BASE
 ═══════════════════════════════════════ */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { height: 100%; overflow: hidden; }
-body { font-size: 14px; line-height: 1.5; }
-a { color: inherit; text-decoration: none; }
-button { cursor: pointer; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;overflow:hidden;}
+body{font-size:14px;line-height:1.5;}
+a{color:inherit;text-decoration:none;}
+button{cursor:pointer;border:none;background:none;}
 
 /* ═══════════════════════════════════════
    SCROLL CONTAINER
 ═══════════════════════════════════════ */
-#app {
-  width: 100vw; height: 100vh;
-  overflow-y: scroll; overflow-x: hidden;
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
+#app{
+  width:100vw;height:100vh;
+  overflow-y:scroll;overflow-x:hidden;
+  scroll-snap-type:y mandatory;
+  scroll-behavior:smooth;
 }
 
 /* ═══════════════════════════════════════
-   PAGE GRID (shared)
-   cols:  left(~22%) | center(1fr) | vbar(44px) | right(~30%)
-   rows:  header(13vh) | main(1fr) | lower(20vh) | footer(7vh)
+   PAGE GRID
+   cols: left(22%) | center(1fr) | vbar(44px) | right(28%)
+   rows: header(12vh) | main(1fr) | lower(22vh) | footer(6vh)
 ═══════════════════════════════════════ */
-.page {
-  width: 100%; height: 100vh;
-  scroll-snap-align: start;
-  display: grid;
-  position: relative;
-  grid-template-columns: minmax(200px,22%) 1fr 44px minmax(280px,30%);
-  grid-template-rows: minmax(80px,13vh) 1fr minmax(140px,20vh) minmax(52px,7vh);
+.page{
+  width:100%;height:100vh;
+  scroll-snap-align:start;
+  display:grid;
+  position:relative;
+  grid-template-columns:minmax(190px,22%) 1fr 44px minmax(260px,28%);
+  grid-template-rows:minmax(72px,12vh) 1fr minmax(150px,22vh) minmax(48px,6vh);
 }
-.cell { position: relative; overflow: hidden; }
+.cell{position:relative;overflow:hidden;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;}
 
 /* ═══════════════════════════════════════
    PAGE 1 — MONO  (white / #292929)
 ═══════════════════════════════════════ */
-#p1 {
-  --ink:    #292929;
-  --ink2:   #555555;
-  --ink3:   #888888;
-  --bg:     #ffffff;
-  --bg2:    #f5f5f5;
-  --b:      1px solid #292929;
-  --ff:     Helvetica Neue, Helvetica, Arial, sans-serif;
-  --fc:     Impact, 'Arial Narrow Bold', Haettenschweiler, sans-serif;
-  --fm:     'IBM Plex Mono', ui-monospace, monospace;
-  --fd:     'Bebas Neue', Impact, sans-serif;
-  background: var(--bg);
+#p1{
+  --ink:   #292929;
+  --ink2:  #555555;
+  --ink3:  #888888;
+  --bg:    #ffffff;
+  --bg2:   #f5f5f5;
+  --b:     1px solid #292929;
+  --ff:    'Helvetica Neue',Helvetica,Arial,sans-serif;
+  --fc:    Impact,'Arial Narrow Bold',Haettenschweiler,sans-serif;
+  --fm:    'IBM Plex Mono',ui-monospace,monospace;
+  --fd:    'Bebas Neue',Impact,sans-serif;
+  background:var(--bg);
 }
-#p1 .cell { border: var(--b); background: var(--bg); color: var(--ink); }
-
-#p1 .lbl {
-  font-family: var(--fc);
-  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--ink3); display: block; margin-bottom: 10px;
-}
+#p1 .cell{border:var(--b);background:var(--bg);color:var(--ink);}
 
 /* A: logo + status */
-#p1 .c-a { grid-column:1; grid-row:1; padding:20px 24px;
-  display:flex; flex-direction:column; justify-content:space-between; }
-.logo-svg-mono rect, .logo-svg-mono line, .logo-svg-mono circle { stroke:#292929 !important; }
+#p1 .c-a{grid-column:1;grid-row:1;padding:16px 24px;
+  flex-direction:row;justify-content:space-between;align-items:center;}
+.logo-svg-mono rect,.logo-svg-mono line,.logo-svg-mono circle{stroke:#292929!important;}
 
-#p1 .salon-name { font-family: var(--ff); font-size:14px; font-weight:600;
-  color:var(--ink); letter-spacing:-0.01em; }
-#p1 .salon-sub  { font-family:var(--fc); font-size:10px; letter-spacing:0.2em;
-  text-transform:uppercase; color:var(--ink3); display:block; margin-top:3px; }
-#p1 .status-badge { display:inline-flex; align-items:center; gap:8px;
-  font-family:var(--fc); font-size:10px; letter-spacing:0.2em;
-  text-transform:uppercase; color:var(--ink3); }
-.sdot { width:7px; height:7px; border-radius:50%; background:#888; transition:background .3s; }
-.sdot.on { background:#00AC5C; }
+#p1 .salon-name{font-family:var(--ff);font-size:15px;font-weight:700;
+  color:var(--ink);letter-spacing:-0.01em;}
+#p1 .salon-sub{font-family:var(--fc);font-size:10px;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--ink3);display:block;margin-top:2px;}
+#p1 .status-badge{display:inline-flex;align-items:center;gap:7px;
+  font-family:var(--fc);font-size:10px;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--ink3);flex-shrink:0;}
+.sdot{width:7px;height:7px;border-radius:50%;background:#888;transition:background .3s;}
+.sdot.on{background:#00AC5C;}
 
-/* B: hero */
-#p1 .c-b { grid-column:1; grid-row:2/4; padding:32px 28px;
-  display:flex; flex-direction:column; justify-content:space-between; }
-#p1 .hero-h1 {
-  font-family: var(--fd);
-  font-size: clamp(3rem, 4.5vw, 5.5rem);
-  font-weight: 400;
-  line-height: 0.92;
-  letter-spacing: 0.02em;
-  color: var(--ink);
-  text-transform: uppercase;
-  margin-bottom: 24px;
+/* B: hero — left col, rows 2+3 */
+#p1 .c-b{grid-column:1;grid-row:2/4;padding:32px 28px;
+  align-items:flex-start;justify-content:center;gap:20px;}
+#p1 .hero-h1{
+  font-family:var(--fd);
+  font-size:clamp(3.6rem,5vw,6rem);
+  font-weight:400;
+  line-height:0.9;
+  letter-spacing:0.025em;
+  color:var(--ink);
+  text-transform:uppercase;
+  text-align:left;
 }
-#p1 .hero-h1 em { font-style:normal; color:var(--ink2); }
-#p1 .hero-desc { font-family:var(--ff); font-size:13px; line-height:1.8;
-  color:var(--ink2); max-width:260px; font-weight:300; }
-#p1 .scroll-hint { font-family:var(--fc); font-size:10px; letter-spacing:0.2em;
-  text-transform:uppercase; color:var(--ink3); cursor:pointer;
-  transition:color .2s; margin-top:auto; padding-top:20px; }
-#p1 .scroll-hint:hover { color:var(--ink); }
+#p1 .hero-h1 em{font-style:normal;color:var(--ink2);}
+#p1 .hero-meta{display:flex;flex-direction:column;gap:6px;align-self:flex-start;}
+#p1 .hero-lbl{font-family:var(--fc);font-size:11px;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--ink3);}
+#p1 .hero-desc{font-family:var(--ff);font-size:14px;line-height:1.75;
+  color:var(--ink2);max-width:240px;font-weight:300;}
+#p1 .scroll-hint{font-family:var(--fc);font-size:10px;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--ink3);cursor:pointer;
+  transition:color .2s;margin-top:8px;}
+#p1 .scroll-hint:hover{color:var(--ink);}
 
 /* C: info bar */
-#p1 .c-c { grid-column:2; grid-row:1; padding:20px 28px;
-  display:flex; align-items:center; gap:48px; flex-wrap:wrap;
-  background:var(--bg2); }
-#p1 .info-lbl { font-family:var(--fc); font-size:10px; letter-spacing:0.2em;
-  text-transform:uppercase; color:var(--ink3); }
-#p1 .info-val  { font-family:var(--ff); font-size:13px; line-height:1.55; color:var(--ink); }
+#p1 .c-c{grid-column:2;grid-row:1;padding:16px 28px;
+  flex-direction:row;justify-content:center;align-items:center;gap:48px;
+  flex-wrap:wrap;background:var(--bg2);}
+#p1 .info-item{display:flex;flex-direction:column;gap:3px;align-items:center;}
+#p1 .info-lbl{font-family:var(--fc);font-size:10px;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--ink3);}
+#p1 .info-val{font-family:var(--ff);font-size:13px;line-height:1.5;
+  color:var(--ink);text-align:center;}
 
 /* D: chatbot */
-#p1 .c-d { grid-column:2; grid-row:2/4; display:flex;
-  align-items:center; justify-content:center;
-  background:var(--bg2); position:relative; }
-#p1 .c-d::after { content:'ASSISTENT'; position:absolute; top:16px; left:20px;
-  font-family:var(--fc); font-size:10px; letter-spacing:0.3em; color:var(--ink3); }
+#p1 .c-d{grid-column:2;grid-row:2/4;
+  background:var(--bg2);position:relative;}
+#p1 .c-d::after{content:'ASSISTENT';position:absolute;top:16px;left:20px;
+  font-family:var(--fc);font-size:10px;letter-spacing:0.3em;color:var(--ink3);}
 
 /* VBAR */
-#p1 .c-vbar { grid-column:3; grid-row:1/4;
-  background:var(--ink); display:flex; align-items:center;
-  justify-content:center; overflow:hidden; }
-#p1 .vbar-text { writing-mode:vertical-rl; transform:rotate(180deg);
-  font-family:var(--fc); font-size:11px; letter-spacing:0.35em;
-  text-transform:uppercase; color:#fff; white-space:nowrap; user-select:none; }
+#p1 .c-vbar{grid-column:3;grid-row:1/4;
+  background:var(--ink);display:flex;align-items:center;
+  justify-content:center;overflow:hidden;}
+#p1 .vbar-text{writing-mode:vertical-rl;transform:rotate(180deg);
+  font-family:var(--fc);font-size:11px;letter-spacing:0.35em;
+  text-transform:uppercase;color:#fff;white-space:nowrap;user-select:none;}
 
-/* E: reviews (large) */
-#p1 .c-e { grid-column:4; grid-row:1/3; padding:24px 26px;
-  display:flex; flex-direction:column; justify-content:space-between; }
-#p1 .rev-header { font-family:var(--fc); font-size:10px; letter-spacing:0.2em;
-  text-transform:uppercase; color:var(--ink3); margin-bottom:18px; }
-#p1 .rev-quote  { font-family:var(--ff); font-style:italic; font-size:16px;
-  line-height:1.55; color:var(--ink); margin-bottom:10px; font-weight:300; }
-#p1 .rev-author { font-family:var(--fc); font-size:11px; letter-spacing:0.12em;
-  text-transform:uppercase; color:var(--ink3); }
-#p1 .rev-treatment { font-family:var(--fm); font-size:10px; color:var(--ink3); margin-top:3px; }
-#p1 .stats-row  { display:flex; gap:24px; padding-top:18px;
-  border-top:var(--b); margin-top:20px; }
-#p1 .stat-item  { display:flex; flex-direction:column; gap:4px; }
-#p1 .stat-n     { font-family:var(--fd); font-size:2.4rem; line-height:1;
-  letter-spacing:0.02em; color:var(--ink); }
-#p1 .stat-l     { font-family:var(--fc); font-size:10px; letter-spacing:0.2em;
-  text-transform:uppercase; color:var(--ink3); }
+/* E: reviews */
+#p1 .c-e{grid-column:4;grid-row:1/3;padding:24px 26px;
+  align-items:flex-start;justify-content:space-between;}
+#p1 .c-e-inner{width:100%;display:flex;flex-direction:column;gap:0;}
+#p1 .rev-header{font-family:var(--fc);font-size:10px;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--ink3);margin-bottom:16px;}
+#p1 .rev-quote{font-family:var(--ff);font-style:italic;font-size:15px;
+  line-height:1.6;color:var(--ink);margin-bottom:8px;font-weight:300;}
+#p1 .rev-author{font-family:var(--fc);font-size:11px;letter-spacing:0.12em;
+  text-transform:uppercase;color:var(--ink3);}
+#p1 .rev-treatment{font-family:var(--fm);font-size:10px;color:var(--ink3);margin-top:2px;}
+#p1 .rev-div{height:1px;background:var(--ink);opacity:.1;margin:16px 0;}
+#p1 .stats-row{display:flex;gap:20px;padding-top:16px;border-top:var(--b);width:100%;}
+#p1 .stat-item{display:flex;flex-direction:column;gap:3px;align-items:center;}
+#p1 .stat-n{font-family:var(--fd);font-size:2.6rem;line-height:1;
+  letter-spacing:0.02em;color:var(--ink);}
+#p1 .stat-l{font-family:var(--fc);font-size:10px;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--ink3);}
 
-/* F: Treatwell (small) */
-#p1 .c-f { grid-column:4; grid-row:3;
-  display:flex; align-items:center; justify-content:center; background:var(--bg2); position:relative; }
-#p1 .c-f::before { content:'BOEKEN'; position:absolute; top:14px; left:18px;
-  font-family:var(--fc); font-size:10px; letter-spacing:0.3em; color:var(--ink3); }
+/* F: Treatwell booking */
+#p1 .c-f{grid-column:4;grid-row:3;
+  background:var(--bg2);position:relative;}
+#p1 .c-f::before{content:'BOEKEN';position:absolute;top:14px;left:18px;
+  font-family:var(--fc);font-size:10px;letter-spacing:0.3em;color:var(--ink3);}
 
 /* FOOTER */
-#p1 .c-footer { grid-column:2/5; grid-row:4; border-top:var(--b); border-left:var(--b);
-  display:flex; align-items:center; justify-content:center;
-  gap:28px; flex-wrap:wrap; padding:0 24px; background:var(--bg2); }
-#p1 .footer-item { font-family:var(--fc); font-size:11px; letter-spacing:0.12em;
-  text-transform:uppercase; color:var(--ink3); transition:color .2s; }
-#p1 .footer-item:hover { color:var(--ink); }
+#p1 .c-footer{grid-column:2/5;grid-row:4;border-top:var(--b);border-left:var(--b);
+  flex-direction:row;justify-content:center;align-items:center;
+  gap:24px;flex-wrap:wrap;padding:0 24px;background:var(--bg2);}
+#p1 .footer-item{font-family:var(--fc);font-size:11px;letter-spacing:0.12em;
+  text-transform:uppercase;color:var(--ink3);transition:color .2s;}
+#p1 .footer-item:hover{color:var(--ink);}
 
-/* Chatbot — page 1 */
-#p1 .chat-card { width:min(480px,calc(100% - 48px)); max-height:min(580px,calc(100% - 32px));
-  background:var(--bg); border:var(--b); display:flex; flex-direction:column; z-index:2; position:relative; }
-#p1 .ch-header { background:var(--ink); color:#fff; padding:14px 18px;
-  display:flex; align-items:center; gap:10px; flex-shrink:0; border-bottom:var(--b); }
-#p1 .ch-dot    { width:7px; height:7px; border-radius:50%; background:#00AC5C; flex-shrink:0; }
-#p1 .ch-name   { font-family:var(--fc); font-size:11px; letter-spacing:0.2em;
-  text-transform:uppercase; flex:1; color:#fff; }
-#p1 .ch-msgs   { flex:1; overflow-y:auto; padding:16px; display:flex;
-  flex-direction:column; gap:10px; min-height:260px; max-height:340px;
-  scrollbar-width:thin; }
-#p1 .cm        { max-width:88%; }
-#p1 .cm.bot    { align-self:flex-start; }
-#p1 .cm.user   { align-self:flex-end; }
-#p1 .cm-b      { padding:11px 14px; font-family:var(--ff); font-size:13px; line-height:1.6; }
-#p1 .cm.bot  .cm-b { background:var(--bg2); border:var(--b); color:var(--ink); }
-#p1 .cm.user .cm-b { background:var(--ink); color:#fff; }
-#p1 .cm-t      { font-family:var(--fm); font-size:10px; color:var(--ink3);
-  margin-top:4px; padding:0 2px; }
-#p1 .cm.user .cm-t { text-align:right; }
-#p1 .typing    { display:flex; gap:4px; padding:11px 14px;
-  background:var(--bg2); border:var(--b); align-self:flex-start; width:fit-content; }
-#p1 .typing span { width:5px; height:5px; border-radius:50%; background:var(--ink3);
-  animation:bl 1.2s infinite; }
-#p1 .ch-chips  { padding:10px 14px; display:flex; gap:6px; flex-wrap:wrap;
-  border-top:var(--b); flex-shrink:0; background:var(--bg); }
-#p1 .chip      { font-family:var(--fc); font-size:10px; letter-spacing:0.12em;
-  text-transform:uppercase; padding:6px 12px; border:var(--b);
-  background:transparent; color:var(--ink2); transition:background .15s,color .15s; }
-#p1 .chip:hover { background:var(--ink); color:#fff; }
-#p1 .ch-ir     { display:flex; border-top:var(--b); flex-shrink:0; }
-#p1 .ch-in     { flex:1; border:none; border-right:var(--b); padding:13px 16px;
-  font-family:var(--ff); font-size:13px; background:var(--bg); color:var(--ink); outline:none; }
-#p1 .ch-in::placeholder { color:var(--ink3); }
-#p1 .ch-snd    { width:50px; height:50px; background:var(--ink); border:none;
-  display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:opacity .2s; }
-#p1 .ch-snd:hover { opacity:.75; }
-#p1 .ch-snd svg { width:14px; height:14px; fill:#fff; }
-#p1 .ch-ft     { font-family:var(--fc); font-size:10px; letter-spacing:0.1em;
-  text-transform:uppercase; color:var(--ink3); text-align:center; padding:7px;
-  border-top:var(--b); flex-shrink:0; background:var(--bg2); }
+/* ── CHATBOT card (p1) ── */
+#p1 .chat-card{width:min(500px,calc(100% - 40px));
+  max-height:min(640px,calc(100% - 32px));
+  background:var(--bg);border:var(--b);
+  display:flex;flex-direction:column;z-index:2;}
+#p1 .ch-header{background:var(--ink);color:#fff;padding:14px 18px;
+  display:flex;align-items:center;gap:10px;flex-shrink:0;border-bottom:var(--b);}
+#p1 .ch-dot{width:7px;height:7px;border-radius:50%;background:#00AC5C;flex-shrink:0;}
+#p1 .ch-name{font-family:var(--fc);font-size:11px;letter-spacing:0.2em;
+  text-transform:uppercase;flex:1;color:#fff;}
+#p1 .ch-msgs{flex:1;overflow-y:auto;padding:16px;display:flex;
+  flex-direction:column;gap:10px;min-height:320px;max-height:400px;
+  scrollbar-width:thin;}
+#p1 .cm{max-width:88%;}
+#p1 .cm.bot{align-self:flex-start;}
+#p1 .cm.user{align-self:flex-end;}
+#p1 .cm-b{padding:11px 14px;font-family:var(--ff);font-size:13px;line-height:1.65;}
+#p1 .cm.bot .cm-b{background:var(--bg2);border:var(--b);color:var(--ink);}
+#p1 .cm.user .cm-b{background:var(--ink);color:#fff;}
+#p1 .cm-t{font-family:var(--fm);font-size:10px;color:var(--ink3);
+  margin-top:4px;padding:0 2px;}
+#p1 .cm.user .cm-t{text-align:right;}
+#p1 .typing{display:flex;gap:4px;padding:11px 14px;
+  background:var(--bg2);border:var(--b);align-self:flex-start;width:fit-content;}
+#p1 .typing span{width:5px;height:5px;border-radius:50%;background:var(--ink3);
+  animation:bl 1.2s infinite;}
+#p1 .ch-chips{padding:10px 14px;display:flex;gap:6px;flex-wrap:wrap;
+  border-top:var(--b);flex-shrink:0;background:var(--bg);}
+#p1 .chip{font-family:var(--fc);font-size:10px;letter-spacing:0.12em;
+  text-transform:uppercase;padding:6px 12px;border:var(--b);
+  background:transparent;color:var(--ink2);transition:background .15s,color .15s;}
+#p1 .chip:hover{background:var(--ink);color:#fff;}
+#p1 .ch-ir{display:flex;border-top:var(--b);flex-shrink:0;}
+#p1 .ch-in{flex:1;border:none;border-right:var(--b);padding:13px 16px;
+  font-family:var(--ff);font-size:13px;background:var(--bg);color:var(--ink);outline:none;}
+#p1 .ch-in::placeholder{color:var(--ink3);}
+#p1 .ch-snd{width:50px;height:50px;background:var(--ink);border:none;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:opacity .2s;}
+#p1 .ch-snd:hover{opacity:.75;}
+#p1 .ch-snd svg{width:14px;height:14px;fill:#fff;}
+#p1 .ch-ft{font-family:var(--fc);font-size:10px;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--ink3);text-align:center;padding:7px;
+  border-top:var(--b);flex-shrink:0;background:var(--bg2);}
 
-/* Treatwell card — page 1 */
-#p1 .tw-card   { background:var(--bg); border:var(--b); padding:20px 22px;
-  width:calc(100% - 40px); max-width:290px; position:relative; z-index:2; }
-#p1 .tw-lbl    { font-family:var(--fc); font-size:10px; letter-spacing:0.22em;
-  text-transform:uppercase; color:var(--ink3); margin-bottom:8px; }
-#p1 .tw-salon  { font-family:var(--ff); font-size:15px; font-weight:600;
-  color:var(--ink); margin-bottom:4px; }
-#p1 .tw-stars  { font-size:13px; color:var(--ink); margin-bottom:16px; }
-#p1 .tw-btn    { display:block; width:100%; background:var(--ink); color:#fff;
-  font-family:var(--fc); font-size:11px; letter-spacing:0.18em; text-transform:uppercase;
-  padding:14px; text-align:center; border:var(--b); transition:background .2s,color .2s; }
-#p1 .tw-btn:hover { background:#fff; color:var(--ink); }
-#p1 .tw-note   { font-family:var(--fm); font-size:10px; color:var(--ink3);
-  text-align:center; margin-top:8px; }
+/* ── Treatwell card (p1) ── */
+#p1 .tw-card{background:var(--bg);border:var(--b);padding:22px 24px;
+  width:calc(100% - 40px);max-width:280px;z-index:2;}
+#p1 .tw-lbl{font-family:var(--fc);font-size:10px;letter-spacing:0.22em;
+  text-transform:uppercase;color:var(--ink3);margin-bottom:8px;}
+#p1 .tw-salon{font-family:var(--ff);font-size:15px;font-weight:700;
+  color:var(--ink);margin-bottom:4px;}
+#p1 .tw-stars{font-size:13px;color:var(--ink);margin-bottom:16px;}
+#p1 .tw-btn{display:block;width:100%;background:var(--ink);color:#fff;
+  font-family:var(--fc);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;
+  padding:14px;text-align:center;border:var(--b);transition:background .2s,color .2s;}
+#p1 .tw-btn:hover{background:#fff;color:var(--ink);}
+#p1 .tw-note{font-family:var(--fm);font-size:10px;color:var(--ink3);
+  text-align:center;margin-top:8px;}
 
 /* ═══════════════════════════════════════
    PAGE 2 — HYPERSTUDIO  (#101010 / #F3F3F3)
 ═══════════════════════════════════════ */
-#p2 {
-  --midnight: #101010;
-  --deep:     #080808;
-  --polar:    #F3F3F3;
-  --white:    #FFFFFF;
-  --ash:      #949494;
-  --carbon:   #333333;
-  --amber:    #E7C59A;
-  --green:    #00AC5C;
-  --b:        1px solid #333333;
-  --ff:       'Inter', ui-sans-serif, system-ui, sans-serif;
-  --fm:       'IBM Plex Mono', ui-monospace, monospace;
-  background: var(--midnight);
+#p2{
+  --midnight:#101010;
+  --deep:    #080808;
+  --polar:   #F3F3F3;
+  --white:   #FFFFFF;
+  --ash:     #949494;
+  --carbon:  #333333;
+  --amber:   #E7C59A;
+  --green:   #00AC5C;
+  --b:       1px solid #333333;
+  --ff:      'Inter',ui-sans-serif,system-ui,sans-serif;
+  --fm:      'IBM Plex Mono',ui-monospace,monospace;
+  background:var(--midnight);
 }
-#p2 .cell { border: var(--b); background: var(--midnight); color: var(--polar); }
-
-#p2 .lbl { font-family:var(--fm); font-size:10px; letter-spacing:0.2em;
-  text-transform:uppercase; color:var(--ash); display:block; margin-bottom:10px; }
+#p2 .cell{border:var(--b);background:var(--midnight);color:var(--polar);}
 
 /* A2 */
-#p2 .c-a { grid-column:1; grid-row:1; padding:20px 24px;
-  display:flex; flex-direction:column; justify-content:space-between; }
-#p2 .salon-name { font-size:14px; font-weight:600; color:var(--polar); letter-spacing:-0.01em; }
-#p2 .salon-sub  { font-family:var(--fm); font-size:10px; letter-spacing:0.2em;
-  text-transform:uppercase; color:var(--ash); display:block; margin-top:3px; }
-#p2 .status-badge { display:inline-flex; align-items:center; gap:8px;
-  font-family:var(--fm); font-size:10px; letter-spacing:0.2em;
-  text-transform:uppercase; color:var(--ash); }
+#p2 .c-a{grid-column:1;grid-row:1;padding:16px 24px;
+  flex-direction:row;justify-content:space-between;align-items:center;}
+#p2 .salon-name{font-size:15px;font-weight:600;color:var(--polar);letter-spacing:-0.01em;}
+#p2 .salon-sub{font-family:var(--fm);font-size:10px;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--ash);display:block;margin-top:2px;}
+#p2 .status-badge{display:inline-flex;align-items:center;gap:7px;
+  font-family:var(--fm);font-size:10px;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--ash);flex-shrink:0;}
 
 /* B2: heading + FAQ */
-#p2 .c-b2 { grid-column:1; grid-row:2/4; padding:28px;
-  display:flex; flex-direction:column; background:var(--midnight); overflow:hidden; }
-#p2 .p2-h1 { font-size:clamp(1.8rem,2.5vw,2.8rem); font-weight:700; line-height:0.95;
-  letter-spacing:-0.02em; color:var(--polar); margin-bottom:10px; }
-#p2 .p2-h1 em { font-style:italic; color:var(--ash); }
-#p2 .p2-desc   { font-size:12px; line-height:1.75; color:var(--ash); margin-bottom:22px; }
+#p2 .c-b2{grid-column:1;grid-row:2/4;padding:28px;
+  align-items:flex-start;justify-content:flex-start;background:var(--midnight);overflow:hidden;}
+#p2 .p2-h1{font-size:clamp(1.9rem,2.6vw,3rem);font-weight:700;line-height:0.95;
+  letter-spacing:-0.02em;color:var(--polar);margin-bottom:8px;}
+#p2 .p2-h1 em{font-style:italic;color:var(--ash);}
+#p2 .p2-desc{font-size:13px;line-height:1.7;color:var(--ash);margin-bottom:20px;}
 
 /* FAQ */
-#p2 .faq-lbl  { font-family:var(--fm); font-size:10px; letter-spacing:0.2em;
-  text-transform:uppercase; color:var(--ash); margin-bottom:10px; display:block; }
-#p2 .faq-wrap { flex:1; overflow-y:auto;
-  scrollbar-width:thin; scrollbar-color:var(--carbon) transparent; }
-#p2 .faq-item { border-top:var(--b); }
-#p2 .faq-q    { font-size:12px; font-weight:600; color:var(--polar); cursor:pointer;
-  display:flex; justify-content:space-between; align-items:flex-start;
-  gap:8px; padding:12px 0; transition:color .15s; }
-#p2 .faq-q:hover { color:var(--white); }
-#p2 .faq-icon { font-size:18px; flex-shrink:0; color:var(--ash);
-  transition:transform .2s,color .2s; line-height:1; }
-#p2 .faq-item.open .faq-icon { transform:rotate(45deg); color:var(--polar); }
-#p2 .faq-a    { font-size:12px; line-height:1.7; color:var(--ash);
-  padding-bottom:12px; display:none; }
-#p2 .faq-item.open .faq-a { display:block; }
+#p2 .faq-lbl{font-family:var(--fm);font-size:10px;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--ash);margin-bottom:10px;display:block;}
+#p2 .faq-wrap{flex:1;overflow-y:auto;width:100%;
+  scrollbar-width:thin;scrollbar-color:var(--carbon) transparent;}
+#p2 .faq-item{border-top:var(--b);}
+#p2 .faq-q{font-size:13px;font-weight:600;color:var(--polar);cursor:pointer;
+  display:flex;justify-content:space-between;align-items:flex-start;
+  gap:8px;padding:12px 0;transition:color .15s;}
+#p2 .faq-q:hover{color:var(--white);}
+#p2 .faq-icon{font-size:18px;flex-shrink:0;color:var(--ash);
+  transition:transform .2s,color .2s;line-height:1;}
+#p2 .faq-item.open .faq-icon{transform:rotate(45deg);color:var(--polar);}
+#p2 .faq-a{font-size:13px;line-height:1.7;color:var(--ash);
+  padding-bottom:12px;display:none;}
+#p2 .faq-item.open .faq-a{display:block;}
 
 /* C2: info bar */
-#p2 .c-c { grid-column:2; grid-row:1; padding:20px 28px;
-  display:flex; align-items:center; gap:48px; flex-wrap:wrap;
-  background:var(--deep); }
-#p2 .info-lbl { font-family:var(--fm); font-size:10px; letter-spacing:0.2em;
-  text-transform:uppercase; color:var(--ash); }
-#p2 .info-val { font-size:13px; line-height:1.55; color:var(--polar); }
+#p2 .c-c{grid-column:2;grid-row:1;padding:16px 28px;
+  flex-direction:row;justify-content:center;align-items:center;gap:48px;
+  flex-wrap:wrap;background:var(--deep);}
+#p2 .info-item{display:flex;flex-direction:column;gap:3px;align-items:center;}
+#p2 .info-lbl{font-family:var(--fm);font-size:10px;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--ash);}
+#p2 .info-val{font-size:13px;line-height:1.5;color:var(--polar);text-align:center;}
 
 /* D2: chatbot */
-#p2 .c-d { grid-column:2; grid-row:2/4; display:flex;
-  align-items:center; justify-content:center;
-  background:var(--midnight); position:relative; }
-#p2 .c-d::after { content:'ASSISTENT'; position:absolute; top:16px; left:20px;
-  font-family:var(--fm); font-size:10px; letter-spacing:0.3em; color:var(--ash); }
+#p2 .c-d{grid-column:2;grid-row:2/4;
+  background:var(--midnight);position:relative;}
+#p2 .c-d::after{content:'ASSISTENT';position:absolute;top:16px;left:20px;
+  font-family:var(--fm);font-size:10px;letter-spacing:0.3em;color:var(--ash);}
 
 /* VBAR */
-#p2 .c-vbar { grid-column:3; grid-row:1/4;
-  background:var(--deep); display:flex; align-items:center;
-  justify-content:center; overflow:hidden; }
-#p2 .vbar-text { writing-mode:vertical-rl; transform:rotate(180deg);
-  font-family:var(--fm); font-size:11px; letter-spacing:0.35em;
-  text-transform:uppercase; color:var(--white); white-space:nowrap; user-select:none; }
+#p2 .c-vbar{grid-column:3;grid-row:1/4;
+  background:var(--deep);display:flex;align-items:center;
+  justify-content:center;overflow:hidden;}
+#p2 .vbar-text{writing-mode:vertical-rl;transform:rotate(180deg);
+  font-family:var(--fm);font-size:11px;letter-spacing:0.35em;
+  text-transform:uppercase;color:var(--white);white-space:nowrap;user-select:none;}
 
 /* E2: treatment list */
-#p2 .c-e2 { grid-column:4; grid-row:1/4; overflow-y:auto;
-  background:var(--deep); padding:24px 26px;
-  scrollbar-width:thin; scrollbar-color:var(--carbon) transparent; }
-#p2 .tg        { margin-bottom:28px; }
-#p2 .tg-title  { font-family:var(--fm); font-size:10px; letter-spacing:0.22em;
-  text-transform:uppercase; color:var(--ash);
-  padding-bottom:10px; margin-bottom:12px; border-bottom:1px solid var(--carbon); }
-#p2 .tr        { display:flex; justify-content:space-between; align-items:baseline;
-  padding:9px 0; border-bottom:1px solid rgba(255,255,255,.04); gap:12px; }
-#p2 .tr:last-child { border-bottom:none; }
-#p2 .tr-n      { font-size:13px; color:var(--polar); line-height:1.4; flex:1; }
-#p2 .tr-r      { display:flex; flex-direction:column; align-items:flex-end; gap:2px; flex-shrink:0; }
-#p2 .tr-p      { font-family:var(--fm); font-size:14px; font-weight:500;
-  color:var(--white); white-space:nowrap; }
-#p2 .tr-p.va::before { content:'v.a. '; font-size:10px; color:var(--ash); }
-#p2 .tr-t      { font-family:var(--fm); font-size:10px; color:var(--ash); white-space:nowrap; }
-#p2 .e2-book   { display:block; margin-top:8px; padding:14px;
-  background:var(--polar); color:var(--midnight);
-  font-family:var(--fm); font-size:11px; letter-spacing:0.18em;
-  text-transform:uppercase; text-align:center; border-top:var(--b); }
-#p2 .e2-book:hover { background:var(--white); }
+#p2 .c-e2{grid-column:4;grid-row:1/4;overflow-y:auto;
+  background:var(--deep);padding:24px 26px;
+  scrollbar-width:thin;scrollbar-color:var(--carbon) transparent;
+  align-items:flex-start;justify-content:flex-start;}
+#p2 .e2-lbl{font-family:var(--fm);font-size:10px;letter-spacing:0.22em;
+  text-transform:uppercase;color:var(--ash);margin-bottom:16px;display:block;}
+#p2 .tg{margin-bottom:28px;width:100%;}
+#p2 .tg-title{font-family:var(--fm);font-size:10px;letter-spacing:0.22em;
+  text-transform:uppercase;color:var(--ash);
+  padding-bottom:10px;margin-bottom:12px;border-bottom:1px solid var(--carbon);}
+#p2 .tr{display:flex;justify-content:space-between;align-items:baseline;
+  padding:9px 0;border-bottom:1px solid rgba(255,255,255,.04);gap:12px;}
+#p2 .tr:last-child{border-bottom:none;}
+#p2 .tr-n{font-size:13px;color:var(--polar);line-height:1.4;flex:1;}
+#p2 .tr-r{display:flex;flex-direction:column;align-items:flex-end;gap:2px;flex-shrink:0;}
+#p2 .tr-p{font-family:var(--fm);font-size:14px;font-weight:500;
+  color:var(--white);white-space:nowrap;}
+#p2 .tr-p.va::before{content:'v.a. ';font-size:10px;color:var(--ash);}
+#p2 .tr-t{font-family:var(--fm);font-size:10px;color:var(--ash);white-space:nowrap;}
+#p2 .e2-book{display:block;margin-top:8px;padding:14px;width:100%;
+  background:var(--polar);color:var(--midnight);
+  font-family:var(--fm);font-size:11px;letter-spacing:0.18em;
+  text-transform:uppercase;text-align:center;border-top:var(--b);}
+#p2 .e2-book:hover{background:var(--white);}
 
 /* FOOTER p2 */
-#p2 .c-footer { grid-column:2/5; grid-row:4; border-top:var(--b); border-left:var(--b);
-  display:flex; align-items:center; justify-content:center;
-  gap:28px; flex-wrap:wrap; padding:0 24px; background:var(--deep); }
-#p2 .footer-item { font-family:var(--fm); font-size:11px; letter-spacing:0.12em;
-  text-transform:uppercase; color:var(--ash); transition:color .2s; }
-#p2 .footer-item:hover { color:var(--polar); }
+#p2 .c-footer{grid-column:2/5;grid-row:4;border-top:var(--b);border-left:var(--b);
+  flex-direction:row;justify-content:center;align-items:center;
+  gap:24px;flex-wrap:wrap;padding:0 24px;background:var(--deep);}
+#p2 .footer-item{font-family:var(--fm);font-size:11px;letter-spacing:0.12em;
+  text-transform:uppercase;color:var(--ash);transition:color .2s;}
+#p2 .footer-item:hover{color:var(--polar);}
 
-/* Chatbot — page 2 */
-#p2 .chat-card { width:min(480px,calc(100% - 48px)); max-height:min(580px,calc(100% - 32px));
-  background:var(--deep); border:var(--b); display:flex; flex-direction:column;
-  position:relative; z-index:2; }
-#p2 .ch-header { background:var(--carbon); color:var(--polar); padding:14px 18px;
-  display:flex; align-items:center; gap:10px; flex-shrink:0; border-bottom:var(--b); }
-#p2 .ch-dot    { width:7px; height:7px; border-radius:50%; background:var(--green); flex-shrink:0; }
-#p2 .ch-name   { font-family:var(--fm); font-size:11px; letter-spacing:0.2em;
-  text-transform:uppercase; flex:1; color:var(--polar); }
-#p2 .ch-msgs   { flex:1; overflow-y:auto; padding:16px; display:flex;
-  flex-direction:column; gap:10px; min-height:260px; max-height:340px;
-  scrollbar-width:thin; scrollbar-color:var(--carbon) transparent; }
-#p2 .cm        { max-width:88%; }
-#p2 .cm.bot    { align-self:flex-start; }
-#p2 .cm.user   { align-self:flex-end; }
-#p2 .cm-b      { padding:11px 14px; font-size:13px; line-height:1.6; }
-#p2 .cm.bot  .cm-b { background:var(--carbon); border:var(--b); color:var(--polar); }
-#p2 .cm.user .cm-b { background:var(--polar); color:var(--midnight); }
-#p2 .cm-t      { font-family:var(--fm); font-size:10px; color:var(--ash);
-  margin-top:4px; padding:0 2px; }
-#p2 .cm.user .cm-t { text-align:right; }
-#p2 .typing    { display:flex; gap:4px; padding:11px 14px;
-  background:var(--carbon); border:var(--b); align-self:flex-start; width:fit-content; }
-#p2 .typing span { width:5px; height:5px; border-radius:50%; background:var(--ash);
-  animation:bl 1.2s infinite; }
-#p2 .ch-chips  { padding:10px 14px; display:flex; gap:6px; flex-wrap:wrap;
-  border-top:var(--b); flex-shrink:0; background:var(--midnight); }
-#p2 .chip      { font-family:var(--fm); font-size:10px; letter-spacing:0.12em;
-  text-transform:uppercase; padding:6px 12px; border:var(--b);
-  background:transparent; color:var(--ash); transition:background .15s,color .15s; }
-#p2 .chip:hover { background:var(--polar); color:var(--midnight); }
-#p2 .ch-ir     { display:flex; border-top:var(--b); flex-shrink:0; }
-#p2 .ch-in     { flex:1; border:none; border-right:var(--b); padding:13px 16px;
-  font-family:var(--fm); font-size:13px; background:var(--midnight);
-  color:var(--polar); outline:none; }
-#p2 .ch-in::placeholder { color:var(--ash); }
-#p2 .ch-snd    { width:50px; height:50px; background:var(--polar); border:none;
-  display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:opacity .2s; }
-#p2 .ch-snd:hover { opacity:.8; }
-#p2 .ch-snd svg { width:14px; height:14px; fill:var(--midnight); }
-#p2 .ch-ft     { font-family:var(--fm); font-size:10px; letter-spacing:0.1em;
-  text-transform:uppercase; color:var(--ash); text-align:center; padding:7px;
-  border-top:var(--b); flex-shrink:0; background:var(--deep); }
-
-/* Treatwell card — page 2 (inside E2, no separate cell) */
+/* ── CHATBOT card (p2) ── */
+#p2 .chat-card{width:min(500px,calc(100% - 40px));
+  max-height:min(640px,calc(100% - 32px));
+  background:var(--deep);border:var(--b);
+  display:flex;flex-direction:column;position:relative;z-index:2;}
+#p2 .ch-header{background:var(--carbon);color:var(--polar);padding:14px 18px;
+  display:flex;align-items:center;gap:10px;flex-shrink:0;border-bottom:var(--b);}
+#p2 .ch-dot{width:7px;height:7px;border-radius:50%;background:var(--green);flex-shrink:0;}
+#p2 .ch-name{font-family:var(--fm);font-size:11px;letter-spacing:0.2em;
+  text-transform:uppercase;flex:1;color:var(--polar);}
+#p2 .ch-msgs{flex:1;overflow-y:auto;padding:16px;display:flex;
+  flex-direction:column;gap:10px;min-height:320px;max-height:400px;
+  scrollbar-width:thin;scrollbar-color:var(--carbon) transparent;}
+#p2 .cm{max-width:88%;}
+#p2 .cm.bot{align-self:flex-start;}
+#p2 .cm.user{align-self:flex-end;}
+#p2 .cm-b{padding:11px 14px;font-size:13px;line-height:1.65;}
+#p2 .cm.bot .cm-b{background:var(--carbon);border:var(--b);color:var(--polar);}
+#p2 .cm.user .cm-b{background:var(--polar);color:var(--midnight);}
+#p2 .cm-t{font-family:var(--fm);font-size:10px;color:var(--ash);
+  margin-top:4px;padding:0 2px;}
+#p2 .cm.user .cm-t{text-align:right;}
+#p2 .typing{display:flex;gap:4px;padding:11px 14px;
+  background:var(--carbon);border:var(--b);align-self:flex-start;width:fit-content;}
+#p2 .typing span{width:5px;height:5px;border-radius:50%;background:var(--ash);
+  animation:bl 1.2s infinite;}
+#p2 .ch-chips{padding:10px 14px;display:flex;gap:6px;flex-wrap:wrap;
+  border-top:var(--b);flex-shrink:0;background:var(--midnight);}
+#p2 .chip{font-family:var(--fm);font-size:10px;letter-spacing:0.12em;
+  text-transform:uppercase;padding:6px 12px;border:var(--b);
+  background:transparent;color:var(--ash);transition:background .15s,color .15s;}
+#p2 .chip:hover{background:var(--polar);color:var(--midnight);}
+#p2 .ch-ir{display:flex;border-top:var(--b);flex-shrink:0;}
+#p2 .ch-in{flex:1;border:none;border-right:var(--b);padding:13px 16px;
+  font-family:var(--fm);font-size:13px;background:var(--midnight);
+  color:var(--polar);outline:none;}
+#p2 .ch-in::placeholder{color:var(--ash);}
+#p2 .ch-snd{width:50px;height:50px;background:var(--polar);border:none;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:opacity .2s;}
+#p2 .ch-snd:hover{opacity:.8;}
+#p2 .ch-snd svg{width:14px;height:14px;fill:var(--midnight);}
+#p2 .ch-ft{font-family:var(--fm);font-size:10px;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--ash);text-align:center;padding:7px;
+  border-top:var(--b);flex-shrink:0;background:var(--deep);}
 
 /* ═══════════════════════════════════════
    SHARED
 ═══════════════════════════════════════ */
-.info-item { display:flex; flex-direction:column; gap:4px; }
-@keyframes bl { 0%,60%,100%{opacity:.3}30%{opacity:1;transform:translateY(-3px)} }
+@keyframes bl{0%,60%,100%{opacity:.3}30%{opacity:1;transform:translateY(-3px)}}
 
 /* ═══════════════════════════════════════
    RESPONSIVE
 ═══════════════════════════════════════ */
-@media (max-width:900px) {
-  .page {
-    height:auto; min-height:100vh;
+@media(max-width:900px){
+  .page{height:auto;min-height:100vh;
     grid-template-columns:1fr 44px minmax(220px,35%);
-    grid-template-rows:auto auto auto auto auto auto;
-  }
-  #p1 .c-a,#p2 .c-a { grid-column:1; grid-row:1; }
-  #p1 .c-b           { grid-column:1; grid-row:3/5; min-height:220px; }
-  #p2 .c-b2          { grid-column:1; grid-row:3/5; min-height:220px; }
-  #p1 .c-c,#p2 .c-c  { grid-column:1/3; grid-row:2; }
-  #p1 .c-d,#p2 .c-d  { grid-column:1/3; grid-row:5; min-height:540px; }
-  #p1 .c-vbar,#p2 .c-vbar { grid-column:2; grid-row:1/5; }
-  #p1 .c-e           { grid-column:3; grid-row:1/4; }
-  #p1 .c-f           { grid-column:3; grid-row:4/6; min-height:160px; }
-  #p2 .c-e2          { grid-column:3; grid-row:1/5; max-height:80vh; }
-  #p1 .c-footer,#p2 .c-footer { grid-column:1/-1; grid-row:6; }
+    grid-template-rows:auto auto auto auto auto auto;}
+  #p1 .c-a,#p2 .c-a{grid-column:1;grid-row:1;}
+  #p1 .c-b           {grid-column:1;grid-row:3/5;min-height:220px;}
+  #p2 .c-b2          {grid-column:1;grid-row:3/5;min-height:220px;}
+  #p1 .c-c,#p2 .c-c  {grid-column:1/3;grid-row:2;}
+  #p1 .c-d,#p2 .c-d  {grid-column:1/3;grid-row:5;min-height:580px;}
+  #p1 .c-vbar,#p2 .c-vbar{grid-column:2;grid-row:1/5;}
+  #p1 .c-e           {grid-column:3;grid-row:1/4;}
+  #p1 .c-f           {grid-column:3;grid-row:4/6;min-height:160px;}
+  #p2 .c-e2          {grid-column:3;grid-row:1/5;max-height:80vh;}
+  #p1 .c-footer,#p2 .c-footer{grid-column:1/-1;grid-row:6;}
 }
-@media (max-width:600px) {
-  .page { grid-template-columns:44px 1fr; grid-template-rows:52px auto auto auto auto auto auto; }
-  #p1 .c-a,#p2 .c-a  { grid-column:2; grid-row:1; padding:10px 14px;
-    flex-direction:row; align-items:center; justify-content:space-between; }
-  #p1 .c-vbar,#p2 .c-vbar { grid-column:1; grid-row:1/8; }
-  #p1 .c-c,#p2 .c-c  { grid-column:2; grid-row:2; gap:20px; padding:16px; }
-  #p1 .c-b           { grid-column:2; grid-row:3; padding:22px 18px; min-height:180px; }
-  #p2 .c-b2          { grid-column:2; grid-row:3; padding:22px 18px; }
-  #p1 .c-d,#p2 .c-d  { grid-column:2; grid-row:4; min-height:540px; }
-  #p1 .c-e           { grid-column:2; grid-row:5; min-height:240px; }
-  #p2 .c-e2          { grid-column:2; grid-row:5; max-height:none; }
-  #p1 .c-f           { grid-column:2; grid-row:6; min-height:180px; }
-  #p1 .c-footer,#p2 .c-footer { grid-column:2; grid-row:7; }
-  #p1 .chat-card, #p2 .chat-card { width:calc(100% - 24px); max-width:none; }
-  #p1 .tw-card { width:calc(100% - 24px); max-width:none; }
+@media(max-width:600px){
+  .page{grid-template-columns:44px 1fr;grid-template-rows:52px auto auto auto auto auto auto;}
+  #p1 .c-a,#p2 .c-a  {grid-column:2;grid-row:1;padding:10px 14px;
+    flex-direction:row;align-items:center;justify-content:space-between;}
+  #p1 .c-vbar,#p2 .c-vbar{grid-column:1;grid-row:1/8;}
+  #p1 .c-c,#p2 .c-c  {grid-column:2;grid-row:2;gap:20px;padding:16px;}
+  #p1 .c-b           {grid-column:2;grid-row:3;padding:22px 18px;min-height:180px;}
+  #p2 .c-b2          {grid-column:2;grid-row:3;padding:22px 18px;}
+  #p1 .c-d,#p2 .c-d  {grid-column:2;grid-row:4;min-height:580px;}
+  #p1 .c-e           {grid-column:2;grid-row:5;min-height:240px;}
+  #p2 .c-e2          {grid-column:2;grid-row:5;max-height:none;}
+  #p1 .c-f           {grid-column:2;grid-row:6;min-height:180px;}
+  #p1 .c-footer,#p2 .c-footer{grid-column:2;grid-row:7;}
+  #p1 .chat-card,#p2 .chat-card{width:calc(100% - 24px);max-width:none;}
+  #p1 .tw-card{width:calc(100% - 24px);max-width:none;}
 }
 </style>
 </head>
@@ -421,8 +420,9 @@ button { cursor: pointer; }
 ══════════════════════════════════════ -->
 <div class="page" id="p1">
 
+  <!-- A: logo + status -->
   <div class="cell c-a">
-    <div class="logo-wrap" style="display:flex;align-items:center;gap:12px">
+    <div style="display:flex;align-items:center;gap:12px">
       <svg class="logo-svg-mono" width="22" height="22" viewBox="0 0 18 18" fill="none">
         <rect x=".4" y=".4" width="17.2" height="17.2" stroke="#292929" stroke-width=".8"/>
         <line x1="3" y1="9" x2="15" y2="9" stroke="#292929" stroke-width=".6"/>
@@ -442,17 +442,21 @@ button { cursor: pointer; }
     </div>
   </div>
 
+  <!-- B: hero -->
   <div class="cell c-b">
-    <div>
-      <div class="lbl">Amsterdam-West · Kinkerstraat</div>
+    <div style="width:100%">
+      <div class="hero-lbl">Amsterdam-West · Kinkerstraat</div>
       <h1 class="hero-h1">Vakman<br>schap<br>voor elk<br>haartype.</h1>
-      <p class="hero-desc">Gediplomeerde barbier en kapper in het hart van Amsterdam. Geen haastwerk — aandacht en kwaliteit voor elk detail.</p>
     </div>
-    <div class="scroll-hint" onclick="document.getElementById('p2').scrollIntoView({behavior:'smooth'})">
-      ↓ behandelingen &amp; prijzen
+    <div class="hero-meta">
+      <p class="hero-desc">Gediplomeerde barbier en kapper in het hart van Amsterdam. Geen haastwerk, aandacht en kwaliteit voor elk detail.</p>
+      <div class="scroll-hint" onclick="document.getElementById('p2').scrollIntoView({behavior:'smooth'})">
+        Behandelingen &amp; prijzen
+      </div>
     </div>
   </div>
 
+  <!-- C: info bar -->
   <div class="cell c-c">
     <div class="info-item">
       <span class="info-lbl">Adres</span>
@@ -460,7 +464,7 @@ button { cursor: pointer; }
     </div>
     <div class="info-item">
       <span class="info-lbl">Open</span>
-      <span class="info-val">Wo – Za · 10:00–19:00</span>
+      <span class="info-val">Wo t/m Za · 10:00 tot 19:00</span>
     </div>
     <div class="info-item">
       <span class="info-lbl">Bereikbaar</span>
@@ -468,6 +472,7 @@ button { cursor: pointer; }
     </div>
   </div>
 
+  <!-- D: chatbot -->
   <div class="cell c-d">
     <div class="chat-card">
       <div class="ch-header">
@@ -491,47 +496,51 @@ button { cursor: pointer; }
     </div>
   </div>
 
+  <!-- VBAR -->
   <div class="cell c-vbar">
     <span class="vbar-text">Patrick Anches · Amsterdam · Kinkerstraat</span>
   </div>
 
+  <!-- E: reviews -->
   <div class="cell c-e">
-    <div style="flex:1">
+    <div class="c-e-inner" style="flex:1">
       <div class="rev-header">Klantreviews · Treatwell geverifieerd</div>
-      <div style="margin-bottom:20px">
+      <div>
         <div class="rev-quote" id="rq1"></div>
         <div class="rev-author" id="ra1"></div>
         <div class="rev-treatment" id="rt1"></div>
       </div>
-      <div style="height:1px;background:#292929;opacity:.12;margin:0 0 20px"></div>
+      <div class="rev-div"></div>
       <div>
         <div class="rev-quote" id="rq2"></div>
         <div class="rev-author" id="ra2"></div>
         <div class="rev-treatment" id="rt2"></div>
       </div>
     </div>
-    <div>
+    <div style="width:100%">
       <div class="stats-row">
         <div class="stat-item"><span class="stat-n">4,8</span><span class="stat-l">Beoordeling</span></div>
         <div class="stat-item"><span class="stat-n">67+</span><span class="stat-l">Klanten</span></div>
         <div class="stat-item"><span class="stat-n">24</span><span class="stat-l">Behandelingen</span></div>
       </div>
-      <span id="rcnt" style="font-family:Impact,sans-serif;font-size:10px;letter-spacing:.1em;color:#888;display:block;margin-top:8px"></span>
+      <span id="rcnt" style="font-family:Impact,sans-serif;font-size:10px;letter-spacing:.1em;color:#888;display:block;margin-top:8px;text-align:center"></span>
     </div>
   </div>
 
+  <!-- F: Treatwell -->
   <div class="cell c-f">
     <div class="tw-card">
       <div class="tw-lbl">Direct boeken</div>
       <div class="tw-salon">Hairstyler Patrick Anches</div>
-      <div class="tw-stars">★★★★★ &nbsp;4,8 · 67 reviews</div>
+      <div class="tw-stars">&#9733;&#9733;&#9733;&#9733;&#9733; &nbsp;4,8 · 67 reviews</div>
       <a class="tw-btn" href="https://www.treatwell.nl/salon/hairstyler-patrick-anches-barbier-kapper/" target="_blank" rel="noopener">
-        Boek via Treatwell →
+        Boek via Treatwell
       </a>
       <div class="tw-note">Bevestiging direct · gratis</div>
     </div>
   </div>
 
+  <!-- Footer -->
   <div class="cell c-footer">
     <span class="footer-item">© Patrick Anches</span>
     <span class="footer-item" style="opacity:.2">·</span>
@@ -549,8 +558,9 @@ button { cursor: pointer; }
 ══════════════════════════════════════ -->
 <div class="page" id="p2">
 
+  <!-- A2 -->
   <div class="cell c-a">
-    <div class="logo-wrap" style="display:flex;align-items:center;gap:12px">
+    <div style="display:flex;align-items:center;gap:12px">
       <svg width="22" height="22" viewBox="0 0 18 18" fill="none">
         <rect x=".4" y=".4" width="17.2" height="17.2" stroke="#F3F3F3" stroke-width=".8"/>
         <line x1="3" y1="9" x2="15" y2="9" stroke="#F3F3F3" stroke-width=".6"/>
@@ -570,17 +580,17 @@ button { cursor: pointer; }
     </div>
   </div>
 
+  <!-- B2: heading + FAQ -->
   <div class="cell c-b2">
-    <div>
-      <div class="lbl">Volledig overzicht</div>
+    <div style="width:100%">
       <h2 class="p2-h1">Behandelingen<br>&amp; <em>prijzen</em></h2>
-      <p class="p2-desc">Boek direct via Treatwell — bevestiging meteen in je inbox.</p>
+      <p class="p2-desc">Boek direct via Treatwell. Bevestiging meteen in je inbox.</p>
     </div>
     <span class="faq-lbl">Veelgestelde vragen</span>
     <div class="faq-wrap">
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">Hoe maak ik een afspraak?<span class="faq-icon">+</span></div>
-        <div class="faq-a">Boek via Treatwell — je kiest behandeling, datum en tijd, bevestiging volgt direct. Of WhatsApp: 06 52874750.</div>
+        <div class="faq-a">Boek via Treatwell. Je kiest behandeling, datum en tijd, bevestiging volgt direct. Of WhatsApp: 06 52874750.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">Kan ik binnenlopen zonder afspraak?<span class="faq-icon">+</span></div>
@@ -588,23 +598,23 @@ button { cursor: pointer; }
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">Wat zijn de openingstijden?<span class="faq-icon">+</span></div>
-        <div class="faq-a">Woensdag t/m zaterdag, 10:00–19:00. Maandag, dinsdag en zondag gesloten.</div>
+        <div class="faq-a">Woensdag t/m zaterdag, 10:00 tot 19:00. Maandag, dinsdag en zondag gesloten.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">Wat betekenen de "v.a."-prijzen?<span class="faq-icon">+</span></div>
+        <div class="faq-q" onclick="toggleFaq(this)">Wat betekenen de "v.a." prijzen?<span class="faq-icon">+</span></div>
         <div class="faq-a">Prijs kan oplopen afhankelijk van haarlengte of dikte. Patrick bepaalt dit op locatie.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">Doet Patrick ook damesbehandelingen?<span class="faq-icon">+</span></div>
-        <div class="faq-a">Ja — Europees haar én Black hair. Knippen, föhnen, steilen, permanenten, relaxen en extensions.</div>
+        <div class="faq-a">Ja. Europees haar én Black hair. Knippen, föhnen, steilen, permanenten, relaxen en extensions.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">Waar kan ik parkeren?<span class="faq-icon">+</span></div>
-        <div class="faq-a">P-garage De Hallen, Bellamyplein 41 — op loopafstand. Of betaald straatparkeren.</div>
+        <div class="faq-a">P-garage De Hallen, Bellamyplein 41 op loopafstand. Of betaald straatparkeren.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">Welke producten gebruikt Patrick?<span class="faq-icon">+</span></div>
-        <div class="faq-a">L'Oréal, Redken, Keune en KeraCare — uitsluitend professionele merken.</div>
+        <div class="faq-a">L'Oreal, Redken, Keune en KeraCare. Uitsluitend professionele merken.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">Spreekt Patrick ook Engels?<span class="faq-icon">+</span></div>
@@ -613,6 +623,7 @@ button { cursor: pointer; }
     </div>
   </div>
 
+  <!-- C2: info bar -->
   <div class="cell c-c">
     <div class="info-item">
       <span class="info-lbl">Adres</span>
@@ -620,7 +631,7 @@ button { cursor: pointer; }
     </div>
     <div class="info-item">
       <span class="info-lbl">Open</span>
-      <span class="info-val">Wo – Za · 10:00–19:00</span>
+      <span class="info-val">Wo t/m Za · 10:00 tot 19:00</span>
     </div>
     <div class="info-item">
       <span class="info-lbl">Bereikbaar</span>
@@ -628,6 +639,7 @@ button { cursor: pointer; }
     </div>
   </div>
 
+  <!-- D2: chatbot -->
   <div class="cell c-d">
     <div class="chat-card">
       <div class="ch-header">
@@ -651,53 +663,56 @@ button { cursor: pointer; }
     </div>
   </div>
 
+  <!-- VBAR -->
   <div class="cell c-vbar">
     <span class="vbar-text">Patrick Anches · Amsterdam · Kinkerstraat</span>
   </div>
 
+  <!-- E2: treatment list -->
   <div class="cell c-e2">
-    <div class="lbl" style="margin-bottom:16px">Behandelingen &amp; Prijzen</div>
+    <span class="e2-lbl">Behandelingen &amp; Prijzen</span>
     <div class="tg">
-      <div class="tg-title">Mannen — Knippen &amp; Styling</div>
-      <div class="tr"><span class="tr-n">Knippen kort haar</span><div class="tr-r"><span class="tr-p">€23,50</span><span class="tr-t">50 min</span></div></div>
-      <div class="tr"><span class="tr-n">Haar &amp; baard fresh-up trim</span><div class="tr-r"><span class="tr-p">€23,50</span><span class="tr-t">1u 15m</span></div></div>
-      <div class="tr"><span class="tr-n">Baard knippen &amp; modelleren</span><div class="tr-r"><span class="tr-p">€16,00</span><span class="tr-t">30 min</span></div></div>
-      <div class="tr"><span class="tr-n">Knippen &amp; baard</span><div class="tr-r"><span class="tr-p">€30,00</span><span class="tr-t">1u 15m</span></div></div>
-      <div class="tr"><span class="tr-n">Hoofd kaal scheren + baard</span><div class="tr-r"><span class="tr-p">€20,00</span><span class="tr-t">45 min</span></div></div>
-      <div class="tr"><span class="tr-n">Knippen senioren 65+</span><div class="tr-r"><span class="tr-p">€18,50</span><span class="tr-t">45 min</span></div></div>
-      <div class="tr"><span class="tr-n">Wassen, knippen &amp; drogen</span><div class="tr-r"><span class="tr-p">€26,95</span><span class="tr-t">50 min</span></div></div>
-      <div class="tr"><span class="tr-n">Wassen, massage, knippen &amp; föhnen</span><div class="tr-r"><span class="tr-p">€35,00</span><span class="tr-t">1u 15m</span></div></div>
-      <div class="tr"><span class="tr-n">Contouren</span><div class="tr-r"><span class="tr-p">€10,00</span><span class="tr-t">20 min</span></div></div>
-      <div class="tr"><span class="tr-n">Kort haar verven &amp; knippen</span><div class="tr-r"><span class="tr-p">€45,00</span><span class="tr-t">1u 5m</span></div></div>
-      <div class="tr"><span class="tr-n">Kinderen knippen</span><div class="tr-r"><span class="tr-p">€21,00</span><span class="tr-t">45 min</span></div></div>
+      <div class="tg-title">Mannen · Knippen &amp; Styling</div>
+      <div class="tr"><span class="tr-n">Knippen kort haar</span><div class="tr-r"><span class="tr-p">23,50</span><span class="tr-t">50 min</span></div></div>
+      <div class="tr"><span class="tr-n">Haar &amp; baard fresh-up trim</span><div class="tr-r"><span class="tr-p">23,50</span><span class="tr-t">1u 15m</span></div></div>
+      <div class="tr"><span class="tr-n">Baard knippen &amp; modelleren</span><div class="tr-r"><span class="tr-p">16,00</span><span class="tr-t">30 min</span></div></div>
+      <div class="tr"><span class="tr-n">Knippen &amp; baard</span><div class="tr-r"><span class="tr-p">30,00</span><span class="tr-t">1u 15m</span></div></div>
+      <div class="tr"><span class="tr-n">Hoofd kaal scheren + baard</span><div class="tr-r"><span class="tr-p">20,00</span><span class="tr-t">45 min</span></div></div>
+      <div class="tr"><span class="tr-n">Knippen senioren 65+</span><div class="tr-r"><span class="tr-p">18,50</span><span class="tr-t">45 min</span></div></div>
+      <div class="tr"><span class="tr-n">Wassen, knippen &amp; drogen</span><div class="tr-r"><span class="tr-p">26,95</span><span class="tr-t">50 min</span></div></div>
+      <div class="tr"><span class="tr-n">Wassen, massage, knippen &amp; föhnen</span><div class="tr-r"><span class="tr-p">35,00</span><span class="tr-t">1u 15m</span></div></div>
+      <div class="tr"><span class="tr-n">Contouren</span><div class="tr-r"><span class="tr-p">10,00</span><span class="tr-t">20 min</span></div></div>
+      <div class="tr"><span class="tr-n">Kort haar verven &amp; knippen</span><div class="tr-r"><span class="tr-p">45,00</span><span class="tr-t">1u 5m</span></div></div>
+      <div class="tr"><span class="tr-n">Kinderen knippen</span><div class="tr-r"><span class="tr-p">21,00</span><span class="tr-t">45 min</span></div></div>
     </div>
     <div class="tg">
-      <div class="tg-title">Vrouwen — Europees Haar</div>
-      <div class="tr"><span class="tr-n">Wassen &amp; föhnen kort haar</span><div class="tr-r"><span class="tr-p">€25,00</span><span class="tr-t">40 min</span></div></div>
-      <div class="tr"><span class="tr-n">Knippen kort haar</span><div class="tr-r"><span class="tr-p va">€23,95</span><span class="tr-t">45 min</span></div></div>
-      <div class="tr"><span class="tr-n">Haar wassen + stijltang steilen</span><div class="tr-r"><span class="tr-p va">€35,00</span><span class="tr-t">50 min</span></div></div>
-      <div class="tr"><span class="tr-n">Permanent incl. knippen</span><div class="tr-r"><span class="tr-p va">€85,00</span><span class="tr-t">1u 45m</span></div></div>
-      <div class="tr"><span class="tr-n">Knippen senioren 65+</span><div class="tr-r"><span class="tr-p va">€18,50</span><span class="tr-t">45 min</span></div></div>
+      <div class="tg-title">Vrouwen · Europees Haar</div>
+      <div class="tr"><span class="tr-n">Wassen &amp; föhnen kort haar</span><div class="tr-r"><span class="tr-p">25,00</span><span class="tr-t">40 min</span></div></div>
+      <div class="tr"><span class="tr-n">Knippen kort haar</span><div class="tr-r"><span class="tr-p va">23,95</span><span class="tr-t">45 min</span></div></div>
+      <div class="tr"><span class="tr-n">Haar wassen + stijltang steilen</span><div class="tr-r"><span class="tr-p va">35,00</span><span class="tr-t">50 min</span></div></div>
+      <div class="tr"><span class="tr-n">Permanent incl. knippen</span><div class="tr-r"><span class="tr-p va">85,00</span><span class="tr-t">1u 45m</span></div></div>
+      <div class="tr"><span class="tr-n">Knippen senioren 65+</span><div class="tr-r"><span class="tr-p va">18,50</span><span class="tr-t">45 min</span></div></div>
     </div>
     <div class="tg">
-      <div class="tg-title">Extensions — Alle Haartypes</div>
-      <div class="tr"><span class="tr-n">Extensions verwijderen p/baan</span><div class="tr-r"><span class="tr-p va">€5,00</span><span class="tr-t">10 min</span></div></div>
-      <div class="tr"><span class="tr-n">Extensions incl. microringen p/baan</span><div class="tr-r"><span class="tr-p">€25,00</span><span class="tr-t">25 min</span></div></div>
-      <div class="tr"><span class="tr-n">Extensions interlocking p/baan</span><div class="tr-r"><span class="tr-p va">€25,00</span><span class="tr-t">30 min</span></div></div>
+      <div class="tg-title">Extensions · Alle Haartypes</div>
+      <div class="tr"><span class="tr-n">Extensions verwijderen p/baan</span><div class="tr-r"><span class="tr-p va">5,00</span><span class="tr-t">10 min</span></div></div>
+      <div class="tr"><span class="tr-n">Extensions incl. microringen p/baan</span><div class="tr-r"><span class="tr-p">25,00</span><span class="tr-t">25 min</span></div></div>
+      <div class="tr"><span class="tr-n">Extensions interlocking p/baan</span><div class="tr-r"><span class="tr-p va">25,00</span><span class="tr-t">30 min</span></div></div>
     </div>
     <div class="tg">
-      <div class="tg-title">Vrouwen — Black Hair</div>
-      <div class="tr"><span class="tr-n">Wassen &amp; stijltangen kort haar</span><div class="tr-r"><span class="tr-p">€35,00</span><span class="tr-t">1u</span></div></div>
-      <div class="tr"><span class="tr-n">Curly perm incl. knippen</span><div class="tr-r"><span class="tr-p va">€110,00</span><span class="tr-t">2u 30m</span></div></div>
-      <div class="tr"><span class="tr-n">Relaxen incl. knippen &amp; stylen</span><div class="tr-r"><span class="tr-p va">€85,00</span><span class="tr-t">2u 30m</span></div></div>
-      <div class="tr"><span class="tr-n">Kort knippen</span><div class="tr-r"><span class="tr-p va">€23,95</span><span class="tr-t">1u</span></div></div>
-      <div class="tr"><span class="tr-n">Knippen senioren 65+</span><div class="tr-r"><span class="tr-p va">€18,50</span><span class="tr-t">45 min</span></div></div>
+      <div class="tg-title">Vrouwen · Black Hair</div>
+      <div class="tr"><span class="tr-n">Wassen &amp; stijltangen kort haar</span><div class="tr-r"><span class="tr-p">35,00</span><span class="tr-t">1u</span></div></div>
+      <div class="tr"><span class="tr-n">Curly perm incl. knippen</span><div class="tr-r"><span class="tr-p va">110,00</span><span class="tr-t">2u 30m</span></div></div>
+      <div class="tr"><span class="tr-n">Relaxen incl. knippen &amp; stylen</span><div class="tr-r"><span class="tr-p va">85,00</span><span class="tr-t">2u 30m</span></div></div>
+      <div class="tr"><span class="tr-n">Kort knippen</span><div class="tr-r"><span class="tr-p va">23,95</span><span class="tr-t">1u</span></div></div>
+      <div class="tr"><span class="tr-n">Knippen senioren 65+</span><div class="tr-r"><span class="tr-p va">18,50</span><span class="tr-t">45 min</span></div></div>
     </div>
     <a class="e2-book" href="https://www.treatwell.nl/salon/hairstyler-patrick-anches-barbier-kapper/" target="_blank" rel="noopener">
-      Boek via Treatwell →
+      Boek via Treatwell
     </a>
   </div>
 
+  <!-- Footer -->
   <div class="cell c-footer">
     <span class="footer-item">© Patrick Anches</span>
     <span class="footer-item" style="opacity:.2">·</span>
@@ -723,7 +738,7 @@ setStatus('sdot','sst'); setStatus('sdot2','sst2');
 
 /* REVIEWS */
 const revs=[
-  {t:'Eindelijk een kapper die krullend haar écht begrijpt.',n:'Sheryda',tr:'Black hair · vrouwen knippen',d:'4 dagen'},
+  {t:'Eindelijk een kapper die krullend haar echt begrijpt.',n:'Sheryda',tr:'Black hair · vrouwen knippen',d:'4 dagen'},
   {t:'Great work always. Patrick knows exactly what he\'s doing.',n:'Omor',tr:'Mannen knippen',d:'1 week'},
   {t:'Uitstekende knip en scheerbeurt. Veel aandacht voor detail.',n:'Harm',tr:'Mannen knippen',d:'17 dagen'},
   {t:'Patrick is geen kapper maar een artiest. Geweldig persoon.',n:'Mark',tr:'Mannen knippen',d:'1 maand'},
@@ -731,9 +746,9 @@ const revs=[
   {t:'Vakkundig en deskundig. Mijn haar zit altijd perfect.',n:'Kevin',tr:'Mannen knippen',d:'2 maanden'},
   {t:'Patrick neemt echt de tijd voor je. Geen haastwerk.',n:'Laura',tr:'Vrouwen knippen',d:'2 maanden'},
   {t:'Beste baard trim ooit. Patrick weet precies wat hij doet.',n:'Ahmed',tr:'Baard knippen',d:'3 maanden'},
-  {t:'Mijn go-to kapper in Amsterdam. Altijd tevreden.',n:'Daniëlle',tr:'Vrouwen knippen',d:'3 maanden'},
-  {t:'Snel, nauwkeurig en gezellig. Precies wat je zoekt.',n:'Kevin',tr:'Knippen & baard',d:'4 maanden'},
-  {t:'Ga al jaren bij Patrick — nooit teleurgesteld.',n:'Thomas',tr:'Mannen knippen',d:'5 maanden'},
+  {t:'Mijn go-to kapper in Amsterdam. Altijd tevreden.',n:'Danielle',tr:'Vrouwen knippen',d:'3 maanden'},
+  {t:'Snel, nauwkeurig en gezellig. Precies wat je zoekt.',n:'Kevin',tr:'Knippen + baard',d:'4 maanden'},
+  {t:'Ga al jaren bij Patrick. Nooit teleurgesteld.',n:'Thomas',tr:'Mannen knippen',d:'5 maanden'},
   {t:'Mijn zoon was meteen fan. Geweldige sfeer.',n:'Sandra',tr:'Kinderen knippen',d:'5 maanden'},
 ];
 let ri=0;
@@ -757,7 +772,7 @@ renderRevs(0);
 setInterval(()=>{ri=(ri+2)%revs.length;renderRevs(ri);},6000);
 
 /* FAQ */
-function toggleFaq(el){ el.closest('.faq-item').classList.toggle('open'); }
+function toggleFaq(el){el.closest('.faq-item').classList.toggle('open');}
 
 /* CHATBOT */
 const SYS=`Je bent de vriendelijke digitale assistent van Hairstyler Patrick Anches, een ervaren barbier en kapper in Amsterdam-West. Je helpt klanten met vragen over behandelingen en prijzen, en stuurt ze door naar Treatwell voor het maken van een afspraak.
@@ -767,22 +782,24 @@ NAAM EN LOCATIE:
 - WhatsApp: 06 52874750
 - Boeken: https://www.treatwell.nl/salon/hairstyler-patrick-anches-barbier-kapper/
 
-OPENINGSTIJDEN: Woensdag t/m zaterdag 10:00–19:00. Ma/di/zo gesloten.
+OPENINGSTIJDEN: Woensdag t/m zaterdag 10:00 tot 19:00. Ma/di/zo gesloten.
 BEREIKBAAR: Tram 7 & 17 halte Ten Katestraat · Parkeren: P De Hallen, Bellamyplein 41
 REVIEWS: 4,8 sterren · 67+ reviews op Treatwell. Patrick spreekt NL en EN.
 
 BEHANDELINGEN & PRIJZEN:
-Mannen: knippen €23,50 (50m) · haar+baard €23,50 (1u15m) · baard €16 (30m) · knippen+baard €30 (1u15m) · kaal+baard €20 (45m) · senioren €18,50 (45m) · wassen+knippen+drogen €26,95 (50m) · wassen+massage+knippen+föhnen €35 (1u15m) · contouren €10 (20m) · verven+knippen €45 (1u5m) · kinderen €21 (45m)
-Vrouwen Europees: wassen+föhnen €25 (40m) · knippen v.a.€23,95 (45m) · stijltang v.a.€35 (50m) · permanent v.a.€85 (1u45m) · senioren v.a.€18,50 (45m)
-Extensions: verwijderen p/baan v.a.€5 (10m) · microringen p/baan €25 (25m) · interlocking p/baan v.a.€25 (30m)
-Black hair: wassen+stijltangen €35 (1u) · curly perm v.a.€110 (2u30m) · relaxen v.a.€85 (2u30m) · knippen v.a.€23,95 (1u) · senioren v.a.€18,50 (45m)
-Producten: L'Oréal, Redken, Keune, KeraCare.
+Mannen: knippen 23,50 (50m) · haar+baard 23,50 (1u15m) · baard 16 (30m) · knippen+baard 30 (1u15m) · kaal+baard 20 (45m) · senioren 18,50 (45m) · wassen+knippen+drogen 26,95 (50m) · wassen+massage+knippen+fohnen 35 (1u15m) · contouren 10 (20m) · verven+knippen 45 (1u5m) · kinderen 21 (45m)
+Vrouwen Europees: wassen+fohnen 25 (40m) · knippen v.a.23,95 (45m) · stijltang v.a.35 (50m) · permanent v.a.85 (1u45m) · senioren v.a.18,50 (45m)
+Extensions: verwijderen p/baan v.a.5 (10m) · microringen p/baan 25 (25m) · interlocking p/baan v.a.25 (30m)
+Black hair: wassen+stijltangen 35 (1u) · curly perm v.a.110 (2u30m) · relaxen v.a.85 (2u30m) · knippen v.a.23,95 (1u) · senioren v.a.18,50 (45m)
+Producten: L'Oreal, Redken, Keune, KeraCare.
 
 BOEKINGSFLOW: Geef altijd de Treatwell-link. Alternatief: WhatsApp 06 52874750. Beloof NOOIT een specifieke beschikbaarheid.
-TOON: vriendelijk, informeel (je/jij), max 2–3 zinnen. Schakel mee in de taal van de klant.
+TOON: vriendelijk, informeel (je/jij), max 2 tot 3 zinnen. Schakel mee in de taal van de klant.
 GRENZEN: Nooit beschikbaarheid beloven. Nooit vragen om persoonsgegevens. Als gevraagd of je AI bent: eerlijk zeggen dat je de digitale assistent van Patrick bent.`;
 
 const hist=[];let busy=false;
+const CHAT_URL='https://anchor-abu-eyes-gps.trycloudflare.com/chat';
+
 function ts(){return new Date().toLocaleTimeString('nl-NL',{hour:'2-digit',minute:'2-digit'});}
 function addM(cid,role,text){
   const c=document.getElementById(cid),d=document.createElement('div');
@@ -802,36 +819,37 @@ async function sendMsg(txt){
   busy=true;
   document.getElementById('chips1').style.display='none';
   document.getElementById('chips2').style.display='none';
-  addM('msgs1','user',txt); addM('msgs2','user',txt);
+  addM('msgs1','user',txt);addM('msgs2','user',txt);
   hist.push({role:'user',content:txt});
-  showTyp('msgs1'); showTyp('msgs2');
+  showTyp('msgs1');showTyp('msgs2');
   try{
-    const r=await fetch('https://anchor-abu-eyes-gps.trycloudflare.com/chat',{
+    const r=await fetch(CHAT_URL,{
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:600,system:SYS,messages:hist.slice(-12)})
     });
-    const data=await r.json();
     document.getElementById('typmsgs1')?.remove();
     document.getElementById('typmsgs2')?.remove();
-    const rep=data.content?.[0]?.text||'Even geen antwoord — probeer opnieuw.';
+    const data=await r.json();
+    const rep=data.content?.[0]?.text||'Even geen antwoord. Probeer opnieuw.';
     hist.push({role:'assistant',content:rep});
-    addM('msgs1','bot',rep); addM('msgs2','bot',rep);
+    addM('msgs1','bot',rep);addM('msgs2','bot',rep);
   }catch{
     document.getElementById('typmsgs1')?.remove();
     document.getElementById('typmsgs2')?.remove();
-    const err='Verbindingsfout — WhatsApp: 06 52874750.';
-    addM('msgs1','bot',err); addM('msgs2','bot',err);
+    addM('msgs1','bot','Verbindingsfout. WhatsApp: 06 52874750.');
+    addM('msgs2','bot','Verbindingsfout. WhatsApp: 06 52874750.');
   }
   busy=false;
 }
-function sd() {const v=document.getElementById('in1').value.trim();document.getElementById('in1').value='';if(v)sendMsg(v);}
+function sd(){const v=document.getElementById('in1').value.trim();document.getElementById('in1').value='';if(v)sendMsg(v);}
 function sd2(){const v=document.getElementById('in2').value.trim();document.getElementById('in2').value='';if(v)sendMsg(v);}
-function qs(t){sendMsg(t);} function qs2(t){sendMsg(t);}
+function qs(t){sendMsg(t);}
+function qs2(t){sendMsg(t);}
 document.getElementById('in1').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sd();}});
 document.getElementById('in2').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sd2();}});
 const welcome='Hoi! Ik ben de assistent van Patrick. Vraag me over behandelingen, prijzen of hoe je een afspraak maakt.';
-addM('msgs1','bot',welcome); addM('msgs2','bot',welcome);
+addM('msgs1','bot',welcome);addM('msgs2','bot',welcome);
 </script>
 </body>
 </html>

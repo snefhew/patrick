@@ -3,6 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Patrick Anches — gediplomeerde barbier en kapper in Amsterdam-West. Knippen, baard, extensions en Black hair. Boek direct via Treatwell. Kinkerstraat 162-H.">
+<meta property="og:type" content="business.business">
+<meta property="og:title" content="Patrick Anches — Barbier &amp; Kapper Amsterdam">
+<meta property="og:description" content="Gediplomeerde barbier en kapper in Amsterdam-West. Knippen, baard, extensions en Black hair. Boek direct via Treatwell.">
+<meta property="og:url" content="https://snefhew.github.io/patrick/">
+<meta property="og:locale" content="nl_NL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Patrick Anches — Barbier &amp; Kapper Amsterdam">
+<meta name="twitter:description" content="Gediplomeerde barbier en kapper in Amsterdam-West. Boek direct via Treatwell.">
+<link rel="canonical" href="https://snefhew.github.io/patrick/">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'><rect x='.4' y='.4' width='17.2' height='17.2' stroke='%23292929' stroke-width='.8' fill='none'/><circle cx='9' cy='9' r='2.8' stroke='%23292929' stroke-width='.6' fill='none'/></svg>">
 <title>Patrick Anches — Barbier &amp; Kapper Amsterdam</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -381,7 +392,8 @@ button{cursor:pointer;border:none;background:none;}
    RESPONSIVE
 ═══════════════════════════════════════ */
 @media(max-width:900px){
-  .page{height:auto;min-height:100vh;
+  #app{scroll-snap-type:none;}
+  .page{scroll-snap-align:none;height:auto;min-height:100vh;
     grid-template-columns:1fr 44px minmax(220px,35%);
     grid-template-rows:auto auto auto auto auto auto;}
   #p1 .c-a,#p2 .c-a{grid-column:1;grid-row:1;}
@@ -488,9 +500,9 @@ button{cursor:pointer;border:none;background:none;}
         <button class="chip" onclick="qs('Hoe kom ik er?')">Route</button>
       </div>
       <div class="ch-ir">
-        <input class="ch-in" id="in1" type="text" placeholder="Stel een vraag..." autocomplete="off">
-        <button class="ch-snd" onclick="sd()">
-          <svg viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
+        <input class="ch-in" id="in1" type="text" aria-label="Stel een vraag aan de assistent" placeholder="Stel een vraag..." autocomplete="off">
+        <button class="ch-snd" onclick="sd()" aria-label="Verstuur bericht">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
         </button>
       </div>
       <div class="ch-ft">Powered by Axon · AI-assistent</div>
@@ -654,9 +666,9 @@ button{cursor:pointer;border:none;background:none;}
         <button class="chip" onclick="qs2('Hoe kom ik er?')">Route</button>
       </div>
       <div class="ch-ir">
-        <input class="ch-in" id="in2" type="text" placeholder="Stel een vraag..." autocomplete="off">
-        <button class="ch-snd" onclick="sd2()">
-          <svg viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
+        <input class="ch-in" id="in2" type="text" aria-label="Stel een vraag aan de assistent" placeholder="Stel een vraag..." autocomplete="off">
+        <button class="ch-snd" onclick="sd2()" aria-label="Verstuur bericht">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
         </button>
       </div>
       <div class="ch-ft">Powered by Axon · AI-assistent</div>
@@ -727,9 +739,15 @@ button{cursor:pointer;border:none;background:none;}
 </div><!-- /app -->
 
 <script>
-/* STATUS */
+/* STATUS — uses Amsterdam timezone */
 function setStatus(dotId,textId){
-  const d=new Date(),dy=d.getDay(),h=d.getHours();
+  const now=new Date();
+  const parts=new Intl.DateTimeFormat('nl-NL',{
+    timeZone:'Europe/Amsterdam',weekday:'short',hour:'numeric',hour12:false
+  }).formatToParts(now);
+  const dayStr=parts.find(p=>p.type==='weekday').value.toLowerCase();
+  const h=parseInt(parts.find(p=>p.type==='hour').value,10);
+  const dy=['zo','ma','di','wo','do','vr','za'].indexOf(dayStr);
   const open=[3,4,5,6].includes(dy)&&h>=10&&h<19;
   document.getElementById(dotId).className='sdot'+(open?' on':'');
   document.getElementById(textId).textContent=open?'Nu open':'Gesloten';
@@ -797,7 +815,7 @@ TOON: vriendelijk, informeel (je/jij), max 2 tot 3 zinnen. Schakel mee in de taa
 GRENZEN: Nooit beschikbaarheid beloven. Nooit vragen om persoonsgegevens. Als gevraagd of je AI bent: eerlijk zeggen dat je de digitale assistent van Patrick bent.`;
 
 const hist=[];let busy=false;
-const CHAT_URL='https://anchor-abu-eyes-gps.trycloudflare.com/chat';
+const CHAT_URL='https://wage-simpsons-algebra-fresh.trycloudflare.com/chat';
 
 function ts(){return new Date().toLocaleTimeString('nl-NL',{hour:'2-digit',minute:'2-digit'});}
 function addM(cid,role,text){
@@ -829,6 +847,7 @@ async function sendMsg(txt){
     });
     document.getElementById('typmsgs1')?.remove();
     document.getElementById('typmsgs2')?.remove();
+    if(!r.ok) throw new Error(`HTTP ${r.status}`);
     const data=await r.json();
     const rep=data.content?.[0]?.text||'Even geen antwoord. Probeer opnieuw.';
     hist.push({role:'assistant',content:rep});
@@ -849,6 +868,34 @@ document.getElementById('in1').addEventListener('keydown',e=>{if(e.key==='Enter'
 document.getElementById('in2').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sd2();}});
 const welcome='Hoi! Ik ben de assistent van Patrick. Vraag me over behandelingen, prijzen of hoe je een afspraak maakt.';
 addM('msgs1','bot',welcome);addM('msgs2','bot',welcome);
+</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"HairSalon",
+  "name":"Patrick Anches — Barbier & Kapper",
+  "url":"https://snefhew.github.io/patrick/",
+  "telephone":"+31652874750",
+  "address":{
+    "@type":"PostalAddress",
+    "streetAddress":"Kinkerstraat 162-H",
+    "postalCode":"1053EH",
+    "addressLocality":"Amsterdam",
+    "addressCountry":"NL"
+  },
+  "openingHoursSpecification":[{
+    "@type":"OpeningHoursSpecification",
+    "dayOfWeek":["Wednesday","Thursday","Friday","Saturday"],
+    "opens":"10:00",
+    "closes":"19:00"
+  }],
+  "aggregateRating":{
+    "@type":"AggregateRating",
+    "ratingValue":"4.8",
+    "reviewCount":"67"
+  },
+  "sameAs":["https://www.treatwell.nl/salon/hairstyler-patrick-anches-barbier-kapper/"]
+}
 </script>
 </body>
 </html>

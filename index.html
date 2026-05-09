@@ -124,12 +124,8 @@ button{cursor:pointer;border:none;background:none;}
 #p1 .info-val{font-family:var(--ff);font-size:13px;line-height:1.5;
   color:var(--ink);text-align:center;}
 
-/* D: chatbot */
-#p1 .c-d{grid-column:2;grid-row:2/4;
-  background:var(--bg2);position:relative;
-  display:flex;align-items:center;justify-content:center;}
-#p1 .c-d::after{content:'ASSISTENT';position:absolute;top:16px;left:20px;
-  font-family:var(--fc);font-size:10px;letter-spacing:0.3em;color:var(--ink3);}
+/* D: chatbot — moved to floating modal, hidden from grid */
+#p1 .c-d{display:none;}
 
 /* VBAR */
 #p1 .c-vbar{grid-column:3;grid-row:1/4;
@@ -139,8 +135,8 @@ button{cursor:pointer;border:none;background:none;}
   font-family:var(--fc);font-size:11px;letter-spacing:0.35em;
   text-transform:uppercase;color:#fff;white-space:nowrap;user-select:none;}
 
-/* E: reviews */
-#p1 .c-e{grid-column:4;grid-row:1/3;padding:28px 26px;
+/* E: reviews — center col, row 2 */
+#p1 .c-e{grid-column:2;grid-row:2;padding:24px 26px;
   flex-direction:column;align-items:center;justify-content:space-between;}
 #p1 .c-e-inner{width:100%;flex:1;display:flex;flex-direction:column;gap:0;align-items:center;justify-content:space-evenly;}
 #p1 .rev-header{font-family:var(--fc);font-size:11px;letter-spacing:0.2em;
@@ -162,8 +158,8 @@ button{cursor:pointer;border:none;background:none;}
 #p1 .stat-l{font-family:var(--fc);font-size:10px;letter-spacing:0.2em;
   text-transform:uppercase;color:var(--ink3);}
 
-/* F: Treatwell booking */
-#p1 .c-f{grid-column:4;grid-row:3;
+/* F: Treatwell booking — center col, row 3 */
+#p1 .c-f{grid-column:2;grid-row:3;
   background:var(--bg2);position:relative;overflow:hidden;}
 #p1 .c-f::before{
   content:'';
@@ -183,6 +179,39 @@ button{cursor:pointer;border:none;background:none;}
   pointer-events:none;
 }
 #p1 .c-f > *{position:relative;z-index:2;}
+
+/* TX: treatment list — right col, rows 1-3 */
+#p1 .c-tx{grid-column:4;grid-row:1/4;overflow-y:auto;padding:20px 18px;
+  flex-direction:column;align-items:flex-start;justify-content:flex-start;
+  scrollbar-width:thin;scrollbar-color:#ccc transparent;}
+#p1 .c-tx .e2-lbl{font-family:var(--fc);font-size:10px;letter-spacing:0.22em;
+  text-transform:uppercase;color:var(--ink3);margin-bottom:16px;display:flex;
+  align-items:center;gap:10px;width:100%;}
+#p1 .c-tx .e2-lbl::after{content:'';flex:1;height:1px;background:var(--ink);opacity:.15;}
+#p1 .c-tx .e2-tabs{border-color:#292929;margin-bottom:20px;width:100%;}
+#p1 .c-tx .e2-tab{color:var(--ink3);border-right-color:#292929;}
+#p1 .c-tx .e2-tab.active{background:var(--ink);color:#fff;}
+#p1 .c-tx .e2-tab:hover:not(.active){background:rgba(41,41,41,0.05);color:var(--ink);}
+#p1 .c-tx .tg{margin-bottom:24px;width:100%;}
+#p1 .c-tx .tg-title{font-family:var(--fc);font-size:9px;letter-spacing:0.3em;
+  text-transform:uppercase;color:var(--ink3);
+  padding-bottom:8px;margin-bottom:10px;border-bottom:1px solid rgba(41,41,41,0.18);
+  display:block;}
+#p1 .c-tx .tr{display:flex;justify-content:space-between;align-items:baseline;
+  padding:8px 0;border-bottom:1px solid rgba(41,41,41,0.07);gap:12px;
+  transition:background .12s;}
+#p1 .c-tx .tr:hover{background:rgba(41,41,41,0.03);}
+#p1 .c-tx .tr-n{font-size:13px;color:var(--ink);line-height:1.4;flex:1;}
+#p1 .c-tx .tr-r{display:flex;flex-direction:column;align-items:flex-end;gap:2px;flex-shrink:0;}
+#p1 .c-tx .tr-p{font-family:var(--fc);font-size:14px;font-weight:600;color:var(--ink);white-space:nowrap;}
+#p1 .c-tx .tr-p::before{content:'€ ';font-size:10px;color:var(--ink3);}
+#p1 .c-tx .tr-p.va::before{content:'v.a. € ';font-size:10px;color:var(--ink3);}
+#p1 .c-tx .tr-t{font-family:var(--fc);font-size:10px;color:var(--ink3);white-space:nowrap;}
+#p1 .c-tx .e2-book{display:block;margin-top:8px;padding:14px;width:100%;
+  background:var(--ink);color:#fff;font-family:var(--fc);font-size:11px;
+  letter-spacing:0.18em;text-transform:uppercase;text-align:center;
+  border:var(--b);transition:background .2s;}
+#p1 .c-tx .e2-book:hover{background:#000;}
 
 /* FOOTER */
 #p1 .c-footer{grid-column:2/5;grid-row:4;border-top:var(--b);border-left:var(--b);
@@ -408,31 +437,55 @@ button{cursor:pointer;border:none;background:none;}
   text-transform:uppercase;color:var(--ash);text-align:center;padding:7px;
   border-top:var(--b);flex-shrink:0;background:var(--deep);}
 
-/* ── c-photo (col1/row2) ── */
-#p2 .c-photo{grid-column:1;grid-row:2;position:relative;overflow:hidden;}
+/* ── c-b2-heading (left col, rows 2-5) — page title cell ── */
+#p2 .c-photo{
+  grid-column:1;grid-row:2/5;
+  position:relative;overflow:hidden;
+  align-items:flex-start;justify-content:center;
+  padding:28px;
+}
 #p2 .c-photo::before{
   content:'';position:absolute;inset:0;
   background-image:url('hero.jpg');
   background-size:cover;background-position:center 20%;
-  filter:grayscale(60%) brightness(0.32) contrast(1.2);
+  filter:grayscale(60%) brightness(0.28) contrast(1.2);
   z-index:0;pointer-events:none;transform:scale(1.02);
 }
 #p2 .c-photo::after{
   content:'';position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(16,16,16,0.55) 0%,rgba(16,16,16,0.05) 45%,rgba(16,16,16,0.7) 100%);
+  background:linear-gradient(170deg,rgba(16,16,16,0.72) 0%,rgba(16,16,16,0.38) 55%,rgba(16,16,16,0.75) 100%);
   z-index:1;pointer-events:none;
 }
 #p2 .c-photo>*{position:relative;z-index:2;}
-.c-photo-lbl{
+
+/* ── c-album — foto album placeholder (right col, rows 1-3) ── */
+#p2 .c-album{
+  grid-column:4;grid-row:1/3;
+  position:relative;overflow:hidden;
+}
+#p2 .c-album::before{
+  content:'';position:absolute;inset:0;
+  background-image:url('hero.jpg');
+  background-size:cover;background-position:center 25%;
+  filter:grayscale(50%) brightness(0.35) contrast(1.15);
+  z-index:0;pointer-events:none;
+}
+#p2 .c-album::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(16,16,16,0.3) 0%,rgba(16,16,16,0.0) 40%,rgba(16,16,16,0.65) 100%);
+  z-index:1;pointer-events:none;
+}
+#p2 .c-album>*{position:relative;z-index:2;}
+.c-album-lbl{
   position:absolute;bottom:16px;left:18px;
   font-family:'Barlow Condensed',sans-serif;font-size:10px;
   letter-spacing:0.3em;text-transform:uppercase;
   color:rgba(243,243,243,0.45);
 }
 
-/* ── c-tw-p2 (col1/rows3-5) ── */
+/* ── c-tw-p2 — direct boeken (right col, row 3) ── */
 #p2 .c-tw-p2{
-  grid-column:1;grid-row:3/5;
+  grid-column:4;grid-row:3;
   display:flex;align-items:center;justify-content:center;
   background:var(--deep);flex-direction:column;padding:28px;
 }
@@ -444,8 +497,13 @@ button{cursor:pointer;border:none;background:none;}
 #p2 .tw-p2-btn{display:block;width:100%;background:var(--polar);color:var(--midnight);
   font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;
   letter-spacing:0.18em;text-transform:uppercase;padding:15px;text-align:center;
-  border:none;transition:background .2s,transform .2s cubic-bezier(0.22,1,0.36,1);}
-#p2 .tw-p2-btn:hover{background:#fff;transform:translateY(-2px);}
+  border:none;transition:background .2s,transform .2s cubic-bezier(0.22,1,0.36,1),box-shadow .2s;}
+#p2 .tw-p2-btn:hover{background:#fff;transform:translateY(-2px);
+  box-shadow:0 8px 24px rgba(0,0,0,0.55),0 2px 8px rgba(0,0,0,0.4);}
+@media(prefers-reduced-motion:no-preference){
+  #p2 .c-tw-p2 .tw-p2-inner{transition:transform .25s cubic-bezier(0.22,1,0.36,1);}
+  #p2 .c-tw-p2:hover .tw-p2-inner{transform:translateY(-4px);}
+}
 #p2 .tw-p2-note{font-family:'Barlow Condensed',sans-serif;font-size:10px;
   color:var(--ash);text-align:center;margin-top:8px;display:block;}
 
@@ -1210,18 +1268,24 @@ body { font-size: 16px; }
   .page{scroll-snap-align:none;height:auto;min-height:100vh;
     grid-template-columns:1fr 48px minmax(220px,35%);
     grid-template-rows:auto auto auto auto auto auto;}
-  #p1 .c-a,#p2 .c-a{grid-column:1;grid-row:1;}
+  /* P1 tablet */
+  #p1 .c-a           {grid-column:1;grid-row:1;}
   #p1 .c-b           {grid-column:1;grid-row:3/5;min-height:220px;}
-  #p2 .c-photo       {grid-column:1;grid-row:3;min-height:200px;}
-  #p2 .c-tw-p2       {grid-column:1;grid-row:4/6;min-height:180px;}
-  #p1 .c-c,#p2 .c-c  {grid-column:1/3;grid-row:2;}
-  #p1 .c-d           {grid-column:1/3;grid-row:5;min-height:580px;}
+  #p1 .c-c           {grid-column:1/3;grid-row:2;}
+  #p1 .c-e           {grid-column:1/3;grid-row:5;min-height:280px;}
+  #p1 .c-f           {grid-column:1/3;grid-row:6;min-height:160px;}
+  #p1 .c-tx          {grid-column:3;grid-row:1/6;max-height:80vh;overflow-y:auto;}
+  #p1 .c-vbar        {grid-column:2;grid-row:1/5;}
+  #p1 .c-footer      {grid-column:1/-1;grid-row:7;}
+  /* P2 tablet */
+  #p2 .c-a           {grid-column:1;grid-row:1;}
+  #p2 .c-photo       {grid-column:1;grid-row:3/5;min-height:220px;}
+  #p2 .c-c           {grid-column:1/3;grid-row:2;}
   #p2 .c-faq         {grid-column:1/3;grid-row:5;min-height:420px;}
-  #p1 .c-vbar,#p2 .c-vbar{grid-column:2;grid-row:1/5;}
-  #p1 .c-e           {grid-column:3;grid-row:1/4;}
-  #p1 .c-f           {grid-column:3;grid-row:4/6;min-height:160px;}
-  #p2 .c-e2          {grid-column:3;grid-row:1/5;max-height:80vh;}
-  #p1 .c-footer,#p2 .c-footer{grid-column:1/-1;grid-row:6;}
+  #p2 .c-vbar        {grid-column:2;grid-row:1/5;}
+  #p2 .c-album       {grid-column:3;grid-row:1/4;max-height:60vh;}
+  #p2 .c-tw-p2       {grid-column:3;grid-row:4/6;min-height:180px;}
+  #p2 .c-footer      {grid-column:1/-1;grid-row:6;}
 }
 @media(max-width:600px){
   html,body{overflow:auto;}
@@ -1265,48 +1329,23 @@ body { font-size: 16px; }
   #p1 .c-c .info-val { font-size: 13px; text-align: left; }
   #p1 .c-c .info-sep { display: none; }
 
-  /* Hero */
-  #p1 .c-b {
-    min-height:280px;
-    padding:28px 20px;
-    flex-shrink:0;
-  }
-  #p2 .c-b2 {
-    min-height:200px;
-    padding:28px 20px;
-    flex-shrink:0;
-  }
-
-  /* Chatbot (page 1 only visible) */
-  #p1 .c-d {
-    min-height:560px;
-    padding:16px 12px;
-    flex-shrink:0;
-  }
+  /* P1 hero */
+  #p1 .c-b { min-height:280px; padding:28px 20px; flex-shrink:0; }
+  /* P1 reviews */
+  #p1 .c-e { min-height:320px; padding:24px 20px; flex-shrink:0; }
+  /* P1 direct boeken */
+  #p1 .c-f { min-height:220px; padding:24px 20px; flex-shrink:0; }
+  #p1 .tw-card { width:100%; max-width:none; }
+  /* P1 treatments */
+  #p1 .c-tx { min-height:600px; padding:28px 20px; padding-bottom:60px; flex-shrink:0; }
   #p1 .chat-card { width:100%; max-width:none; }
   #p2 .chat-card { width:100%; max-width:none; }
 
-  /* Reviews (page 1) */
-  #p1 .c-e { min-height:320px; padding:28px 20px; flex-shrink:0; }
-
-  /* Booking (page 1) */
-  #p1 .c-f { min-height:220px; padding:24px 20px; flex-shrink:0; }
-  #p1 .tw-card { width:100%; max-width:none; }
-
-  /* Page 2: treatment list — comes first on mobile */
-  #p2 .c-e2 {
-    max-height:none;
-    min-height:600px;
-    padding:28px 20px;
-    padding-bottom:60px;
-    flex-shrink:0;
-    order:1;
-  }
-
-  /* Page 2 mobile: new cells */
-  #p2 .c-photo { min-height:240px; flex-shrink:0; order:2; }
-  #p2 .c-tw-p2 { min-height:180px; padding:24px 20px; flex-shrink:0; order:3; }
-  #p2 .c-faq { min-height:auto; padding:0; flex-shrink:0; order:4; }
+  /* P2 mobile order */
+  #p2 .c-photo { min-height:240px; flex-shrink:0; order:1; }
+  #p2 .c-faq   { min-height:auto; padding:0; flex-shrink:0; order:2; }
+  #p2 .c-album { min-height:220px; flex-shrink:0; order:3; }
+  #p2 .c-tw-p2 { min-height:200px; padding:24px 20px; flex-shrink:0; order:4; }
   /* Page 2 footer — always last */
   #p2 .c-footer { order:5; }
 
@@ -1491,30 +1530,6 @@ body { font-size: 16px; }
     </div>
   </div>
 
-  <!-- D: chatbot -->
-  <div class="cell c-d" data-anim="scale" style="--ad:140ms">
-    <div class="chat-card">
-      <div class="ch-header">
-        <div class="ch-dot"></div>
-        <span class="ch-name">Assistent Patrick</span>
-      </div>
-      <div class="ch-msgs" id="msgs1" role="log" aria-live="polite" aria-label="Chatgesprek"></div>
-      <div class="ch-chips" id="chips1">
-        <button class="chip" onclick="qs('Wat kost knippen?')">Prijzen</button>
-        <button class="chip" onclick="qs('Afspraak maken')">Afspraak</button>
-        <button class="chip" onclick="qs('Openingstijden')">Tijden</button>
-        <button class="chip" onclick="qs('Hoe kom ik er?')">Route</button>
-      </div>
-      <div class="ch-ir">
-        <input class="ch-in" id="in1" type="text" aria-label="Stel een vraag aan de assistent" placeholder="Stel een vraag..." autocomplete="off">
-        <button class="ch-snd" onclick="sd()" aria-label="Verstuur bericht">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
-        </button>
-      </div>
-      <div class="ch-ft">Powered by Axon · AI-assistent</div>
-    </div>
-  </div>
-
   <!-- VBAR -->
   <div class="cell c-vbar" data-anim="scale" style="--ad:100ms">
     <span class="vbar-num">01</span>
@@ -1549,6 +1564,55 @@ body { font-size: 16px; }
         <a href="https://www.treatwell.nl/salon/hairstyler-patrick-anches-barbier-kapper/" target="_blank" rel="noopener" class="tw-inline-btn" style="flex:1;padding-top:11px;padding-bottom:11px;">Afspraak maken →</a>
       </div>
     </div>
+  </div>
+
+  <!-- TX: behandelingen & prijzen (right col, full height) -->
+  <div class="cell c-tx" data-anim="left" style="--ad:80ms">
+    <span class="e2-lbl">Behandelingen &amp; Prijzen</span>
+    <div class="e2-tabs">
+      <button class="e2-tab active" onclick="filterTx(this,'all')">Alle</button>
+      <button class="e2-tab" onclick="filterTx(this,'mannen')">Mannen</button>
+      <button class="e2-tab" onclick="filterTx(this,'vrouwen')">Vrouwen</button>
+      <button class="e2-tab" onclick="filterTx(this,'extensions')">Extensions</button>
+      <button class="e2-tab" onclick="filterTx(this,'blackhair')">Black hair</button>
+    </div>
+    <div class="tg" data-cat="mannen">
+      <div class="tg-title">Mannen · Knippen &amp; Styling</div>
+      <div class="tr"><span class="tr-n">Knippen kort haar</span><div class="tr-r"><span class="tr-p">23,50</span><span class="tr-t">50 min</span></div></div>
+      <div class="tr"><span class="tr-n">Haar &amp; baard fresh-up trim</span><div class="tr-r"><span class="tr-p">23,50</span><span class="tr-t">1u 15m</span></div></div>
+      <div class="tr"><span class="tr-n">Baard knippen &amp; modelleren</span><div class="tr-r"><span class="tr-p">16,00</span><span class="tr-t">30 min</span></div></div>
+      <div class="tr"><span class="tr-n">Knippen &amp; baard <span class="pop-tag">Populair</span></span><div class="tr-r"><span class="tr-p">30,00</span><span class="tr-t">1u 15m</span></div></div>
+      <div class="tr"><span class="tr-n">Hoofd kaal scheren + baard</span><div class="tr-r"><span class="tr-p">20,00</span><span class="tr-t">45 min</span></div></div>
+      <div class="tr"><span class="tr-n">Knippen senioren 65+</span><div class="tr-r"><span class="tr-p">18,50</span><span class="tr-t">45 min</span></div></div>
+      <div class="tr"><span class="tr-n">Wassen, knippen &amp; drogen</span><div class="tr-r"><span class="tr-p">26,95</span><span class="tr-t">50 min</span></div></div>
+      <div class="tr"><span class="tr-n">Wassen, massage, knippen &amp; föhnen</span><div class="tr-r"><span class="tr-p">35,00</span><span class="tr-t">1u 15m</span></div></div>
+      <div class="tr"><span class="tr-n">Contouren</span><div class="tr-r"><span class="tr-p">10,00</span><span class="tr-t">20 min</span></div></div>
+      <div class="tr"><span class="tr-n">Kort haar verven &amp; knippen</span><div class="tr-r"><span class="tr-p">45,00</span><span class="tr-t">1u 5m</span></div></div>
+      <div class="tr"><span class="tr-n">Kinderen knippen</span><div class="tr-r"><span class="tr-p">21,00</span><span class="tr-t">45 min</span></div></div>
+    </div>
+    <div class="tg" data-cat="vrouwen">
+      <div class="tg-title">Vrouwen · Europees Haar</div>
+      <div class="tr"><span class="tr-n">Wassen &amp; föhnen kort haar</span><div class="tr-r"><span class="tr-p">25,00</span><span class="tr-t">40 min</span></div></div>
+      <div class="tr"><span class="tr-n">Knippen kort haar</span><div class="tr-r"><span class="tr-p va">23,95</span><span class="tr-t">45 min</span></div></div>
+      <div class="tr"><span class="tr-n">Haar wassen + stijltang steilen</span><div class="tr-r"><span class="tr-p va">35,00</span><span class="tr-t">50 min</span></div></div>
+      <div class="tr"><span class="tr-n">Permanent incl. knippen</span><div class="tr-r"><span class="tr-p va">85,00</span><span class="tr-t">1u 45m</span></div></div>
+      <div class="tr"><span class="tr-n">Knippen senioren 65+</span><div class="tr-r"><span class="tr-p va">18,50</span><span class="tr-t">45 min</span></div></div>
+    </div>
+    <div class="tg" data-cat="extensions">
+      <div class="tg-title">Extensions · Alle Haartypes</div>
+      <div class="tr"><span class="tr-n">Extensions verwijderen p/baan</span><div class="tr-r"><span class="tr-p va">5,00</span><span class="tr-t">10 min</span></div></div>
+      <div class="tr"><span class="tr-n">Extensions incl. microringen p/baan</span><div class="tr-r"><span class="tr-p">25,00</span><span class="tr-t">25 min</span></div></div>
+      <div class="tr"><span class="tr-n">Extensions interlocking p/baan</span><div class="tr-r"><span class="tr-p va">25,00</span><span class="tr-t">30 min</span></div></div>
+    </div>
+    <div class="tg" data-cat="blackhair">
+      <div class="tg-title">Vrouwen · Black Hair</div>
+      <div class="tr"><span class="tr-n">Wassen &amp; stijltangen kort haar</span><div class="tr-r"><span class="tr-p">35,00</span><span class="tr-t">1u</span></div></div>
+      <div class="tr"><span class="tr-n">Curly perm incl. knippen</span><div class="tr-r"><span class="tr-p va">110,00</span><span class="tr-t">2u 30m</span></div></div>
+      <div class="tr"><span class="tr-n">Relaxen incl. knippen &amp; stylen</span><div class="tr-r"><span class="tr-p va">85,00</span><span class="tr-t">2u 30m</span></div></div>
+      <div class="tr"><span class="tr-n">Kort knippen</span><div class="tr-r"><span class="tr-p va">23,95</span><span class="tr-t">1u</span></div></div>
+      <div class="tr"><span class="tr-n">Knippen senioren 65+</span><div class="tr-r"><span class="tr-p va">18,50</span><span class="tr-t">45 min</span></div></div>
+    </div>
+    <a class="e2-book" href="https://www.treatwell.nl/salon/hairstyler-patrick-anches-barbier-kapper/" target="_blank" rel="noopener">Boek via Treatwell</a>
   </div>
 
   <!-- F: Treatwell -->
@@ -1606,12 +1670,22 @@ body { font-size: 16px; }
     </div>
   </div>
 
-  <!-- Photo placeholder (col1/row2) -->
+  <!-- B2: page heading — left col rows 2-5 -->
   <div class="cell c-photo" data-anim="right" style="--ad:80ms">
-    <span class="c-photo-lbl">Foto Album · Binnenkort</span>
+    <div style="width:100%">
+      <div class="hero-lbl" style="font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(243,243,243,0.5);margin-bottom:12px;">Pagina twee · FAQ &amp; Info</div>
+      <h2 class="p2-h1">Alles<br>wat je<br><em>wil weten.</em></h2>
+    </div>
+    <div class="hero-meta" style="margin-top:auto;">
+      <p class="p2-desc">Vind snel antwoord op veelgestelde vragen. Of neem direct contact op via WhatsApp.</p>
+      <a href="https://wa.me/31652874750?text=Hallo%20Patrick%2C%20ik%20wil%20graag%20een%20afspraak%20maken." target="_blank" rel="noopener"
+        style="font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(243,243,243,0.6);margin-top:12px;display:inline-block;text-decoration:underline;text-underline-offset:3px;">
+        → WhatsApp Patrick
+      </a>
+    </div>
   </div>
 
-  <!-- Treatwell dark booking card (col1/rows3-5) -->
+  <!-- Direct boeken — right col row 3 (placed via CSS grid-column:4) -->
   <div class="cell c-tw-p2" data-anim="up" style="--ad:160ms">
     <div class="tw-p2-inner">
       <div class="tw-p2-lbl">Direct Boeken</div>
@@ -1708,56 +1782,12 @@ body { font-size: 16px; }
     <span class="vbar-num">01</span>
   </div>
 
-  <!-- E2: treatment list -->
-  <div class="cell c-e2" data-anim="left" style="--ad:120ms">
-    <span class="e2-lbl">Behandelingen &amp; Prijzen</span>
-    <div class="e2-tabs">
-      <button class="e2-tab active" onclick="filterTx(this,'all')">Alle</button>
-      <button class="e2-tab" onclick="filterTx(this,'mannen')">Mannen</button>
-      <button class="e2-tab" onclick="filterTx(this,'vrouwen')">Vrouwen</button>
-      <button class="e2-tab" onclick="filterTx(this,'extensions')">Extensions</button>
-      <button class="e2-tab" onclick="filterTx(this,'blackhair')">Black hair</button>
-    </div>
-    <div class="tg" data-cat="mannen">
-      <div class="tg-title">Mannen · Knippen &amp; Styling</div>
-      <div class="tr"><span class="tr-n">Knippen kort haar</span><div class="tr-r"><span class="tr-p">23,50</span><span class="tr-t">50 min</span></div></div>
-      <div class="tr"><span class="tr-n">Haar &amp; baard fresh-up trim</span><div class="tr-r"><span class="tr-p">23,50</span><span class="tr-t">1u 15m</span></div></div>
-      <div class="tr"><span class="tr-n">Baard knippen &amp; modelleren</span><div class="tr-r"><span class="tr-p">16,00</span><span class="tr-t">30 min</span></div></div>
-      <div class="tr"><span class="tr-n">Knippen &amp; baard <span class="pop-tag">Populair</span></span><div class="tr-r"><span class="tr-p">30,00</span><span class="tr-t">1u 15m</span></div></div>
-      <div class="tr"><span class="tr-n">Hoofd kaal scheren + baard</span><div class="tr-r"><span class="tr-p">20,00</span><span class="tr-t">45 min</span></div></div>
-      <div class="tr"><span class="tr-n">Knippen senioren 65+</span><div class="tr-r"><span class="tr-p">18,50</span><span class="tr-t">45 min</span></div></div>
-      <div class="tr"><span class="tr-n">Wassen, knippen &amp; drogen</span><div class="tr-r"><span class="tr-p">26,95</span><span class="tr-t">50 min</span></div></div>
-      <div class="tr"><span class="tr-n">Wassen, massage, knippen &amp; föhnen</span><div class="tr-r"><span class="tr-p">35,00</span><span class="tr-t">1u 15m</span></div></div>
-      <div class="tr"><span class="tr-n">Contouren</span><div class="tr-r"><span class="tr-p">10,00</span><span class="tr-t">20 min</span></div></div>
-      <div class="tr"><span class="tr-n">Kort haar verven &amp; knippen</span><div class="tr-r"><span class="tr-p">45,00</span><span class="tr-t">1u 5m</span></div></div>
-      <div class="tr"><span class="tr-n">Kinderen knippen</span><div class="tr-r"><span class="tr-p">21,00</span><span class="tr-t">45 min</span></div></div>
-    </div>
-    <div class="tg" data-cat="vrouwen">
-      <div class="tg-title">Vrouwen · Europees Haar</div>
-      <div class="tr"><span class="tr-n">Wassen &amp; föhnen kort haar</span><div class="tr-r"><span class="tr-p">25,00</span><span class="tr-t">40 min</span></div></div>
-      <div class="tr"><span class="tr-n">Knippen kort haar</span><div class="tr-r"><span class="tr-p va">23,95</span><span class="tr-t">45 min</span></div></div>
-      <div class="tr"><span class="tr-n">Haar wassen + stijltang steilen</span><div class="tr-r"><span class="tr-p va">35,00</span><span class="tr-t">50 min</span></div></div>
-      <div class="tr"><span class="tr-n">Permanent incl. knippen</span><div class="tr-r"><span class="tr-p va">85,00</span><span class="tr-t">1u 45m</span></div></div>
-      <div class="tr"><span class="tr-n">Knippen senioren 65+</span><div class="tr-r"><span class="tr-p va">18,50</span><span class="tr-t">45 min</span></div></div>
-    </div>
-    <div class="tg" data-cat="extensions">
-      <div class="tg-title">Extensions · Alle Haartypes</div>
-      <div class="tr"><span class="tr-n">Extensions verwijderen p/baan</span><div class="tr-r"><span class="tr-p va">5,00</span><span class="tr-t">10 min</span></div></div>
-      <div class="tr"><span class="tr-n">Extensions incl. microringen p/baan</span><div class="tr-r"><span class="tr-p">25,00</span><span class="tr-t">25 min</span></div></div>
-      <div class="tr"><span class="tr-n">Extensions interlocking p/baan</span><div class="tr-r"><span class="tr-p va">25,00</span><span class="tr-t">30 min</span></div></div>
-    </div>
-    <div class="tg" data-cat="blackhair">
-      <div class="tg-title">Vrouwen · Black Hair</div>
-      <div class="tr"><span class="tr-n">Wassen &amp; stijltangen kort haar</span><div class="tr-r"><span class="tr-p">35,00</span><span class="tr-t">1u</span></div></div>
-      <div class="tr"><span class="tr-n">Curly perm incl. knippen</span><div class="tr-r"><span class="tr-p va">110,00</span><span class="tr-t">2u 30m</span></div></div>
-      <div class="tr"><span class="tr-n">Relaxen incl. knippen &amp; stylen</span><div class="tr-r"><span class="tr-p va">85,00</span><span class="tr-t">2u 30m</span></div></div>
-      <div class="tr"><span class="tr-n">Kort knippen</span><div class="tr-r"><span class="tr-p va">23,95</span><span class="tr-t">1u</span></div></div>
-      <div class="tr"><span class="tr-n">Knippen senioren 65+</span><div class="tr-r"><span class="tr-p va">18,50</span><span class="tr-t">45 min</span></div></div>
-    </div>
-    <a class="e2-book" href="https://www.treatwell.nl/salon/hairstyler-patrick-anches-barbier-kapper/" target="_blank" rel="noopener">
-      Boek via Treatwell
-    </a>
+  <!-- Album — foto album placeholder (right col, rows 1-3) -->
+  <div class="cell c-album" data-anim="left" style="--ad:80ms">
+    <span class="c-album-lbl">Foto Album · Binnenkort</span>
   </div>
+
+  <!-- E2: behandelingen verwijderd van p2 (staat nu op p1 rechts) -->
 
   <!-- Footer -->
   <div class="cell c-footer" data-anim="up" style="--ad:200ms">

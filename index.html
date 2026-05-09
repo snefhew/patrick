@@ -58,7 +58,8 @@ button{cursor:pointer;border:none;background:none;}
   --fd:    'Bebas Neue',Impact,sans-serif;
   background:var(--bg);
 }
-#p1 .cell{border:var(--b);background:var(--bg);color:var(--ink);}
+#p1 .cell{border:var(--b);background:var(--bg);color:var(--ink);border-radius:0;}
+#p1 *{border-radius:0!important;}
 
 /* A: logo + status */
 #p1 .c-a{grid-column:1;grid-row:1;padding:16px 24px;
@@ -80,9 +81,9 @@ button{cursor:pointer;border:none;background:none;}
   align-items:flex-start;justify-content:center;gap:20px;}
 #p1 .hero-h1{
   font-family:var(--fd);
-  font-size:clamp(3.6rem,5vw,6rem);
+  font-size:clamp(4rem,5.5vw,7rem);
   font-weight:400;
-  line-height:0.9;
+  line-height:0.88;
   letter-spacing:0.025em;
   color:var(--ink);
   text-transform:uppercase;
@@ -124,20 +125,20 @@ button{cursor:pointer;border:none;background:none;}
   text-transform:uppercase;color:#fff;white-space:nowrap;user-select:none;}
 
 /* E: reviews */
-#p1 .c-e{grid-column:4;grid-row:1/3;padding:24px 26px;
-  align-items:flex-start;justify-content:space-between;}
-#p1 .c-e-inner{width:100%;display:flex;flex-direction:column;gap:0;}
-#p1 .rev-header{font-family:var(--fc);font-size:10px;letter-spacing:0.2em;
-  text-transform:uppercase;color:var(--ink3);margin-bottom:16px;}
-#p1 .rev-quote{font-family:var(--ff);font-style:italic;font-size:15px;
-  line-height:1.6;color:var(--ink);margin-bottom:8px;font-weight:300;}
+#p1 .c-e{grid-column:4;grid-row:1/3;padding:28px 26px;
+  flex-direction:column;align-items:center;justify-content:space-between;}
+#p1 .c-e-inner{width:100%;display:flex;flex-direction:column;gap:0;align-items:center;}
+#p1 .rev-header{font-family:var(--fc);font-size:11px;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--ink3);margin-bottom:16px;text-align:center;}
+#p1 .rev-quote{font-family:var(--ff);font-style:italic;font-size:16px;
+  line-height:1.6;color:var(--ink);margin-bottom:8px;font-weight:300;text-align:center;}
 #p1 .rev-author{font-family:var(--fc);font-size:11px;letter-spacing:0.12em;
-  text-transform:uppercase;color:var(--ink3);}
-#p1 .rev-treatment{font-family:var(--fm);font-size:10px;color:var(--ink3);margin-top:2px;}
-#p1 .rev-div{height:1px;background:var(--ink);opacity:.1;margin:16px 0;}
-#p1 .stats-row{display:flex;gap:20px;padding-top:16px;border-top:var(--b);width:100%;}
-#p1 .stat-item{display:flex;flex-direction:column;gap:3px;align-items:center;}
-#p1 .stat-n{font-family:var(--fd);font-size:2.6rem;line-height:1;
+  text-transform:uppercase;color:var(--ink3);text-align:center;}
+#p1 .rev-treatment{font-family:var(--fm);font-size:10px;color:var(--ink3);margin-top:2px;text-align:center;}
+#p1 .rev-div{height:1px;background:var(--ink);opacity:1;margin:16px 0;width:100%;}
+#p1 .stats-row{display:flex;justify-content:space-around;padding-top:16px;border-top:1px solid #292929;width:100%;}
+#p1 .stat-item{display:flex;flex-direction:column;gap:3px;align-items:center;text-align:center;}
+#p1 .stat-n{font-family:var(--fd);font-size:3.2rem;line-height:1;
   letter-spacing:0.02em;color:var(--ink);}
 #p1 .stat-l{font-family:var(--fc);font-size:10px;letter-spacing:0.2em;
   text-transform:uppercase;color:var(--ink3);}
@@ -503,15 +504,15 @@ button{cursor:pointer;border:none;background:none;}
 
   <!-- E: reviews -->
   <div class="cell c-e">
-    <div class="c-e-inner" style="flex:1">
+    <div class="c-e-inner">
       <div class="rev-header">Klantreviews · Treatwell geverifieerd</div>
-      <div>
+      <div style="width:100%;text-align:center">
         <div class="rev-quote" id="rq1"></div>
         <div class="rev-author" id="ra1"></div>
         <div class="rev-treatment" id="rt1"></div>
       </div>
       <div class="rev-div"></div>
-      <div>
+      <div style="width:100%;text-align:center">
         <div class="rev-quote" id="rq2"></div>
         <div class="rev-author" id="ra2"></div>
         <div class="rev-treatment" id="rt2"></div>
@@ -523,7 +524,6 @@ button{cursor:pointer;border:none;background:none;}
         <div class="stat-item"><span class="stat-n">67+</span><span class="stat-l">Klanten</span></div>
         <div class="stat-item"><span class="stat-n">24</span><span class="stat-l">Behandelingen</span></div>
       </div>
-      <span id="rcnt" style="font-family:Impact,sans-serif;font-size:10px;letter-spacing:.1em;color:#888;display:block;margin-top:8px;text-align:center"></span>
     </div>
   </div>
 
@@ -764,7 +764,6 @@ function renderRevs(i){
     document.getElementById('rq2').innerHTML=`"${r2.t}"`;
     document.getElementById('ra2').textContent=`${r2.n} · ${r2.d} geleden`;
     document.getElementById('rt2').textContent=r2.tr;
-    document.getElementById('rcnt').textContent=`${Math.floor(i/2)+1} / ${Math.ceil(revs.length/2)}`;
     ['rq1','ra1','rt1','rq2','ra2','rt2'].forEach(id=>show(document.getElementById(id)));
   },220);
 }

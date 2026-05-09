@@ -442,7 +442,7 @@ button{cursor:pointer;border:none;background:none;}
   grid-column:1;grid-row:2/5;
   position:relative;overflow:hidden;
   align-items:flex-start;justify-content:center;
-  padding:28px;
+  padding:28px;gap:20px;
 }
 #p2 .c-photo::before{
   content:'';position:absolute;inset:0;
@@ -1446,6 +1446,147 @@ body { font-size: 16px; }
     animation-delay: 200ms;
   }
 }
+
+/* ═══════════════════════════════════════
+   macOS PHOTO VIEWER OVERLAY
+═══════════════════════════════════════ */
+#photo-viewer{
+  display:none;position:fixed;inset:0;z-index:500;
+  background:rgba(0,0,0,0.86);
+  align-items:center;justify-content:center;
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+}
+#photo-viewer.open{display:flex;}
+.pv-window{
+  width:min(860px,calc(100vw - 40px));
+  height:min(660px,calc(100vh - 60px));
+  background:#141414;
+  border:1px solid #2a2a2a;
+  display:flex;flex-direction:column;
+  border-radius:12px;overflow:hidden;
+  box-shadow:0 32px 80px rgba(0,0,0,0.95),0 0 0 1px rgba(255,255,255,0.04);
+}
+.pv-titlebar{
+  height:36px;background:#1e1e1e;border-bottom:1px solid #222;
+  display:flex;align-items:center;padding:0 14px;
+  flex-shrink:0;user-select:none;
+}
+.pv-lights{display:flex;gap:8px;align-items:center;}
+.pv-light{width:12px;height:12px;border-radius:50%;flex-shrink:0;cursor:pointer;transition:filter .15s;}
+.pv-light.pv-red{background:#ff5f57;}
+.pv-light.pv-yellow{background:#febc2e;}
+.pv-light.pv-green{background:#28c840;}
+.pv-light:hover{filter:brightness(1.2);}
+.pv-title-text{
+  font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:600;
+  color:rgba(243,243,243,0.45);letter-spacing:0.14em;text-transform:uppercase;
+  flex:1;text-align:center;margin-right:60px;
+}
+.pv-main{
+  flex:1;position:relative;display:flex;
+  align-items:center;justify-content:center;
+  overflow:hidden;background:#0e0e0e;min-height:0;
+}
+#pv-img{max-width:100%;max-height:100%;object-fit:contain;display:block;}
+.pv-nav{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.07);
+  color:#F3F3F3;font-size:26px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .18s;z-index:10;
+  font-family:Georgia,serif;line-height:1;padding:0;
+}
+.pv-nav:hover{background:rgba(255,255,255,0.22);}
+.pv-prev{left:16px;}
+.pv-next{right:16px;}
+.pv-counter{
+  position:absolute;bottom:12px;right:16px;
+  font-family:'Barlow Condensed',sans-serif;font-size:11px;
+  color:rgba(243,243,243,0.4);letter-spacing:0.14em;text-transform:uppercase;
+}
+.pv-filmstrip{
+  height:88px;background:#0d0d0d;border-top:1px solid #1e1e1e;
+  overflow-x:auto;padding:14px 16px;flex-shrink:0;
+  scrollbar-width:thin;scrollbar-color:#2a2a2a transparent;
+}
+.pv-strip{display:flex;gap:8px;height:100%;}
+.pv-thumb-img{
+  width:58px;height:58px;flex-shrink:0;
+  object-fit:cover;cursor:pointer;
+  border:2px solid transparent;
+  opacity:0.5;transition:opacity .18s,border-color .18s;
+  border-radius:2px;
+}
+.pv-thumb-img:hover{opacity:0.8;}
+.pv-thumb-img.pv-active{border-color:rgba(243,243,243,0.85);opacity:1;}
+@media(max-width:600px){
+  .pv-window{width:100%;height:94vh;border-radius:0;}
+  .pv-filmstrip{height:72px;padding:9px 10px;}
+  .pv-thumb-img{width:48px;height:48px;}
+}
+
+/* ── Album thumbnail grid ── */
+#p2 .c-album::before{content:none !important;}
+#p2 .c-album::after{content:none !important;}
+#p2 .c-album{
+  flex-direction:column;align-items:stretch;justify-content:flex-start;
+  padding:0;background:var(--midnight);
+}
+.album-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  grid-template-rows:repeat(2,1fr);
+  gap:2px;flex:1;width:100%;min-height:0;overflow:hidden;
+}
+.album-cell{position:relative;overflow:hidden;cursor:pointer;min-height:0;}
+.album-cell img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  filter:grayscale(20%) brightness(0.78);
+  transition:filter .3s ease,transform .4s cubic-bezier(0.22,1,0.36,1);
+}
+.album-cell:hover img{filter:grayscale(0%) brightness(1.05);transform:scale(1.08);}
+.album-cell-ov{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  background:rgba(0,0,0,0);transition:background .25s ease;
+  color:#fff;font-size:20px;opacity:0;
+}
+.album-cell:hover .album-cell-ov{background:rgba(0,0,0,0.32);opacity:1;}
+.c-album-lbl{
+  position:static !important;flex-shrink:0;
+  padding:9px 14px;cursor:pointer;text-align:center;
+  font-family:'Barlow Condensed',sans-serif;font-size:10px;
+  letter-spacing:0.3em;text-transform:uppercase;
+  color:rgba(243,243,243,0.4);
+  background:var(--midnight);border-top:1px solid rgba(51,51,51,0.6);
+  transition:color .2s;
+}
+.c-album-lbl:hover{color:rgba(243,243,243,0.75);}
+
+/* ── Review redesign — mono terminal scale ── */
+#p1 .rev-quote{
+  font-size:14px !important;line-height:1.55 !important;
+  font-weight:400 !important;letter-spacing:0.01em !important;
+}
+#p1 .rev-author{
+  font-size:12px !important;letter-spacing:0.5px !important;
+  font-weight:500 !important;margin-top:4px;
+}
+#p1 .rev-treatment{font-size:11px !important;}
+
+/* ── Chat FAB: p2 inversion ── */
+#chat-fab.fab-p2{background:#ffffff;box-shadow:0 4px 20px rgba(0,0,0,0.18);}
+#chat-fab.fab-p2 svg{fill:#0d0d0d;}
+#chat-fab.fab-p2:hover{background:#f0f0f0;box-shadow:0 8px 32px rgba(0,0,0,0.28);}
+
+/* ── Chat FAB: attention pulse (3 pulses on load) ── */
+@keyframes fabAttention{
+  0%,100%{box-shadow:0 4px 20px rgba(0,0,0,0.35),0 0 0 0 rgba(13,13,13,0);}
+  40%{box-shadow:0 6px 28px rgba(0,0,0,0.55),0 0 0 10px rgba(13,13,13,0);}
+  60%{box-shadow:0 6px 28px rgba(0,0,0,0.55),0 0 0 10px rgba(13,13,13,0);}
+}
+#chat-fab{animation:fabAttention 1.8s ease-out 2s 3;}
+#chat-fab:hover{animation:none;transform:scale(1.08);box-shadow:0 8px 32px rgba(0,0,0,0.45);}
 </style>
 </head>
 <body>
@@ -1638,7 +1779,6 @@ body { font-size: 16px; }
       <span class="footer-sep">·</span>
       <a class="footer-item" href="tel:+31652874750">06 5287 4750</a>
     </div>
-    <span class="footer-loc">Kinkerstraat 162-H</span>
   </div>
 
 </div><!-- /p1 -->
@@ -1676,7 +1816,7 @@ body { font-size: 16px; }
       <div class="hero-lbl" style="font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(243,243,243,0.5);margin-bottom:12px;">Pagina twee · FAQ &amp; Info</div>
       <h2 class="p2-h1">Alles<br>wat je<br><em>wil weten.</em></h2>
     </div>
-    <div class="hero-meta" style="margin-top:auto;">
+    <div class="hero-meta">
       <p class="p2-desc">Vind snel antwoord op veelgestelde vragen. Of neem direct contact op via WhatsApp.</p>
       <a href="https://wa.me/31652874750?text=Hallo%20Patrick%2C%20ik%20wil%20graag%20een%20afspraak%20maken." target="_blank" rel="noopener"
         style="font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(243,243,243,0.6);margin-top:12px;display:inline-block;text-decoration:underline;text-underline-offset:3px;">
@@ -1782,9 +1922,17 @@ body { font-size: 16px; }
     <span class="vbar-num">01</span>
   </div>
 
-  <!-- Album — foto album placeholder (right col, rows 1-3) -->
+  <!-- Album — foto album (right col, rows 1-2) -->
   <div class="cell c-album" data-anim="left" style="--ad:80ms">
-    <span class="c-album-lbl">Foto Album · Binnenkort</span>
+    <div class="album-grid">
+      <div class="album-cell" onclick="openPhotoViewer(0)"><img src="p1.jpg" alt="Portfolio 1" loading="lazy"><div class="album-cell-ov">↗</div></div>
+      <div class="album-cell" onclick="openPhotoViewer(1)"><img src="p2.jpg" alt="Portfolio 2" loading="lazy"><div class="album-cell-ov">↗</div></div>
+      <div class="album-cell" onclick="openPhotoViewer(2)"><img src="p3.jpg" alt="Portfolio 3" loading="lazy"><div class="album-cell-ov">↗</div></div>
+      <div class="album-cell" onclick="openPhotoViewer(3)"><img src="p4.jpg" alt="Portfolio 4" loading="lazy"><div class="album-cell-ov">↗</div></div>
+      <div class="album-cell" onclick="openPhotoViewer(4)"><img src="p5.jpg" alt="Portfolio 5" loading="lazy"><div class="album-cell-ov">↗</div></div>
+      <div class="album-cell" onclick="openPhotoViewer(5)"><img src="p6.jpg" alt="Portfolio 6" loading="lazy"><div class="album-cell-ov">↗</div></div>
+    </div>
+    <span class="c-album-lbl" onclick="openPhotoViewer(0)">Foto Album · 7 foto's — Klik om te bekijken →</span>
   </div>
 
   <!-- E2: behandelingen verwijderd van p2 (staat nu op p1 rechts) -->
@@ -1799,7 +1947,6 @@ body { font-size: 16px; }
       <span class="footer-sep">·</span>
       <a class="footer-item" href="tel:+31652874750">06 5287 4750</a>
     </div>
-    <span class="footer-loc">Kinkerstraat 162-H</span>
   </div>
 
 </div><!-- /p2 -->
@@ -1808,6 +1955,27 @@ body { font-size: 16px; }
 <a id="mobile-book-bar" href="https://www.treatwell.nl/salon/hairstyler-patrick-anches-barbier-kapper/" target="_blank" rel="noopener">
   Boek via Treatwell &nbsp;→
 </a>
+
+<!-- ── macOS Photo Viewer ── -->
+<div id="photo-viewer" onclick="pvBgClose(event)">
+  <div class="pv-window">
+    <div class="pv-titlebar">
+      <div class="pv-lights">
+        <div class="pv-light pv-red" onclick="closePhotoViewer()"></div>
+        <div class="pv-light pv-yellow"></div>
+        <div class="pv-light pv-green"></div>
+      </div>
+      <span class="pv-title-text" id="pv-title">Patrick Anches · Foto's</span>
+    </div>
+    <div class="pv-main">
+      <button class="pv-nav pv-prev" onclick="pvNav(-1)" aria-label="Vorige foto">&#8249;</button>
+      <img id="pv-img" src="" alt="Portfolio foto">
+      <button class="pv-nav pv-next" onclick="pvNav(1)" aria-label="Volgende foto">&#8250;</button>
+      <span class="pv-counter" id="pv-counter">1 / 7</span>
+    </div>
+    <div class="pv-filmstrip"><div class="pv-strip" id="pv-strip"></div></div>
+  </div>
+</div>
 
 <!-- ── Floating chat button ── -->
 <button id="chat-fab" onclick="toggleChatModal()">
@@ -2058,12 +2226,12 @@ let ri=0;
 function renderRevs(i){
   const r1=revs[i%revs.length],r2=revs[(i+1)%revs.length];
   const ids=['rq1','ra1','rt1','rq2','ra2','rt2'];
-  // Fade + slide out
+  // Exit: fade + micro-scale down
   ids.forEach(id=>{
     const el=document.getElementById(id);
-    el.style.transition='opacity .25s ease, transform .25s ease';
+    el.style.transition='opacity .22s ease, transform .22s ease';
     el.style.opacity='0';
-    el.style.transform='translateX(-10px)';
+    el.style.transform='scale(0.97)';
   });
   setTimeout(()=>{
     document.getElementById('rq1').innerHTML=`"${r1.t}"`;
@@ -2072,23 +2240,23 @@ function renderRevs(i){
     document.getElementById('rq2').innerHTML=`"${r2.t}"`;
     document.getElementById('ra2').textContent=`${r2.n} · ${r2.d} geleden`;
     document.getElementById('rt2').textContent=r2.tr;
-    // Slide in from right
+    // Enter: clip-path horizontal reveal from left + fade
     ids.forEach((id,idx)=>{
       const el=document.getElementById(id);
-      el.style.transform='translateX(14px)';
-      el.style.opacity='0';
       el.style.transition='none';
-      // Staggered entrance
+      el.style.transform='scale(1)';
+      el.style.clipPath='inset(0 100% 0 0)';
+      el.style.opacity='0.5';
       setTimeout(()=>{
-        el.style.transition=`opacity .45s ease ${idx*35}ms, transform .45s cubic-bezier(0.22,1,0.36,1) ${idx*35}ms`;
+        el.style.transition=`clip-path .62s cubic-bezier(0.25,0.46,0.45,0.94) ${idx*45}ms, opacity .3s ease ${idx*45}ms`;
+        el.style.clipPath='inset(0 0% 0 0)';
         el.style.opacity='1';
-        el.style.transform='translateX(0)';
-      }, 20);
+      },16);
     });
-  },260);
+  },240);
 }
 renderRevs(0);
-setInterval(()=>{ri=(ri+2)%revs.length;renderRevs(ri);},6000);
+setInterval(()=>{ri=(ri+2)%revs.length;renderRevs(ri);},7000);
 
 /* FAQ */
 function toggleFaq(el){el.closest('.faq-item').classList.toggle('open');}
@@ -2184,10 +2352,10 @@ updateClock(); setInterval(updateClock,30000);
 function filterTx(btn, cat) {
   document.querySelectorAll('.e2-tab').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  document.querySelectorAll('#p2 .tg').forEach(g=>{
+  document.querySelectorAll('#p1 .tg').forEach(g=>{
     g.style.display = (cat==='all' || g.dataset.cat===cat) ? '' : 'none';
   });
-  const panel = document.querySelector('#p2 .c-e2');
+  const panel = document.querySelector('#p1 .c-tx');
   if(panel) panel.scrollTop = 0;
 }
 
@@ -2244,6 +2412,69 @@ if (twCard && window.IntersectionObserver) {
     mbb.style.pointerEvents = entries[0].isIntersecting ? 'none' : 'auto';
   }, { threshold: 0.4 }).observe(twCard);
 }
+
+/* ── macOS Photo Viewer ── */
+const pvPhotos=['p1.jpg','p2.jpg','p3.jpg','p4.jpg','p5.jpg','p6.jpg','p7.jpg'];
+let pvIdx=0,pvStripBuilt=false;
+function openPhotoViewer(i){
+  pvIdx=i;
+  document.getElementById('photo-viewer').classList.add('open');
+  document.body.style.overflow='hidden';
+  if(!pvStripBuilt){
+    pvStripBuilt=true;
+    const strip=document.getElementById('pv-strip');
+    pvPhotos.forEach((src,j)=>{
+      const img=document.createElement('img');
+      img.className='pv-thumb-img';img.src=src;img.alt='Foto '+(j+1);
+      img.onclick=()=>pvGoTo(j);
+      strip.appendChild(img);
+    });
+  }
+  pvRender(true);pvUpdateStrip();
+}
+function closePhotoViewer(){
+  document.getElementById('photo-viewer').classList.remove('open');
+  document.body.style.overflow='';
+}
+function pvBgClose(e){if(e.target.id==='photo-viewer')closePhotoViewer();}
+function pvNav(dir){pvGoTo(pvIdx+dir);}
+function pvGoTo(i){pvIdx=(i+pvPhotos.length)%pvPhotos.length;pvRender(false);pvUpdateStrip();}
+function pvRender(instant){
+  const img=document.getElementById('pv-img');
+  if(instant){img.style.transition='none';img.style.opacity='1';img.src=pvPhotos[pvIdx];}
+  else{
+    img.style.transition='opacity .15s ease';img.style.opacity='0';
+    setTimeout(()=>{
+      img.src=pvPhotos[pvIdx];
+      img.style.transition='opacity .38s ease';img.style.opacity='1';
+    },150);
+  }
+  document.getElementById('pv-counter').textContent=(pvIdx+1)+' / '+pvPhotos.length;
+}
+function pvUpdateStrip(){
+  const thumbs=document.getElementById('pv-strip').querySelectorAll('.pv-thumb-img');
+  thumbs.forEach((t,i)=>t.classList.toggle('pv-active',i===pvIdx));
+  const active=thumbs[pvIdx];
+  if(active)active.scrollIntoView({inline:'center',behavior:'smooth',block:'nearest'});
+}
+document.addEventListener('keydown',e=>{
+  if(!document.getElementById('photo-viewer').classList.contains('open'))return;
+  if(e.key==='ArrowLeft')pvNav(-1);
+  else if(e.key==='ArrowRight')pvNav(1);
+  else if(e.key==='Escape')closePhotoViewer();
+});
+
+/* ── Chat FAB: invert on page 2 ── */
+(function(){
+  const fab=document.getElementById('chat-fab');
+  const p2=document.getElementById('p2');
+  const appEl=document.getElementById('app');
+  if(fab&&p2&&appEl&&window.IntersectionObserver){
+    new IntersectionObserver(entries=>{
+      fab.classList.toggle('fab-p2',entries[0].isIntersecting);
+    },{threshold:0.4,root:appEl}).observe(p2);
+  }
+})();
 </script>
 <script type="application/ld+json">
 {

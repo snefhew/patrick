@@ -15,14 +15,14 @@
 <link rel="canonical" href="https://snefhew.github.io/patrick/">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'><rect x='.4' y='.4' width='17.2' height='17.2' stroke='%23292929' stroke-width='.8' fill='none'/><circle cx='9' cy='9' r='2.8' stroke='%23292929' stroke-width='.6' fill='none'/></svg>">
 <title>Patrick Anches — Barbier &amp; Kapper Amsterdam</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════
    BASE
 ═══════════════════════════════════════ */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html,body{height:100%;overflow:hidden;}
-body{font-size:14px;line-height:1.5;}
+body{font-size:14px;line-height:1.5;font-family:'Inter',ui-sans-serif,system-ui,sans-serif;}
 a{color:inherit;text-decoration:none;}
 button{cursor:pointer;border:none;background:none;}
 
@@ -63,10 +63,10 @@ button{cursor:pointer;border:none;background:none;}
   --bg:    #ffffff;
   --bg2:   #f5f5f5;
   --b:     1px solid #292929;
-  --ff:    'Helvetica Neue',Helvetica,Arial,sans-serif;
-  --fc:    Impact,'Arial Narrow Bold',Haettenschweiler,sans-serif;
-  --fm:    'IBM Plex Mono',ui-monospace,monospace;
-  --fd:    'Bebas Neue',Impact,sans-serif;
+  --ff:    'Inter',ui-sans-serif,system-ui,sans-serif;
+  --fc:    'Barlow Condensed','Arial Narrow Bold',sans-serif;
+  --fm:    'Barlow Condensed','Arial Narrow Bold',sans-serif;
+  --fd:    'Barlow Condensed',sans-serif;
   background:var(--bg);
 }
 #p1 .cell{border:var(--b);background:var(--bg);color:var(--ink);border-radius:0;}
@@ -93,9 +93,9 @@ button{cursor:pointer;border:none;background:none;}
 #p1 .hero-h1{
   font-family:var(--fd);
   font-size:clamp(4rem,5.5vw,7rem);
-  font-weight:400;
+  font-weight:800;
   line-height:0.88;
-  letter-spacing:0.025em;
+  letter-spacing:0.01em;
   color:var(--ink);
   text-transform:uppercase;
   text-align:left;
@@ -151,7 +151,7 @@ button{cursor:pointer;border:none;background:none;}
 #p1 .stats-row{display:flex;justify-content:space-around;padding-top:16px;border-top:1px solid #292929;width:100%;}
 #p1 .stat-item{display:flex;flex-direction:column;gap:3px;align-items:center;text-align:center;}
 #p1 .stat-n{font-family:var(--fd);font-size:3.2rem;line-height:1;
-  letter-spacing:0.02em;color:var(--ink);}
+  font-weight:800;letter-spacing:0.02em;color:var(--ink);}
 #p1 .stat-l{font-family:var(--fc);font-size:10px;letter-spacing:0.2em;
   text-transform:uppercase;color:var(--ink3);}
 
@@ -222,7 +222,7 @@ button{cursor:pointer;border:none;background:none;}
   color:var(--ink);margin-bottom:4px;}
 #p1 .tw-stars{font-size:13px;color:var(--ink);margin-bottom:16px;}
 #p1 .tw-btn{display:block;width:100%;background:var(--ink);color:#fff;
-  font-family:var(--fc);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;
+  font-family:var(--fc);font-size:13px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;
   padding:14px;text-align:center;border:var(--b);transition:background .2s,color .2s;}
 #p1 .tw-btn:hover{background:#fff;color:var(--ink);}
 #p1 .tw-note{font-family:var(--fm);font-size:10px;color:var(--ink3);
@@ -242,7 +242,7 @@ button{cursor:pointer;border:none;background:none;}
   --green:   #00AC5C;
   --b:       1px solid #333333;
   --ff:      'Inter',ui-sans-serif,system-ui,sans-serif;
-  --fm:      'IBM Plex Mono',ui-monospace,monospace;
+  --fm:      'Barlow Condensed',sans-serif;
   background:var(--midnight);
 }
 #p2 .cell{border:var(--b);background:var(--midnight);color:var(--polar);}
@@ -543,9 +543,9 @@ button{cursor:pointer;border:none;background:none;}
 /* 8. Footer — heavier top border */
 #p2 .c-footer{border-top:2px solid var(--carbon);}
 
-/* 9. Page 2 heading — tighter */
-#p2 .p2-h1{font-size:clamp(2rem,2.8vw,3.2rem);font-weight:700;line-height:0.92;
-  letter-spacing:-0.025em;color:var(--polar);margin-bottom:12px;}
+/* 9. Page 2 heading — tighter, Barlow Condensed */
+#p2 .p2-h1{font-family:'Barlow Condensed',sans-serif;font-size:clamp(2.4rem,3.2vw,4rem);font-weight:800;line-height:0.90;
+  letter-spacing:0.005em;color:var(--polar);margin-bottom:12px;text-transform:uppercase;}
 #p2 .p2-h1 em{font-style:normal;color:var(--ash);}
 
 /* 10. Vbar — dot overlay */
@@ -601,6 +601,101 @@ button{cursor:pointer;border:none;background:none;}
 
 /* 7. FOOTER p1 — 2px top accent line */
 #p1 .c-footer{border-top:2px solid var(--ink);}
+
+/* ═══════════════════════════════════════
+   HERO BACKGROUND PHOTO
+═══════════════════════════════════════ */
+
+/* Page 1 — grayscale + white wash */
+#p1 .c-b{
+  background-image:none;
+  position:relative;
+  overflow:hidden;
+}
+#p1 .c-b::before{
+  content:'';
+  position:absolute;inset:0;
+  background-image:url('hero.jpg');
+  background-size:cover;
+  background-position:center 20%;
+  filter:grayscale(100%) contrast(1.2) brightness(0.95);
+  z-index:0;
+  pointer-events:none;
+  transform:scale(1.02);
+}
+#p1 .c-b::after{
+  content:'';
+  position:absolute;inset:0;
+  background:rgba(255,255,255,0.82);
+  z-index:1;
+  pointer-events:none;
+}
+#p1 .c-b > *{position:relative;z-index:2;}
+
+/* Page 2 — dark moody version */
+#p2 .c-b2{
+  position:relative;
+  overflow:hidden;
+}
+#p2 .c-b2::before{
+  content:'';
+  position:absolute;inset:0;
+  background-image:url('hero.jpg');
+  background-size:cover;
+  background-position:center 20%;
+  filter:grayscale(60%) brightness(0.18) contrast(1.2);
+  z-index:0;
+  pointer-events:none;
+  transform:scale(1.02);
+}
+#p2 .c-b2 > *{position:relative;z-index:1;}
+
+/* ═══════════════════════════════════════
+   CHATBOT — FLOATING POPUP
+═══════════════════════════════════════ */
+
+/* Page 1 — float over light bg */
+#p1 .c-d{
+  background:rgba(248,248,248,0.6);
+}
+#p1 .chat-card{
+  box-shadow:
+    0 1px 3px rgba(0,0,0,0.05),
+    0 6px 20px rgba(0,0,0,0.09),
+    0 20px 48px rgba(0,0,0,0.13),
+    0 40px 72px rgba(0,0,0,0.06);
+  transform:translateY(-8px);
+  transition:box-shadow 0.35s ease, transform 0.35s ease;
+}
+#p1 .chat-card:hover{
+  box-shadow:
+    0 1px 3px rgba(0,0,0,0.07),
+    0 10px 28px rgba(0,0,0,0.13),
+    0 28px 60px rgba(0,0,0,0.17);
+  transform:translateY(-12px);
+}
+
+/* Page 2 — dramatic float on dark */
+#p2 .c-d{
+  background:rgba(4,4,4,0.55);
+}
+#p2 .chat-card{
+  box-shadow:
+    0 2px 8px rgba(0,0,0,0.45),
+    0 10px 28px rgba(0,0,0,0.55),
+    0 28px 64px rgba(0,0,0,0.65),
+    0 0 0 1px rgba(255,255,255,0.06);
+  transform:translateY(-8px);
+  transition:box-shadow 0.35s ease, transform 0.35s ease;
+}
+#p2 .chat-card:hover{
+  box-shadow:
+    0 2px 8px rgba(0,0,0,0.55),
+    0 14px 36px rgba(0,0,0,0.65),
+    0 36px 80px rgba(0,0,0,0.75),
+    0 0 0 1px rgba(255,255,255,0.09);
+  transform:translateY(-12px);
+}
 
 @media(max-width:900px){
   #app{scroll-snap-type:none;}

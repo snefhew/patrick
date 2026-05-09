@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="nl">
 <head>
 <meta charset="UTF-8">
@@ -142,16 +142,20 @@ button{cursor:pointer;border:none;background:none;}
 #p1 .c-e-inner{width:100%;flex:1;display:flex;flex-direction:column;gap:0;align-items:center;justify-content:space-evenly;}
 #p1 .rev-header{font-family:var(--fc);font-size:11px;letter-spacing:0.2em;
   text-transform:uppercase;color:var(--ink3);margin-bottom:16px;text-align:center;}
-#p1 .rev-quote{font-family:var(--ff);font-style:italic;font-size:17px;
-  line-height:1.6;color:var(--ink);margin-bottom:8px;font-weight:300;text-align:center;}
+#p1 .rev-quote{
+  font-family:var(--ff);font-style:italic;font-size:21px;
+  line-height:1.42;color:var(--ink);margin-bottom:10px;
+  font-weight:300;text-align:center;letter-spacing:-0.01em;}
 #p1 .rev-author{font-family:var(--fc);font-size:11px;letter-spacing:0.12em;
   text-transform:uppercase;color:var(--ink3);text-align:center;}
 #p1 .rev-treatment{font-family:var(--fm);font-size:10px;color:var(--ink3);margin-top:2px;text-align:center;}
 #p1 .rev-div{height:1px;background:var(--ink);opacity:1;margin:16px 0;width:100%;}
 #p1 .stats-row{display:flex;justify-content:space-around;padding-top:16px;border-top:1px solid #292929;width:100%;}
 #p1 .stat-item{display:flex;flex-direction:column;gap:3px;align-items:center;text-align:center;}
-#p1 .stat-n{font-family:var(--fd);font-size:3.2rem;line-height:1;
-  font-weight:800;letter-spacing:0.02em;color:var(--ink);}
+#p1 .stat-n{
+  font-family:var(--fd);font-size:3.4rem;line-height:1;
+  font-weight:800;letter-spacing:-0.01em;color:var(--ink);
+  font-variant-numeric:tabular-nums;}
 #p1 .stat-l{font-family:var(--fc);font-size:10px;letter-spacing:0.2em;
   text-transform:uppercase;color:var(--ink3);}
 
@@ -868,7 +872,10 @@ button{cursor:pointer;border:none;background:none;}
 #p1 .c-b::after{
   content:'';
   position:absolute;inset:0;
-  background:rgba(255,255,255,0.82);
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"),
+    linear-gradient(170deg,rgba(255,255,255,0.92) 0%,rgba(255,255,255,0.76) 55%,rgba(255,255,255,0.86) 100%);
+  background-size:200px 200px,100% 100%;
   z-index:1;
   pointer-events:none;
 }
@@ -890,7 +897,60 @@ button{cursor:pointer;border:none;background:none;}
   pointer-events:none;
   transform:scale(1.02);
 }
-#p2 .c-b2 > *{position:relative;z-index:1;}
+#p2 .c-b2::after{
+  content:'';
+  position:absolute;inset:0;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E"),
+    linear-gradient(180deg,rgba(16,16,16,0.45) 0%,rgba(16,16,16,0.0) 40%,rgba(16,16,16,0.6) 100%);
+  background-size:200px 200px,100% 100%;
+  z-index:1;
+  pointer-events:none;
+}
+#p2 .c-b2 > *{position:relative;z-index:2;}
+
+/* ═══════════════════════════════════════
+   PREMIUM UPGRADES 2025
+═══════════════════════════════════════ */
+
+/* ── Vbar: full-height, page-number indicators top + bottom ── */
+#p1 .c-vbar,#p2 .c-vbar{
+  flex-direction:column;justify-content:space-between;padding:14px 0;gap:0;
+}
+#p1 .vbar-num,#p2 .vbar-num{
+  font-family:var(--fc);font-size:9px;letter-spacing:0.22em;font-weight:600;
+  color:rgba(255,255,255,0.38);user-select:none;
+  writing-mode:horizontal-tb;text-align:center;
+}
+#p1 .vbar-mid,#p2 .vbar-mid{flex:1;display:flex;align-items:center;justify-content:center;}
+
+/* ── Rev quote: large decorative open-quote backdrop ── */
+#p1 .rev-quote{position:relative;}
+#p1 .rev-quote::before{
+  content:'\201C';
+  position:absolute;top:-18px;left:50%;transform:translateX(-50%);
+  font-family:Georgia,'Times New Roman',serif;font-size:72px;line-height:1;
+  color:rgba(41,41,41,0.06);pointer-events:none;user-select:none;
+  font-style:normal;
+}
+
+/* ── Info bar micro-refinements ── */
+#p1 .info-lbl{letter-spacing:0.28em;font-size:8.5px;}
+#p2 .info-lbl{letter-spacing:0.28em;font-size:8.5px;}
+#p1 .info-val{font-weight:500;}
+
+/* ── Scroll hint: warm amber arrow ── */
+#p1 .scroll-arrow{color:#C8A97A;}
+
+/* ── Stats: suffix styling for 67+ sign ── */
+#p1 .stat-suffix{
+  font-size:1.8rem;font-weight:700;line-height:1;
+  opacity:0.55;vertical-align:baseline;margin-left:1px;
+}
+
+/* ── Rev author: spaced caps ── */
+#p1 .rev-author{letter-spacing:0.18em;}
+#p1 .rev-treatment{letter-spacing:0.14em;font-size:9px;}
 
 /* ═══════════════════════════════════════
    CHATBOT — FLOATING POPUP
@@ -1074,7 +1134,9 @@ button{cursor:pointer;border:none;background:none;}
 
   <!-- VBAR -->
   <div class="cell c-vbar" data-anim="scale" style="--ad:100ms">
-    <span class="vbar-text" style="--vd:400ms">Patrick Anches · Amsterdam · Kinkerstraat</span>
+    <span class="vbar-num">01</span>
+    <span class="vbar-mid"><span class="vbar-text" style="--vd:400ms">Patrick Anches · Amsterdam · Kinkerstraat</span></span>
+    <span class="vbar-num">02</span>
   </div>
 
   <!-- E: reviews -->
@@ -1251,7 +1313,9 @@ button{cursor:pointer;border:none;background:none;}
 
   <!-- VBAR -->
   <div class="cell c-vbar" data-anim="scale" style="--ad:100ms">
-    <span class="vbar-text" style="--vd:400ms">Patrick Anches · Amsterdam · Kinkerstraat</span>
+    <span class="vbar-num">02</span>
+    <span class="vbar-mid"><span class="vbar-text" style="--vd:400ms">Patrick Anches · Amsterdam · Kinkerstraat</span></span>
+    <span class="vbar-num">01</span>
   </div>
 
   <!-- E2: treatment list -->

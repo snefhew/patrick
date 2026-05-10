@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="description" content="Patrick Anches — gediplomeerde barbier en kapper in Amsterdam-West. Knippen, baard, extensions en Black hair. Boek direct via Treatwell. Kinkerstraat 162-H.">
 <meta property="og:type" content="business.business">
 <meta property="og:title" content="Patrick Anches — Barbier &amp; Kapper Amsterdam">
@@ -90,7 +90,7 @@ button{cursor:pointer;border:none;background:none;}
 .sdot{width:7px;height:7px;border-radius:50%;background:#888;transition:background .3s;}
 .sdot.on{background:#00AC5C;}
 
-/* B: hero — left col, rows 2+3 */
+/* B: hero — left col, rows 2+3+lower */
 #p1 .c-b{grid-column:1;grid-row:2/5;padding:32px 28px;
   align-items:flex-start;justify-content:center;gap:20px;}
 #p1 .hero-h1{
@@ -1274,9 +1274,9 @@ body { font-size: 16px; }
   #p1 .c-c           {grid-column:1/4;grid-row:2;}
   #p1 .c-e           {grid-column:1/3;grid-row:4;min-height:280px;}
   #p1 .c-f           {grid-column:1/3;grid-row:5;min-height:160px;}
-  #p1 .c-tx          {grid-column:4;grid-row:1/6;max-height:80vh;overflow-y:auto;}
-  #p1 .c-vbar        {grid-column:3;grid-row:1/5;}
-  #p1 .c-footer      {grid-column:1/-1;grid-row:7;}
+  #p1 .c-tx          {grid-column:4;grid-row:1/7;max-height:80vh;overflow-y:auto;}
+  #p1 .c-vbar        {grid-column:3;grid-row:1/6;}
+  #p1 .c-footer      {grid-column:1/-1;grid-row:6;}
   /* P2 tablet */
   #p2 .c-a           {grid-column:1;grid-row:1;}
   #p2 .c-photo       {grid-column:1;grid-row:2/5;min-height:200px;}
@@ -1342,8 +1342,10 @@ body { font-size: 16px; }
   #p2 .chat-card { width:100%; max-width:none; }
 
   /* P2 mobile order */
+  #p2 .c-a     { order:0; }
   #p2 .c-photo { min-height:240px; flex-shrink:0; order:1; }
   #p2 .c-faq   { min-height:auto; padding:0; flex-shrink:0; order:2; }
+  #p2 .c-faq > div { height:auto !important; }
   #p2 .c-album { width:100%; aspect-ratio:16/9; min-height:unset; flex-shrink:0; order:3; padding:0; }
   #p2 .c-tw-p2 { min-height:200px; padding:24px 20px; flex-shrink:0; order:4; }
   /* Page 2 footer — always last */
@@ -1432,6 +1434,9 @@ body { font-size: 16px; }
 .e2-tab:last-child { border-right: none; }
 .e2-tab.active { background: var(--polar); color: var(--midnight); }
 .e2-tab:hover:not(.active) { background: rgba(255,255,255,0.06); color: var(--polar); }
+/* P1 override — must come after the global rule to win the cascade */
+#p1 .e2-tab.active { background: var(--ink); color: #fff; }
+#p1 .e2-tab:hover:not(.active) { background: rgba(41,41,41,0.05); color: var(--ink); }
 
 /* ── Ticker strip: compensate scroll-snap offset ── */
 
@@ -1695,7 +1700,11 @@ body { font-size: 16px; }
 }
 .macos-photo-wrap:hover .macos-toolbar{opacity:1;}
 /* Touch devices: toolbar always visible (no hover state on touch) */
-@media(hover:none){.macos-toolbar{opacity:1;}}
+@media(hover:none){
+  .macos-toolbar{opacity:1;}
+  .pv-pill{opacity:1;}
+  .pv-nav{opacity:0.7;}
+}
 .macos-tb-btn{
   width:30px;height:26px;border-radius:7px;
   background:transparent;
@@ -1755,6 +1764,20 @@ body { font-size: 16px; }
 #chat-fab.fab-p2{background:#ffffff;box-shadow:0 4px 20px rgba(0,0,0,0.18);}
 #chat-fab.fab-p2 svg{fill:#0d0d0d;}
 #chat-fab.fab-p2:hover{background:#f0f0f0;box-shadow:0 8px 32px rgba(0,0,0,0.28);}
+
+/* ── iOS safe-area insets ── */
+#mobile-book-bar{
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  height:calc(56px + env(safe-area-inset-bottom,0px));
+}
+@media(max-width:600px){
+  #app{padding-bottom:calc(56px + env(safe-area-inset-bottom,0px));}
+  #chat-fab{bottom:calc(72px + env(safe-area-inset-bottom,0px));right:calc(16px + env(safe-area-inset-right,0px));}
+  #chat-modal{padding-bottom:calc(env(safe-area-inset-bottom,0px));}
+}
+@media(min-width:601px){
+  #chat-fab{bottom:calc(28px + env(safe-area-inset-bottom,0px));right:calc(28px + env(safe-area-inset-right,0px));}
+}
 
 /* ── Chat FAB: attention pulse (3 pulses on load) ── */
 @keyframes fabAttention{
@@ -2427,7 +2450,7 @@ function setStatus(dotId,textId){
   const parts=new Intl.DateTimeFormat('nl-NL',{
     timeZone:'Europe/Amsterdam',weekday:'short',hour:'numeric',hour12:false
   }).formatToParts(now);
-  const dayStr=parts.find(p=>p.type==='weekday').value.toLowerCase().replace('.','');
+  const dayStr=parts.find(p=>p.type==='weekday').value.toLowerCase().replace(/\./g,'');
   const h=parseInt(parts.find(p=>p.type==='hour').value,10);
   const dy=['zo','ma','di','wo','do','vr','za'].indexOf(dayStr);
   const open=[3,4,5,6].includes(dy)&&h>=10&&h<19;
@@ -2493,7 +2516,7 @@ function renderRevs(i){
 }
 /* Initial — populate without animation */
 setRevData(1,revs[0]);setRevData(2,revs[1]);
-setInterval(()=>{ri=(ri+2)%revs.length;renderRevs(ri);},7000);
+setInterval(()=>{ri=(ri+2)%revs.length;renderRevs(ri);},5000);
 
 /* FAQ */
 function toggleFaq(el){el.closest('.faq-item').classList.toggle('open');}

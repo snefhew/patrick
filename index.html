@@ -1623,6 +1623,7 @@ body { font-size: 16px; }
   max-height:100%;
   width:auto;
   height:auto;
+  min-height:200px;
   display:flex;flex-direction:column;
   background:#1a1a1a;overflow:hidden;
   border-radius:10px;
@@ -1694,6 +1695,8 @@ body { font-size: 16px; }
   pointer-events:all;
 }
 .macos-photo-wrap:hover .macos-toolbar{opacity:1;}
+/* Touch devices: toolbar always visible (no hover state on touch) */
+@media(hover:none){.macos-toolbar{opacity:1;}}
 .macos-tb-btn{
   width:30px;height:26px;border-radius:7px;
   background:transparent;
@@ -2212,8 +2215,6 @@ body { font-size: 16px; }
     <div class="pv-filmstrip"><div class="pv-strip" id="pv-strip"></div></div>
   </div>
 </div>
-</div>
-
 
 <!-- ── Floating chat button ── -->
 <button id="chat-fab" onclick="toggleChatModal()">
@@ -2245,6 +2246,7 @@ body { font-size: 16px; }
     </div>
     <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:#555;text-align:center;padding:9px;border-top:1px solid #1a1a1a;background:#080808;flex-shrink:0;">Powered by Axon · AI-assistent</div>
   </div>
+</div>
 
 <script>
 /* ═══════════════════════════════════════
@@ -2538,40 +2540,18 @@ function showTyp(cid){
   d.innerHTML='<span></span><span></span><span></span>';
   c.appendChild(d);c.scrollTop=c.scrollHeight;
 }
+/* sendMsg: grid chat (c-d) was removed — all chat now goes through the modal */
 async function sendMsg(txt){
-  if(busy||!txt.trim())return;
-  busy=true;
-  document.getElementById('chips1').style.display='none';
-  addM('msgs1','user',txt);
-  hist.push({role:'user',content:txt});
-  showTyp('msgs1');
-  try{
-    const r=await fetch(CHAT_URL,{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:600,system:SYS,messages:hist.slice(-12)})
-    });
-    document.getElementById('typmsgs1')?.remove();
-    if(!r.ok) throw new Error(`HTTP ${r.status}`);
-    const data=await r.json();
-    const rep=data.content?.[0]?.text||'Even geen antwoord. Probeer opnieuw.';
-    hist.push({role:'assistant',content:rep});
-    addM('msgs1','bot',rep);
-    document.getElementById('chips1').style.display='flex';
-  }catch{
-    document.getElementById('typmsgs1')?.remove();
-    addM('msgs1','bot','Verbindingsfout. WhatsApp: 06 52874750.');
-    document.getElementById('chips1').style.display='flex';
-  }
-  busy=false;
+  if(!txt||!txt.trim())return;
+  /* Route through modal chat: open it if not already open, then send */
+  if(!chatModalOpen) toggleChatModal();
+  /* Wait a tick so modal DOM is visible before writing */
+  setTimeout(()=>{ document.getElementById('inM').value=txt; sdM(); }, 50);
 }
-function sd(){const v=document.getElementById('in1').value.trim();document.getElementById('in1').value='';if(v)sendMsg(v);}
+function sd(){} // grid chat removed — no-op
 function sd2(){} // c-d removed — chatbot now in modal
 function qs(t){sendMsg(t);}
-function qs2(t){qs(t);}
-document.getElementById('in1').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sd();}});
-const welcome='Hoi! Ik ben de assistent van Patrick. Vraag me over behandelingen, prijzen of hoe je een afspraak maakt.';
-addM('msgs1','bot',welcome);
+function qs2(t){sendMsg(t);}
 
 /* Amsterdam live clock (A4) */
 function updateClock(){
@@ -2714,7 +2694,7 @@ function pvRender(instant){
 }
 function pvUpdateStrip(){
   const thumbs=document.getElementById('pv-strip').querySelectorAll('.pv-thumb-img');
-  thumbs.forEach((t,i)=>t.classList.toggle('pv-active',i===pvIdx));
+  thumbs.forEach((t,i)=>t.classList.toggle('active',i===pvIdx));
   const active=thumbs[pvIdx];
   if(active)active.scrollIntoView({inline:'center',behavior:'smooth',block:'nearest'});
 }

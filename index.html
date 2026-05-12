@@ -533,12 +533,11 @@ button{cursor:pointer;border:none;background:none;}
 
 /* ── Chat modal ── */
 #chat-modal{
-  display:none;position:fixed;inset:0;z-index:400;
-  background:rgba(0,0,0,0.55);
-  align-items:flex-end;justify-content:flex-end;
-  padding:0 28px 96px 0;
+  display:none;position:fixed;
+  bottom:96px;right:28px;
+  z-index:400;
 }
-#chat-modal.open{display:flex;}
+#chat-modal.open{display:block;}
 #chat-modal-inner{
   width:min(460px,calc(100vw - 40px));
   max-height:min(600px,calc(100vh - 120px));
@@ -548,7 +547,7 @@ button{cursor:pointer;border:none;background:none;}
   border-radius:0;
 }
 @media(max-width:600px){
-  #chat-modal{padding:0;align-items:flex-end;justify-content:flex-end;}
+  #chat-modal{bottom:calc(72px + env(safe-area-inset-bottom,0px));right:0;left:0;}
   #chat-modal-inner{width:100%;max-height:80vh;border-left:none;border-right:none;border-bottom:none;}
 }
 
@@ -1773,7 +1772,7 @@ body { font-size: 16px; }
 @media(max-width:600px){
   #app{padding-bottom:calc(56px + env(safe-area-inset-bottom,0px));}
   #chat-fab{bottom:calc(72px + env(safe-area-inset-bottom,0px));right:calc(16px + env(safe-area-inset-right,0px));}
-  #chat-modal{padding-bottom:calc(env(safe-area-inset-bottom,0px));}
+  #chat-modal{bottom:calc(72px + env(safe-area-inset-bottom,0px));}
 }
 @media(min-width:601px){
   #chat-fab{bottom:calc(28px + env(safe-area-inset-bottom,0px));right:calc(28px + env(safe-area-inset-right,0px));}
@@ -2244,7 +2243,7 @@ body { font-size: 16px; }
 </button>
 
 <!-- ── Chat modal ── -->
-<div id="chat-modal" role="dialog" aria-modal="true" aria-label="Chat assistent" onclick="closeChatIfBg(event)">
+<div id="chat-modal" role="dialog" aria-modal="true" aria-label="Chat assistent">
   <div id="chat-modal-inner">
     <div class="ch-header" style="background:#0d0d0d;color:#fff;padding:14px 18px;display:flex;align-items:center;gap:10px;flex-shrink:0;border-bottom:1px solid #292929;">
       <div style="width:7px;height:7px;border-radius:50%;background:#00AC5C;flex-shrink:0;"></div>
@@ -2542,7 +2541,8 @@ Producten: L'Oreal, Redken, Keune, KeraCare.
 
 BOEKINGSFLOW: Geef altijd de Treatwell-link. Alternatief: WhatsApp 06 52874750. Beloof NOOIT een specifieke beschikbaarheid.
 TOON: vriendelijk, informeel (je/jij), max 2 tot 3 zinnen. Schakel mee in de taal van de klant.
-GRENZEN: Nooit beschikbaarheid beloven. Nooit vragen om persoonsgegevens. Als gevraagd of je AI bent: eerlijk zeggen dat je de digitale assistent van Patrick bent.`;
+GRENZEN: Nooit beschikbaarheid beloven. Nooit vragen om persoonsgegevens. Als gevraagd of je AI bent: eerlijk zeggen dat je de digitale assistent van Patrick bent.
+ANTWOORDSTIJL: Gebruik NOOIT emojis. Gebruik GEEN markdown zoals **bold** of *italic*. Schrijf alleen plain tekst. Telefoonnummers schrijf je als: 06 52874750.`;
 
 const hist=[];let busy=false;
 const CHAT_URL='https://chat.cratedrop.app/chat';
@@ -2616,7 +2616,11 @@ function addModalMsg(role, text){
   d.style.cssText='max-width:88%;'+(role==='bot'?'align-self:flex-start;':'align-self:flex-end;');
   const b=document.createElement('div');
   b.style.cssText='padding:11px 14px;font-family:Inter,sans-serif;font-size:14px;line-height:1.65;'+(role==='bot'?'background:#1a1a1a;border:1px solid #292929;color:#f3f3f3;':'background:#f3f3f3;color:#0d0d0d;');
-  b.textContent=text;
+  const safe=text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const linked=safe
+    .replace(/https?:\/\/[^\s<]+/g,u=>`<a href="${u}" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">${u}</a>`)
+    .replace(/(\b06[\s\-]?\d{2}[\s\-]?\d{2}[\s\-]?\d{2}[\s\-]?\d{2}\b)/g,n=>`<a href="tel:${n.replace(/[\s\-]/g,'')}" style="color:inherit;text-decoration:underline;">${n}</a>`);
+  b.innerHTML=linked.replace(/\n/g,'<br>');
   d.appendChild(b);
   box.appendChild(d);
   box.scrollTop=box.scrollHeight;
@@ -2640,6 +2644,9 @@ async function sdM(){
     addModalMsg('bot',data.content?.[0]?.text||data.content||data.text||data.response||'Sorry, probeer opnieuw.');
   }catch(e){typ.remove();addModalMsg('bot','Verbindingsfout. Probeer later opnieuw.');}
 }
+
+/* Open chatbot on page load */
+setTimeout(()=>toggleChatModal(), 800);
 
 /* Hide mobile booking bar when Treatwell card is visible (E1) */
 const twCard = document.querySelector('#p1 .c-f');

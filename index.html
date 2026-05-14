@@ -151,10 +151,10 @@ button{cursor:pointer;border:none;background:none;}
   text-transform:uppercase;color:var(--ink3);text-align:center;}
 #p1 .rev-treatment{font-family:var(--fm);font-size:10px;color:var(--ink3);margin-top:2px;text-align:center;}
 #p1 .rev-div{height:1px;background:var(--ink);opacity:1;margin:16px 0;width:100%;}
-#p1 .stats-row{display:flex;justify-content:space-around;padding-top:16px;border-top:1px solid #292929;width:100%;}
+#p1 .stats-row{display:flex;justify-content:space-around;padding-top:10px;border-top:1px solid #292929;width:100%;}
 #p1 .stat-item{display:flex;flex-direction:column;gap:3px;align-items:center;text-align:center;}
 #p1 .stat-n{
-  font-family:var(--fd);font-size:3.4rem;line-height:1;
+  font-family:var(--fd);font-size:2.4rem;line-height:1;
   font-weight:800;letter-spacing:-0.01em;color:var(--ink);
   font-variant-numeric:tabular-nums;}
 #p1 .stat-l{font-family:var(--fc);font-size:10px;letter-spacing:0.2em;
@@ -600,8 +600,8 @@ body { font-size: 16px; }
 #p1 .rev-author  { font-size: 13px; font-weight: 700; letter-spacing: 0.16em; }
 #p1 .rev-treatment { font-size: 12px; font-weight: 500; letter-spacing: 0.12em; }
 
-#p1 .stat-n { font-size: 4rem; }
-#p1 .stat-l { font-size: 12px; font-weight: 700; letter-spacing: 0.16em; }
+#p1 .stat-n { font-size: 2.4rem; }
+#p1 .stat-l { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; }
 
 #p1 .tw-lbl   { font-size: 11px; letter-spacing: 0.22em; }
 #p1 .tw-salon { font-size: 16px; font-weight: 700; }
@@ -1090,7 +1090,7 @@ body { font-size: 16px; }
 #p1 .c-vbar{grid-column:3;grid-row:1/5;background:#000000;position:relative;}
 
 /* 2. STAT ITEMS — top accent line */
-#p1 .stat-item{position:relative;padding-top:10px;}
+#p1 .stat-item{position:relative;padding-top:7px;}
 #p1 .stat-item::before{content:'';position:absolute;top:0;left:50%;
   transform:translateX(-50%);width:20px;height:2px;background:var(--ink);}
 
@@ -1284,8 +1284,7 @@ body { font-size: 16px; }
   #p2 .c-c           {grid-column:2;grid-row:1;}
   #p2 .c-album       {grid-column:2;grid-row:2/4;min-height:260px;}
   #p2 .c-vbar        {grid-column:3;grid-row:1/5;}
-  #p2 .c-faq         {grid-column:4;grid-row:1/4;}
-  #p2 .c-tw-p2       {grid-column:4;grid-row:4;min-height:160px;}
+  #p2 .c-faq         {grid-column:4;grid-row:1/5;}
   #p2 .c-footer      {grid-column:1/-1;grid-row:5;}
 }
 @media(max-width:600px){
@@ -1348,9 +1347,8 @@ body { font-size: 16px; }
   #p2 .c-faq   { min-height:auto; padding:0; flex-shrink:0; order:2; }
   #p2 .c-faq > div { height:auto !important; }
   #p2 .c-album { width:100%; aspect-ratio:16/9; min-height:unset; flex-shrink:0; order:3; padding:0; }
-  #p2 .c-tw-p2 { min-height:200px; padding:24px 20px; flex-shrink:0; order:4; }
   /* Page 2 footer — always last */
-  #p2 .c-footer { order:5; }
+  #p2 .c-footer { order:4; }
 
   /* Page 2 footer — readable, properly sized */
   #p2 .c-footer {
@@ -1729,37 +1727,37 @@ body { font-size: 16px; }
 #p1 .c-e-inner{width:100%;flex:1;display:flex;flex-direction:column;gap:0;min-height:0;overflow:hidden;}
 #p1 .rev-header{
   font-family:var(--fc);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink3);
-  display:flex;align-items:center;gap:10px;width:100%;flex-shrink:0;margin-bottom:10px;
+  display:flex;align-items:center;gap:10px;width:100%;flex-shrink:0;margin-bottom:8px;
 }
 #p1 .rev-header::before,#p1 .rev-header::after{content:'';flex:1;height:1px;background:var(--ink);opacity:.12;}
-.rev-card{flex:0 1 auto;min-height:0;max-height:145px;display:flex;flex-direction:column;justify-content:space-between;padding:12px 14px;position:relative;overflow:hidden;background:#f7f7f7;border:1px solid rgba(13,13,13,0.08);border-radius:6px;box-shadow:0 1px 3px rgba(13,13,13,0.06),0 4px 14px rgba(13,13,13,0.04);}
+.rev-card{flex:0 1 auto;min-height:0;max-height:120px;display:flex;flex-direction:column;justify-content:space-between;padding:8px 12px;position:relative;overflow:hidden;background:#f7f7f7;border:1px solid rgba(13,13,13,0.08);border-radius:6px;box-shadow:0 1px 3px rgba(13,13,13,0.06),0 4px 14px rgba(13,13,13,0.04);}
 .rev-qmark{
   position:absolute;top:-4px;left:10px;
-  font-family:Georgia,'Times New Roman',serif;font-size:80px;line-height:1;
+  font-family:Georgia,'Times New Roman',serif;font-size:52px;line-height:1;
   color:rgba(13,13,13,0.07);user-select:none;pointer-events:none;font-style:normal;
 }
 .rev-card-quote{position:relative;flex:1;display:flex;align-items:center;}
 .rev-text{
-  font-family:var(--ff);font-size:12.5px;line-height:1.5;color:var(--ink);font-weight:400;padding-left:2px;
-  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+  font-family:var(--ff);font-size:11.5px;line-height:1.45;color:var(--ink);font-weight:400;padding-left:2px;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
 }
-.rev-card-foot{display:flex;justify-content:space-between;align-items:center;margin-top:10px;flex-shrink:0;gap:8px;}
+.rev-card-foot{display:flex;justify-content:space-between;align-items:center;margin-top:7px;flex-shrink:0;gap:8px;}
 .rev-card-author{display:flex;align-items:center;gap:9px;min-width:0;}
 .rev-avatar{
-  width:30px;height:30px;border-radius:50%;flex-shrink:0;
-  background:var(--ink);color:#fff;font-family:var(--fc);font-size:13px;font-weight:700;
+  width:24px;height:24px;border-radius:50%;flex-shrink:0;
+  background:var(--ink);color:#fff;font-family:var(--fc);font-size:10px;font-weight:700;
   display:flex;align-items:center;justify-content:center;text-transform:uppercase;
   border:1px solid rgba(13,13,13,0.2);
 }
 .rev-author-meta{display:flex;flex-direction:column;gap:2px;min-width:0;}
-.rev-author-name{font-family:var(--fc);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.rev-stars{font-size:10px;letter-spacing:2px;color:var(--ink);opacity:0.4;}
+.rev-author-name{font-family:var(--fc);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.rev-stars{font-size:8px;letter-spacing:2px;color:var(--ink);opacity:0.4;}
 .rev-badge{
-  font-family:var(--fc);font-size:9px;text-transform:uppercase;letter-spacing:0.45px;
-  border:1px solid rgba(13,13,13,0.22);padding:3px 7px;color:var(--ink3);
+  font-family:var(--fc);font-size:8px;text-transform:uppercase;letter-spacing:0.45px;
+  border:1px solid rgba(13,13,13,0.22);padding:2px 5px;color:var(--ink3);
   background:rgba(13,13,13,0.03);white-space:nowrap;flex-shrink:0;
 }
-.rev-sep{height:1px;background:var(--ink);opacity:.09;flex-shrink:0;margin:0 16px;}
+.rev-sep{height:1px;background:var(--ink);opacity:.09;flex-shrink:0;margin:0 14px;}
 
 /* ── Chat FAB: p2 inversion ── */
 #chat-fab.fab-p2{background:#ffffff;box-shadow:0 4px 20px rgba(0,0,0,0.18);}
@@ -1803,49 +1801,7 @@ body { font-size: 16px; }
 ═══════════════════════════════════════ */
 /* c-tx uses the #p1 .c-tx rules defined above (padding 20px 18px, overflow-y:auto) */
 
-/* ═══════════════════════════════════════
-   PAGE 1 — FAQ VAKJE (c-f, center bottom)
-═══════════════════════════════════════ */
-/* Override the booking.jpg bg — c-f becomes a clean FAQ card */
-#p1 .c-f{
-  background:var(--bg);
-  align-items:stretch;justify-content:flex-start;
-  overflow:hidden;padding:0;
-}
-#p1 .c-f::before{display:none!important;}
-#p1 .c-f::after{display:none!important;}
-#p1 .c-f > *{position:relative;z-index:auto;}
-.p1-faq-box{
-  width:100%;height:100%;
-  overflow-y:auto;
-  scrollbar-width:thin;scrollbar-color:rgba(41,41,41,.18) transparent;
-  padding:20px 22px;display:flex;flex-direction:column;
-}
-.p1-faq-lbl{
-  font-family:var(--fc);font-size:10px;letter-spacing:0.22em;
-  text-transform:uppercase;color:var(--ink3);
-  margin-bottom:14px;display:flex;align-items:center;gap:10px;
-  flex-shrink:0;
-}
-.p1-faq-lbl::after{content:'';flex:1;height:1px;background:var(--ink);opacity:.12;}
-.p1-faq-item{border-top:1px solid rgba(41,41,41,.09);}
-.p1-faq-q{
-  font-family:var(--ff);font-size:13px;font-weight:600;color:var(--ink);cursor:pointer;
-  display:flex;justify-content:space-between;align-items:flex-start;
-  gap:8px;padding:10px 0;transition:color .15s;
-  appearance:none;background:none;border:none;width:100%;text-align:left;
-}
-.p1-faq-q:hover{color:#000;}
-.p1-faq-icon{
-  font-size:15px;flex-shrink:0;color:var(--ink3);
-  transition:transform .2s,color .2s;line-height:1;margin-top:1px;
-}
-.p1-faq-item.open .p1-faq-icon{transform:rotate(45deg);color:var(--ink);}
-.p1-faq-a{
-  font-family:var(--ff);font-size:13px;line-height:1.72;color:var(--ink2);
-  padding-bottom:10px;display:none;
-}
-.p1-faq-item.open .p1-faq-a{display:block;}
+/* ── c-f booking card: bg image restored via ::before/::after in base rules ── */
 
 /* ── Star ratings — amber on both pages ── */
 #p1 .rev-stars,#p1 .tw-stars{color:#C8A97A;}
@@ -1856,8 +1812,8 @@ body { font-size: 16px; }
   #p1 .footer-brand{font-size:14px;font-weight:700;}
   #p1 .footer-links{gap:14px;flex-wrap:wrap;}
   #p1 .footer-item{font-size:12px;}
-  /* c-f faq on mobile */
-  #p1 .c-f{min-height:280px;}
+  /* c-f booking on mobile */
+  #p1 .c-f{min-height:220px;}
   /* p2 info bar condensed on mobile */
   #p2 .c-c{display:flex!important;flex-wrap:wrap;gap:8px 20px;padding:12px 16px;justify-content:flex-start;}
   #p2 .c-c .info-item{flex-direction:row;align-items:center;gap:6px;}
@@ -2058,30 +2014,16 @@ body { font-size: 16px; }
     <a class="e2-book" href="https://www.treatwell.nl/salon/hairstyler-patrick-anches-barbier-kapper/" target="_blank" rel="noopener">Boek via Treatwell</a>
   </div>
 
-  <!-- F: Veel gestelde vragen vakje -->
+  <!-- F: Direct boeken — Treatwell card -->
   <div class="cell c-f" data-anim="left" style="--ad:180ms">
-    <div class="p1-faq-box">
-      <span class="p1-faq-lbl">Veel gestelde vragen</span>
-      <div class="p1-faq-item">
-        <button type="button" class="p1-faq-q" aria-expanded="false" onclick="toggleP1Faq(this)">Hoe maak ik een afspraak?<span class="p1-faq-icon">+</span></button>
-        <div class="p1-faq-a">Boek via Treatwell — kies behandeling, datum en tijd, bevestiging volgt direct. Of stuur een WhatsApp naar <a href="https://wa.me/31652874750" style="color:inherit;text-decoration:underline">06 5287 4750</a>.</div>
-      </div>
-      <div class="p1-faq-item">
-        <button type="button" class="p1-faq-q" aria-expanded="false" onclick="toggleP1Faq(this)">Wat zijn de openingstijden?<span class="p1-faq-icon">+</span></button>
-        <div class="p1-faq-a">Woensdag t/m zaterdag van 10:00 tot 19:00. Maandag, dinsdag en zondag gesloten.</div>
-      </div>
-      <div class="p1-faq-item">
-        <button type="button" class="p1-faq-q" aria-expanded="false" onclick="toggleP1Faq(this)">Kan ik binnenlopen zonder afspraak?<span class="p1-faq-icon">+</span></button>
-        <div class="p1-faq-a">Patrick werkt op afspraak. App een WhatsApp om te checken of er plek is op de dag zelf.</div>
-      </div>
-      <div class="p1-faq-item">
-        <button type="button" class="p1-faq-q" aria-expanded="false" onclick="toggleP1Faq(this)">Wat betekenen de "v.a." prijzen?<span class="p1-faq-icon">+</span></button>
-        <div class="p1-faq-a">De prijs kan oplopen afhankelijk van haarlengte of dikte. Patrick bepaalt dit ter plekke.</div>
-      </div>
-      <div class="p1-faq-item">
-        <button type="button" class="p1-faq-q" aria-expanded="false" onclick="toggleP1Faq(this)">Doet Patrick ook damesbehandelingen?<span class="p1-faq-icon">+</span></button>
-        <div class="p1-faq-a">Ja. Europees haar én Black hair. Knippen, föhnen, steilen, permanenten, relaxen en extensions.</div>
-      </div>
+    <div class="tw-card">
+      <div class="tw-lbl">Direct boeken</div>
+      <div class="tw-salon">Hairstyler Patrick Anches</div>
+      <div class="tw-stars">&#9733;&#9733;&#9733;&#9733;&#9733; &nbsp;4,8 · 67 reviews</div>
+      <a class="tw-btn" href="https://www.treatwell.nl/salon/hairstyler-patrick-anches-barbier-kapper/" target="_blank" rel="noopener">
+        Boek via Treatwell
+      </a>
+      <div class="tw-note">Bevestiging direct · gratis</div>
     </div>
   </div>
 
@@ -2139,17 +2081,6 @@ body { font-size: 16px; }
         style="font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(243,243,243,0.6);margin-top:12px;display:inline-block;text-decoration:underline;text-underline-offset:3px;">
         → WhatsApp Patrick
       </a>
-    </div>
-  </div>
-
-  <!-- Direct boeken — right col row 3 (placed via CSS grid-column:4) -->
-  <div class="cell c-tw-p2" data-anim="up" style="--ad:160ms">
-    <div class="tw-p2-inner">
-      <div class="tw-p2-lbl">Direct Boeken</div>
-      <div class="tw-p2-name">Hairstyler Patrick Anches</div>
-      <div class="tw-p2-stars">★★★★★ &nbsp;4,8 · 67 reviews</div>
-      <a class="tw-p2-btn" href="https://www.treatwell.nl/salon/hairstyler-patrick-anches-barbier-kapper/" target="_blank" rel="noopener">Boek via Treatwell</a>
-      <div class="tw-p2-note">Bevestiging direct · gratis</div>
     </div>
   </div>
 
@@ -2701,13 +2632,6 @@ function filterTx(btn, cat) {
   });
   const txCell = document.querySelector('#p1 .c-tx');
   if(txCell) txCell.scrollTop = 0;
-}
-
-/* P1 FAQ toggle (separate from p2 faq) */
-function toggleP1Faq(el){
-  const item=el.closest('.p1-faq-item');
-  item.classList.toggle('open');
-  el.setAttribute('aria-expanded', item.classList.contains('open') ? 'true' : 'false');
 }
 
 /* ── Modal chat ── */

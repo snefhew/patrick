@@ -1769,7 +1769,7 @@ body { font-size: 16px; }
 /* ── Page nav indicator ── */
 #page-nav {
   position: fixed;
-  bottom: 14px;
+  bottom: calc(6vh + 20px);
   left: 50%;
   transform: translateX(-50%);
   z-index: 250;
@@ -1885,7 +1885,6 @@ body { font-size: 16px; }
 }
 
 /* ── Chat FAB label ── */
-#chat-fab { position: relative; }
 #chat-fab::after {
   content: 'Vraag stellen';
   position: absolute;

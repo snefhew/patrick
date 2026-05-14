@@ -1980,15 +1980,18 @@ body { font-size: 16px; }
    VISUAL UPGRADES — merged from v2 agent
 ═══════════════════════════════════════ */
 
-/* Grid — improved proportions */
-.page{grid-template-columns:minmax(200px,20%) 1fr 48px minmax(280px,30%);}
+/* Grid — hero gets more space, reviews balanced */
+.page{grid-template-columns:minmax(220px,26%) minmax(180px,22%) 48px 1fr;}
 
-/* Hero h1 — bigger impact */
-#p1 .hero-h1{font-size:clamp(2.8rem,4.5vw,6.5rem);}
+/* Hero h1 — sized to fit the column */
+#p1 .hero-h1{font-size:clamp(2.2rem,3vw,4.2rem);}
 @media(max-width:600px){#p1 .hero-h1{font-size:clamp(2.6rem,10vw,4rem);}}
 
 /* Hero desc — heavier */
 #p1 .hero-desc{font-weight:500;}
+
+/* Hero overlay — stronger white wash so text is crisp over the photo */
+#p1 .c-b::after{background:linear-gradient(170deg,rgba(255,255,255,0.90) 0%,rgba(255,255,255,0.84) 55%,rgba(255,255,255,0.90) 100%) !important;}
 
 /* Status badge — open state green glow */
 #p1 .status-badge.is-open,#p2 .status-badge.is-open{color:#00AC5C;text-shadow:0 0 8px rgba(0,172,92,0.4);}

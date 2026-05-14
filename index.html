@@ -1766,6 +1766,158 @@ body { font-size: 16px; }
 #chat-fab.fab-p2 svg{fill:#0d0d0d;}
 #chat-fab.fab-p2:hover{background:#f0f0f0;box-shadow:0 8px 32px rgba(0,0,0,0.28);}
 
+/* ── Page nav indicator ── */
+#page-nav {
+  position: fixed;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 250;
+  display: flex;
+  gap: 6px;
+  background: rgba(13,13,13,0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 99px;
+  padding: 5px 8px;
+}
+.pnav-pill {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  background: transparent;
+  border: none;
+  padding: 5px 12px;
+  border-radius: 99px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.pnav-pill.active {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+}
+@media(max-width:600px) {
+  #page-nav { bottom: calc(14px + 56px + env(safe-area-inset-bottom,0px)); }
+}
+
+/* ── Scroll hint button ── */
+.scroll-hint-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  background: transparent;
+  border: 1px solid rgba(41,41,41,0.22);
+  padding: 7px 14px;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+  user-select: none;
+}
+.scroll-hint-btn:hover {
+  color: var(--ink);
+  border-color: rgba(41,41,41,0.55);
+  background: rgba(41,41,41,0.04);
+}
+
+/* ── Hero CTA button ── */
+#p1 .hero-cta-btn {
+  display: inline-block;
+  background: var(--ink);
+  color: #fff;
+  font-family: var(--fc);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 12px 20px;
+  text-decoration: none;
+  margin-bottom: 10px;
+  transition: background 0.2s, transform 0.2s cubic-bezier(0.22,1,0.36,1);
+}
+#p1 .hero-cta-btn:hover {
+  background: #000;
+  transform: translateY(-2px);
+}
+
+/* ── Hero WhatsApp link ── */
+#p1 .hero-wa-link {
+  display: block;
+  font-family: var(--fc);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  margin-bottom: 12px;
+  transition: color 0.2s;
+}
+#p1 .hero-wa-link:hover { color: var(--ink); }
+
+/* ── Page 2 back button ── */
+#p2 .p2-back-btn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(243,243,243,0.45);
+  background: transparent;
+  border: 1px solid rgba(243,243,243,0.2);
+  padding: 7px 14px;
+  cursor: pointer;
+  margin-top: 16px;
+  display: block;
+  transition: color 0.2s, border-color 0.2s;
+}
+#p2 .p2-back-btn:hover {
+  color: rgba(243,243,243,0.85);
+  border-color: rgba(243,243,243,0.45);
+}
+
+/* ── Chat FAB label ── */
+#chat-fab { position: relative; }
+#chat-fab::after {
+  content: 'Vraag stellen';
+  position: absolute;
+  right: calc(100% + 10px);
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  background: #0d0d0d;
+  color: #fff;
+  padding: 5px 10px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+#chat-fab:hover::after { opacity: 1; }
+@media(max-width:600px) { #chat-fab::after { display: none; } }
+
+/* ── Info val links: obvious clickable ── */
+#p1 .info-val a, #p2 .info-val a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(0,0,0,0.25);
+  transition: text-decoration-color 0.2s;
+}
+#p1 .info-val a:hover { text-decoration-color: currentColor; }
+#p2 .info-val a { text-decoration-color: rgba(255,255,255,0.25); }
+#p2 .info-val a:hover { text-decoration-color: currentColor; }
+
 /* ── iOS safe-area insets ── */
 #mobile-book-bar{
   padding-bottom:env(safe-area-inset-bottom,0px);
@@ -1823,6 +1975,62 @@ body { font-size: 16px; }
   #p2 .c-c .info-val{font-size:12px;white-space:nowrap;}
   #p2 .c-c .info-sep{display:none;}
 }
+
+/* ═══════════════════════════════════════
+   VISUAL UPGRADES — merged from v2 agent
+═══════════════════════════════════════ */
+
+/* Grid — improved proportions */
+.page{grid-template-columns:minmax(200px,20%) 1fr 48px minmax(280px,30%);}
+
+/* Hero h1 — bigger impact */
+#p1 .hero-h1{font-size:clamp(2.8rem,4.5vw,6.5rem);}
+@media(max-width:600px){#p1 .hero-h1{font-size:clamp(2.6rem,10vw,4rem);}}
+
+/* Hero desc — heavier */
+#p1 .hero-desc{font-weight:500;}
+
+/* Status badge — open state green glow */
+#p1 .status-badge.is-open,#p2 .status-badge.is-open{color:#00AC5C;text-shadow:0 0 8px rgba(0,172,92,0.4);}
+
+/* Stats — larger + top accent line */
+#p1 .stat-n{font-size:3rem;}
+#p1 .stat-item{position:relative;padding-top:7px;}
+#p1 .stat-item::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:20px;height:2px;background:var(--ink);}
+
+/* Booking card — less grayscale, pulsing CTA */
+#p1 .c-f::before{filter:grayscale(30%) contrast(1.1) brightness(1.0);}
+#p1 .c-f::after{background:linear-gradient(180deg,rgba(255,255,255,0.76) 0%,rgba(255,255,255,0.58) 50%,rgba(255,255,255,0.74) 100%);}
+@keyframes bookPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.02);}}
+#p1 .tw-btn{font-family:var(--fd);font-size:16px;letter-spacing:0.1em;animation:bookPulse 3s ease-in-out infinite;}
+#p1 .tw-btn:hover{letter-spacing:0.15em;animation:none;border-color:#C8A97A;}
+#p2 .tw-p2-btn{animation:bookPulse 3s ease-in-out infinite;}
+#p2 .tw-p2-btn:hover{animation:none;}
+#p2 .tw-p2-stars{color:#E7C59A;}
+
+/* Treatment rows — alternating bg + bigger prices */
+#p1 .c-tx .tr:nth-child(even){background:rgba(41,41,41,0.02);}
+#p1 .c-tx .tr-p{font-size:15px;font-variant-numeric:tabular-nums;}
+
+/* Populair tag — amber */
+.pop-tag{color:#C8A97A;border-color:rgba(200,169,122,0.5);}
+#p2 .pop-tag{color:#E7C59A;border-color:rgba(231,197,154,0.35);}
+
+/* Review cards — premium left border + larger quote mark */
+.rev-card{border-left:3px solid rgba(41,41,41,0.15);}
+.rev-qmark{font-size:80px;color:rgba(13,13,13,0.04);}
+.rev-stars{color:#C8A97A;}
+
+/* Scroll arrow — amber */
+.scroll-arrow{color:#C8A97A;}
+
+/* Mobile WhatsApp button */
+.hero-wa-btn{display:none;width:100%;background:#25D366;color:#fff;padding:12px;text-align:center;font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.18em;text-transform:uppercase;text-decoration:none;}
+@media(max-width:600px){.hero-wa-btn{display:block;margin-top:8px;}}
+
+/* Page 2 — FAQ hover amber */
+#p2 .faq-q:hover{color:var(--amber);}
+#p2 .faq-item.open .faq-icon{color:var(--amber);}
 </style>
 </head>
 <body>
@@ -1863,8 +2071,14 @@ body { font-size: 16px; }
     </div>
     <div class="hero-meta">
       <p class="hero-desc">Gediplomeerde barbier en kapper in het hart van Amsterdam. Geen haastwerk, aandacht en kwaliteit voor elk detail.</p>
-      <div class="scroll-hint" role="button" tabindex="0" onclick="document.getElementById('app').scrollTo({top:document.getElementById('p2').offsetTop,behavior:'smooth'})" onkeydown="if(event.key==='Enter'||event.key===' ')document.getElementById('app').scrollTo({top:document.getElementById('p2').offsetTop,behavior:'smooth'})">
-        <span class="scroll-arrow">↓</span><span>FAQ &amp; Info</span>
+      <a class="hero-cta-btn" href="https://www.treatwell.nl/salon/hairstyler-patrick-anches-barbier-kapper/" target="_blank" rel="noopener">
+        Afspraak maken →
+      </a>
+      <a class="hero-wa-link" href="https://wa.me/31652874750?text=Hallo%20Patrick%2C%20ik%20wil%20graag%20een%20afspraak%20maken." target="_blank" rel="noopener">
+        of WhatsApp →
+      </a>
+      <div class="scroll-hint-btn" role="button" tabindex="0" onclick="document.getElementById('app').scrollTo({top:document.getElementById('p2').offsetTop,behavior:'smooth'})" onkeydown="if(event.key==='Enter'||event.key===' ')document.getElementById('app').scrollTo({top:document.getElementById('p2').offsetTop,behavior:'smooth'})">
+        <span class="scroll-arrow">↓</span><span>FAQ &amp; Portfolio</span>
       </div>
     </div>
   </div>
@@ -2084,6 +2298,9 @@ body { font-size: 16px; }
         style="font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(243,243,243,0.6);margin-top:12px;display:inline-block;text-decoration:underline;text-underline-offset:3px;">
         → WhatsApp Patrick
       </a>
+      <button class="p2-back-btn" onclick="document.getElementById('app').scrollTo({top:0,behavior:'smooth'})">
+        ↑ Terug naar behandelingen
+      </button>
     </div>
   </div>
 
@@ -2223,6 +2440,12 @@ body { font-size: 16px; }
 
 </div><!-- /p2 -->
 </div><!-- /app -->
+
+<!-- ── Page navigation indicator ── -->
+<div id="page-nav">
+  <button class="pnav-pill active" data-page="0">Behandelingen</button>
+  <button class="pnav-pill" data-page="1">FAQ &amp; Portfolio</button>
+</div>
 
 <a id="mobile-book-bar" href="https://www.treatwell.nl/salon/hairstyler-patrick-anches-barbier-kapper/" target="_blank" rel="noopener">
   Boek via Treatwell &nbsp;→
@@ -2487,6 +2710,8 @@ function setStatus(dotId,textId){
   const open=[3,4,5,6].includes(dy)&&h>=10&&h<19;
   document.getElementById(dotId).className='sdot'+(open?' on':'');
   document.getElementById(textId).textContent=open?'Nu open':'Gesloten';
+  const badge=document.getElementById(textId)?.closest('.status-badge');
+  if(badge) badge.classList.toggle('is-open',open);
 }
 setStatus('sdot','sst'); setStatus('sdot2','sst2');
 
@@ -2692,7 +2917,7 @@ async function sdM(){
   finally{busy=false;}
 }
 
-/* Auto-open chatbot on page load */
+/* Auto-open chatbot after short delay */
 setTimeout(() => { if (!chatModalOpen) toggleChatModal(); }, 900);
 
 /* Hide mobile booking bar when Treatwell card is visible (E1) */
@@ -2781,6 +3006,50 @@ document.addEventListener('keydown',e=>{
   else if(e.key==='ArrowRight')pvNav(1);
   else if(e.key==='Escape')closePhotoViewer();
 });
+
+/* ── Page nav indicator ── */
+(function initPageNav() {
+  const app = document.getElementById('app');
+  const pills = document.querySelectorAll('.pnav-pill');
+  pills.forEach((pill, i) => {
+    pill.addEventListener('click', () => {
+      const target = i === 0 ? document.getElementById('p1') : document.getElementById('p2');
+      app.scrollTo({ top: target.offsetTop, behavior: 'smooth' });
+    });
+  });
+  function updateNav() {
+    const scrollY = app.scrollTop;
+    const vh = app.clientHeight;
+    const isP2 = scrollY >= vh * 0.6;
+    pills.forEach((p, i) => p.classList.toggle('active', isP2 ? i === 1 : i === 0));
+  }
+  app.addEventListener('scroll', updateNav, { passive: true });
+  updateNav();
+})();
+
+/* ── Treatment tabs: keyboard nav ── */
+document.querySelectorAll('.e2-tab').forEach((tab, i, tabs) => {
+  tab.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') { e.preventDefault(); tabs[(i+1)%tabs.length].focus(); }
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); tabs[(i-1+tabs.length)%tabs.length].focus(); }
+  });
+});
+
+/* ── Review rotation: pause on hover ── */
+const revBox = document.querySelector('#p1 .c-e');
+if (revBox) {
+  revBox.addEventListener('mouseenter', () => clearInterval(revInterval));
+  revBox.addEventListener('mouseleave', () => {
+    revInterval = setInterval(() => { ri=(ri+1)%revs.length; renderRevs(ri); }, 5000);
+  });
+}
+
+/* ── FAQ: expand first item by default ── */
+const firstFaq = document.querySelector('#p2 .faq-item');
+if (firstFaq) {
+  const btn = firstFaq.querySelector('.faq-q');
+  if (btn) { firstFaq.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
+}
 
 /* ── Chat FAB: invert style on p2 (dark page) ── */
 (function(){

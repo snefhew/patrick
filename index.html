@@ -1789,80 +1789,82 @@ body { font-size: 16px; }
 #chat-fab{animation:fabAttention 1.8s ease-out 2s 3;}
 #chat-fab:hover{animation:none;transform:scale(1.08);box-shadow:0 8px 32px rgba(0,0,0,0.45);}
 
+/* ── Chat modal: premium vakje frame ── */
+#chat-modal-inner{
+  box-shadow:
+    0 0 0 1px rgba(41,41,41,0.55),
+    0 4px 16px rgba(0,0,0,0.35),
+    0 20px 60px rgba(0,0,0,0.60),
+    0 40px 80px rgba(0,0,0,0.30);
+}
+
 /* ═══════════════════════════════════════
-   CTX PANEL — right panel tab + embedded chat
+   PAGE 1 — BEHANDELINGEN (right col, direct — no tab system)
 ═══════════════════════════════════════ */
-#p1 .c-tx{padding:0;flex-direction:column;align-items:stretch;justify-content:flex-start;}
-.ctx-tabs{display:flex;border-bottom:1px solid #292929;flex-shrink:0;}
-.ctx-tab{
-  flex:1;padding:12px 8px;
-  font-family:'Barlow Condensed','Arial Narrow Bold',sans-serif;
-  font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;
-  color:#888;border:none;border-right:1px solid #292929;background:#f5f5f5;
-  cursor:pointer;transition:background .15s,color .15s;
-  display:flex;align-items:center;justify-content:center;gap:7px;
+/* c-tx uses the #p1 .c-tx rules defined above (padding 20px 18px, overflow-y:auto) */
+
+/* ═══════════════════════════════════════
+   PAGE 1 — FAQ VAKJE (c-f, center bottom)
+═══════════════════════════════════════ */
+/* Override the booking.jpg bg — c-f becomes a clean FAQ card */
+#p1 .c-f{
+  background:var(--bg);
+  align-items:stretch;justify-content:flex-start;
+  overflow:hidden;padding:0;
 }
-.ctx-tab:last-child{border-right:none;}
-.ctx-tab-active{background:#0d0d0d;color:#fff;}
-.ctx-tab:hover:not(.ctx-tab-active){background:rgba(41,41,41,0.06);color:#0d0d0d;}
-.ctx-tab-dot{width:6px;height:6px;border-radius:50%;background:#00AC5C;flex-shrink:0;}
-.ctx-panel{flex:1;overflow:hidden;display:flex;flex-direction:column;min-height:0;}
-.ctx-hidden{display:none!important;}
-.ctx-msgs{
-  flex:1;overflow-y:auto;padding:16px;
-  display:flex;flex-direction:column;gap:10px;
-  background:#fff;scrollbar-width:thin;scrollbar-color:#ddd transparent;min-height:0;
+#p1 .c-f::before{display:none!important;}
+#p1 .c-f::after{display:none!important;}
+#p1 .c-f > *{position:relative;z-index:auto;}
+.p1-faq-box{
+  width:100%;height:100%;
+  overflow-y:auto;
+  scrollbar-width:thin;scrollbar-color:rgba(41,41,41,.18) transparent;
+  padding:20px 22px;display:flex;flex-direction:column;
 }
-.ctx-chips{
-  padding:10px 14px;display:flex;gap:6px;flex-wrap:wrap;
-  border-top:1px solid #292929;flex-shrink:0;background:#fff;
+.p1-faq-lbl{
+  font-family:var(--fc);font-size:10px;letter-spacing:0.22em;
+  text-transform:uppercase;color:var(--ink3);
+  margin-bottom:14px;display:flex;align-items:center;gap:10px;
+  flex-shrink:0;
 }
-.ctx-ir{display:flex;border-top:1px solid #292929;flex-shrink:0;}
-.ctx-input{
-  flex:1;border:none;border-right:1px solid #292929;padding:13px 16px;
-  font-family:'Inter',sans-serif;font-size:14px;background:#fff;color:#0d0d0d;outline:none;
+.p1-faq-lbl::after{content:'';flex:1;height:1px;background:var(--ink);opacity:.12;}
+.p1-faq-item{border-top:1px solid rgba(41,41,41,.09);}
+.p1-faq-q{
+  font-family:var(--ff);font-size:13px;font-weight:600;color:var(--ink);cursor:pointer;
+  display:flex;justify-content:space-between;align-items:flex-start;
+  gap:8px;padding:10px 0;transition:color .15s;
+  appearance:none;background:none;border:none;width:100%;text-align:left;
 }
-.ctx-input::placeholder{color:#888;}
-.ctx-snd{
-  width:50px;height:50px;background:#0d0d0d;border:none;
-  display:flex;align-items:center;justify-content:center;flex-shrink:0;
-  cursor:pointer;transition:opacity .2s;
+.p1-faq-q:hover{color:#000;}
+.p1-faq-icon{
+  font-size:15px;flex-shrink:0;color:var(--ink3);
+  transition:transform .2s,color .2s;line-height:1;margin-top:1px;
 }
-.ctx-snd:hover{opacity:.75;}
-.ctx-snd svg{width:14px;height:14px;fill:#fff;}
-.ctx-ft{
-  font-family:'Barlow Condensed',sans-serif;font-size:9px;letter-spacing:0.14em;
-  text-transform:uppercase;color:#999;text-align:center;padding:8px;
-  border-top:1px solid #ececec;background:#f5f5f5;flex-shrink:0;
+.p1-faq-item.open .p1-faq-icon{transform:rotate(45deg);color:var(--ink);}
+.p1-faq-a{
+  font-family:var(--ff);font-size:13px;line-height:1.72;color:var(--ink2);
+  padding-bottom:10px;display:none;
 }
-#ctxTxPanel{
-  overflow-y:auto;padding:20px 18px;
-  scrollbar-width:thin;scrollbar-color:#ccc transparent;
-  /* Fade indicator at bottom */
-  -webkit-mask-image:linear-gradient(to bottom,black calc(100% - 44px),transparent 100%);
-  mask-image:linear-gradient(to bottom,black calc(100% - 44px),transparent 100%);
-}
-.ctx-msg{max-width:88%;}
-.ctx-msg.bot{align-self:flex-start;}
-.ctx-msg.user{align-self:flex-end;}
-.ctx-msg-b{padding:11px 14px;font-family:'Inter',sans-serif;font-size:14px;line-height:1.65;}
-.ctx-msg.bot .ctx-msg-b{background:#f5f5f5;border:1px solid #e8e8e8;color:#0d0d0d;}
-.ctx-msg.user .ctx-msg-b{background:#0d0d0d;color:#fff;}
-@media(max-width:900px){#p1 .c-tx{min-height:500px;padding:0;}}
-@media(max-width:600px){#p1 .c-tx{min-height:480px;padding:0;}.ctx-msgs{min-height:240px;}}
-/* Star ratings — amber on both pages */
+.p1-faq-item.open .p1-faq-a{display:block;}
+
+/* ── Star ratings — amber on both pages ── */
 #p1 .rev-stars,#p1 .tw-stars{color:#C8A97A;}
-/* p1 footer always visible */
-@media(max-width:600px){#p1 .c-footer{display:flex!important;min-height:64px;padding:12px 20px;flex-direction:column;align-items:flex-start;gap:8px;}
-#p1 .footer-brand{font-size:14px;font-weight:700;}
-#p1 .footer-links{gap:14px;flex-wrap:wrap;}
-#p1 .footer-item{font-size:12px;}
-/* p2 info bar condensed on mobile instead of hidden */
-#p2 .c-c{display:flex!important;flex-wrap:wrap;gap:8px 20px;padding:12px 16px;justify-content:flex-start;}
-#p2 .c-c .info-item{flex-direction:row;align-items:center;gap:6px;}
-#p2 .c-c .info-lbl{font-size:9px;white-space:nowrap;}
-#p2 .c-c .info-val{font-size:12px;white-space:nowrap;}
-#p2 .c-c .info-sep{display:none;}}
+
+/* ── p1 footer always visible on mobile ── */
+@media(max-width:600px){
+  #p1 .c-footer{display:flex!important;min-height:64px;padding:12px 20px;flex-direction:column;align-items:flex-start;gap:8px;}
+  #p1 .footer-brand{font-size:14px;font-weight:700;}
+  #p1 .footer-links{gap:14px;flex-wrap:wrap;}
+  #p1 .footer-item{font-size:12px;}
+  /* c-f faq on mobile */
+  #p1 .c-f{min-height:280px;}
+  /* p2 info bar condensed on mobile */
+  #p2 .c-c{display:flex!important;flex-wrap:wrap;gap:8px 20px;padding:12px 16px;justify-content:flex-start;}
+  #p2 .c-c .info-item{flex-direction:row;align-items:center;gap:6px;}
+  #p2 .c-c .info-lbl{font-size:9px;white-space:nowrap;}
+  #p2 .c-c .info-val{font-size:12px;white-space:nowrap;}
+  #p2 .c-c .info-sep{display:none;}
+}
 </style>
 </head>
 <body>
@@ -1903,7 +1905,7 @@ body { font-size: 16px; }
     </div>
     <div class="hero-meta">
       <p class="hero-desc">Gediplomeerde barbier en kapper in het hart van Amsterdam. Geen haastwerk, aandacht en kwaliteit voor elk detail.</p>
-      <div class="scroll-hint" role="button" tabindex="0" onclick="document.getElementById('p2').scrollIntoView({behavior:'smooth'})" onkeydown="if(event.key==='Enter'||event.key===' ')document.getElementById('p2').scrollIntoView({behavior:'smooth'})">
+      <div class="scroll-hint" role="button" tabindex="0" onclick="document.getElementById('app').scrollTo({top:document.getElementById('p2').offsetTop,behavior:'smooth'})" onkeydown="if(event.key==='Enter'||event.key===' ')document.getElementById('app').scrollTo({top:document.getElementById('p2').offsetTop,behavior:'smooth'})">
         <span class="scroll-arrow">↓</span><span>FAQ &amp; Info</span>
       </div>
     </div>
@@ -2007,96 +2009,79 @@ body { font-size: 16px; }
     </div>
   </div>
 
-  <!-- TX: right panel — Assistent + Behandelingen tab system -->
+  <!-- TX: right panel — Behandelingen & Prijzen (direct, no tabs above chat) -->
   <div class="cell c-tx" data-anim="left" style="--ad:80ms">
-    <!-- Tab bar -->
-    <div class="ctx-tabs">
-      <button type="button" class="ctx-tab ctx-tab-active" id="ctx-tab-chat" onclick="switchCtxTab('chat')">
-        <span class="ctx-tab-dot"></span>Assistent
-      </button>
-      <button type="button" class="ctx-tab" id="ctx-tab-tx" onclick="switchCtxTab('tx')">
-        Behandelingen
-      </button>
+    <span class="e2-lbl">Behandelingen &amp; Prijzen</span>
+    <div class="e2-tabs">
+      <button type="button" class="e2-tab active" onclick="filterTx(this,'all')">Alle</button>
+      <button type="button" class="e2-tab" onclick="filterTx(this,'mannen')">Mannen</button>
+      <button type="button" class="e2-tab" onclick="filterTx(this,'vrouwen')">Vrouwen</button>
+      <button type="button" class="e2-tab" onclick="filterTx(this,'extensions')">Extensions</button>
+      <button type="button" class="e2-tab" onclick="filterTx(this,'blackhair')">Black hair</button>
     </div>
-    <!-- Chat panel (default active) -->
-    <div class="ctx-panel" id="ctxChatPanel">
-      <div id="p1msgs" role="log" aria-live="polite" class="ctx-msgs"></div>
-      <div class="ctx-chips">
-        <button type="button" class="chip" onclick="qsP1('Wat kost knippen?')">Prijzen</button>
-        <button type="button" class="chip" onclick="qsP1('Afspraak maken')">Afspraak</button>
-        <button type="button" class="chip" onclick="qsP1('Openingstijden')">Tijden</button>
-        <button type="button" class="chip" onclick="qsP1('Hoe kom ik er?')">Route</button>
-      </div>
-      <div class="ctx-ir">
-        <input id="inP1" type="text" placeholder="Stel een vraag..." autocomplete="off"
-          aria-label="Stel een vraag aan de assistent"
-          onkeydown="if(event.key==='Enter')sdP1()" class="ctx-input">
-        <button type="button" onclick="sdP1()" aria-label="Verstuur bericht" class="ctx-snd">
-          <svg viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
-        </button>
-      </div>
-      <div class="ctx-ft">Assistent Patrick · Axon AI</div>
+    <div class="tg" data-cat="mannen">
+      <div class="tg-title">Mannen · Knippen &amp; Styling</div>
+      <div class="tr"><span class="tr-n">Knippen kort haar</span><div class="tr-r"><span class="tr-p">23,50</span><span class="tr-t">50 min</span></div></div>
+      <div class="tr"><span class="tr-n">Haar &amp; baard fresh-up trim</span><div class="tr-r"><span class="tr-p">23,50</span><span class="tr-t">1u 15m</span></div></div>
+      <div class="tr"><span class="tr-n">Baard knippen &amp; modelleren</span><div class="tr-r"><span class="tr-p">16,00</span><span class="tr-t">30 min</span></div></div>
+      <div class="tr"><span class="tr-n">Knippen &amp; baard <span class="pop-tag">Populair</span></span><div class="tr-r"><span class="tr-p">30,00</span><span class="tr-t">1u 15m</span></div></div>
+      <div class="tr"><span class="tr-n">Hoofd kaal scheren + baard</span><div class="tr-r"><span class="tr-p">20,00</span><span class="tr-t">45 min</span></div></div>
+      <div class="tr"><span class="tr-n">Knippen senioren 65+</span><div class="tr-r"><span class="tr-p">18,50</span><span class="tr-t">45 min</span></div></div>
+      <div class="tr"><span class="tr-n">Wassen, knippen &amp; drogen</span><div class="tr-r"><span class="tr-p">26,95</span><span class="tr-t">50 min</span></div></div>
+      <div class="tr"><span class="tr-n">Wassen, massage, knippen &amp; föhnen</span><div class="tr-r"><span class="tr-p">35,00</span><span class="tr-t">1u 15m</span></div></div>
+      <div class="tr"><span class="tr-n">Contouren</span><div class="tr-r"><span class="tr-p">10,00</span><span class="tr-t">20 min</span></div></div>
+      <div class="tr"><span class="tr-n">Kort haar verven &amp; knippen</span><div class="tr-r"><span class="tr-p">45,00</span><span class="tr-t">1u 5m</span></div></div>
+      <div class="tr"><span class="tr-n">Kinderen knippen</span><div class="tr-r"><span class="tr-p">21,00</span><span class="tr-t">45 min</span></div></div>
     </div>
-    <!-- Behandelingen panel (hidden by default) -->
-    <div class="ctx-panel ctx-hidden" id="ctxTxPanel">
-      <span class="e2-lbl">Behandelingen &amp; Prijzen</span>
-      <div class="e2-tabs">
-        <button type="button" class="e2-tab active" onclick="filterTx(this,'all')">Alle</button>
-        <button type="button" class="e2-tab" onclick="filterTx(this,'mannen')">Mannen</button>
-        <button type="button" class="e2-tab" onclick="filterTx(this,'vrouwen')">Vrouwen</button>
-        <button type="button" class="e2-tab" onclick="filterTx(this,'extensions')">Extensions</button>
-        <button type="button" class="e2-tab" onclick="filterTx(this,'blackhair')">Black hair</button>
-      </div>
-      <div class="tg" data-cat="mannen">
-        <div class="tg-title">Mannen · Knippen &amp; Styling</div>
-        <div class="tr"><span class="tr-n">Knippen kort haar</span><div class="tr-r"><span class="tr-p">23,50</span><span class="tr-t">50 min</span></div></div>
-        <div class="tr"><span class="tr-n">Haar &amp; baard fresh-up trim</span><div class="tr-r"><span class="tr-p">23,50</span><span class="tr-t">1u 15m</span></div></div>
-        <div class="tr"><span class="tr-n">Baard knippen &amp; modelleren</span><div class="tr-r"><span class="tr-p">16,00</span><span class="tr-t">30 min</span></div></div>
-        <div class="tr"><span class="tr-n">Knippen &amp; baard <span class="pop-tag">Populair</span></span><div class="tr-r"><span class="tr-p">30,00</span><span class="tr-t">1u 15m</span></div></div>
-        <div class="tr"><span class="tr-n">Hoofd kaal scheren + baard</span><div class="tr-r"><span class="tr-p">20,00</span><span class="tr-t">45 min</span></div></div>
-        <div class="tr"><span class="tr-n">Knippen senioren 65+</span><div class="tr-r"><span class="tr-p">18,50</span><span class="tr-t">45 min</span></div></div>
-        <div class="tr"><span class="tr-n">Wassen, knippen &amp; drogen</span><div class="tr-r"><span class="tr-p">26,95</span><span class="tr-t">50 min</span></div></div>
-        <div class="tr"><span class="tr-n">Wassen, massage, knippen &amp; föhnen</span><div class="tr-r"><span class="tr-p">35,00</span><span class="tr-t">1u 15m</span></div></div>
-        <div class="tr"><span class="tr-n">Contouren</span><div class="tr-r"><span class="tr-p">10,00</span><span class="tr-t">20 min</span></div></div>
-        <div class="tr"><span class="tr-n">Kort haar verven &amp; knippen</span><div class="tr-r"><span class="tr-p">45,00</span><span class="tr-t">1u 5m</span></div></div>
-        <div class="tr"><span class="tr-n">Kinderen knippen</span><div class="tr-r"><span class="tr-p">21,00</span><span class="tr-t">45 min</span></div></div>
-      </div>
-      <div class="tg" data-cat="vrouwen">
-        <div class="tg-title">Vrouwen · Europees Haar</div>
-        <div class="tr"><span class="tr-n">Wassen &amp; föhnen kort haar</span><div class="tr-r"><span class="tr-p">25,00</span><span class="tr-t">40 min</span></div></div>
-        <div class="tr"><span class="tr-n">Knippen kort haar</span><div class="tr-r"><span class="tr-p va">23,95</span><span class="tr-t">45 min</span></div></div>
-        <div class="tr"><span class="tr-n">Haar wassen + stijltang steilen</span><div class="tr-r"><span class="tr-p va">35,00</span><span class="tr-t">50 min</span></div></div>
-        <div class="tr"><span class="tr-n">Permanent incl. knippen</span><div class="tr-r"><span class="tr-p va">85,00</span><span class="tr-t">1u 45m</span></div></div>
-        <div class="tr"><span class="tr-n">Knippen senioren 65+</span><div class="tr-r"><span class="tr-p va">18,50</span><span class="tr-t">45 min</span></div></div>
-      </div>
-      <div class="tg" data-cat="extensions">
-        <div class="tg-title">Extensions · Alle Haartypes</div>
-        <div class="tr"><span class="tr-n">Extensions verwijderen p/baan</span><div class="tr-r"><span class="tr-p va">5,00</span><span class="tr-t">10 min</span></div></div>
-        <div class="tr"><span class="tr-n">Extensions incl. microringen p/baan</span><div class="tr-r"><span class="tr-p">25,00</span><span class="tr-t">25 min</span></div></div>
-        <div class="tr"><span class="tr-n">Extensions interlocking p/baan</span><div class="tr-r"><span class="tr-p va">25,00</span><span class="tr-t">30 min</span></div></div>
-      </div>
-      <div class="tg" data-cat="blackhair">
-        <div class="tg-title">Vrouwen · Black Hair</div>
-        <div class="tr"><span class="tr-n">Wassen &amp; stijltangen kort haar</span><div class="tr-r"><span class="tr-p">35,00</span><span class="tr-t">1u</span></div></div>
-        <div class="tr"><span class="tr-n">Curly perm incl. knippen</span><div class="tr-r"><span class="tr-p va">110,00</span><span class="tr-t">2u 30m</span></div></div>
-        <div class="tr"><span class="tr-n">Relaxen incl. knippen &amp; stylen</span><div class="tr-r"><span class="tr-p va">85,00</span><span class="tr-t">2u 30m</span></div></div>
-        <div class="tr"><span class="tr-n">Kort knippen</span><div class="tr-r"><span class="tr-p va">23,95</span><span class="tr-t">1u</span></div></div>
-        <div class="tr"><span class="tr-n">Knippen senioren 65+</span><div class="tr-r"><span class="tr-p va">18,50</span><span class="tr-t">45 min</span></div></div>
-      </div>
-      <a class="e2-book" href="https://www.treatwell.nl/salon/hairstyler-patrick-anches-barbier-kapper/" target="_blank" rel="noopener">Boek via Treatwell</a>
+    <div class="tg" data-cat="vrouwen">
+      <div class="tg-title">Vrouwen · Europees Haar</div>
+      <div class="tr"><span class="tr-n">Wassen &amp; föhnen kort haar</span><div class="tr-r"><span class="tr-p">25,00</span><span class="tr-t">40 min</span></div></div>
+      <div class="tr"><span class="tr-n">Knippen kort haar</span><div class="tr-r"><span class="tr-p va">23,95</span><span class="tr-t">45 min</span></div></div>
+      <div class="tr"><span class="tr-n">Haar wassen + stijltang steilen</span><div class="tr-r"><span class="tr-p va">35,00</span><span class="tr-t">50 min</span></div></div>
+      <div class="tr"><span class="tr-n">Permanent incl. knippen</span><div class="tr-r"><span class="tr-p va">85,00</span><span class="tr-t">1u 45m</span></div></div>
+      <div class="tr"><span class="tr-n">Knippen senioren 65+</span><div class="tr-r"><span class="tr-p va">18,50</span><span class="tr-t">45 min</span></div></div>
     </div>
+    <div class="tg" data-cat="extensions">
+      <div class="tg-title">Extensions · Alle Haartypes</div>
+      <div class="tr"><span class="tr-n">Extensions verwijderen p/baan</span><div class="tr-r"><span class="tr-p va">5,00</span><span class="tr-t">10 min</span></div></div>
+      <div class="tr"><span class="tr-n">Extensions incl. microringen p/baan</span><div class="tr-r"><span class="tr-p">25,00</span><span class="tr-t">25 min</span></div></div>
+      <div class="tr"><span class="tr-n">Extensions interlocking p/baan</span><div class="tr-r"><span class="tr-p va">25,00</span><span class="tr-t">30 min</span></div></div>
+    </div>
+    <div class="tg" data-cat="blackhair">
+      <div class="tg-title">Vrouwen · Black Hair</div>
+      <div class="tr"><span class="tr-n">Wassen &amp; stijltangen kort haar</span><div class="tr-r"><span class="tr-p">35,00</span><span class="tr-t">1u</span></div></div>
+      <div class="tr"><span class="tr-n">Curly perm incl. knippen</span><div class="tr-r"><span class="tr-p va">110,00</span><span class="tr-t">2u 30m</span></div></div>
+      <div class="tr"><span class="tr-n">Relaxen incl. knippen &amp; stylen</span><div class="tr-r"><span class="tr-p va">85,00</span><span class="tr-t">2u 30m</span></div></div>
+      <div class="tr"><span class="tr-n">Kort knippen</span><div class="tr-r"><span class="tr-p va">23,95</span><span class="tr-t">1u</span></div></div>
+      <div class="tr"><span class="tr-n">Knippen senioren 65+</span><div class="tr-r"><span class="tr-p va">18,50</span><span class="tr-t">45 min</span></div></div>
+    </div>
+    <a class="e2-book" href="https://www.treatwell.nl/salon/hairstyler-patrick-anches-barbier-kapper/" target="_blank" rel="noopener">Boek via Treatwell</a>
   </div>
 
-  <!-- F: Treatwell -->
+  <!-- F: Veel gestelde vragen vakje -->
   <div class="cell c-f" data-anim="left" style="--ad:180ms">
-    <div class="tw-card">
-      <div class="tw-lbl">Direct boeken</div>
-      <div class="tw-salon">Hairstyler Patrick Anches</div>
-      <div class="tw-stars">&#9733;&#9733;&#9733;&#9733;&#9733; &nbsp;4,8 · 67 reviews</div>
-      <a class="tw-btn" href="https://www.treatwell.nl/salon/hairstyler-patrick-anches-barbier-kapper/" target="_blank" rel="noopener">
-        Boek via Treatwell
-      </a>
-      <div class="tw-note">Bevestiging direct · gratis</div>
+    <div class="p1-faq-box">
+      <span class="p1-faq-lbl">Veel gestelde vragen</span>
+      <div class="p1-faq-item">
+        <button type="button" class="p1-faq-q" aria-expanded="false" onclick="toggleP1Faq(this)">Hoe maak ik een afspraak?<span class="p1-faq-icon">+</span></button>
+        <div class="p1-faq-a">Boek via Treatwell — kies behandeling, datum en tijd, bevestiging volgt direct. Of stuur een WhatsApp naar <a href="https://wa.me/31652874750" style="color:inherit;text-decoration:underline">06 5287 4750</a>.</div>
+      </div>
+      <div class="p1-faq-item">
+        <button type="button" class="p1-faq-q" aria-expanded="false" onclick="toggleP1Faq(this)">Wat zijn de openingstijden?<span class="p1-faq-icon">+</span></button>
+        <div class="p1-faq-a">Woensdag t/m zaterdag van 10:00 tot 19:00. Maandag, dinsdag en zondag gesloten.</div>
+      </div>
+      <div class="p1-faq-item">
+        <button type="button" class="p1-faq-q" aria-expanded="false" onclick="toggleP1Faq(this)">Kan ik binnenlopen zonder afspraak?<span class="p1-faq-icon">+</span></button>
+        <div class="p1-faq-a">Patrick werkt op afspraak. App een WhatsApp om te checken of er plek is op de dag zelf.</div>
+      </div>
+      <div class="p1-faq-item">
+        <button type="button" class="p1-faq-q" aria-expanded="false" onclick="toggleP1Faq(this)">Wat betekenen de "v.a." prijzen?<span class="p1-faq-icon">+</span></button>
+        <div class="p1-faq-a">De prijs kan oplopen afhankelijk van haarlengte of dikte. Patrick bepaalt dit ter plekke.</div>
+      </div>
+      <div class="p1-faq-item">
+        <button type="button" class="p1-faq-q" aria-expanded="false" onclick="toggleP1Faq(this)">Doet Patrick ook damesbehandelingen?<span class="p1-faq-icon">+</span></button>
+        <div class="p1-faq-a">Ja. Europees haar én Black hair. Knippen, föhnen, steilen, permanenten, relaxen en extensions.</div>
+      </div>
     </div>
   </div>
 
@@ -2291,7 +2276,7 @@ body { font-size: 16px; }
   <div class="cell c-footer" data-anim="up" style="--ad:200ms">
     <span class="footer-brand">© 2025 Patrick Anches</span>
     <div class="footer-links">
-      <button type="button" class="footer-item" onclick="document.getElementById('p1').scrollIntoView({behavior:'smooth'})" style="background:none;border:none;cursor:pointer;font-family:inherit;">← Pagina 1</button>
+      <button type="button" class="footer-item" onclick="document.getElementById('app').scrollTo({top:0,behavior:'smooth'})" style="background:none;border:none;cursor:pointer;font-family:inherit;">← Pagina 1</button>
       <span class="footer-sep">·</span>
       <a class="footer-item" href="https://wa.me/31652874750?text=Hallo%20Patrick%2C%20ik%20wil%20graag%20een%20afspraak%20maken." target="_blank" rel="noopener">WhatsApp</a>
       <span class="footer-sep">·</span>
@@ -2666,8 +2651,6 @@ GRENZEN: Nooit beschikbaarheid beloven. Nooit vragen om persoonsgegevens. Als ge
 ANTWOORDSTIJL: Gebruik NOOIT emojis. Gebruik GEEN markdown zoals **bold** of *italic*. Schrijf alleen plain tekst. Telefoonnummers schrijf je als: 06 52874750.`;
 
 const hist=[];let busy=false;
-/* P1 embedded chat state */
-const p1Hist=[];let p1Busy=false,p1InitDone=false;
 const CHAT_URL='https://chat.cratedrop.app/chat';
 const CHAT_PROXY=CHAT_URL;
 
@@ -2716,8 +2699,15 @@ function filterTx(btn, cat) {
   document.querySelectorAll('#p1 .tg').forEach(g=>{
     g.style.display = (cat==='all' || g.dataset.cat===cat) ? '' : 'none';
   });
-  const panel = document.getElementById('ctxTxPanel');
-  if(panel) panel.scrollTop = 0;
+  const txCell = document.querySelector('#p1 .c-tx');
+  if(txCell) txCell.scrollTop = 0;
+}
+
+/* P1 FAQ toggle (separate from p2 faq) */
+function toggleP1Faq(el){
+  const item=el.closest('.p1-faq-item');
+  item.classList.toggle('open');
+  el.setAttribute('aria-expanded', item.classList.contains('open') ? 'true' : 'false');
 }
 
 /* ── Modal chat ── */
@@ -2775,66 +2765,8 @@ async function sdM(){
   finally{busy=false;}
 }
 
-/* ── P1 embedded panel chat functions ── */
-function addP1Msg(role,text){
-  const box=document.getElementById('p1msgs');
-  const d=document.createElement('div');
-  d.className='ctx-msg '+role;
-  const b=document.createElement('div');
-  b.className='ctx-msg-b';
-  const safe=text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  const linked=safe
-    .replace(/https?:\/\/[^\s<]+/g,u=>`<a href="${u}" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">${u}</a>`)
-    .replace(/(\b06[\s\-]?\d{2}[\s\-]?\d{2}[\s\-]?\d{2}[\s\-]?\d{2}\b)/g,n=>`<a href="tel:${n.replace(/[\s\-]/g,'')}" style="color:inherit;text-decoration:underline;">${n}</a>`);
-  b.innerHTML=linked.replace(/\n/g,'<br>');
-  d.appendChild(b);box.appendChild(d);box.scrollTop=box.scrollHeight;
-}
-function initP1Chat(){
-  if(p1InitDone)return;p1InitDone=true;
-  addP1Msg('bot','Hallo! Ik ben de assistent van Patrick Anches. Waarmee kan ik je helpen?');
-}
-function qsP1(q){document.getElementById('inP1').value=q;sdP1();}
-async function sdP1(){
-  if(p1Busy)return;
-  const inp=document.getElementById('inP1');
-  const q=inp.value.trim();
-  if(!q)return;
-  p1Busy=true;inp.value='';
-  addP1Msg('user',q);
-  p1Hist.push({role:'user',content:q});
-  const box=document.getElementById('p1msgs');
-  const typ=document.createElement('div');
-  typ.className='ctx-msg bot';
-  typ.innerHTML='<div class="ctx-msg-b" style="background:#f5f5f5;border:1px solid #e8e8e8;display:flex;gap:5px;padding:14px 16px;"><span style="width:5px;height:5px;border-radius:50%;background:#aaa;animation:bl 1.2s infinite;display:inline-block;"></span><span style="width:5px;height:5px;border-radius:50%;background:#aaa;animation:bl 1.2s infinite;animation-delay:.2s;display:inline-block;"></span><span style="width:5px;height:5px;border-radius:50%;background:#aaa;animation:bl 1.2s infinite;animation-delay:.4s;display:inline-block;"></span></div>';
-  box.appendChild(typ);box.scrollTop=box.scrollHeight;
-  try{
-    const messages=p1Hist.slice(-12);
-    const res=await fetch(CHAT_PROXY,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:600,system:SYS,messages})});
-    const data=await res.json();
-    typ.remove();
-    const botText=data.content?.[0]?.text||data.content||data.text||data.response||'Sorry, probeer opnieuw.';
-    p1Hist.push({role:'assistant',content:botText});
-    addP1Msg('bot',botText);
-  }catch(e){typ.remove();addP1Msg('bot','Verbindingsfout. Probeer het later opnieuw.');}
-  finally{p1Busy=false;}
-}
-function switchCtxTab(tab){
-  const chatPanel=document.getElementById('ctxChatPanel');
-  const txPanel=document.getElementById('ctxTxPanel');
-  const chatTab=document.getElementById('ctx-tab-chat');
-  const txTab=document.getElementById('ctx-tab-tx');
-  if(tab==='chat'){
-    chatPanel.classList.remove('ctx-hidden');txPanel.classList.add('ctx-hidden');
-    chatTab.classList.add('ctx-tab-active');txTab.classList.remove('ctx-tab-active');
-    initP1Chat();setTimeout(()=>document.getElementById('inP1').focus(),80);
-  }else{
-    txPanel.classList.remove('ctx-hidden');chatPanel.classList.add('ctx-hidden');
-    txTab.classList.add('ctx-tab-active');chatTab.classList.remove('ctx-tab-active');
-  }
-}
-initP1Chat();
-
-/* Chat embedded in p1 panel — no auto-open of modal needed */
+/* Auto-open chatbot on page load */
+setTimeout(() => { if (!chatModalOpen) toggleChatModal(); }, 900);
 
 /* Hide mobile booking bar when Treatwell card is visible (E1) */
 const twCard = document.querySelector('#p1 .c-f');
@@ -2923,17 +2855,12 @@ document.addEventListener('keydown',e=>{
   else if(e.key==='Escape')closePhotoViewer();
 });
 
-/* ── Chat FAB: hide on p1 (chat embedded), invert on p2 ── */
+/* ── Chat FAB: invert style on p2 (dark page) ── */
 (function(){
   const fab=document.getElementById('chat-fab');
-  const p1=document.getElementById('p1');
   const p2=document.getElementById('p2');
   const appEl=document.getElementById('app');
-  if(fab&&p1&&p2&&appEl&&window.IntersectionObserver){
-    new IntersectionObserver(entries=>{
-      if(entries[0].isIntersecting){fab.style.display='none';}
-      else{fab.style.display='';}
-    },{threshold:0.4,root:appEl}).observe(p1);
+  if(fab&&p2&&appEl&&window.IntersectionObserver){
     new IntersectionObserver(entries=>{
       fab.classList.toggle('fab-p2',entries[0].isIntersecting);
     },{threshold:0.4,root:appEl}).observe(p2);

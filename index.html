@@ -42,7 +42,7 @@ button{cursor:pointer;border:none;background:none;}
 
 /* ═══════════════════════════════════════
    PAGE GRID
-   cols: left(22%) | center(1fr) | vbar(44px) | right(28%)
+   cols: left(26%) | center(1fr) | vbar(48px) | right(28%)
    rows: header(12vh) | main(1fr) | lower(22vh) | footer(6vh)
 ═══════════════════════════════════════ */
 .page{
@@ -50,7 +50,7 @@ button{cursor:pointer;border:none;background:none;}
   scroll-snap-align:start;
   display:grid;
   position:relative;
-  grid-template-columns:minmax(220px,26%) minmax(180px,22%) 48px 1fr;
+  grid-template-columns:minmax(220px,26%) 1fr 48px minmax(180px,28%);
   grid-template-rows:minmax(72px,12vh) 1fr minmax(150px,22vh) minmax(48px,6vh);
 }
 .cell{position:relative;overflow:hidden;

@@ -178,7 +178,7 @@ button{cursor:pointer;border:none;background:none;}
 /* TX: treatment list — right col, rows 1-3 */
 #p1 .c-tx{grid-column:4;grid-row:1/4;overflow-y:auto;padding:20px 18px;
   flex-direction:column;align-items:flex-start;justify-content:flex-start;
-  scrollbar-width:thin;scrollbar-color:#ccc transparent;}
+  scrollbar-width:thin;scrollbar-color:rgba(41,41,41,0.3) transparent;}
 #p1 .c-tx .e2-lbl{font-family:var(--fc);font-size:10px;letter-spacing:0.22em;
   text-transform:uppercase;color:var(--ink3);margin-bottom:16px;display:flex;
   align-items:center;gap:10px;width:100%;}
@@ -324,8 +324,10 @@ button{cursor:pointer;border:none;background:none;}
   transition:transform .2s,color .2s;line-height:1;}
 #p2 .faq-item.open .faq-icon{transform:rotate(45deg);color:var(--polar);}
 #p2 .faq-a{font-size:13px;line-height:1.7;color:var(--ash);
-  padding-bottom:12px;display:none;}
-#p2 .faq-item.open .faq-a{display:block;}
+  max-height:0;overflow:hidden;padding-bottom:0;
+  transition:max-height .32s cubic-bezier(0.22,1,0.36,1), padding-bottom .32s ease, opacity .28s ease;
+  opacity:0;}
+#p2 .faq-item.open .faq-a{max-height:180px;padding-bottom:14px;opacity:1;}
 
 /* C2: info bar */
 #p2 .c-c{grid-column:2;grid-row:1;padding:14px 32px;
@@ -1294,7 +1296,9 @@ body { font-size: 16px; }
 /* ── Review ticker strip (C3) ── */
 
 /* ── Treatment filter tabs (B1) ── */
-.e2-tabs { display: flex; gap: 0; margin-bottom: 20px; width: 100%; border: 1px solid var(--carbon); }
+.e2-tabs { display: flex; gap: 0; margin-bottom: 20px; width: 100%; }
+#p1 .e2-tabs { border: 1px solid #292929; }
+#p2 .e2-tabs { border: 1px solid var(--carbon); }
 .e2-tab {
   flex: 1;
   font-family: 'Barlow Condensed', sans-serif;
@@ -1302,18 +1306,18 @@ body { font-size: 16px; }
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--ash);
   background: transparent;
   border: none;
-  border-right: 1px solid var(--carbon);
   padding: 9px 4px;
   cursor: pointer;
-  transition: background 0.15s, color 0.15s;
+  transition: background 0.18s, color 0.18s, letter-spacing 0.18s;
 }
+#p1 .e2-tab { color: var(--ink3); border-right: 1px solid #292929; }
+#p2 .e2-tab { color: var(--ash); border-right: 1px solid var(--carbon); }
 .e2-tab:last-child { border-right: none; }
 .e2-tab.active { background: var(--polar); color: var(--midnight); }
 .e2-tab:hover:not(.active) { background: rgba(255,255,255,0.06); color: var(--polar); }
-/* P1 override — must come after the global rule to win the cascade */
+/* P1 override */
 #p1 .e2-tab.active { background: var(--ink); color: #fff; }
 #p1 .e2-tab:hover:not(.active) { background: rgba(41,41,41,0.05); color: var(--ink); }
 
@@ -1620,8 +1624,8 @@ body { font-size: 16px; }
 }
 .rev-card-quote{position:relative;flex:1;display:flex;align-items:flex-start;padding-top:2px;}
 .rev-text{
-  font-family:var(--ff);font-size:12px;line-height:1.5;color:var(--ink);font-weight:400;padding-left:2px;
-  display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;
+  font-family:var(--ff);font-size:12px;line-height:1.55;color:var(--ink);font-weight:400;padding-left:2px;
+  display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden;
 }
 .rev-card-foot{display:flex;justify-content:space-between;align-items:center;margin-top:7px;flex-shrink:0;gap:8px;}
 .rev-card-author{display:flex;align-items:center;gap:9px;min-width:0;}
@@ -1649,39 +1653,55 @@ body { font-size: 16px; }
 /* ── Page nav indicator ── */
 #page-nav {
   position: fixed;
-  bottom: calc(6vh + 20px);
+  bottom: calc(6vh + 16px);
   left: 50%;
   transform: translateX(-50%);
   z-index: 250;
   display: flex;
-  gap: 6px;
-  background: rgba(13,13,13,0.72);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,0.12);
+  gap: 4px;
+  background: rgba(8,8,8,0.82);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(255,255,255,0.14);
   border-radius: 99px;
-  padding: 5px 8px;
+  padding: 4px 6px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.45), 0 1px 4px rgba(0,0,0,0.3);
 }
 .pnav-pill {
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.45);
+  color: rgba(255,255,255,0.50);
   background: transparent;
   border: none;
-  padding: 5px 12px;
+  padding: 6px 14px;
   border-radius: 99px;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s;
+  transition: background 0.22s cubic-bezier(0.22,1,0.36,1), color 0.22s, transform 0.15s;
+  white-space: nowrap;
 }
+.pnav-pill:hover { color: rgba(255,255,255,0.80); }
 .pnav-pill.active {
-  background: rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.18);
   color: #fff;
 }
+.pnav-pill:active { transform: scale(0.96); }
 @media(max-width:600px) {
-  #page-nav { bottom: calc(14px + 56px + env(safe-area-inset-bottom,0px)); }
+  #page-nav { bottom: calc(14px + 56px + env(safe-area-inset-bottom,0px)); font-size: 10px; }
+  .pnav-pill { font-size: 10px; padding: 5px 11px; }
+}
+
+/* ── Treatment row hover — also for P1 ── */
+#p1 .c-tx .tr{
+  transition:background .12s, transform .18s cubic-bezier(0.22,1,0.36,1), border-left-width .18s;
+  border-left: 2px solid transparent;
+}
+#p1 .c-tx .tr:hover{
+  background: rgba(41,41,41,0.04);
+  transform: translateX(4px);
+  border-left-color: rgba(41,41,41,0.2);
 }
 
 /* ── Scroll hint button ── */
@@ -1750,18 +1770,28 @@ body { font-size: 16px; }
   font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(243,243,243,0.45);
+  color: rgba(243,243,243,0.50);
   background: transparent;
-  border: 1px solid rgba(243,243,243,0.2);
-  padding: 7px 14px;
+  border: 1px solid rgba(243,243,243,0.22);
+  padding: 8px 16px;
   cursor: pointer;
-  margin-top: 16px;
-  display: block;
-  transition: color 0.2s, border-color 0.2s;
+  margin-top: 12px;
+  display: inline-block;
+  transition: color 0.2s, border-color 0.2s, background 0.2s, transform 0.18s cubic-bezier(0.22,1,0.36,1);
 }
 #p2 .p2-back-btn:hover {
-  color: rgba(243,243,243,0.85);
-  border-color: rgba(243,243,243,0.45);
+  color: rgba(243,243,243,0.90);
+  border-color: rgba(243,243,243,0.50);
+  background: rgba(243,243,243,0.06);
+  transform: translateY(-1px);
+}
+/* ── Page 2 CTA link (WhatsApp in photo cell) ── */
+#p2 .c-photo a[href*="wa.me"]{
+  transition: color 0.2s, opacity 0.2s;
+}
+#p2 .c-photo a[href*="wa.me"]:hover{
+  color: rgba(243,243,243,0.90) !important;
+  opacity: 0.9;
 }
 
 /* ── Chat FAB label ── */
@@ -1811,6 +1841,13 @@ body { font-size: 16px; }
   #chat-fab{bottom:calc(28px + env(safe-area-inset-bottom,0px));right:calc(28px + env(safe-area-inset-right,0px));}
 }
 
+/* ── Page nav: fade-in on load ── */
+@keyframes navFadeIn{
+  from{opacity:0;transform:translateX(-50%) translateY(10px);}
+  to{opacity:1;transform:translateX(-50%) translateY(0);}
+}
+#page-nav{animation:navFadeIn .6s cubic-bezier(0.22,1,0.36,1) 1.2s both;}
+
 /* ── Chat FAB: attention pulse (3 pulses on load) ── */
 @keyframes fabAttention{
   0%,100%{box-shadow:0 4px 20px rgba(0,0,0,0.35),0 0 0 0 rgba(13,13,13,0);}
@@ -1828,6 +1865,23 @@ body { font-size: 16px; }
     0 20px 60px rgba(0,0,0,0.60),
     0 40px 80px rgba(0,0,0,0.30);
 }
+/* ── Chat modal chip buttons: hover transitions ── */
+#chipsM button{
+  transition: background 0.15s, color 0.15s, border-color 0.15s, transform 0.15s cubic-bezier(0.22,1,0.36,1);
+}
+#chipsM button:hover{
+  background: #292929 !important;
+  color: #f3f3f3 !important;
+  border-color: #555 !important;
+}
+#chipsM button:active{
+  transform: scale(0.95);
+}
+/* ── Chat modal input: focus glow ── */
+#inM:focus{
+  background: #111 !important;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
+}
 
 /* ═══════════════════════════════════════
    PAGE 1 — BEHANDELINGEN (right col, direct — no tab system)
@@ -1836,8 +1890,9 @@ body { font-size: 16px; }
 
 /* ── c-f booking card: bg image restored via ::before/::after in base rules ── */
 
-/* ── Star ratings — amber on both pages ── */
-#p1 .rev-stars,#p1 .tw-stars{color:#C8A97A;}
+/* ── Star ratings — amber on both pages, full opacity ── */
+#p1 .rev-stars,#p1 .tw-stars{color:#C8A97A;opacity:1;}
+.rev-stars{opacity:1;}
 
 /* ── p1 footer always visible on mobile ── */
 @media(max-width:600px){
@@ -1879,14 +1934,11 @@ body { font-size: 16px; }
 #p1 .stat-item{position:relative;padding-top:7px;}
 #p1 .stat-item::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:20px;height:2px;background:var(--ink);}
 
-/* Booking card — less grayscale, pulsing CTA */
+/* Booking card — less grayscale */
 #p1 .c-f::before{filter:grayscale(30%) contrast(1.1) brightness(1.0);}
 #p1 .c-f::after{background:linear-gradient(180deg,rgba(255,255,255,0.76) 0%,rgba(255,255,255,0.58) 50%,rgba(255,255,255,0.74) 100%);}
-@keyframes bookPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.02);}}
-#p1 .tw-btn{font-family:var(--fd);font-size:16px;letter-spacing:0.1em;animation:bookPulse 3s ease-in-out infinite;}
-#p1 .tw-btn:hover{letter-spacing:0.15em;animation:none;border-color:#C8A97A;}
-#p2 .tw-p2-btn{animation:bookPulse 3s ease-in-out infinite;}
-#p2 .tw-p2-btn:hover{animation:none;}
+#p1 .tw-btn{font-family:var(--fd);font-size:16px;letter-spacing:0.1em;}
+#p1 .tw-btn:hover{letter-spacing:0.15em;border-color:#C8A97A;}
 #p2 .tw-p2-stars{color:#E7C59A;}
 
 /* Treatment rows — alternating bg + bigger prices */
@@ -1897,8 +1949,9 @@ body { font-size: 16px; }
 .pop-tag{color:#C8A97A;border-color:rgba(200,169,122,0.5);}
 #p2 .pop-tag{color:#E7C59A;border-color:rgba(231,197,154,0.35);}
 
-/* Review cards — premium left border + larger quote mark */
-.rev-card{border-left:3px solid rgba(41,41,41,0.15);}
+/* Review cards — premium left border + larger quote mark + hover lift */
+.rev-card{border-left:3px solid rgba(41,41,41,0.15);transition:transform .22s cubic-bezier(0.22,1,0.36,1),box-shadow .22s ease,border-left-color .22s;}
+.rev-card:hover{transform:translateY(-3px);box-shadow:0 4px 18px rgba(13,13,13,0.10),0 1px 4px rgba(13,13,13,0.06);border-left-color:rgba(41,41,41,0.35);}
 .rev-qmark{font-size:80px;color:rgba(13,13,13,0.04);}
 .rev-stars{color:#C8A97A;}
 
@@ -2178,9 +2231,15 @@ body { font-size: 16px; }
     </div>
     <div class="hero-meta">
       <p class="p2-desc">Vind snel antwoord op veelgestelde vragen. Of neem direct contact op via WhatsApp.</p>
+      <a href="https://www.treatwell.nl/salon/hairstyler-patrick-anches-barbier-kapper/" target="_blank" rel="noopener"
+        style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--midnight);background:var(--polar);padding:11px 18px;display:inline-block;margin-top:16px;transition:background .2s,transform .2s cubic-bezier(0.22,1,0.36,1);"
+        onmouseover="this.style.background='#fff';this.style.transform='translateY(-2px)'"
+        onmouseout="this.style.background='var(--polar)';this.style.transform='translateY(0)'">
+        Afspraak maken →
+      </a>
       <a href="https://wa.me/31652874750?text=Hallo%20Patrick%2C%20ik%20wil%20graag%20een%20afspraak%20maken." target="_blank" rel="noopener"
-        style="font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(243,243,243,0.6);margin-top:12px;display:inline-block;text-decoration:underline;text-underline-offset:3px;">
-        → WhatsApp Patrick
+        style="font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(243,243,243,0.55);margin-top:10px;display:inline-block;text-decoration:underline;text-underline-offset:3px;">
+        of WhatsApp Patrick →
       </a>
       <button class="p2-back-btn" onclick="document.getElementById('app').scrollTo({top:0,behavior:'smooth'})">
         ↑ Terug naar behandelingen
@@ -2228,7 +2287,7 @@ body { font-size: 16px; }
 
   <!-- FAQ (col2/rows2-4) -->
   <div class="cell c-faq" data-anim="scale" style="--ad:140ms">
-    <div style="width:100%;height:100%;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--carbon) transparent;padding:28px;">
+    <div style="width:100%;height:100%;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#444 transparent;padding:28px 24px;">
       <span class="faq-lbl">Veelgestelde vragen</span>
       <div class="faq-wrap" style="flex:1;overflow:visible;">
         <div class="faq-item">
@@ -2824,7 +2883,15 @@ var albumImgs=['p1.jpg','p2.jpg','p3.jpg','p4.jpg','p5.jpg','p6.jpg','p7.jpg'];
 function albumNav(dir){
   albumIdx=(albumIdx+dir+albumImgs.length)%albumImgs.length;
   var img=document.getElementById('album-img');
-  if(img){ img.src=albumImgs[albumIdx]; }
+  if(img){
+    img.style.transition='opacity .15s ease';
+    img.style.opacity='0';
+    setTimeout(function(){
+      img.src=albumImgs[albumIdx];
+      img.style.transition='opacity .28s ease';
+      img.style.opacity='1';
+    },150);
+  }
   var ctr=document.getElementById('album-counter');
   if(ctr) ctr.textContent=(albumIdx+1)+' / '+albumImgs.length;
   var ttl=document.getElementById('album-win-title');

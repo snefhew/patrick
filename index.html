@@ -106,7 +106,7 @@ button{cursor:pointer;border:none;background:none;}
   text-align:left;
 }
 #p1 .hero-h1 em{font-style:normal;color:var(--ink2);}
-#p1 .hero-meta{display:flex;flex-direction:column;gap:6px;align-self:flex-start;}
+#p1 .hero-meta,#p2 .c-photo .hero-meta{display:flex;flex-direction:column;gap:6px;align-self:flex-start;width:100%;}
 #p1 .hero-lbl{font-family:var(--fc);font-size:11px;letter-spacing:0.2em;
   text-transform:uppercase;color:var(--ink3);}
 #p1 .hero-desc{font-family:var(--ff);font-size:14px;line-height:1.75;
@@ -1796,6 +1796,26 @@ body { font-size: 16px; }
   transform: translateY(-2px);
 }
 
+/* p2 version — light on dark */
+#p2 .hero-cta-btn {
+  display: block;
+  background: var(--polar);
+  color: var(--midnight);
+  font-family: var(--fc);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 12px 20px;
+  text-decoration: none;
+  margin-bottom: 10px;
+  transition: background 0.2s, transform 0.2s cubic-bezier(0.22,1,0.36,1);
+}
+#p2 .hero-cta-btn:hover {
+  background: #fff;
+  transform: translateY(-2px);
+}
+
 /* ── Hero WhatsApp link ── */
 #p1 .hero-wa-link {
   display: block;
@@ -1823,7 +1843,8 @@ body { font-size: 16px; }
   padding: 8px 16px;
   cursor: pointer;
   margin-top: 12px;
-  display: inline-block;
+  display: block;
+  align-self: flex-start;
   transition: color 0.2s, border-color 0.2s, background 0.2s, transform 0.18s cubic-bezier(0.22,1,0.36,1);
 }
 #p2 .p2-back-btn:hover {
@@ -2284,10 +2305,7 @@ body { font-size: 16px; }
     </div>
     <div class="hero-meta">
       <p class="p2-desc">Vind snel antwoord op veelgestelde vragen. Of neem direct contact op via WhatsApp.</p>
-      <a href="https://www.treatwell.nl/salon/hairstyler-patrick-anches-barbier-kapper/" target="_blank" rel="noopener"
-        style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--midnight);background:var(--polar);padding:11px 18px;display:inline-block;margin-top:16px;transition:background .2s,transform .2s cubic-bezier(0.22,1,0.36,1);"
-        onmouseover="this.style.background='#fff';this.style.transform='translateY(-2px)'"
-        onmouseout="this.style.background='var(--polar)';this.style.transform='translateY(0)'">
+      <a class="hero-cta-btn" href="https://www.treatwell.nl/salon/hairstyler-patrick-anches-barbier-kapper/" target="_blank" rel="noopener">
         Afspraak maken →
       </a>
       <a href="https://wa.me/31652874750?text=Hallo%20Patrick%2C%20ik%20wil%20graag%20een%20afspraak%20maken." target="_blank" rel="noopener"

@@ -10,7 +10,7 @@
 <meta property="og:url" content="https://snefhew.github.io/patrick/">
 <meta property="og:image" content="https://snefhew.github.io/patrick/hero.jpg">
 <meta property="og:locale" content="nl_NL">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Patrick Anches — Barbier &amp; Kapper Amsterdam">
 <meta name="twitter:description" content="Gediplomeerde barbier en kapper in Amsterdam-West. Boek direct via Treatwell.">
 <link rel="canonical" href="https://snefhew.github.io/patrick/">
@@ -179,6 +179,13 @@ button{cursor:pointer;border:none;background:none;}
 #p1 .c-tx{grid-column:4;grid-row:1/4;overflow-y:auto;padding:20px 18px;
   flex-direction:column;align-items:flex-start;justify-content:flex-start;
   scrollbar-width:thin;scrollbar-color:rgba(41,41,41,0.3) transparent;}
+#p1 .c-tx::after{
+  content:'';
+  position:sticky;bottom:0;
+  display:block;width:100%;height:40px;flex-shrink:0;
+  background:linear-gradient(transparent, var(--bg2));
+  pointer-events:none;margin-top:-40px;
+}
 #p1 .c-tx .e2-lbl{font-family:var(--fc);font-size:10px;letter-spacing:0.22em;
   text-transform:uppercase;color:var(--ink3);margin-bottom:16px;display:flex;
   align-items:center;gap:10px;width:100%;}
@@ -211,7 +218,7 @@ button{cursor:pointer;border:none;background:none;}
 /* FOOTER */
 #p1 .c-footer{grid-column:2/5;grid-row:4;border-top:var(--b);border-left:var(--b);
   flex-direction:row;justify-content:center;align-items:center;
-  gap:24px;flex-wrap:wrap;padding:0 96px 0 24px;background:var(--bg2);}
+  gap:24px;flex-wrap:wrap;padding:0 32px 0 24px;background:var(--bg2);}
 #p1 .footer-item{font-family:var(--fc);font-size:11px;letter-spacing:0.12em;
   text-transform:uppercase;color:var(--ink3);transition:color .2s;}
 #p1 .footer-item:hover{color:var(--ink);}
@@ -349,7 +356,7 @@ button{cursor:pointer;border:none;background:none;}
 /* FOOTER p2 */
 #p2 .c-footer{grid-column:2/5;grid-row:4;border-top:var(--b);border-left:var(--b);
   flex-direction:row;justify-content:center;align-items:center;
-  gap:24px;flex-wrap:wrap;padding:0 96px 0 24px;background:var(--deep);}
+  gap:24px;flex-wrap:wrap;padding:0 32px 0 24px;background:var(--deep);}
 #p2 .footer-item{font-family:var(--fm);font-size:11px;letter-spacing:0.12em;
   text-transform:uppercase;color:var(--ash);transition:color .2s;}
 #p2 .footer-item:hover{color:var(--polar);}
@@ -469,6 +476,13 @@ button{cursor:pointer;border:none;background:none;}
   z-index:400;
 }
 #chat-modal.open{display:block;}
+@keyframes chatModalIn{
+  from{opacity:0;transform:translateY(10px);}
+  to{opacity:1;transform:translateY(0);}
+}
+#chat-modal.open #chat-modal-inner{
+  animation:chatModalIn 0.22s cubic-bezier(0.22,1,0.36,1) both;
+}
 #chat-modal-inner{
   width:min(460px,calc(100vw - 40px));
   max-height:min(600px,calc(100vh - 120px));
@@ -553,7 +567,7 @@ body { font-size: 16px; }
 #p2 .faq-q    { font-size: 15px; font-weight: 700; }
 #p2 .faq-a    { font-size: 14px; line-height: 1.8; }
 #p2 .p2-desc  { font-size: 14px; line-height: 1.75; }
-#p2 .p2-h1    { font-size: clamp(2.6rem, 3.4vw, 4.4rem); }
+#p2 .p2-h1    { font-size: clamp(1.8rem, 2.4vw, 3.2rem); }
 
 /* Grey text stroke — makes it crisp on any background */
 #p1 .info-lbl,
@@ -587,7 +601,7 @@ body { font-size: 16px; }
 
 #p1 .vbar-num, #p2 .vbar-num { color: rgba(255,255,255,0.65); font-size: 10px; }
 #p2 .tr:hover { background: rgba(255,255,255,0.08); transform: translateX(8px); }
-#p2 .p2-h1 em { color: var(--amber); font-style: normal; }
+#p2 .p2-h1 em { color: var(--amber); }
 @keyframes scrollBounce{
   0%,100%{transform:translateY(0);opacity:.55;}
   50%{transform:translateY(6px);opacity:1;}
@@ -865,7 +879,7 @@ body { font-size: 16px; }
 #p2 .info-val{font-size:14px;font-weight:700;color:var(--polar);text-align:center;white-space:nowrap;}
 
 /* ── Footer: branded 3-zone layout ── */
-#p1 .c-footer{justify-content:space-between;gap:0;padding:0 96px 0 28px;flex-wrap:nowrap;}
+#p1 .c-footer{justify-content:space-between;gap:0;padding:0 32px 0 28px;flex-wrap:nowrap;}
 #p1 .footer-brand{font-family:var(--ff);font-size:12px;font-weight:700;
   color:var(--ink2);letter-spacing:-0.01em;white-space:nowrap;}
 #p1 .footer-links{display:flex;align-items:center;gap:20px;}
@@ -875,7 +889,7 @@ body { font-size: 16px; }
 /* Override old centered footer-item layout for p1 */
 #p1 .c-footer>.footer-item{display:none;}
 
-#p2 .c-footer{justify-content:space-between;gap:0;padding:0 96px 0 28px;flex-wrap:nowrap;}
+#p2 .c-footer{justify-content:space-between;gap:0;padding:0 32px 0 28px;flex-wrap:nowrap;}
 #p2 .footer-brand{font-family:var(--ff);font-size:12px;font-weight:700;
   color:var(--polar);letter-spacing:-0.01em;white-space:nowrap;}
 #p2 .footer-links{display:flex;align-items:center;gap:20px;}
@@ -971,10 +985,10 @@ body { font-size: 16px; }
 /* 8. Footer — heavier top border */
 #p2 .c-footer{border-top:2px solid var(--carbon);}
 
-/* 9. Page 2 heading — tighter, Barlow Condensed */
-#p2 .p2-h1{font-family:'Barlow Condensed',sans-serif;font-size:clamp(2.4rem,3.2vw,4rem);font-weight:800;line-height:0.90;
+/* 9. Page 2 heading — tighter, Barlow Condensed, smaller than p1 h1 for hierarchy */
+#p2 .p2-h1{font-family:'Barlow Condensed',sans-serif;font-size:clamp(1.8rem,2.4vw,3.2rem);font-weight:800;line-height:0.90;
   letter-spacing:0.005em;color:var(--polar);margin-bottom:12px;text-transform:uppercase;}
-#p2 .p2-h1 em{font-style:normal;color:var(--ash);}
+#p2 .p2-h1 em{font-style:italic;color:var(--amber);}
 
 /* 10. Vbar — pure black, no dot overlay */
 #p2 .c-vbar{position:relative;}
@@ -1030,7 +1044,6 @@ body { font-size: 16px; }
 
 /* Page 1 — grayscale + white wash */
 #p1 .c-b{
-  background-image:none;
   position:relative;
   overflow:hidden;
 }
@@ -1227,7 +1240,7 @@ body { font-size: 16px; }
   #p2 .c-a     { order:0; }
   #p2 .c-photo { min-height:240px; flex-shrink:0; order:1; }
   #p2 .c-faq   { min-height:auto; padding:0; flex-shrink:0; order:2; }
-  #p2 .c-faq > div { height:auto !important; }
+  #p2 .c-faq > div { height:auto !important; overflow-y:visible !important; }
   #p2 .c-album { width:100%; aspect-ratio:16/9; min-height:unset; flex-shrink:0; order:3; padding:0; }
   /* Page 2 footer — always last */
   #p2 .c-footer { order:4; }
@@ -1317,9 +1330,9 @@ body { font-size: 16px; }
 .e2-tab:last-child { border-right: none; }
 .e2-tab.active { background: var(--polar); color: var(--midnight); }
 .e2-tab:hover:not(.active) { background: rgba(255,255,255,0.06); color: var(--polar); }
-/* P1 override */
-#p1 .e2-tab.active { background: var(--ink); color: #fff; }
-#p1 .e2-tab:hover:not(.active) { background: rgba(41,41,41,0.05); color: var(--ink); }
+/* P1 override — higher specificity to guarantee correct cascade */
+#p1 .c-tx .e2-tab.active { background: var(--ink); color: #fff; }
+#p1 .c-tx .e2-tab:hover:not(.active) { background: rgba(41,41,41,0.05); color: var(--ink); }
 
 /* ── Ticker strip: compensate scroll-snap offset ── */
 
@@ -1559,6 +1572,19 @@ body { font-size: 16px; }
 }
 .macos-photo:hover .macos-photo-img{filter:grayscale(0%) brightness(1.0);}
 
+/* Fix 11: expand icon affordance */
+.macos-expand-icon{
+  position:absolute;top:8px;right:8px;z-index:6;
+  width:22px;height:22px;
+  background:rgba(0,0,0,0.45);
+  border:1px solid rgba(255,255,255,0.20);
+  border-radius:4px;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity .2s;pointer-events:none;
+}
+.macos-photo-wrap:hover .macos-expand-icon{opacity:1;}
+.macos-expand-icon svg{width:10px;height:10px;stroke:rgba(255,255,255,0.80);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+
 /* ── Liquid Glass toolbar — SIBLING of .macos-photo, absolute in .macos-photo-wrap ── */
 .macos-toolbar{
   position:absolute;bottom:13px;left:50%;transform:translateX(-50%);
@@ -1596,6 +1622,8 @@ body { font-size: 16px; }
   transition:background .14s,color .14s;flex-shrink:0;
 }
 .macos-tb-btn:hover{background:rgba(255,255,255,0.16);color:#fff;}
+.macos-tb-btn:focus-visible{outline:2px solid rgba(255,255,255,0.7);outline-offset:2px;}
+.macos-toolbar:focus-within{opacity:1;}
 .macos-tb-btn svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;}
 .macos-tb-sep{width:1px;height:15px;background:rgba(255,255,255,0.16);margin:0 3px;flex-shrink:0;}
 .macos-tb-counter{
@@ -1627,6 +1655,12 @@ body { font-size: 16px; }
   font-family:var(--ff);font-size:12px;line-height:1.55;color:var(--ink);font-weight:400;padding-left:2px;
   display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden;
 }
+.rev-card-quote::after{
+  content:'';
+  position:absolute;bottom:0;left:0;right:0;height:28px;
+  background:linear-gradient(transparent, #f7f7f7);
+  pointer-events:none;
+}
 .rev-card-foot{display:flex;justify-content:space-between;align-items:center;margin-top:7px;flex-shrink:0;gap:8px;}
 .rev-card-author{display:flex;align-items:center;gap:9px;min-width:0;}
 .rev-avatar{
@@ -1653,7 +1687,7 @@ body { font-size: 16px; }
 /* ── Page nav indicator ── */
 #page-nav {
   position: fixed;
-  bottom: calc(6vh + 16px);
+  bottom: max(calc(6vh + 16px), 64px);
   left: 50%;
   transform: translateX(-50%);
   z-index: 250;
@@ -1666,6 +1700,19 @@ body { font-size: 16px; }
   border-radius: 99px;
   padding: 4px 6px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.45), 0 1px 4px rgba(0,0,0,0.3);
+  transition: background 0.3s, border-color 0.3s;
+}
+/* Fix 17: p2 light style */
+#page-nav.page-nav-p2 {
+  background: rgba(240,240,240,0.12);
+  border-color: rgba(255,255,255,0.20);
+}
+#page-nav.page-nav-p2 .pnav-pill {
+  color: rgba(255,255,255,0.65);
+}
+#page-nav.page-nav-p2 .pnav-pill.active {
+  background: rgba(255,255,255,0.22);
+  color: #fff;
 }
 .pnav-pill {
   font-family: 'Barlow Condensed', sans-serif;
@@ -1855,7 +1902,9 @@ body { font-size: 16px; }
   60%{box-shadow:0 6px 28px rgba(0,0,0,0.55),0 0 0 10px rgba(13,13,13,0);}
 }
 #chat-fab{animation:fabAttention 1.8s ease-out 2s 3;}
+/* Fix 16: only reset animation on the FAB itself, not ::after tooltip */
 #chat-fab:hover{animation:none;transform:scale(1.08);box-shadow:0 8px 32px rgba(0,0,0,0.45);}
+#chat-fab:hover::after{animation:none;}
 
 /* ── Chat modal: premium vakje frame ── */
 #chat-modal-inner{
@@ -1865,16 +1914,20 @@ body { font-size: 16px; }
     0 20px 60px rgba(0,0,0,0.60),
     0 40px 80px rgba(0,0,0,0.30);
 }
-/* ── Chat modal chip buttons: hover transitions ── */
-#chipsM button{
+/* ── Chat modal chip buttons ── */
+.modal-chip{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:10px;letter-spacing:0.12em;text-transform:uppercase;
+  padding:6px 12px;border:1px solid #292929;
+  background:transparent;color:#888;cursor:pointer;
   transition: background 0.15s, color 0.15s, border-color 0.15s, transform 0.15s cubic-bezier(0.22,1,0.36,1);
 }
-#chipsM button:hover{
-  background: #292929 !important;
-  color: #f3f3f3 !important;
-  border-color: #555 !important;
+.modal-chip:hover{
+  background: #292929;
+  color: #f3f3f3;
+  border-color: #555;
 }
-#chipsM button:active{
+.modal-chip:active{
   transform: scale(0.95);
 }
 /* ── Chat modal input: focus glow ── */
@@ -1916,15 +1969,15 @@ body { font-size: 16px; }
 
 /* Grid already defined in base .page rule */
 
-/* Hero h1 — sized to fit the column */
-#p1 .hero-h1{font-size:clamp(2.2rem,3vw,4.2rem);}
+/* Hero h1 — sized to fit the column, bump for hierarchy */
+#p1 .hero-h1{font-size:clamp(2.8rem,3.8vw,5rem);}
 @media(max-width:600px){#p1 .hero-h1{font-size:clamp(2.6rem,10vw,4rem);}}
 
 /* Hero desc — heavier */
 #p1 .hero-desc{font-weight:500;}
 
 /* Hero overlay — stronger white wash so text is crisp over the photo */
-#p1 .c-b::after{background:linear-gradient(170deg,rgba(255,255,255,0.90) 0%,rgba(255,255,255,0.84) 55%,rgba(255,255,255,0.90) 100%) !important;}
+#p1 .c-b::after{background:linear-gradient(170deg,rgba(255,255,255,0.90) 0%,rgba(255,255,255,0.84) 55%,rgba(255,255,255,0.90) 100%);}
 
 /* Status badge — open state green glow */
 #p1 .status-badge.is-open,#p2 .status-badge.is-open{color:#00AC5C;text-shadow:0 0 8px rgba(0,172,92,0.4);}
@@ -2060,9 +2113,9 @@ body { font-size: 16px; }
 
   <!-- VBAR -->
   <div class="cell c-vbar" data-anim="scale" style="--ad:100ms">
-    <span class="vbar-num">01</span>
+    <span class="vbar-num">01 ↓</span>
     <span class="vbar-mid"><span class="vbar-text" style="--vd:400ms">Patrick Anches · Amsterdam · Kinkerstraat</span></span>
-    <span class="vbar-num">02</span>
+    <span class="vbar-num">↓ 02</span>
   </div>
 
   <!-- E: reviews -->
@@ -2126,8 +2179,8 @@ body { font-size: 16px; }
       <button type="button" class="e2-tab active" onclick="filterTx(this,'all')">Alle</button>
       <button type="button" class="e2-tab" onclick="filterTx(this,'mannen')">Mannen</button>
       <button type="button" class="e2-tab" onclick="filterTx(this,'vrouwen')">Vrouwen</button>
-      <button type="button" class="e2-tab" onclick="filterTx(this,'extensions')">Extensions</button>
-      <button type="button" class="e2-tab" onclick="filterTx(this,'blackhair')">Black hair</button>
+      <button type="button" class="e2-tab" onclick="filterTx(this,'extensions')">Ext.</button>
+      <button type="button" class="e2-tab" onclick="filterTx(this,'blackhair')">Black</button>
     </div>
     <div class="tg" data-cat="mannen">
       <div class="tg-title">Mannen · Knippen &amp; Styling</div>
@@ -2328,9 +2381,9 @@ body { font-size: 16px; }
 
   <!-- VBAR -->
   <div class="cell c-vbar" data-anim="scale" style="--ad:100ms">
-    <span class="vbar-num">02</span>
+    <span class="vbar-num">↑ 01</span>
     <span class="vbar-mid"><span class="vbar-text" style="--vd:400ms">Patrick Anches · Amsterdam · Kinkerstraat</span></span>
-    <span class="vbar-num">01</span>
+    <span class="vbar-num">02 ↑</span>
   </div>
 
   <!-- Album — foto album (right col, rows 1-2) -->
@@ -2348,6 +2401,10 @@ body { font-size: 16px; }
         <!-- img is direct click target for viewer — no wrapper div with onclick -->
         <img class="macos-photo-img" id="album-img" src="p1.jpg" alt="Knippen & Styling — Patrick Anches portfolio"
              onclick="openPhotoViewer(albumIdx)" style="cursor:pointer;">
+        <!-- expand affordance icon -->
+        <span class="macos-expand-icon" aria-hidden="true">
+          <svg viewBox="0 0 10 10"><polyline points="6,1 9,1 9,4"/><polyline points="4,9 1,9 1,6"/><line x1="9" y1="1" x2="5.5" y2="4.5"/><line x1="1" y1="9" x2="4.5" y2="5.5"/></svg>
+        </span>
         <!-- toolbar is a sibling; stopPropagation on the div prevents any bubbling -->
         <div class="macos-toolbar" id="album-toolbar">
           <button class="macos-tb-btn" id="album-prev" title="Vorige">
@@ -2449,10 +2506,10 @@ body { font-size: 16px; }
     </div>
     <div id="msgsM" role="log" aria-live="polite" style="flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;min-height:280px;max-height:360px;background:#0d0d0d;scrollbar-width:thin;"></div>
     <div id="chipsM" style="padding:10px 14px;display:flex;gap:6px;flex-wrap:wrap;border-top:1px solid #292929;flex-shrink:0;background:#0d0d0d;">
-      <button style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;padding:6px 12px;border:1px solid #292929;background:transparent;color:#888;cursor:pointer;" onclick="qsM('Wat kost knippen?')">Prijzen</button>
-      <button style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;padding:6px 12px;border:1px solid #292929;background:transparent;color:#888;cursor:pointer;" onclick="qsM('Afspraak maken')">Afspraak</button>
-      <button style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;padding:6px 12px;border:1px solid #292929;background:transparent;color:#888;cursor:pointer;" onclick="qsM('Openingstijden')">Tijden</button>
-      <button style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;padding:6px 12px;border:1px solid #292929;background:transparent;color:#888;cursor:pointer;" onclick="qsM('Hoe kom ik er?')">Route</button>
+      <button class="modal-chip" onclick="qsM('Wat kost knippen?')">Prijzen</button>
+      <button class="modal-chip" onclick="qsM('Afspraak maken')">Afspraak</button>
+      <button class="modal-chip" onclick="qsM('Openingstijden')">Tijden</button>
+      <button class="modal-chip" onclick="qsM('Hoe kom ik er?')">Route</button>
     </div>
     <div style="display:flex;border-top:1px solid #292929;flex-shrink:0;">
       <input id="inM" type="text" placeholder="Stel een vraag..." autocomplete="off"
@@ -2973,6 +3030,7 @@ document.addEventListener('keydown',e=>{
     const vh = app.clientHeight;
     const isP2 = scrollY >= vh * 0.6;
     pills.forEach((p, i) => p.classList.toggle('active', isP2 ? i === 1 : i === 0));
+    document.getElementById('page-nav').classList.toggle('page-nav-p2', isP2);
   }
   app.addEventListener('scroll', updateNav, { passive: true });
   updateNav();
@@ -2989,8 +3047,8 @@ document.querySelectorAll('.e2-tab').forEach((tab, i, tabs) => {
 /* ── Review rotation: pause on hover ── */
 const revBox = document.querySelector('#p1 .c-e');
 if (revBox) {
-  revBox.addEventListener('mouseenter', () => clearInterval(revInterval));
-  revBox.addEventListener('mouseleave', () => {
+  revBox.addEventListener('pointerenter', () => clearInterval(revInterval));
+  revBox.addEventListener('pointerleave', () => {
     revInterval = setInterval(() => { ri=(ri+1)%revs.length; renderRevs(ri); }, 5000);
   });
 }
